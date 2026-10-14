@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-13",
+  "title": "Chuyển văn phòng sang tòa nhà mới",
+  "scene": {
+    "title": "Chuẩn bị chuyển văn phòng",
+    "topic": "Kinh doanh",
+    "names": [
+      "Đức",
+      "Rachel"
+    ],
+    "lines": [
+      [
+        0,
+        "Rachel, have you heard? We're relocating to the new building next month.",
+        "Rachel, chị nghe tin chưa? Tháng sau chúng ta sẽ chuyển đến tòa nhà mới."
+      ],
+      [
+        1,
+        "Yes! Our rental agreement here ends on December thirty-first, right?",
+        "Có chứ! Hợp đồng thuê ở đây hết hạn vào ngày ba mươi mốt tháng Mười Hai, đúng không?"
+      ],
+      [
+        0,
+        "That's right. Management has already hired a moving company.",
+        "Đúng vậy. Ban quản lý đã thuê một công ty dịch vụ chuyển nhà rồi."
+      ],
+      [
+        1,
+        "Great. Do we need to pack our own desks?",
+        "Tuyệt. Chúng ta có phải tự đóng gói đồ trên bàn làm việc không?"
+      ],
+      [
+        0,
+        "Yes, please pack your personal items and label each box with your name.",
+        "Có, hãy đóng gói đồ cá nhân và dán nhãn tên lên từng thùng."
+      ],
+      [
+        1,
+        "What about the heavy furniture, like cabinets and meeting tables?",
+        "Còn đồ nội thất nặng như tủ hồ sơ và bàn họp thì sao?"
+      ],
+      [
+        0,
+        "The movers will handle all of that over the weekend.",
+        "Nhân viên chuyển nhà sẽ lo toàn bộ những thứ đó vào cuối tuần."
+      ],
+      [
+        1,
+        "Have you seen the floor plan? Where will our team sit?",
+        "Anh đã xem sơ đồ mặt bằng chưa? Nhóm mình sẽ ngồi ở đâu?"
+      ],
+      [
+        0,
+        "We'll have cubicles on the fifth floor. You can unpack on Monday.",
+        "Chúng ta sẽ có các ô làm việc ở tầng năm. Chị có thể dỡ đồ vào thứ Hai."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "unpack",
+      "/ʌnˈpæk/",
+      "v",
+      "dỡ đồ, mở thùng",
+      "to take things out of a box or bag",
+      "We unpacked our computers on Monday morning.",
+      "Chúng tôi đã dỡ máy tính ra khỏi thùng vào sáng thứ Hai."
+    ],
+    [
+      "moving company",
+      "/ˈmuːvɪŋ ˈkʌmpəni/",
+      "phrase",
+      "công ty dịch vụ chuyển nhà/văn phòng",
+      "a business that moves furniture and boxes to a new place",
+      "The moving company will arrive at seven on Saturday morning.",
+      "Công ty chuyển nhà sẽ đến lúc bảy giờ sáng thứ Bảy."
+    ],
+    [
+      "pack",
+      "/pæk/",
+      "v",
+      "đóng gói",
+      "to put things into boxes or bags to move or store them",
+      "Please pack all the files into the blue boxes.",
+      "Vui lòng đóng gói tất cả hồ sơ vào các thùng màu xanh."
+    ],
+    [
+      "label",
+      "/ˈleɪbəl/",
+      "v",
+      "dán nhãn",
+      "to put a piece of paper with information on something",
+      "Label each box with your name and team.",
+      "Hãy dán nhãn tên và nhóm của bạn lên từng thùng."
+    ],
+    [
+      "floor plan",
+      "/flɔːr plæn/",
+      "phrase",
+      "sơ đồ mặt bằng",
+      "a drawing that shows the layout of rooms on one floor",
+      "The floor plan shows where each team will sit.",
+      "Sơ đồ mặt bằng cho thấy mỗi nhóm sẽ ngồi ở đâu."
+    ],
+    [
+      "furniture",
+      "/ˈfɜːrnɪtʃər/",
+      "n",
+      "đồ nội thất",
+      "things such as desks, chairs, and cabinets",
+      "We are buying new furniture for the meeting rooms.",
+      "Chúng tôi đang mua đồ nội thất mới cho các phòng họp."
+    ],
+    [
+      "cubicle",
+      "/ˈkjuːbɪkəl/",
+      "n",
+      "ô làm việc (có vách ngăn)",
+      "a small work area separated by low walls in an open office",
+      "My new cubicle is right next to the window.",
+      "Ô làm việc mới của tôi nằm ngay cạnh cửa sổ."
+    ],
+    [
+      "premises",
+      "/ˈpremɪsɪz/",
+      "n",
+      "cơ sở, mặt bằng (của công ty)",
+      "the buildings and land that a business uses",
+      "Smoking is not allowed anywhere on the premises.",
+      "Không được hút thuốc ở bất kỳ đâu trong khuôn viên công ty."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The company decided ____ its head office to a larger building near the airport.",
+      "o": [
+        "relocate",
+        "relocating",
+        "to relocate",
+        "relocated"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau động từ \"decide\" dùng \"to + V\", nên chọn \"to relocate\"."
+    },
+    {
+      "q": "Staff should pack ____ personal belongings before Friday evening.",
+      "o": [
+        "they",
+        "them",
+        "their",
+        "themselves"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Trước cụm danh từ \"personal belongings\" cần tính từ sở hữu \"their\"."
+    },
+    {
+      "q": "All the office furniture ____ to the new building over the weekend.",
+      "o": [
+        "will move",
+        "will be moved",
+        "moves",
+        "is moving"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Đồ nội thất không tự di chuyển được nên dùng bị động tương lai \"will be moved\"."
+    },
+    {
+      "q": "By the time the movers arrive, we ____ all the boxes.",
+      "o": [
+        "will have labeled",
+        "labeled",
+        "have labeled",
+        "had labeled"
+      ],
+      "a": 0,
+      "gp": "tense",
+      "x": "\"By the time + hiện tại đơn\" chỉ mốc tương lai, dùng tương lai hoàn thành \"will have labeled\"."
+    },
+    {
+      "q": "The new office is located ____ the fifth and sixth floors of the Lotus Tower.",
+      "o": [
+        "at",
+        "in",
+        "on",
+        "by"
+      ],
+      "a": 2,
+      "gp": "prep",
+      "x": "Dùng \"on\" với tầng nhà: \"on the fifth floor\"."
+    },
+    {
+      "q": "Employees cannot enter the new ____ until the security cards are ready.",
+      "o": [
+        "premises",
+        "promises",
+        "presence",
+        "pressure"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Premises\" nghĩa là cơ sở, mặt bằng của công ty, phù hợp với việc vào tòa nhà mới."
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-11",
+  "title": "Nhận thẻ tên tại hội nghị",
+  "scene": {
+    "title": "Ngày đầu tiên ở hội nghị thương mại",
+    "topic": "Du lịch",
+    "names": [
+      "Tuấn",
+      "Emma"
+    ],
+    "lines": [
+      [
+        0,
+        "Hello, I'm Lê Văn Tuấn from Sao Mai Logistics. I'm here for the trade conference.",
+        "Xin chào, tôi là Lê Văn Tuấn từ công ty Sao Mai Logistics. Tôi đến dự hội nghị thương mại."
+      ],
+      [
+        1,
+        "Welcome! Let me find your name. Here is your name tag and lanyard.",
+        "Chào mừng anh! Để tôi tìm tên anh. Đây là thẻ tên và dây đeo của anh."
+      ],
+      [
+        0,
+        "Thank you. Is there a printed program for today's sessions?",
+        "Cảm ơn chị. Có chương trình in sẵn cho các phiên hôm nay không?"
+      ],
+      [
+        1,
+        "Yes, it's in your welcome kit along with a map of the venue.",
+        "Có ạ, nó nằm trong bộ quà chào mừng cùng với bản đồ khu tổ chức sự kiện."
+      ],
+      [
+        0,
+        "Great. What time does the keynote speech start this morning?",
+        "Tuyệt. Bài phát biểu chính sáng nay bắt đầu lúc mấy giờ?"
+      ],
+      [
+        1,
+        "At 9:30 in the main hall. Delegates can sit anywhere in the first ten rows.",
+        "Lúc 9 giờ 30 ở hội trường chính. Đại biểu có thể ngồi bất kỳ đâu trong mười hàng đầu."
+      ],
+      [
+        0,
+        "And where can I pick up company brochures and see the product displays?",
+        "Còn tôi có thể lấy tờ giới thiệu của các công ty và xem gian trưng bày sản phẩm ở đâu?"
+      ],
+      [
+        1,
+        "Those are in the exhibition hall on the second floor, next to the coffee area.",
+        "Những thứ đó ở sảnh triển lãm trên tầng hai, cạnh khu cà phê."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "name tag",
+      "/ˈneɪm tæɡ/",
+      "n",
+      "thẻ tên",
+      "a small card with your name that you wear at an event",
+      "Please write your company name on your name tag.",
+      "Vui lòng ghi tên công ty lên thẻ tên của bạn."
+    ],
+    [
+      "lanyard",
+      "/ˈlænjərd/",
+      "n",
+      "dây đeo thẻ",
+      "a cord worn around the neck to hold a card or key",
+      "Each guest received a blue lanyard at the entrance.",
+      "Mỗi vị khách nhận được một dây đeo thẻ màu xanh ở lối vào."
+    ],
+    [
+      "delegate",
+      "/ˈdelɪɡət/",
+      "n",
+      "đại biểu",
+      "a person sent to a conference to represent a company or group",
+      "More than 300 delegates from 20 countries joined the forum.",
+      "Hơn 300 đại biểu từ 20 quốc gia đã tham gia diễn đàn."
+    ],
+    [
+      "conference pass",
+      "/ˈkɑːnfərəns pæs/",
+      "n",
+      "thẻ ra vào hội nghị",
+      "a card or ticket that lets you enter all areas of a conference",
+      "Show your conference pass at the door of each session room.",
+      "Hãy xuất trình thẻ ra vào hội nghị ở cửa mỗi phòng hội thảo."
+    ],
+    [
+      "keynote",
+      "/ˈkiːnoʊt/",
+      "n",
+      "bài phát biểu chính",
+      "the main speech at a conference",
+      "The keynote was given by the CEO of a large airline.",
+      "Bài phát biểu chính do giám đốc điều hành của một hãng bay lớn trình bày."
+    ],
+    [
+      "welcome kit",
+      "/ˈwelkəm kɪt/",
+      "n",
+      "bộ tài liệu chào mừng",
+      "a bag or pack of useful items given to new arrivals at an event",
+      "The welcome kit includes a notebook, a pen, and a city map.",
+      "Bộ tài liệu chào mừng gồm một cuốn sổ, một cây bút và bản đồ thành phố."
+    ],
+    [
+      "breakout session",
+      "/ˈbreɪkaʊt ˌseʃn/",
+      "n",
+      "phiên thảo luận nhóm nhỏ",
+      "a smaller meeting during a conference on a special topic",
+      "After lunch, each delegate can join a breakout session on logistics or marketing.",
+      "Sau bữa trưa, mỗi đại biểu có thể tham gia một phiên thảo luận nhóm nhỏ về logistics hoặc marketing."
+    ],
+    [
+      "exhibition hall",
+      "/ˌeksɪˈbɪʃn hɔːl/",
+      "n",
+      "sảnh triển lãm",
+      "a large room where companies show their products",
+      "The exhibition hall opens at nine and closes at five.",
+      "Sảnh triển lãm mở cửa lúc chín giờ và đóng cửa lúc năm giờ."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "All delegates are asked to wear their name tags ____ the conference.",
+      "o": [
+        "throughout",
+        "among",
+        "between",
+        "onto"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "'Throughout' nghĩa là 'suốt, trong toàn bộ' (khoảng thời gian), phù hợp với 'the conference'."
+    },
+    {
+      "q": "Ms. Rossi, ____ gave the keynote speech, is the CEO of a major shipping firm.",
+      "o": [
+        "who",
+        "which",
+        "whose",
+        "where"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ làm chủ ngữ chỉ người (Ms. Rossi), nên chọn 'who'."
+    },
+    {
+      "q": "Neither the welcome kit nor the brochures ____ been delivered to the information desk yet.",
+      "o": [
+        "has",
+        "have",
+        "is",
+        "was"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Với 'neither... nor', động từ chia theo chủ ngữ gần nhất 'the brochures' (số nhiều), và có 'been' nên chọn 'have'."
+    },
+    {
+      "q": "If you ____ your name tag, please ask a staff member at the information desk for a new one.",
+      "o": [
+        "lose",
+        "will lose",
+        "lost",
+        "losing"
+      ],
+      "a": 0,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 1 với mệnh đề chính là câu mệnh lệnh, mệnh đề 'if' dùng hiện tại đơn 'lose'."
+    },
+    {
+      "q": "By the end of this week, the organizers ____ over 600 welcome kits.",
+      "o": [
+        "will have prepared",
+        "prepare",
+        "prepared",
+        "are preparing"
+      ],
+      "a": 0,
+      "gp": "tense",
+      "x": "'By the end of + thời điểm tương lai' dùng thì tương lai hoàn thành 'will have prepared'."
+    },
+    {
+      "q": "The new venue is ____ larger than the hotel used for last year's event.",
+      "o": [
+        "very",
+        "much",
+        "more",
+        "most"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Để nhấn mạnh so sánh hơn 'larger' ta dùng 'much'; không dùng 'very' hay 'more' trước 'larger'."
+    }
+  ]
+}

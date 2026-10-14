@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-06",
+  "title": "Tán gẫu với đồng nghiệp ở quán cà phê",
+  "scene": {
+    "title": "Ly cà phê buổi sáng",
+    "topic": "Đời sống",
+    "names": [
+      "Tom",
+      "Vy"
+    ],
+    "lines": [
+      [
+        0,
+        "Morning, Vy! Do you want to grab a coffee before work?",
+        "Chào buổi sáng, Vy! Đi uống cà phê trước giờ làm không?"
+      ],
+      [
+        1,
+        "Sure, Tom. I really need one. I'm exhausted after this week.",
+        "Được thôi, Tom. Tôi đang rất cần một ly. Tuần này tôi mệt rã rời."
+      ],
+      [
+        0,
+        "Same here. I was stuck on the road for an hour this morning.",
+        "Tôi cũng vậy. Sáng nay tôi bị kẹt trên đường cả tiếng đồng hồ."
+      ],
+      [
+        1,
+        "There was a big traffic jam on Nguyen Van Linh Street, wasn't there?",
+        "Đường Nguyễn Văn Linh bị kẹt xe nặng lắm phải không?"
+      ],
+      [
+        0,
+        "Yes, it was terrible. Anyway, it's chilly today, so I'll get a hot latte.",
+        "Ừ, kinh khủng lắm. Mà hôm nay trời se lạnh, nên tôi sẽ gọi một ly latte nóng."
+      ],
+      [
+        1,
+        "I'll have a decaf. Too much caffeine keeps me awake at night.",
+        "Tôi uống loại không caffeine. Nhiều caffeine quá khiến tôi mất ngủ."
+      ],
+      [
+        0,
+        "We haven't had time to catch up lately. How was your weekend?",
+        "Dạo này mình chưa có dịp trò chuyện. Cuối tuần của bạn thế nào?"
+      ],
+      [
+        1,
+        "Great! I started a pottery class. It's my new hobby.",
+        "Tuyệt lắm! Tôi bắt đầu học làm gốm. Đó là sở thích mới của tôi."
+      ],
+      [
+        0,
+        "That sounds fun. You'll have to show me your work sometime.",
+        "Nghe vui đấy. Hôm nào bạn phải cho tôi xem sản phẩm của bạn nhé."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "grab",
+      "/ɡræb/",
+      "v",
+      "tranh thủ ăn/uống nhanh, lấy vội",
+      "to get or have something quickly",
+      "Let's grab lunch at the noodle shop downstairs.",
+      "Mình đi ăn trưa nhanh ở quán mì dưới lầu nhé."
+    ],
+    [
+      "exhausted",
+      "/ɪɡˈzɔːstɪd/",
+      "adj",
+      "kiệt sức, mệt rã rời",
+      "extremely tired",
+      "I was exhausted after cleaning the whole house.",
+      "Tôi mệt rã rời sau khi dọn dẹp cả căn nhà."
+    ],
+    [
+      "caffeine",
+      "/ˈkæfiːn/",
+      "n",
+      "chất caffeine",
+      "a substance in coffee and tea that makes you feel awake",
+      "I try not to have caffeine after 3 p.m.",
+      "Tôi cố gắng không dùng caffeine sau 3 giờ chiều."
+    ],
+    [
+      "traffic jam",
+      "/ˈtræfɪk dʒæm/",
+      "phrase",
+      "tắc đường, kẹt xe",
+      "a long line of vehicles that cannot move",
+      "We were stuck in a traffic jam for forty minutes.",
+      "Chúng tôi bị kẹt xe suốt bốn mươi phút."
+    ],
+    [
+      "chilly",
+      "/ˈtʃɪli/",
+      "adj",
+      "se lạnh, lạnh",
+      "cold in a way that is not comfortable",
+      "It gets chilly in Hanoi in December.",
+      "Hà Nội trở lạnh vào tháng Mười Hai."
+    ],
+    [
+      "decaf",
+      "/ˈdiːkæf/",
+      "n",
+      "cà phê đã khử caffeine",
+      "coffee with the caffeine removed",
+      "She orders a decaf every afternoon.",
+      "Chiều nào cô ấy cũng gọi một ly cà phê không caffeine."
+    ],
+    [
+      "catch up",
+      "/ˌkætʃ ˈʌp/",
+      "phrase",
+      "hàn huyên, cập nhật tin tức của nhau",
+      "to talk with someone you have not seen for a while",
+      "Let's meet for dinner and catch up next week.",
+      "Tuần sau mình gặp nhau ăn tối và hàn huyên nhé."
+    ],
+    [
+      "hobby",
+      "/ˈhɑːbi/",
+      "n",
+      "sở thích",
+      "an activity you do for fun in your free time",
+      "Gardening has become my favorite hobby.",
+      "Làm vườn đã trở thành sở thích yêu thích của tôi."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Vy ____ a pottery class every Saturday since September.",
+      "o": [
+        "takes",
+        "has been taking",
+        "took",
+        "will take"
+      ],
+      "a": 1,
+      "gp": "tense",
+      "x": "Có since September và hành động vẫn đang tiếp diễn nên dùng hiện tại hoàn thành tiếp diễn: has been taking."
+    },
+    {
+      "q": "Tom and I often have coffee together, but ____ rarely talk about work.",
+      "o": [
+        "we",
+        "us",
+        "our",
+        "ours"
+      ],
+      "a": 0,
+      "gp": "pronoun",
+      "x": "Vị trí chủ ngữ trước động từ talk nên dùng đại từ chủ ngữ we."
+    },
+    {
+      "q": "Neither of my coworkers ____ coffee without sugar.",
+      "o": [
+        "drink",
+        "drinks",
+        "are drinking",
+        "have drunk"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Neither of + danh từ số nhiều đi với động từ số ít trong văn phong chuẩn: drinks."
+    },
+    {
+      "q": "There are only ____ seats left in the coffee shop, so let's hurry.",
+      "o": [
+        "a few",
+        "a little",
+        "much",
+        "a great deal of"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "Seats là danh từ đếm được số nhiều nên dùng a few; các lựa chọn còn lại đi với danh từ không đếm được."
+    },
+    {
+      "q": "The new café on the corner is very ____ with office workers.",
+      "o": [
+        "popularity",
+        "popular",
+        "popularly",
+        "popularize"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Sau to be và very cần tính từ: popular with (được ưa chuộng bởi)."
+    },
+    {
+      "q": "Sorry I'm late. I was ____ in heavy traffic for almost an hour.",
+      "o": [
+        "stuck",
+        "spent",
+        "taken",
+        "made"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "Be stuck in traffic nghĩa là bị kẹt xe."
+    }
+  ]
+}

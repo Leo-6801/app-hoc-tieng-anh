@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-30",
+  "title": "Chọn gói cước điện thoại mới",
+  "scene": {
+    "title": "Tư vấn gói cước tại cửa hàng",
+    "topic": "Đời sống",
+    "names": ["Rachel", "Bảo"],
+    "lines": [
+      [0, "Hi there! Are you looking for a new phone plan today?", "Chào anh! Hôm nay anh đang tìm gói cước điện thoại mới phải không?"],
+      [1, "Yes, I want to switch from my prepaid SIM to a monthly plan.", "Vâng, tôi muốn chuyển từ SIM trả trước sang gói cước trả theo tháng."],
+      [0, "How much mobile data do you usually use each month?", "Mỗi tháng anh thường dùng bao nhiêu dữ liệu di động?"],
+      [1, "A lot. I watch videos on the bus, so I'd like unlimited data.", "Nhiều lắm. Tôi hay xem video trên xe buýt, nên tôi muốn dữ liệu không giới hạn."],
+      [0, "Our premium data plan is unlimited and costs 300,000 dong a month.", "Gói dữ liệu cao cấp của chúng tôi không giới hạn và có giá 300.000 đồng một tháng."],
+      [1, "How is the coverage outside the city? I often visit my hometown.", "Sóng ở ngoài thành phố thế nào? Tôi thường về quê."],
+      [0, "Coverage is strong nationwide, and international roaming is also included.", "Sóng mạnh trên toàn quốc, và gói cũng bao gồm chuyển vùng quốc tế."],
+      [1, "Sounds good. Can I upgrade my phone at the same time?", "Nghe hay đấy. Tôi có thể nâng cấp điện thoại cùng lúc không?"],
+      [0, "Of course. We can activate your new SIM card in about ten minutes.", "Tất nhiên. Chúng tôi có thể kích hoạt SIM mới của anh trong khoảng mười phút."]
+    ]
+  },
+  "vocab": [
+    ["switch", "/swɪtʃ/", "v", "chuyển, đổi sang", "to change from one thing to another", "I switched to a cheaper phone company last year.", "Năm ngoái tôi đã chuyển sang một nhà mạng rẻ hơn."],
+    ["prepaid", "/ˌpriːˈpeɪd/", "adj", "trả trước", "paid for before you use it", "Many students use prepaid SIM cards to control their spending.", "Nhiều sinh viên dùng SIM trả trước để kiểm soát chi tiêu."],
+    ["data plan", "/ˈdeɪtə plæn/", "phrase", "gói dữ liệu di động", "a phone service that lets you use the internet", "My data plan gives me 4GB of internet a day.", "Gói dữ liệu của tôi cho 4GB internet mỗi ngày."],
+    ["unlimited", "/ʌnˈlɪmɪtɪd/", "adj", "không giới hạn", "without any limit", "This plan offers unlimited calls to all networks.", "Gói này cho phép gọi không giới hạn đến tất cả các mạng."],
+    ["coverage", "/ˈkʌvərɪdʒ/", "n", "vùng phủ sóng", "the area where a phone signal can be received", "There is poor coverage in the mountains.", "Ở vùng núi sóng điện thoại rất yếu."],
+    ["roaming", "/ˈroʊmɪŋ/", "n", "chuyển vùng (quốc tế)", "using your phone in another country through a different network", "Turn off roaming before you go abroad to avoid high charges.", "Hãy tắt chuyển vùng trước khi ra nước ngoài để tránh cước phí cao."],
+    ["upgrade", "/ʌpˈɡreɪd/", "v", "nâng cấp", "to change to a newer or better version", "I want to upgrade to a phone with a better camera.", "Tôi muốn nâng cấp lên điện thoại có camera tốt hơn."],
+    ["activate", "/ˈæktɪveɪt/", "v", "kích hoạt", "to make something start working", "You need to activate your new SIM card before using it.", "Bạn cần kích hoạt SIM mới trước khi sử dụng."]
+  ],
+  "toeic": [
+    {"q": "The new data plan is ____ cheaper than the old one.", "o": ["consider", "considerable", "considerably", "consideration"], "a": 2, "gp": "wordform", "x": "Cần trạng từ considerably để bổ nghĩa cho tính từ so sánh cheaper."},
+    {"q": "If you had chosen the unlimited plan, you ____ extra charges last month.", "o": ["don't pay", "won't pay", "wouldn't have paid", "didn't pay"], "a": 2, "gp": "conditional", "x": "Câu điều kiện loại 3 (không có thật trong quá khứ): If + had V3, mệnh đề chính dùng would have V3."},
+    {"q": "This is the store ____ I bought my first smartphone.", "o": ["where", "which", "who", "whose"], "a": 0, "gp": "relative", "x": "Where thay cho nơi chốn (the store) và mệnh đề sau đã đủ thành phần (I bought my first smartphone)."},
+    {"q": "Of all the plans, the family package offers the ____ value for money.", "o": ["good", "better", "best", "well"], "a": 2, "gp": "compare", "x": "Of all và the cho thấy cần so sánh nhất: the best."},
+    {"q": "Mr. Lam is considering ____ to a different mobile carrier.", "o": ["switch", "switching", "to switch", "switched"], "a": 1, "gp": "gerund", "x": "Sau consider dùng danh động từ (V-ing): considering switching."},
+    {"q": "____ the plan is a little expensive, it includes unlimited data.", "o": ["Although", "Because", "Unless", "Despite"], "a": 0, "gp": "conj", "x": "Although (mặc dù) nối hai ý tương phản và đi với mệnh đề; Despite chỉ đi với danh từ hoặc V-ing."}
+  ]
+}

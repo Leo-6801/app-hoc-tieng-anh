@@ -1,0 +1,207 @@
+{
+ "date": "2026-10-15",
+ "title": "Họp nhóm hằng tuần: báo cáo tiến độ dự án",
+ "scene": {
+  "title": "Cập nhật tiến độ dự án website",
+  "topic": "Công sở",
+  "names": [
+   "Linh",
+   "David"
+  ],
+  "lines": [
+   [
+    0,
+    "Good morning, David. Could you give us a quick status update on the website project?",
+    "Chào buổi sáng, David. Anh có thể cập nhật nhanh tình hình dự án website cho mọi người được không?"
+   ],
+   [
+    1,
+    "Sure. We reached our second milestone last Friday, so we are on track.",
+    "Được chứ. Chúng tôi đã đạt mốc quan trọng thứ hai vào thứ Sáu tuần trước, nên dự án đang đúng tiến độ."
+   ],
+   [
+    0,
+    "That's great news. Have you run into any problems so far?",
+    "Tin tốt quá. Đến giờ anh có gặp vấn đề gì không?"
+   ],
+   [
+    1,
+    "The main bottleneck is testing, because only one person is checking every page.",
+    "Điểm nghẽn chính là khâu kiểm thử, vì chỉ có một người kiểm tra tất cả các trang."
+   ],
+   [
+    0,
+    "I see. Could Minh help with testing if we lighten his workload this week?",
+    "Tôi hiểu rồi. Nếu giảm bớt khối lượng công việc của Minh tuần này thì cậu ấy có thể hỗ trợ kiểm thử không?"
+   ],
+   [
+    1,
+    "That would help a lot. Then we can make the mobile version our top priority.",
+    "Như vậy sẽ giúp ích rất nhiều. Khi đó chúng ta có thể ưu tiên hàng đầu cho phiên bản di động."
+   ],
+   [
+    0,
+    "Good. When do you expect to wrap up the testing phase?",
+    "Tốt. Anh dự kiến khi nào sẽ hoàn tất giai đoạn kiểm thử?"
+   ],
+   [
+    1,
+    "By next Thursday, and I'll share our progress in the group chat every day.",
+    "Trước thứ Năm tuần sau, và tôi sẽ chia sẻ tiến độ trong nhóm chat mỗi ngày."
+   ],
+   [
+    0,
+    "Perfect. Thanks, David. Let's move on to the marketing team's update.",
+    "Tuyệt. Cảm ơn anh, David. Chúng ta chuyển sang phần cập nhật của nhóm marketing nhé."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "status",
+   "/ˈsteɪtəs/",
+   "n",
+   "tình trạng, tình hình",
+   "the current situation of something",
+   "Please send me a short status report every Monday.",
+   "Vui lòng gửi tôi một báo cáo tình hình ngắn vào mỗi thứ Hai."
+  ],
+  [
+   "milestone",
+   "/ˈmaɪlstəʊn/",
+   "n",
+   "mốc quan trọng",
+   "an important stage in a project",
+   "Launching the beta version was a major milestone for our team.",
+   "Ra mắt phiên bản beta là một mốc quan trọng đối với nhóm chúng tôi."
+  ],
+  [
+   "on track",
+   "/ɒn træk/",
+   "phrase",
+   "đúng tiến độ, đúng hướng",
+   "making progress as planned",
+   "The project is on track to finish by the end of the month.",
+   "Dự án đang đúng tiến độ để hoàn thành vào cuối tháng."
+  ],
+  [
+   "progress",
+   "/ˈprəʊɡres/",
+   "n",
+   "tiến độ, sự tiến triển",
+   "movement toward finishing something",
+   "We made good progress on the design this week.",
+   "Tuần này chúng tôi đã có tiến triển tốt về phần thiết kế."
+  ],
+  [
+   "bottleneck",
+   "/ˈbɒtlnek/",
+   "n",
+   "điểm nghẽn, khâu tắc nghẽn",
+   "a part of a process that slows everything down",
+   "The approval process has become a bottleneck for our team.",
+   "Quy trình phê duyệt đã trở thành điểm nghẽn của nhóm chúng tôi."
+  ],
+  [
+   "workload",
+   "/ˈwɜːkləʊd/",
+   "n",
+   "khối lượng công việc",
+   "the amount of work a person has to do",
+   "Her workload is very heavy before the product launch.",
+   "Khối lượng công việc của cô ấy rất nặng trước đợt ra mắt sản phẩm."
+  ],
+  [
+   "priority",
+   "/praɪˈɒrəti/",
+   "n",
+   "việc ưu tiên",
+   "something that is more important than other things",
+   "Fixing the login error is our top priority today.",
+   "Sửa lỗi đăng nhập là ưu tiên hàng đầu của chúng tôi hôm nay."
+  ],
+  [
+   "wrap up",
+   "/ræp ʌp/",
+   "phrase",
+   "hoàn tất, kết thúc",
+   "to finish something",
+   "Let's wrap up the meeting and continue tomorrow.",
+   "Chúng ta hãy kết thúc cuộc họp và tiếp tục vào ngày mai."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "The project team has made steady ____ since the new manager joined.",
+   "o": [
+    "progress",
+    "progressive",
+    "progressed",
+    "progressively"
+   ],
+   "a": 0,
+   "gp": "wordform",
+   "x": "Sau tính từ \"steady\" cần một danh từ; \"progress\" là danh từ nghĩa là \"sự tiến triển\"."
+  },
+  {
+   "q": "By the end of this week, we ____ the second phase of the project.",
+   "o": [
+    "completed",
+    "have been completing",
+    "will have completed",
+    "complete"
+   ],
+   "a": 2,
+   "gp": "tense",
+   "x": "\"By the end of this week\" chỉ một mốc trong tương lai, nên dùng thì tương lai hoàn thành \"will have completed\"."
+  },
+  {
+   "q": "All status reports must be sent to Ms. Tran ____ Friday at noon.",
+   "o": [
+    "by",
+    "until",
+    "since",
+    "during"
+   ],
+   "a": 0,
+   "gp": "prep",
+   "x": "\"by\" + thời điểm nghĩa là \"trước/chậm nhất là\"; \"until\" diễn tả hành động kéo dài liên tục đến thời điểm đó."
+  },
+  {
+   "q": "Neither the designers nor the developer ____ aware of the change in priorities.",
+   "o": [
+    "were",
+    "are",
+    "have been",
+    "was"
+   ],
+   "a": 3,
+   "gp": "agreement",
+   "x": "Với \"neither... nor...\", động từ chia theo chủ ngữ gần nhất là \"the developer\" (số ít), nên dùng \"was\"."
+  },
+  {
+   "q": "Please keep your update brief so that we can ____ the meeting on time.",
+   "o": [
+    "hold up",
+    "wrap up",
+    "pick up",
+    "show up"
+   ],
+   "a": 1,
+   "gp": "vocab",
+   "x": "\"wrap up\" nghĩa là kết thúc, hoàn tất; \"show up\" là xuất hiện, \"hold up\" là làm chậm trễ, \"pick up\" là nhặt lên/đón."
+  },
+  {
+   "q": "The testing phase will be finished on time ____ two more engineers join the team.",
+   "o": [
+    "although",
+    "whereas",
+    "because of",
+    "if"
+   ],
+   "a": 3,
+   "gp": "conditional",
+   "x": "\"if\" nêu điều kiện: nếu có thêm hai kỹ sư thì giai đoạn kiểm thử sẽ xong đúng hạn. \"because of\" phải đi với danh từ, còn \"although/whereas\" không hợp nghĩa."
+  }
+ ]
+}

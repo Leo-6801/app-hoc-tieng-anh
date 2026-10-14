@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-04",
+  "title": "Hỗ trợ kỹ thuật sau bán hàng",
+  "scene": {
+    "title": "Cuộc gọi hỗ trợ kỹ thuật",
+    "topic": "Kinh doanh",
+    "names": ["Phạm Thu Hà", "Mark Wilson"],
+    "lines": [
+      [0, "Technical support, this is Thu Hà speaking. How can I help you today?", "Bộ phận hỗ trợ kỹ thuật, Thu Hà xin nghe. Tôi có thể giúp gì cho anh hôm nay?"],
+      [1, "Hi, our label printer keeps showing an error message, and it won't print anything.", "Chào chị, máy in nhãn của chúng tôi cứ báo lỗi và không in được gì cả."],
+      [0, "I'm sorry about that. Could you read me the serial number on the back?", "Tôi rất tiếc về điều đó. Anh có thể đọc cho tôi số sê-ri ở mặt sau máy không?"],
+      [1, "Sure, it's PX-4471-B. We bought it from your company about six months ago.", "Được, số là PX-4471-B. Chúng tôi mua máy từ công ty chị khoảng sáu tháng trước."],
+      [0, "Thank you. Please hold the line while I check the malfunction reports for this model.", "Cảm ơn anh. Xin anh vui lòng giữ máy trong lúc tôi kiểm tra các báo cáo trục trặc của mẫu máy này."],
+      [1, "No problem. I already tried to restart it twice, but nothing changed.", "Không sao. Tôi đã thử khởi động lại hai lần rồi, nhưng không có gì thay đổi."],
+      [0, "Let's troubleshoot together. Please press and hold the reset button for ten seconds.", "Chúng ta cùng xử lý sự cố nhé. Anh hãy nhấn và giữ nút cài đặt lại trong mười giây."],
+      [1, "Okay, the light is green now, and it's printing again. That's great!", "Được rồi, đèn đã chuyển xanh và máy in lại được rồi. Tuyệt quá!"],
+      [0, "Wonderful. If it happens again, we can send a technician to your office.", "Tốt quá. Nếu lỗi xảy ra lần nữa, chúng tôi có thể cử kỹ thuật viên đến văn phòng anh."]
+    ]
+  },
+  "vocab": [
+    ["troubleshoot", "/ˈtrʌblʃuːt/", "v", "xử lý sự cố, khắc phục lỗi", "to find and fix problems in a machine or system", "The support agent helped me troubleshoot the connection problem.", "Nhân viên hỗ trợ đã giúp tôi khắc phục sự cố kết nối."],
+    ["restart", "/ˌriːˈstɑːt/", "v", "khởi động lại", "to turn a machine or computer off and on again", "Please restart the device and try again.", "Vui lòng khởi động lại thiết bị và thử lại."],
+    ["malfunction", "/ˌmælˈfʌŋkʃn/", "n", "sự trục trặc, sự hoạt động sai", "a failure to work in the correct way", "A small malfunction in the sensor stopped the whole machine.", "Một trục trặc nhỏ ở cảm biến đã làm cả cỗ máy ngừng hoạt động."],
+    ["reset", "/ˌriːˈset/", "v", "đặt lại, cài đặt lại", "to return something to its original settings", "You can reset the password by clicking the link below.", "Bạn có thể đặt lại mật khẩu bằng cách nhấp vào đường dẫn bên dưới."],
+    ["user manual", "/ˈjuːzər ˈmænjuəl/", "n", "sách hướng dẫn sử dụng", "a book that explains how to use a product", "You can find the instructions in the user manual.", "Bạn có thể tìm thấy hướng dẫn trong sách hướng dẫn sử dụng."],
+    ["technician", "/tekˈnɪʃn/", "n", "kỹ thuật viên", "a person whose job is to repair or check machines", "A technician will visit your office tomorrow morning.", "Một kỹ thuật viên sẽ đến văn phòng của bạn vào sáng mai."],
+    ["hold the line", "/həʊld ðə laɪn/", "phrase", "giữ máy (khi gọi điện thoại)", "to wait on the phone without hanging up", "Please hold the line while I check your account.", "Xin vui lòng giữ máy trong lúc tôi kiểm tra tài khoản của bạn."],
+    ["serial number", "/ˈsɪəriəl ˈnʌmbər/", "n", "số sê-ri", "a unique number printed on a product to identify it", "Please write down the serial number before calling support.", "Vui lòng ghi lại số sê-ri trước khi gọi bộ phận hỗ trợ."]
+  ],
+  "toeic": [
+    {"q": "All support calls ____ to improve the quality of our service.", "o": ["record", "are recorded", "recording", "have recorded"], "a": 1, "gp": "passive", "x": "Các cuộc gọi được ghi âm bởi người khác nên dùng câu bị động \"are recorded\"."},
+    {"q": "Before ____ a technician, please try restarting the machine.", "o": ["call", "called", "calling", "to call"], "a": 2, "gp": "gerund", "x": "Sau giới từ \"before\" dùng danh động từ (V-ing), nên chọn \"calling\"."},
+    {"q": "The client could not print the report ____ the machine had run out of ink.", "o": ["because", "although", "so", "unless"], "a": 0, "gp": "conj", "x": "Máy hết mực là nguyên nhân khiến không in được, nên dùng liên từ chỉ nguyên nhân \"because\"."},
+    {"q": "The technician ____ repaired our copier last month is on vacation this week.", "o": ["which", "who", "whose", "whom"], "a": 1, "gp": "relative", "x": "\"The technician\" là người và đại từ quan hệ làm chủ ngữ cho \"repaired\", nên chọn \"who\"."},
+    {"q": "Please follow the instructions in the manual ____ to avoid further damage.", "o": ["careful", "carefully", "care", "careless"], "a": 1, "gp": "wordform", "x": "Cần trạng từ bổ nghĩa cho động từ \"follow\", nên chọn \"carefully\"."},
+    {"q": "The number of support calls ____ increased since the new model was launched.", "o": ["have", "has", "are", "were"], "a": 1, "gp": "agreement", "x": "\"The number of + danh từ số nhiều\" là chủ ngữ số ít, và có \"since\" nên dùng hiện tại hoàn thành \"has increased\"."}
+  ]
+}

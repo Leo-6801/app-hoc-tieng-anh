@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-26",
+  "title": "Xin duyệt bài đăng mạng xã hội",
+  "scene": {
+    "title": "Duyệt bài đăng trước khi công khai",
+    "topic": "Kinh doanh",
+    "names": [
+      "Minh",
+      "Sarah"
+    ],
+    "lines": [
+      [
+        0,
+        "Hi Sarah, could you sign off on this Facebook post before lunch?",
+        "Chào Sarah, chị có thể duyệt bài đăng Facebook này trước giờ ăn trưa không?"
+      ],
+      [
+        1,
+        "Sure, let me look at the draft. Is this the final version?",
+        "Được, để chị xem bản nháp. Đây là phiên bản cuối cùng chưa?"
+      ],
+      [
+        0,
+        "Yes, I've already checked the photo and the caption twice.",
+        "Vâng, em đã kiểm tra hình ảnh và chú thích hai lần rồi."
+      ],
+      [
+        1,
+        "The caption is a bit long. Our guidelines say under fifty words.",
+        "Chú thích hơi dài. Hướng dẫn của chúng ta quy định dưới năm mươi từ."
+      ],
+      [
+        0,
+        "You're right. I'll revise it and remove the second sentence.",
+        "Chị nói đúng. Em sẽ chỉnh sửa và bỏ câu thứ hai."
+      ],
+      [
+        1,
+        "Also, please add our campaign hashtag at the end.",
+        "Ngoài ra, em hãy thêm hashtag của chiến dịch vào cuối bài nhé."
+      ],
+      [
+        0,
+        "Got it. What time is best to publish it?",
+        "Em hiểu rồi. Mấy giờ là thời điểm tốt nhất để đăng bài?"
+      ],
+      [
+        1,
+        "Around seven in the evening. That's when engagement is usually highest.",
+        "Khoảng bảy giờ tối. Đó là lúc mức độ tương tác thường cao nhất."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "sign off on",
+      "/saɪn ɔːf ɑːn/",
+      "phrase",
+      "phê duyệt, ký duyệt",
+      "to give official approval for something",
+      "The director signed off on the post after a few small changes.",
+      "Giám đốc đã ký duyệt bài đăng sau vài chỉnh sửa nhỏ."
+    ],
+    [
+      "draft",
+      "/dræft/",
+      "n",
+      "bản nháp",
+      "an early version of a text that is not finished yet",
+      "Please send me the draft before you share it with the team.",
+      "Vui lòng gửi tôi bản nháp trước khi bạn chia sẻ với nhóm."
+    ],
+    [
+      "caption",
+      "/ˈkæpʃən/",
+      "n",
+      "chú thích (ảnh, bài đăng)",
+      "a short text that goes with a photo or post",
+      "The caption under the photo explains the new product's main benefit.",
+      "Chú thích bên dưới bức ảnh giải thích lợi ích chính của sản phẩm mới."
+    ],
+    [
+      "engagement",
+      "/ɪnˈɡeɪdʒmənt/",
+      "n",
+      "mức độ tương tác",
+      "how much people like, comment on, or share content",
+      "Videos usually get more engagement than plain text posts.",
+      "Video thường có mức độ tương tác cao hơn bài đăng chỉ có chữ."
+    ],
+    [
+      "revise",
+      "/rɪˈvaɪz/",
+      "v",
+      "chỉnh sửa, sửa đổi",
+      "to change a text to make it better or correct",
+      "She revised the post to make the message clearer.",
+      "Cô ấy đã chỉnh sửa bài đăng để thông điệp rõ ràng hơn."
+    ],
+    [
+      "guideline",
+      "/ˈɡaɪdlaɪn/",
+      "n",
+      "hướng dẫn, nguyên tắc",
+      "a rule or piece of advice about how to do something",
+      "All posts must follow the company's brand guidelines.",
+      "Tất cả bài đăng phải tuân theo hướng dẫn thương hiệu của công ty."
+    ],
+    [
+      "hashtag",
+      "/ˈhæʃtæɡ/",
+      "n",
+      "hashtag, thẻ chủ đề",
+      "a word after the # symbol that groups posts on the same topic",
+      "Add the hashtag #GreenOffice so people can find our posts.",
+      "Hãy thêm hashtag #GreenOffice để mọi người có thể tìm thấy bài đăng của chúng ta."
+    ],
+    [
+      "publish",
+      "/ˈpʌblɪʃ/",
+      "v",
+      "đăng tải, xuất bản",
+      "to make content available for the public to see",
+      "We will publish the announcement video on Friday morning.",
+      "Chúng tôi sẽ đăng video thông báo vào sáng thứ Sáu."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "All social media posts must be approved by the communications manager before ____ published.",
+      "o": [
+        "be",
+        "being",
+        "been",
+        "to be"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Sau giới từ \"before\" cần dạng V-ing; ở dạng bị động là \"being + V3\", nên chọn \"being\"."
+    },
+    {
+      "q": "Ms. Tran asked Minh to revise the caption ____ because it was too long.",
+      "o": [
+        "he",
+        "his",
+        "him",
+        "himself"
+      ],
+      "a": 3,
+      "gp": "pronoun",
+      "x": "Đại từ phản thân \"himself\" nhấn mạnh rằng chính Minh tự chỉnh sửa; các lựa chọn khác sai chức năng ngữ pháp."
+    },
+    {
+      "q": "Each of the drafts ____ reviewed carefully by the legal team.",
+      "o": [
+        "were",
+        "are",
+        "was",
+        "have been"
+      ],
+      "a": 2,
+      "gp": "agreement",
+      "x": "Chủ ngữ \"Each of + N số nhiều\" đi với động từ số ít, nên chọn \"was\"."
+    },
+    {
+      "q": "The post received high engagement ____ it was published late at night.",
+      "o": [
+        "although",
+        "because of",
+        "despite",
+        "so that"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Cần liên từ chỉ sự tương phản đi với mệnh đề, nên chọn \"although\"; \"despite\" chỉ đi với danh từ."
+    },
+    {
+      "q": "The new social media guidelines are ____ written so that every employee can understand them.",
+      "o": [
+        "clear",
+        "clearly",
+        "clarity",
+        "clearer"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho phân từ \"written\", nên chọn \"clearly\"."
+    },
+    {
+      "q": "The designer, ____ created the images for the post, works from our Da Nang office.",
+      "o": [
+        "which",
+        "whose",
+        "who",
+        "whom"
+      ],
+      "a": 2,
+      "gp": "relative",
+      "x": "Đại từ quan hệ thay cho người và làm chủ ngữ của mệnh đề quan hệ là \"who\"."
+    }
+  ]
+}

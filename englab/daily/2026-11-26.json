@@ -1,0 +1,207 @@
+{
+ "date": "2026-11-26",
+ "title": "Góp ý mang tính xây dựng cho nhân viên mới",
+ "scene": {
+  "title": "Góp ý cho bản báo cáo đầu tiên",
+  "topic": "Công sở",
+  "names": [
+   "Phương",
+   "Kevin"
+  ],
+  "lines": [
+   [
+    0,
+    "Kevin, do you have a few minutes? I'd like to talk about your first client report.",
+    "Kevin, em có vài phút không? Chị muốn nói về bản báo cáo khách hàng đầu tiên của em."
+   ],
+   [
+    1,
+    "Sure, Phương. I'd really appreciate any advice you can give me.",
+    "Dạ được chị Phương. Em rất trân trọng mọi lời khuyên chị dành cho em."
+   ],
+   [
+    0,
+    "First, your analysis was excellent. Clear data is definitely one of your strengths.",
+    "Trước tiên, phần phân tích của em rất xuất sắc. Trình bày dữ liệu rõ ràng chắc chắn là một điểm mạnh của em."
+   ],
+   [
+    1,
+    "Thank you. Is there anything I could improve?",
+    "Em cảm ơn chị. Có điểm nào em có thể cải thiện không ạ?"
+   ],
+   [
+    0,
+    "I want to point out that some numbers in the charts didn't match the text.",
+    "Chị muốn chỉ ra rằng một vài số liệu trong biểu đồ không khớp với nội dung."
+   ],
+   [
+    1,
+    "Oh, I'm sorry. I should have double-checked them before sending.",
+    "Ôi, em xin lỗi. Lẽ ra em phải kiểm tra lại trước khi gửi."
+   ],
+   [
+    0,
+    "It's a common mistake. Making a simple checklist could help you avoid it.",
+    "Đó là lỗi thường gặp. Lập một danh sách kiểm tra đơn giản có thể giúp em tránh được."
+   ],
+   [
+    1,
+    "That's very constructive advice. I'll start using one from this week.",
+    "Lời khuyên rất mang tính xây dựng ạ. Em sẽ bắt đầu dùng từ tuần này."
+   ],
+   [
+    0,
+    "Great. I also want to encourage you to ask questions whenever you're unsure.",
+    "Tốt lắm. Chị cũng muốn khuyến khích em đặt câu hỏi bất cứ khi nào em không chắc chắn."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "constructive",
+   "/kənˈstrʌktɪv/",
+   "adj",
+   "mang tính xây dựng",
+   "helpful and intended to make things better",
+   "Thank you for your constructive comments on my presentation.",
+   "Cảm ơn những nhận xét mang tính xây dựng của bạn về bài thuyết trình của tôi."
+  ],
+  [
+   "appreciate",
+   "/əˈpriːʃieɪt/",
+   "v",
+   "trân trọng, cảm kích",
+   "to be grateful for something",
+   "I really appreciate your help with the report.",
+   "Tôi thật sự trân trọng sự giúp đỡ của bạn với bản báo cáo."
+  ],
+  [
+   "praise",
+   "/preɪz/",
+   "v",
+   "khen ngợi",
+   "to say that someone has done something well",
+   "The manager praised Kevin for his clear analysis.",
+   "Quản lý đã khen ngợi Kevin vì phần phân tích rõ ràng."
+  ],
+  [
+   "weakness",
+   "/ˈwiːknəs/",
+   "n",
+   "điểm yếu",
+   "an area that is not as good as it should be",
+   "Time management is a weakness he is working on.",
+   "Quản lý thời gian là điểm yếu mà anh ấy đang cố khắc phục."
+  ],
+  [
+   "improve",
+   "/ɪmˈpruːv/",
+   "v",
+   "cải thiện",
+   "to make something better",
+   "Regular practice will improve your writing.",
+   "Luyện tập thường xuyên sẽ giúp cải thiện khả năng viết của bạn."
+  ],
+  [
+   "point out",
+   "/ˌpɔɪnt ˈaʊt/",
+   "phrase",
+   "chỉ ra",
+   "to tell someone about a fact or problem",
+   "My manager pointed out two errors in my email.",
+   "Quản lý của tôi đã chỉ ra hai lỗi trong email của tôi."
+  ],
+  [
+   "encourage",
+   "/ɪnˈkʌrɪdʒ/",
+   "v",
+   "khuyến khích, động viên",
+   "to give someone support or confidence to do something",
+   "Good leaders encourage their team members to share ideas.",
+   "Những người lãnh đạo giỏi khuyến khích các thành viên trong nhóm chia sẻ ý tưởng."
+  ],
+  [
+   "performance",
+   "/pəˈfɔːməns/",
+   "n",
+   "hiệu suất, kết quả làm việc",
+   "how well someone does their job",
+   "Her performance has improved a lot since she joined the team.",
+   "Hiệu suất làm việc của cô ấy đã cải thiện rất nhiều kể từ khi gia nhập nhóm."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "Ms. Nguyen gave her new team member some very ____ feedback on his first report.",
+   "o": [
+    "constructively",
+    "constructive",
+    "construct",
+    "construction"
+   ],
+   "a": 1,
+   "gp": "wordform",
+   "x": "Sau trạng từ \"very\" và trước danh từ \"feedback\" cần một tính từ, nên chọn \"constructive\"."
+  },
+  {
+   "q": "The new staff member thanked his team leader for ____ out the errors in his report.",
+   "o": [
+    "point",
+    "to point",
+    "pointed",
+    "pointing"
+   ],
+   "a": 3,
+   "gp": "gerund",
+   "x": "Sau giới từ \"for\" phải dùng danh động từ (V-ing), nên chọn \"pointing\"."
+  },
+  {
+   "q": "Mr. Kim, ____ has trained many new employees, is known for his patient feedback.",
+   "o": [
+    "whom",
+    "who",
+    "which",
+    "whose"
+   ],
+   "a": 1,
+   "gp": "relative",
+   "x": "Cần đại từ quan hệ thay cho người (Mr. Kim) và làm chủ ngữ của \"has trained\", nên chọn \"who\"."
+  },
+  {
+   "q": "If Kevin had checked the numbers carefully, he ____ those mistakes.",
+   "o": [
+    "would have avoided",
+    "would avoid",
+    "will avoid",
+    "had avoided"
+   ],
+   "a": 0,
+   "gp": "conditional",
+   "x": "Câu điều kiện loại 3 (giả định trái với quá khứ): if + quá khứ hoàn thành, mệnh đề chính dùng \"would have + V3\"."
+  },
+  {
+   "q": "Good managers praise their employees and help ____ improve in weaker areas.",
+   "o": [
+    "they",
+    "theirs",
+    "them",
+    "their"
+   ],
+   "a": 2,
+   "gp": "pronoun",
+   "x": "Sau động từ \"help\" cần đại từ tân ngữ, nên chọn \"them\"."
+  },
+  {
+   "q": "Giving regular feedback can greatly improve a new employee's ____.",
+   "o": [
+    "performance",
+    "appearance",
+    "insurance",
+    "allowance"
+   ],
+   "a": 0,
+   "gp": "vocab",
+   "x": "\"performance\" nghĩa là hiệu suất làm việc, là điều mà việc góp ý thường xuyên có thể cải thiện."
+  }
+ ]
+}

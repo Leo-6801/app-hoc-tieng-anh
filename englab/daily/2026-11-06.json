@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-06",
+  "title": "Thuê căn hộ",
+  "scene": {
+    "title": "Hỏi chủ nhà về căn hộ cho thuê",
+    "topic": "Đời sống",
+    "names": ["Quang", "Mrs. Wilson"],
+    "lines": [
+      [0, "Hi, Mrs. Wilson. I'm calling about the apartment advertised online.", "Chào bà Wilson. Cháu gọi về căn hộ được đăng quảng cáo trên mạng ạ."],
+      [1, "Oh yes. It's a spacious two-bedroom apartment near the park.", "À vâng. Đó là căn hộ hai phòng ngủ rộng rãi gần công viên."],
+      [0, "How much is the rent, and are utilities included?", "Tiền thuê là bao nhiêu, và đã bao gồm tiền điện nước chưa ạ?"],
+      [1, "The rent is eight million a month, but utilities are extra.", "Tiền thuê là tám triệu một tháng, nhưng tiền điện nước tính riêng."],
+      [0, "Is the apartment furnished, or do I need to buy my own furniture?", "Căn hộ có sẵn nội thất không, hay cháu phải tự mua đồ đạc ạ?"],
+      [1, "It's fully furnished, with a bed, a sofa, and a washing machine.", "Căn hộ có đầy đủ nội thất, gồm giường, ghế sofa và máy giặt."],
+      [0, "How long is the lease? I might move again next year.", "Thời hạn thuê là bao lâu ạ? Có thể năm sau cháu sẽ chuyển đi."],
+      [1, "The minimum lease is one year, but most tenants stay much longer.", "Thời hạn thuê tối thiểu là một năm, nhưng hầu hết người thuê đều ở lâu hơn nhiều."],
+      [0, "Is the neighborhood quiet? Could I come and see it this Saturday?", "Khu này có yên tĩnh không ạ? Thứ Bảy này cháu đến xem nhà được không ạ?"]
+    ]
+  },
+  "vocab": [
+    ["landlord", "/ˈlændlɔːrd/", "n", "chủ nhà (cho thuê)", "a person who owns a house or apartment and rents it to others", "Our landlord fixed the leaking pipe very quickly.", "Chủ nhà của chúng tôi đã sửa đường ống bị rò rất nhanh."],
+    ["tenant", "/ˈtenənt/", "n", "người thuê nhà", "a person who pays money to live in a place owned by someone else", "The new tenant moved in last weekend.", "Người thuê mới đã chuyển đến vào cuối tuần trước."],
+    ["lease", "/liːs/", "n", "hợp đồng thuê nhà", "a legal agreement to rent a home for a period of time", "We signed a two-year lease on the apartment.", "Chúng tôi đã ký hợp đồng thuê căn hộ hai năm."],
+    ["utilities", "/juːˈtɪlətiz/", "n", "các dịch vụ điện, nước, ga", "services such as electricity, water, and gas", "The rent does not include utilities like electricity and water.", "Tiền thuê nhà không bao gồm các chi phí như điện và nước."],
+    ["furnished", "/ˈfɜːrnɪʃt/", "adj", "có sẵn nội thất", "having furniture already in it", "I'm looking for a furnished room close to my office.", "Tôi đang tìm một phòng có sẵn nội thất gần văn phòng."],
+    ["neighborhood", "/ˈneɪbərhʊd/", "n", "khu phố, khu dân cư", "the area around where you live", "This neighborhood has many good restaurants.", "Khu phố này có nhiều nhà hàng ngon."],
+    ["rent", "/rent/", "n", "tiền thuê nhà", "money you pay regularly to live in a place", "The rent is due on the first day of each month.", "Tiền thuê nhà phải trả vào ngày đầu tiên của mỗi tháng."],
+    ["spacious", "/ˈspeɪʃəs/", "adj", "rộng rãi", "having a lot of space", "The living room is bright and spacious.", "Phòng khách sáng sủa và rộng rãi."]
+  ],
+  "toeic": [
+    {"q": "The apartment ____ we visited yesterday has a large balcony.", "o": ["who", "whose", "which", "where"], "a": 2, "gp": "relative", "x": "Which thay cho vật (the apartment) và làm tân ngữ cho visited; where không dùng được vì visited cần tân ngữ."},
+    {"q": "This apartment is ____ than the one on Le Loi Street, but it is closer to my office.", "o": ["small", "smaller", "smallest", "more small"], "a": 1, "gp": "compare", "x": "Có than nên dùng so sánh hơn của tính từ ngắn: smaller."},
+    {"q": "Mr. Hai ____ in this building for five years before he bought his own house.", "o": ["lives", "has lived", "had lived", "will live"], "a": 2, "gp": "tense", "x": "Hành động xảy ra trước một hành động khác trong quá khứ (bought) nên dùng quá khứ hoàn thành: had lived."},
+    {"q": "Tenants must pay for ____ own electricity and water.", "o": ["they", "them", "their", "theirs"], "a": 2, "gp": "pronoun", "x": "Trước own + danh từ cần tính từ sở hữu: their own."},
+    {"q": "Please consider ____ a one-year lease to get a lower monthly rent.", "o": ["sign", "signing", "to sign", "signed"], "a": 1, "gp": "gerund", "x": "Sau động từ consider dùng danh động từ (V-ing): consider signing."},
+    {"q": "The landlord asked all tenants to ____ any broken appliances immediately.", "o": ["report", "borrow", "invite", "install"], "a": 0, "gp": "vocab", "x": "Report nghĩa là báo cáo, thông báo; chủ nhà yêu cầu người thuê báo ngay khi thiết bị bị hỏng."}
+  ]
+}

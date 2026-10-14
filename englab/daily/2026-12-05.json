@@ -1,0 +1,37 @@
+{
+  "date": "2026-12-05",
+  "title": "Đổi tiền và rút tiền ATM ở nước ngoài",
+  "scene": {
+    "title": "Tại quầy đổi ngoại tệ ở sân bay Paris",
+    "topic": "Du lịch",
+    "names": ["Hoàng Nam", "Claire"],
+    "lines": [
+      [0, "Hi, I'd like to change 500 US dollars into euros, please.", "Chào chị, tôi muốn đổi 500 đô la Mỹ sang euro."],
+      [1, "Certainly. Today's exchange rate is 0.92 euros to the dollar.", "Vâng ạ. Tỷ giá hôm nay là 0,92 euro đổi một đô la."],
+      [0, "Is there a commission, or is that already included in the rate?", "Có tính phí hoa hồng không, hay đã bao gồm trong tỷ giá rồi?"],
+      [1, "We charge a two percent commission. Would you like some small banknotes?", "Chúng tôi tính phí hoa hồng hai phần trăm. Anh có muốn lấy một ít tiền mệnh giá nhỏ không?"],
+      [0, "Yes, please. Also, my card was declined at the ATM outside. Do you know why?", "Có, làm ơn. Ngoài ra, thẻ của tôi bị từ chối ở cây ATM bên ngoài. Chị có biết tại sao không?"],
+      [1, "Some foreign cards have a daily withdrawal limit. You may have reached it.", "Một số thẻ nước ngoài có hạn mức rút tiền mỗi ngày. Có thể anh đã rút hết hạn mức."],
+      [0, "That makes sense. Do local ATMs charge a transaction fee as well?", "Hợp lý đấy. Các cây ATM ở đây cũng tính phí giao dịch phải không?"],
+      [1, "Usually, yes. So it's cheaper to take out a larger amount at once.", "Thường là có. Vì vậy rút một khoản lớn một lần sẽ rẻ hơn."]
+    ]
+  },
+  "vocab": [
+    ["exchange rate", "/ɪksˈtʃeɪndʒ reɪt/", "n", "tỷ giá hối đoái", "the value of one country's money compared to another's", "The exchange rate at the airport is usually not very good.", "Tỷ giá ở sân bay thường không tốt lắm."],
+    ["foreign currency", "/ˌfɔːrən ˈkɜːrənsi/", "n", "ngoại tệ", "money used in another country", "You should carry some foreign currency for taxis and small shops.", "Bạn nên mang theo một ít ngoại tệ để đi taxi và mua ở cửa hàng nhỏ."],
+    ["bureau de change", "/ˌbjʊroʊ də ˈʃɑːnʒ/", "n", "quầy đổi ngoại tệ", "a place where you can change money from one currency to another", "There is a bureau de change next to the arrivals exit.", "Có một quầy đổi ngoại tệ cạnh lối ra khu đến."],
+    ["commission", "/kəˈmɪʃn/", "n", "phí hoa hồng, phí dịch vụ", "a fee charged by a bank or exchange office for a service", "This exchange office does not charge any commission.", "Quầy đổi tiền này không tính bất kỳ phí hoa hồng nào."],
+    ["banknote", "/ˈbæŋknoʊt/", "n", "tiền giấy", "a piece of paper money", "Some taxis do not accept large banknotes.", "Một số xe taxi không nhận tiền giấy mệnh giá lớn."],
+    ["withdrawal limit", "/wɪðˈdrɔːəl ˌlɪmɪt/", "n", "hạn mức rút tiền", "the most money you can take from an ATM in a set period", "My card has a daily withdrawal limit of 10 million dong.", "Thẻ của tôi có hạn mức rút tiền mỗi ngày là 10 triệu đồng."],
+    ["transaction fee", "/trænˈzækʃn fiː/", "n", "phí giao dịch", "a charge for using a card or moving money", "Using your card abroad may add a transaction fee of 3 percent.", "Dùng thẻ ở nước ngoài có thể bị cộng thêm phí giao dịch 3 phần trăm."],
+    ["decline", "/dɪˈklaɪn/", "v", "từ chối (thẻ thanh toán)", "to refuse to accept a card or a request", "The hotel declined my card, so I paid in cash.", "Khách sạn từ chối thẻ của tôi nên tôi đã trả bằng tiền mặt."]
+  ],
+  "toeic": [
+    {"q": "Travelers are advised to exchange ____ money at a bank rather than at the airport.", "o": ["their", "them", "theirs", "themselves"], "a": 0, "gp": "pronoun", "x": "Trước danh từ 'money' cần tính từ sở hữu 'their'."},
+    {"q": "The exchange rate at this counter is ____ than the rate offered at the hotel.", "o": ["good", "better", "best", "well"], "a": 1, "gp": "compare", "x": "Có 'than' nên dùng so sánh hơn của 'good' là 'better'."},
+    {"q": "____ a large amount of cash is risky, so many travelers prefer to use cards.", "o": ["Carry", "Carrying", "Carried", "To carrying"], "a": 1, "gp": "gerund", "x": "Cần danh động từ (V-ing) làm chủ ngữ của câu, nên chọn 'Carrying'."},
+    {"q": "If your card ____ at a foreign ATM, contact your bank immediately.", "o": ["is declined", "declines", "declining", "will decline"], "a": 0, "gp": "passive", "x": "Thẻ 'bị từ chối' (bởi máy ATM) nên dùng bị động 'is declined'; mệnh đề 'if' loại 1 dùng hiện tại."},
+    {"q": "A small fee is charged for ____ withdrawal made from an overseas ATM.", "o": ["each", "all", "many", "several"], "a": 0, "gp": "quant", "x": "'Withdrawal' là danh từ đếm được số ít nên dùng 'each'; 'all', 'many', 'several' đi với danh từ số nhiều."},
+    {"q": "The bank's mobile app shows the ____ exchange rate before you complete a transaction.", "o": ["current", "currency", "currently", "currents"], "a": 0, "gp": "wordform", "x": "Cần tính từ bổ nghĩa cho cụm danh từ 'exchange rate', nên chọn 'current' (hiện tại)."}
+  ]
+}

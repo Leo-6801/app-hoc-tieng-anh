@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-15",
+  "title": "Tiệc chia tay đồng nghiệp nghỉ hưu",
+  "scene": {
+    "title": "Buổi tiệc chia tay chị Grace",
+    "topic": "Công sở",
+    "names": [
+      "Hùng",
+      "Grace"
+    ],
+    "lines": [
+      [
+        0,
+        "Grace, everyone is here to celebrate your retirement tonight.",
+        "Chị Grace, mọi người đều có mặt ở đây để chúc mừng chị nghỉ hưu tối nay."
+      ],
+      [
+        1,
+        "Thank you, Hùng. I can't believe I'm really going to retire.",
+        "Cảm ơn em, Hùng. Chị không thể tin là mình thật sự sắp nghỉ hưu."
+      ],
+      [
+        0,
+        "You've worked here for over three decades. That's amazing dedication.",
+        "Chị đã làm việc ở đây hơn ba thập kỷ. Đó là sự tận tụy tuyệt vời."
+      ],
+      [
+        1,
+        "When I look back, I remember so many wonderful people.",
+        "Khi nhìn lại, chị nhớ đến rất nhiều con người tuyệt vời."
+      ],
+      [
+        0,
+        "Tonight we want to honor you for patiently training every new team member.",
+        "Tối nay chúng em muốn tôn vinh chị vì đã kiên nhẫn đào tạo từng thành viên mới."
+      ],
+      [
+        1,
+        "That's kind of you. What have you all planned for this farewell?",
+        "Em thật tử tế. Mọi người đã chuẩn bị gì cho buổi chia tay này vậy?"
+      ],
+      [
+        0,
+        "First, the director will give a short speech, and then we'll make a toast.",
+        "Đầu tiên, giám đốc sẽ phát biểu ngắn, sau đó chúng ta sẽ nâng ly chúc mừng."
+      ],
+      [
+        1,
+        "Wonderful. I'll enjoy my pension, but I'll really miss this office.",
+        "Tuyệt quá. Chị sẽ tận hưởng lương hưu, nhưng chị sẽ rất nhớ văn phòng này."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "retire",
+      "/rɪˈtaɪə(r)/",
+      "v",
+      "nghỉ hưu",
+      "to stop working because you have reached a certain age",
+      "Mr. Long will retire at the end of this year.",
+      "Ông Long sẽ nghỉ hưu vào cuối năm nay."
+    ],
+    [
+      "farewell",
+      "/ˌfeəˈwel/",
+      "n",
+      "sự chia tay, lời tạm biệt",
+      "the act of saying goodbye to someone",
+      "We held a farewell lunch for our team leader.",
+      "Chúng tôi đã tổ chức một bữa trưa chia tay cho trưởng nhóm."
+    ],
+    [
+      "dedication",
+      "/ˌdedɪˈkeɪʃn/",
+      "n",
+      "sự tận tụy, cống hiến",
+      "hard work and loyalty to a job or goal",
+      "The award celebrates her dedication to the company.",
+      "Giải thưởng ghi nhận sự cống hiến của bà ấy cho công ty."
+    ],
+    [
+      "decade",
+      "/ˈdekeɪd/",
+      "n",
+      "thập kỷ (mười năm)",
+      "a period of ten years",
+      "He has worked in this factory for almost a decade.",
+      "Ông ấy đã làm việc ở nhà máy này gần một thập kỷ."
+    ],
+    [
+      "look back",
+      "/lʊk ˈbæk/",
+      "phrase",
+      "nhìn lại, hồi tưởng",
+      "to think about something that happened in the past",
+      "When I look back on my first year, I remember many mistakes.",
+      "Khi nhìn lại năm đầu tiên, tôi nhớ đến nhiều sai lầm."
+    ],
+    [
+      "honor",
+      "/ˈɒnə(r)/",
+      "v",
+      "tôn vinh, vinh danh",
+      "to show great respect for someone in public",
+      "The company honored Mr. Bình with a long-service award.",
+      "Công ty đã vinh danh ông Bình bằng giải thưởng thâm niên."
+    ],
+    [
+      "toast",
+      "/təʊst/",
+      "n",
+      "lời chúc khi nâng ly",
+      "the act of raising glasses and drinking to honor someone",
+      "The manager proposed a toast to the retiring engineer.",
+      "Quản lý đã đề nghị nâng ly chúc mừng người kỹ sư sắp nghỉ hưu."
+    ],
+    [
+      "pension",
+      "/ˈpenʃn/",
+      "n",
+      "lương hưu",
+      "money paid regularly to a person after they stop working",
+      "She receives a monthly pension from the government.",
+      "Bà ấy nhận lương hưu hằng tháng từ nhà nước."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "A farewell party ____ for Ms. Wilson next Friday in the main lobby.",
+      "o": [
+        "will hold",
+        "will be held",
+        "is holding",
+        "holds"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Bữa tiệc \"được tổ chức\" nên dùng câu bị động tương lai \"will be held\"."
+    },
+    {
+      "q": "Each of the team members ____ written a message in the farewell card.",
+      "o": [
+        "have",
+        "has",
+        "are",
+        "is"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "\"Each of\" + danh từ số nhiều đi với động từ số ít; cấu trúc hiện tại hoàn thành cần \"has written\"."
+    },
+    {
+      "q": "Mr. Tan is looking forward to ____ more time with his grandchildren after he retires.",
+      "o": [
+        "spend",
+        "spending",
+        "spent",
+        "be spent"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Trong cụm \"look forward to\", \"to\" là giới từ nên theo sau là V-ing."
+    },
+    {
+      "q": "Ms. Hughes is the ____ serving employee in the history of the company.",
+      "o": [
+        "long",
+        "longer",
+        "longest",
+        "most long"
+      ],
+      "a": 2,
+      "gp": "compare",
+      "x": "Có \"the\" và phạm vi \"in the history of the company\" nên dùng so sánh nhất \"longest\"."
+    },
+    {
+      "q": "The engineer, ____ retirement was announced last week, joined the firm in 1994.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "that"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ sở hữu trước danh từ \"retirement\" (sự nghỉ hưu của người kỹ sư), nên chọn \"whose\"."
+    },
+    {
+      "q": "All staff are ____ to join the retirement party for Mr. Diaz on Friday.",
+      "o": [
+        "invited",
+        "included",
+        "installed",
+        "indicated"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Be invited to do something\" nghĩa là được mời làm gì, phù hợp với ngữ cảnh bữa tiệc."
+    }
+  ]
+}

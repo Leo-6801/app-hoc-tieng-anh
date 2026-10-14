@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-03",
+  "title": "Lên kế hoạch chuyến đi gắn kết đội nhóm",
+  "scene": {
+    "title": "Chuẩn bị chuyến team-building cuối năm",
+    "topic": "Công sở",
+    "names": [
+      "Vy",
+      "Kevin"
+    ],
+    "lines": [
+      [
+        0,
+        "Kevin, the director wants us to plan a team-building trip next month.",
+        "Kevin, giám đốc muốn chúng ta lên kế hoạch cho một chuyến đi gắn kết đội nhóm vào tháng sau."
+      ],
+      [
+        1,
+        "Great! Team morale has been low since the busy season.",
+        "Tuyệt quá! Tinh thần cả nhóm đã đi xuống kể từ mùa cao điểm."
+      ],
+      [
+        0,
+        "Exactly. I'm thinking of a two-day retreat by the beach in Vũng Tàu.",
+        "Đúng vậy. Mình đang nghĩ đến một chuyến nghỉ dưỡng hai ngày ở biển Vũng Tàu."
+      ],
+      [
+        1,
+        "Good choice. What's our headcount so far?",
+        "Lựa chọn hay đấy. Đến giờ chúng ta có bao nhiêu người?"
+      ],
+      [
+        0,
+        "Twenty-five people have signed up. We need a venue for a big group.",
+        "Đã có hai mươi lăm người đăng ký. Chúng ta cần một địa điểm cho nhóm lớn."
+      ],
+      [
+        1,
+        "I know a resort with a large hall and a private beach.",
+        "Mình biết một khu nghỉ dưỡng có hội trường lớn và bãi biển riêng."
+      ],
+      [
+        0,
+        "Perfect. Could you organize some icebreaker games and outdoor activities for bonding?",
+        "Tuyệt vời. Bạn có thể tổ chức vài trò chơi làm quen và hoạt động ngoài trời để gắn kết mọi người không?"
+      ],
+      [
+        1,
+        "Sure. I'll call the resort and share a plan by Friday.",
+        "Được thôi. Mình sẽ gọi cho khu nghỉ dưỡng và gửi kế hoạch trước thứ Sáu."
+      ],
+      [
+        0,
+        "Great. Also, people with cars could carpool to save on transport.",
+        "Tuyệt. Ngoài ra, những ai có xe có thể đi chung xe để tiết kiệm chi phí đi lại."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "team-building",
+      "/ˈtiːm ˌbɪldɪŋ/",
+      "adj",
+      "(thuộc) gắn kết đội nhóm",
+      "describing activities that help people work well together",
+      "The team-building games helped new staff feel welcome.",
+      "Các trò chơi gắn kết đội nhóm đã giúp nhân viên mới cảm thấy được chào đón."
+    ],
+    [
+      "morale",
+      "/məˈrɑːl/",
+      "n",
+      "tinh thần (làm việc)",
+      "the confidence and happiness of a group of people",
+      "The extra day off really improved staff morale.",
+      "Ngày nghỉ thêm thực sự đã cải thiện tinh thần nhân viên."
+    ],
+    [
+      "retreat",
+      "/rɪˈtriːt/",
+      "n",
+      "chuyến nghỉ dưỡng của tập thể",
+      "a short trip away from the office for planning or relaxing",
+      "The sales team went on a weekend retreat in Đà Lạt.",
+      "Nhóm bán hàng đã đi nghỉ dưỡng cuối tuần ở Đà Lạt."
+    ],
+    [
+      "headcount",
+      "/ˈhedkaʊnt/",
+      "n",
+      "số lượng người",
+      "the total number of people in a group",
+      "Please give me the final headcount for the trip by Monday.",
+      "Vui lòng cho tôi số lượng người cuối cùng cho chuyến đi trước thứ Hai."
+    ],
+    [
+      "venue",
+      "/ˈvenjuː/",
+      "n",
+      "địa điểm tổ chức",
+      "the place where an event happens",
+      "The venue for the year-end party is a hotel near the river.",
+      "Địa điểm tổ chức tiệc cuối năm là một khách sạn gần sông."
+    ],
+    [
+      "icebreaker",
+      "/ˈaɪsbreɪkə(r)/",
+      "n",
+      "trò chơi/hoạt động làm quen",
+      "a game or activity that helps people relax and get to know each other",
+      "We started the retreat with a fun icebreaker.",
+      "Chúng tôi bắt đầu chuyến nghỉ dưỡng bằng một trò chơi làm quen vui nhộn."
+    ],
+    [
+      "bonding",
+      "/ˈbɒndɪŋ/",
+      "n",
+      "sự gắn kết",
+      "the process of forming close relationships with others",
+      "The cooking class was great for team bonding.",
+      "Lớp học nấu ăn rất tuyệt cho việc gắn kết đội nhóm."
+    ],
+    [
+      "carpool",
+      "/ˈkɑːpuːl/",
+      "v",
+      "đi chung xe",
+      "to share a car ride with other people going to the same place",
+      "Some of us will carpool to the beach to save money.",
+      "Một số người trong chúng tôi sẽ đi chung xe ra biển để tiết kiệm tiền."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "There is not ____ space on the bus for everyone, so we will need a second one.",
+      "o": [
+        "many",
+        "enough",
+        "few",
+        "several"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "\"Space\" là danh từ không đếm được; \"enough\" (đủ) dùng được và hợp nghĩa, còn \"many\", \"few\", \"several\" đi với danh từ đếm được số nhiều."
+    },
+    {
+      "q": "This year's retreat was ____ more enjoyable than last year's.",
+      "o": [
+        "very",
+        "much",
+        "many",
+        "most"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Dùng \"much\" để nhấn mạnh so sánh hơn (\"much more enjoyable\"); \"very\" không đứng trước so sánh hơn."
+    },
+    {
+      "q": "The organizers suggested ____ the trip to a cooler month.",
+      "o": [
+        "move",
+        "moving",
+        "to move",
+        "moved"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Sau động từ \"suggest\" dùng danh động từ (V-ing), nên chọn \"moving\"."
+    },
+    {
+      "q": "The resort ____ we stayed at last year has a large meeting hall.",
+      "o": [
+        "where",
+        "which",
+        "who",
+        "whose"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "Cuối mệnh đề đã có giới từ \"at\" nên cần đại từ quan hệ làm tân ngữ chỉ vật \"which\"; \"where\" sẽ thừa giới từ."
+    },
+    {
+      "q": "If it rains on Saturday, the outdoor games ____ indoors.",
+      "o": [
+        "will be held",
+        "would be held",
+        "were held",
+        "had been held"
+      ],
+      "a": 0,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 1 (mệnh đề \"if\" ở hiện tại đơn) nên mệnh đề chính dùng \"will\"; ở đây là bị động \"will be held\"."
+    },
+    {
+      "q": "Team members should book ____ own train tickets and keep the receipts.",
+      "o": [
+        "they",
+        "their",
+        "them",
+        "theirs"
+      ],
+      "a": 1,
+      "gp": "pronoun",
+      "x": "Trước \"own\" + danh từ cần tính từ sở hữu, nên chọn \"their\"."
+    }
+  ]
+}

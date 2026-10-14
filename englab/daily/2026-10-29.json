@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-29",
+  "title": "Xử lý khiếu nại về sản phẩm lỗi",
+  "scene": {
+    "title": "Khách hàng phàn nàn về máy pha cà phê",
+    "topic": "Kinh doanh",
+    "names": [
+      "Laura Bennett",
+      "Trần Quốc Bảo"
+    ],
+    "lines": [
+      [
+        0,
+        "I'm calling to make a complaint. The coffee machines you sent us are faulty.",
+        "Tôi gọi để khiếu nại. Những chiếc máy pha cà phê các anh gửi cho chúng tôi bị lỗi."
+      ],
+      [
+        1,
+        "I'm very sorry to hear that, Ms. Bennett. Could you tell me what happened?",
+        "Tôi rất tiếc khi nghe điều đó, chị Bennett. Chị có thể cho tôi biết chuyện gì đã xảy ra không?"
+      ],
+      [
+        0,
+        "Three of the ten machines stopped working after two days. My staff are really frustrated.",
+        "Ba trong số mười chiếc máy ngừng hoạt động chỉ sau hai ngày. Nhân viên của tôi thực sự rất bực bội."
+      ],
+      [
+        1,
+        "I completely understand, and I apologize for the inconvenience this has caused.",
+        "Tôi hoàn toàn hiểu, và tôi xin lỗi vì sự bất tiện mà việc này đã gây ra."
+      ],
+      [
+        0,
+        "This is the second time this year. I expect a proper solution, not just an apology.",
+        "Đây là lần thứ hai trong năm nay rồi. Tôi mong có một giải pháp thỏa đáng, chứ không chỉ là lời xin lỗi."
+      ],
+      [
+        1,
+        "Of course. We will send replacements for all three defective machines by Thursday.",
+        "Dĩ nhiên rồi. Chúng tôi sẽ gửi máy thay thế cho cả ba chiếc bị lỗi trước thứ Năm."
+      ],
+      [
+        0,
+        "And what about the time we lost? Our café had to close one counter.",
+        "Còn thời gian chúng tôi bị mất thì sao? Quán cà phê của tôi đã phải đóng một quầy."
+      ],
+      [
+        1,
+        "I'll escalate this to my manager and see how we can compensate you.",
+        "Tôi sẽ chuyển vấn đề này lên quản lý của tôi và xem chúng tôi có thể bồi thường cho chị thế nào."
+      ],
+      [
+        0,
+        "Thank you. Please call me back before the end of today.",
+        "Cảm ơn anh. Vui lòng gọi lại cho tôi trước khi hết ngày hôm nay."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "dissatisfied",
+      "/dɪsˈsætɪsfaɪd/",
+      "adj",
+      "không hài lòng",
+      "not happy with something",
+      "Dissatisfied clients often tell their friends about bad service.",
+      "Những khách hàng không hài lòng thường kể với bạn bè về dịch vụ tồi."
+    ],
+    [
+      "defective",
+      "/dɪˈfektɪv/",
+      "adj",
+      "bị lỗi, có khuyết tật",
+      "not made correctly or not working properly",
+      "Please return any defective items within seven days.",
+      "Vui lòng gửi trả lại mọi sản phẩm bị lỗi trong vòng bảy ngày."
+    ],
+    [
+      "resolve",
+      "/rɪˈzɒlv/",
+      "v",
+      "giải quyết (vấn đề)",
+      "to find an answer to a problem",
+      "Our team resolved the issue within two hours.",
+      "Đội của chúng tôi đã giải quyết vấn đề trong vòng hai giờ."
+    ],
+    [
+      "frustrated",
+      "/frʌˈstreɪtɪd/",
+      "adj",
+      "bực bội, thất vọng",
+      "annoyed because you cannot get what you want",
+      "The client was frustrated because nobody answered his emails.",
+      "Khách hàng bực bội vì không ai trả lời email của anh ấy."
+    ],
+    [
+      "inconvenience",
+      "/ˌɪnkənˈviːniəns/",
+      "n",
+      "sự bất tiện, phiền phức",
+      "trouble or problems that make things difficult",
+      "We are sorry for any inconvenience this may cause.",
+      "Chúng tôi xin lỗi vì mọi sự bất tiện mà việc này có thể gây ra."
+    ],
+    [
+      "escalate",
+      "/ˈeskəleɪt/",
+      "v",
+      "chuyển lên cấp cao hơn để xử lý",
+      "to send a problem to a person with more power",
+      "If the problem continues, I will escalate it to the service manager.",
+      "Nếu sự cố vẫn tiếp diễn, tôi sẽ chuyển nó lên quản lý dịch vụ."
+    ],
+    [
+      "compensate",
+      "/ˈkɒmpenseɪt/",
+      "v",
+      "bồi thường, đền bù",
+      "to pay or give something because of a loss or problem",
+      "The company offered to compensate clients for the damaged goods.",
+      "Công ty đề nghị bồi thường cho khách hàng vì hàng hóa bị hư hỏng."
+    ],
+    [
+      "faulty",
+      "/ˈfɔːlti/",
+      "adj",
+      "hỏng, có lỗi kỹ thuật",
+      "not working correctly",
+      "The faulty cable caused the machine to stop working.",
+      "Sợi cáp bị hỏng đã khiến máy ngừng hoạt động."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "If the replacement part ____ tomorrow, the technician will repair the machine on Friday.",
+      "o": [
+        "arrive",
+        "arrives",
+        "arrived",
+        "will arrive"
+      ],
+      "a": 1,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 1: mệnh đề \"if\" dùng hiện tại đơn; chủ ngữ số ít \"the replacement part\" nên chọn \"arrives\"."
+    },
+    {
+      "q": "The client ____ about the faulty product when the manager walked into the room.",
+      "o": [
+        "complains",
+        "has complained",
+        "was complaining",
+        "will complain"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "Một hành động đang diễn ra trong quá khứ thì hành động khác xen vào (\"walked\"), nên dùng quá khứ tiếp diễn \"was complaining\"."
+    },
+    {
+      "q": "We apologize ____ the inconvenience caused by the defective items.",
+      "o": [
+        "for",
+        "to",
+        "with",
+        "at"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "Cấu trúc \"apologize for + sự việc\" nghĩa là xin lỗi vì điều gì; \"apologize to\" đi với người."
+    },
+    {
+      "q": "____ of the complaints we received last month were about late responses.",
+      "o": [
+        "Much",
+        "Every",
+        "Most",
+        "Each"
+      ],
+      "a": 2,
+      "gp": "quant",
+      "x": "\"Most of + danh từ số nhiều\" đi với động từ số nhiều \"were\". \"Each of\" cần động từ số ít, \"Much\" dùng cho danh từ không đếm được, \"Every\" không đi với \"of\"."
+    },
+    {
+      "q": "To keep the client, the company offered to ____ her for the damaged goods.",
+      "o": [
+        "compensate",
+        "complain",
+        "compete",
+        "complete"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Compensate someone for something\" nghĩa là bồi thường cho ai vì điều gì, phù hợp với ngữ cảnh hàng bị hư hỏng."
+    },
+    {
+      "q": "Please send us photos of the damaged items so that we can process ____ claim quickly.",
+      "o": [
+        "you",
+        "your",
+        "yours",
+        "yourself"
+      ],
+      "a": 1,
+      "gp": "pronoun",
+      "x": "Trước danh từ \"claim\" cần tính từ sở hữu, nên chọn \"your\"."
+    }
+  ]
+}

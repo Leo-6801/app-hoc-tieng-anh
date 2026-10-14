@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-09",
+  "title": "Đánh giá năng lực cuối năm và định hướng sự nghiệp",
+  "scene": {
+    "title": "Buổi đánh giá năng lực hằng năm",
+    "topic": "Công sở",
+    "names": [
+      "Michael",
+      "Ngọc"
+    ],
+    "lines": [
+      [
+        0,
+        "Ngọc, thanks for coming. Let's start your annual appraisal.",
+        "Ngọc, cảm ơn em đã đến. Chúng ta bắt đầu buổi đánh giá năng lực hằng năm của em nhé."
+      ],
+      [
+        1,
+        "Thank you, Michael. I'm looking forward to your feedback.",
+        "Cảm ơn anh, Michael. Em rất mong nhận được nhận xét của anh."
+      ],
+      [
+        0,
+        "Your self-assessment was very accurate. Communication is clearly your strongest area.",
+        "Bản tự đánh giá của em rất chính xác. Giao tiếp rõ ràng là thế mạnh nổi bật nhất của em."
+      ],
+      [
+        1,
+        "That's great to hear. Is there any area that needs improvement?",
+        "Thật vui khi nghe vậy. Có điểm nào em cần cải thiện không ạ?"
+      ],
+      [
+        0,
+        "To be honest, I think you could share more tasks with others.",
+        "Thành thật mà nói, anh nghĩ em có thể chia bớt việc cho người khác."
+      ],
+      [
+        1,
+        "I agree. In the long term, I'd like to move into a management role.",
+        "Em đồng ý. Về lâu dài, em muốn chuyển sang vai trò quản lý."
+      ],
+      [
+        0,
+        "That's a good aspiration. A leadership course could build that competency.",
+        "Đó là một hoài bão tốt. Một khóa học về lãnh đạo có thể giúp em xây dựng năng lực đó."
+      ],
+      [
+        1,
+        "Could we plan my career path together for the next two years?",
+        "Chúng ta có thể cùng lên lộ trình sự nghiệp của em cho hai năm tới không ạ?"
+      ],
+      [
+        0,
+        "Absolutely. The company wants to recognize and support people like you.",
+        "Chắc chắn rồi. Công ty muốn ghi nhận và hỗ trợ những người như em."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "appraisal",
+      "/əˈpreɪzl/",
+      "n",
+      "sự đánh giá năng lực (nhân viên)",
+      "a meeting or report that judges how well an employee works",
+      "Annual appraisals take place every December.",
+      "Các buổi đánh giá năng lực hằng năm diễn ra vào mỗi tháng Mười Hai."
+    ],
+    [
+      "self-assessment",
+      "/ˌself əˈsesmənt/",
+      "n",
+      "bản tự đánh giá",
+      "a report in which you judge your own work and progress",
+      "Please complete your self-assessment before the review meeting.",
+      "Vui lòng hoàn thành bản tự đánh giá trước buổi họp đánh giá."
+    ],
+    [
+      "improvement",
+      "/ɪmˈpruːvmənt/",
+      "n",
+      "sự cải thiện, tiến bộ",
+      "the act or result of becoming better",
+      "There has been a clear improvement in her writing.",
+      "Kỹ năng viết của cô ấy đã có sự tiến bộ rõ rệt."
+    ],
+    [
+      "competency",
+      "/ˈkɒmpɪtənsi/",
+      "n",
+      "năng lực (chuyên môn)",
+      "an ability needed to do a job well",
+      "Time management is a key competency for project leaders.",
+      "Quản lý thời gian là một năng lực then chốt đối với trưởng dự án."
+    ],
+    [
+      "aspiration",
+      "/ˌæspəˈreɪʃn/",
+      "n",
+      "khát vọng, hoài bão",
+      "a strong hope to reach a goal in the future",
+      "Her aspiration is to become a regional manager.",
+      "Hoài bão của cô ấy là trở thành quản lý khu vực."
+    ],
+    [
+      "leadership",
+      "/ˈliːdəʃɪp/",
+      "n",
+      "khả năng lãnh đạo",
+      "the ability to guide and manage a group of people",
+      "He showed strong leadership during the busy season.",
+      "Anh ấy đã thể hiện khả năng lãnh đạo mạnh mẽ trong mùa cao điểm."
+    ],
+    [
+      "career path",
+      "/kəˈrɪə(r) pɑːθ/",
+      "phrase",
+      "lộ trình sự nghiệp",
+      "the series of jobs a person plans to have over time",
+      "HR can help you plan a clear career path.",
+      "Phòng nhân sự có thể giúp bạn lên kế hoạch cho một lộ trình sự nghiệp rõ ràng."
+    ],
+    [
+      "recognize",
+      "/ˈrekəɡnaɪz/",
+      "v",
+      "ghi nhận, công nhận",
+      "to publicly show that someone's work is valued",
+      "The company recognized her hard work with an award.",
+      "Công ty đã ghi nhận sự chăm chỉ của cô ấy bằng một giải thưởng."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Bui received very ____ feedback from her manager during the appraisal.",
+      "o": [
+        "positive",
+        "positively",
+        "positivity",
+        "positiveness"
+      ],
+      "a": 0,
+      "gp": "wordform",
+      "x": "Cần tính từ bổ nghĩa cho danh từ \"feedback\" (sau trạng từ \"very\"), nên chọn \"positive\"."
+    },
+    {
+      "q": "Mr. Ross suggested ____ a leadership course to prepare for a management role.",
+      "o": [
+        "take",
+        "taking",
+        "took",
+        "to taking"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Sau động từ \"suggest\" dùng danh động từ (V-ing), nên chọn \"taking\"."
+    },
+    {
+      "q": "All appraisal forms must ____ to HR by December 15.",
+      "o": [
+        "send",
+        "be sent",
+        "sending",
+        "have sending"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Biểu mẫu \"được gửi\" nên dùng bị động sau động từ khuyết thiếu: \"must be sent\"."
+    },
+    {
+      "q": "Neither the manager nor the employees ____ satisfied with the current review system.",
+      "o": [
+        "is",
+        "are",
+        "was",
+        "has been"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Với \"neither ... nor ...\", động từ chia theo chủ ngữ gần nhất là \"the employees\" (số nhiều), nên dùng \"are\"."
+    },
+    {
+      "q": "Of all the candidates for team leader, Ms. Tran is the ____ qualified.",
+      "o": [
+        "more",
+        "most",
+        "much",
+        "many"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"the\" và phạm vi \"Of all the candidates\" nên dùng so sánh nhất \"the most qualified\"."
+    },
+    {
+      "q": "Mr. Ha has improved his presentation ability, ____ he still needs more practice.",
+      "o": [
+        "but",
+        "so",
+        "or",
+        "because"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Hai mệnh đề có ý tương phản (đã tiến bộ nhưng vẫn cần luyện thêm), nên dùng \"but\"."
+    }
+  ]
+}

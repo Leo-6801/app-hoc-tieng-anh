@@ -1,0 +1,202 @@
+{
+ "date": "2026-11-08",
+ "title": "Nhờ IT đặt lại mật khẩu và sửa laptop",
+ "scene": {
+  "title": "Gọi bộ phận hỗ trợ kỹ thuật",
+  "topic": "Công sở",
+  "names": [
+   "Quang",
+   "Emma"
+  ],
+  "lines": [
+   [
+    0,
+    "Hi Emma, I can't log in. I think I'm locked out of my account.",
+    "Chào Emma, tôi không đăng nhập được. Tôi nghĩ tài khoản của tôi đã bị khóa."
+   ],
+   [
+    1,
+    "No problem. I can unlock it for you. What's your employee ID?",
+    "Không sao. Tôi có thể mở khóa cho anh. Mã nhân viên của anh là gì?"
+   ],
+   [
+    0,
+    "It's VN2041. Also, my laptop has been very slow since yesterday.",
+    "Là VN2041. Ngoài ra, laptop của tôi chạy rất chậm từ hôm qua."
+   ],
+   [
+    1,
+    "I see. Did you install any new software recently?",
+    "Tôi hiểu rồi. Gần đây anh có cài phần mềm mới nào không?"
+   ],
+   [
+    0,
+    "Only a video editing program. Could that cause the glitch?",
+    "Chỉ một chương trình chỉnh sửa video thôi. Có thể đó là nguyên nhân gây ra lỗi không?"
+   ],
+   [
+    1,
+    "Possibly. First, reboot the laptop and see if it runs faster.",
+    "Có thể. Trước tiên, anh khởi động lại laptop rồi xem nó có chạy nhanh hơn không."
+   ],
+   [
+    0,
+    "And if it's still slow, should I call the help desk again?",
+    "Nếu nó vẫn chậm thì tôi có nên gọi lại bộ phận hỗ trợ kỹ thuật không?"
+   ],
+   [
+    1,
+    "Yes, open a support ticket, and someone will visit your desk this afternoon.",
+    "Đúng vậy, anh hãy tạo phiếu yêu cầu hỗ trợ, và chiều nay sẽ có người đến tận bàn anh."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "log in",
+   "/lɒɡ ˈɪn/",
+   "phrase",
+   "đăng nhập",
+   "to enter your name and password to use a computer system",
+   "You need to log in again after you change your password.",
+   "Bạn cần đăng nhập lại sau khi đổi mật khẩu."
+  ],
+  [
+   "lock out",
+   "/ˌlɒk ˈaʊt/",
+   "phrase",
+   "khóa, chặn (không cho truy cập)",
+   "to stop someone from entering a system or place",
+   "I was locked out of my account after three wrong passwords.",
+   "Tôi bị khóa tài khoản sau ba lần nhập sai mật khẩu."
+  ],
+  [
+   "password",
+   "/ˈpɑːswɜːd/",
+   "n",
+   "mật khẩu",
+   "a secret word used to enter a computer system",
+   "Change your password every three months for security.",
+   "Hãy đổi mật khẩu ba tháng một lần để bảo mật."
+  ],
+  [
+   "install",
+   "/ɪnˈstɔːl/",
+   "v",
+   "cài đặt",
+   "to put new software or equipment on a computer",
+   "Please do not install any programs without IT approval.",
+   "Vui lòng không cài đặt bất kỳ chương trình nào khi chưa có sự chấp thuận của IT."
+  ],
+  [
+   "glitch",
+   "/ɡlɪtʃ/",
+   "n",
+   "lỗi nhỏ, trục trặc",
+   "a small problem that stops something from working properly",
+   "A glitch in the system stopped all emails for an hour.",
+   "Một lỗi nhỏ trong hệ thống đã làm ngưng toàn bộ email trong một giờ."
+  ],
+  [
+   "reboot",
+   "/ˌriːˈbuːt/",
+   "v",
+   "khởi động lại (máy tính)",
+   "to turn a computer off and then on again",
+   "Reboot your laptop to finish the update.",
+   "Hãy khởi động lại laptop để hoàn tất bản cập nhật."
+  ],
+  [
+   "support ticket",
+   "/səˈpɔːt ˌtɪkɪt/",
+   "n",
+   "phiếu yêu cầu hỗ trợ",
+   "a request for help sent to the IT team",
+   "Please open a support ticket if your laptop is still slow.",
+   "Vui lòng tạo phiếu yêu cầu hỗ trợ nếu laptop của bạn vẫn chạy chậm."
+  ],
+  [
+   "help desk",
+   "/ˈhelp desk/",
+   "n",
+   "bộ phận hỗ trợ kỹ thuật",
+   "a service that helps staff with computer problems",
+   "Contact the help desk if you cannot open your email.",
+   "Hãy liên hệ bộ phận hỗ trợ kỹ thuật nếu bạn không mở được email."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "If you forget your password, you can reset it ____ by clicking the link below.",
+   "o": [
+    "yourself",
+    "your",
+    "yours",
+    "you"
+   ],
+   "a": 0,
+   "gp": "pronoun",
+   "x": "Đại từ phản thân \"yourself\" nhấn mạnh rằng chính bạn tự làm việc đó."
+  },
+  {
+   "q": "The new security software ____ on every laptop by the end of next week.",
+   "o": [
+    "installs",
+    "is installing",
+    "will be installed",
+    "will install"
+   ],
+   "a": 2,
+   "gp": "passive",
+   "x": "Phần mềm \"được cài đặt\" (chủ ngữ chịu tác động) vào một thời điểm tương lai, nên dùng bị động \"will be installed\"."
+  },
+  {
+   "q": "Staff members who have trouble ____ in should contact the help desk.",
+   "o": [
+    "logging",
+    "to log",
+    "log",
+    "logged"
+   ],
+   "a": 0,
+   "gp": "gerund",
+   "x": "Cấu trúc \"have trouble + V-ing\" (gặp khó khăn khi làm gì), nên chọn \"logging\"."
+  },
+  {
+   "q": "The technician ____ repaired my laptop works on the third floor.",
+   "o": [
+    "whose",
+    "which",
+    "whom",
+    "who"
+   ],
+   "a": 3,
+   "gp": "relative",
+   "x": "Cần đại từ quan hệ chỉ người và làm chủ ngữ cho động từ \"repaired\", nên chọn \"who\"."
+  },
+  {
+   "q": "Ms. Chen's laptop has been running slowly ____ she installed the new program.",
+   "o": [
+    "while",
+    "since",
+    "during",
+    "for"
+   ],
+   "a": 1,
+   "gp": "conj",
+   "x": "Thì hiện tại hoàn thành tiếp diễn đi với \"since\" + mệnh đề quá khứ để chỉ mốc bắt đầu."
+  },
+  {
+   "q": "There are only ____ technicians on duty during the weekend, so repairs may take longer.",
+   "o": [
+    "a little",
+    "much",
+    "every",
+    "a few"
+   ],
+   "a": 3,
+   "gp": "quant",
+   "x": "\"technicians\" là danh từ đếm được số nhiều nên dùng \"a few\"; \"a little\" và \"much\" đi với danh từ không đếm được, \"every\" đi với danh từ số ít."
+  }
+ ]
+}

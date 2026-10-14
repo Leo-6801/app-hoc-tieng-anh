@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-23",
+  "title": "Trình diễn sản phẩm cho khách hàng",
+  "scene": {
+    "title": "Buổi demo phần mềm quản lý kho",
+    "topic": "Kinh doanh",
+    "names": [
+      "Hoàng Nam",
+      "Sophie Martin"
+    ],
+    "lines": [
+      [
+        0,
+        "Thank you for coming, Ms. Martin. Let me start the demonstration of our inventory software.",
+        "Cảm ơn chị Martin đã đến. Tôi xin bắt đầu phần trình diễn phần mềm quản lý kho của chúng tôi."
+      ],
+      [
+        1,
+        "Great. I'm mainly interested in how easy it is for my staff to use.",
+        "Tốt quá. Tôi chủ yếu quan tâm xem nhân viên của tôi sử dụng có dễ không."
+      ],
+      [
+        0,
+        "It's very user-friendly. Your staff can learn the main features in about an hour.",
+        "Phần mềm rất dễ sử dụng. Nhân viên của chị có thể học các tính năng chính trong khoảng một giờ."
+      ],
+      [
+        1,
+        "Is it compatible with the accounting system we already use?",
+        "Nó có tương thích với hệ thống kế toán mà chúng tôi đang dùng không?"
+      ],
+      [
+        0,
+        "Yes, it works with most popular systems. Let me highlight the import function here.",
+        "Có, nó chạy được với hầu hết các hệ thống phổ biến. Để tôi làm nổi bật chức năng nhập dữ liệu ở đây."
+      ],
+      [
+        1,
+        "Impressive. Can we customize the reports to show our own sales data?",
+        "Ấn tượng đấy. Chúng tôi có thể tùy chỉnh báo cáo để hiển thị dữ liệu bán hàng của mình không?"
+      ],
+      [
+        0,
+        "Absolutely. You can choose the columns, charts, and layout for every report.",
+        "Hoàn toàn được. Chị có thể chọn cột, biểu đồ và bố cục cho từng báo cáo."
+      ],
+      [
+        1,
+        "I'd like my team to try it before we make a decision.",
+        "Tôi muốn nhóm của tôi dùng thử trước khi chúng tôi đưa ra quyết định."
+      ],
+      [
+        0,
+        "No problem. We offer a free thirty-day trial, and I'll send the login details today.",
+        "Không vấn đề gì. Chúng tôi có gói dùng thử miễn phí ba mươi ngày, và tôi sẽ gửi thông tin đăng nhập ngay hôm nay."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "demonstration",
+      "/ˌdemənˈstreɪʃn/",
+      "n",
+      "buổi trình diễn, buổi giới thiệu sản phẩm",
+      "an event where someone shows how a product works",
+      "The sales team gave a short demonstration of the new app.",
+      "Đội bán hàng đã trình diễn ngắn về ứng dụng mới."
+    ],
+    [
+      "feature",
+      "/ˈfiːtʃər/",
+      "n",
+      "tính năng, đặc điểm",
+      "an important or useful part of a product",
+      "The most popular feature of this phone is its long battery life.",
+      "Tính năng được yêu thích nhất của chiếc điện thoại này là thời lượng pin dài."
+    ],
+    [
+      "user-friendly",
+      "/ˌjuːzər ˈfrendli/",
+      "adj",
+      "dễ sử dụng, thân thiện với người dùng",
+      "easy for people to use or understand",
+      "The website is user-friendly, so clients can order in a few clicks.",
+      "Trang web rất dễ sử dụng nên khách hàng có thể đặt hàng chỉ với vài cú nhấp chuột."
+    ],
+    [
+      "compatible",
+      "/kəmˈpætəbl/",
+      "adj",
+      "tương thích",
+      "able to work together with another system or device",
+      "The software is compatible with both Windows and Mac computers.",
+      "Phần mềm này tương thích với cả máy tính Windows và Mac."
+    ],
+    [
+      "highlight",
+      "/ˈhaɪlaɪt/",
+      "v",
+      "làm nổi bật, nhấn mạnh",
+      "to show that something is especially important",
+      "In the demo, she highlighted the product's safety features.",
+      "Trong buổi demo, cô ấy đã nhấn mạnh các tính năng an toàn của sản phẩm."
+    ],
+    [
+      "trial",
+      "/ˈtraɪəl/",
+      "n",
+      "sự dùng thử, thời gian dùng thử",
+      "a short period when you test a product before buying it",
+      "Clients can use the software for free during the trial period.",
+      "Khách hàng có thể sử dụng phần mềm miễn phí trong thời gian dùng thử."
+    ],
+    [
+      "customize",
+      "/ˈkʌstəmaɪz/",
+      "v",
+      "tùy chỉnh, điều chỉnh theo yêu cầu",
+      "to change something to suit a person's needs",
+      "We can customize the design to match your company's logo.",
+      "Chúng tôi có thể tùy chỉnh thiết kế cho phù hợp với logo của công ty bạn."
+    ],
+    [
+      "showcase",
+      "/ˈʃəʊkeɪs/",
+      "v",
+      "giới thiệu, trưng bày nổi bật",
+      "to show the best qualities of something",
+      "The demo showcased the product's best features.",
+      "Buổi demo đã giới thiệu nổi bật những tính năng tốt nhất của sản phẩm."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The new features ____ to the client during yesterday's demo.",
+      "o": [
+        "showed",
+        "were shown",
+        "are showing",
+        "have shown"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Chủ ngữ \"the new features\" được người khác giới thiệu, và sự việc xảy ra hôm qua, nên dùng bị động quá khứ \"were shown\"."
+    },
+    {
+      "q": "The client ____ visited our office last week has asked for a second demo.",
+      "o": [
+        "who",
+        "which",
+        "whom",
+        "whose"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ chỉ người, làm chủ ngữ cho động từ \"visited\", nên chọn \"who\"."
+    },
+    {
+      "q": "The new model is ____ to use than the previous version.",
+      "o": [
+        "easy",
+        "easier",
+        "easiest",
+        "more easy"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"than\" nên dùng so sánh hơn. \"Easy\" là tính từ ngắn tận cùng bằng -y, so sánh hơn là \"easier\"."
+    },
+    {
+      "q": "Ms. Martin is considering ____ a free trial before signing the agreement.",
+      "o": [
+        "request",
+        "to request",
+        "requesting",
+        "requested"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau động từ \"consider\" dùng danh động từ (V-ing), nên chọn \"requesting\"."
+    },
+    {
+      "q": "Each of the products in the demonstration ____ a two-year guarantee.",
+      "o": [
+        "include",
+        "includes",
+        "are including",
+        "have included"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Chủ ngữ là \"Each of ...\" nên động từ chia số ít: \"includes\"."
+    },
+    {
+      "q": "The presenter explained the software's functions very ____.",
+      "o": [
+        "clear",
+        "clearly",
+        "clarity",
+        "clearness"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ để bổ nghĩa cho động từ \"explained\", nên chọn \"clearly\"."
+    }
+  ]
+}

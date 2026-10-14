@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-22",
+  "title": "Đề xuất tăng lương với quản lý",
+  "scene": {
+    "title": "Cuộc trò chuyện về việc tăng lương",
+    "topic": "Công sở",
+    "names": [
+      "Tuấn",
+      "Linda"
+    ],
+    "lines": [
+      [
+        0,
+        "Linda, do you have a few minutes to talk about my compensation?",
+        "Linda, chị có vài phút để nói về chế độ đãi ngộ của em không?"
+      ],
+      [
+        1,
+        "Sure, Tuấn. Please have a seat. What's on your mind?",
+        "Được chứ, Tuấn. Em ngồi đi. Em đang nghĩ gì vậy?"
+      ],
+      [
+        0,
+        "My duties have grown a lot since I took over two new clients.",
+        "Công việc của em đã tăng lên nhiều kể từ khi em nhận thêm hai khách hàng mới."
+      ],
+      [
+        1,
+        "That's true. Your contribution to the team has been excellent this year.",
+        "Đúng vậy. Đóng góp của em cho nhóm năm nay rất xuất sắc."
+      ],
+      [
+        0,
+        "Thank you. Based on that, I'd like to ask for a pay raise.",
+        "Cảm ơn chị. Dựa trên điều đó, em muốn đề nghị được tăng lương."
+      ],
+      [
+        1,
+        "I see. Can you justify the amount you have in mind?",
+        "Chị hiểu. Em có thể đưa ra lý do hợp lý cho mức em đang nghĩ đến không?"
+      ],
+      [
+        0,
+        "Yes. Compared with the market rate for similar roles, I'm slightly underpaid.",
+        "Vâng. So với mức lương thị trường cho các vị trí tương tự, em đang được trả hơi thấp."
+      ],
+      [
+        1,
+        "That's a fair approach. I'll raise it with HR and get back to you.",
+        "Đó là cách tiếp cận hợp lý. Chị sẽ đề xuất với phòng nhân sự và trả lời em sau."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "compensation",
+      "/ˌkɒmpenˈseɪʃn/",
+      "n",
+      "chế độ đãi ngộ, lương thưởng",
+      "the money and benefits a worker receives for doing a job",
+      "The company offers competitive compensation and health insurance.",
+      "Công ty đưa ra chế độ đãi ngộ cạnh tranh và bảo hiểm y tế."
+    ],
+    [
+      "underpaid",
+      "/ˌʌndəˈpeɪd/",
+      "adj",
+      "bị trả lương thấp (so với công sức)",
+      "earning less money than is fair for the work you do",
+      "Many nurses feel they are underpaid for their long hours.",
+      "Nhiều y tá cảm thấy họ bị trả lương thấp so với số giờ làm việc dài."
+    ],
+    [
+      "contribution",
+      "/ˌkɒntrɪˈbjuːʃn/",
+      "n",
+      "sự đóng góp",
+      "something you do that helps a group succeed",
+      "Her contribution to the project was praised by the director.",
+      "Sự đóng góp của cô ấy cho dự án đã được giám đốc khen ngợi."
+    ],
+    [
+      "pay raise",
+      "/ˈpeɪ reɪz/",
+      "phrase",
+      "sự tăng lương",
+      "an increase in the money you earn from your job",
+      "All staff will receive a small pay raise in January.",
+      "Tất cả nhân viên sẽ được tăng lương một chút vào tháng Một."
+    ],
+    [
+      "justify",
+      "/ˈdʒʌstɪfaɪ/",
+      "v",
+      "chứng minh là hợp lý",
+      "to give good reasons for a decision or request",
+      "You need clear results to justify your request.",
+      "Bạn cần có kết quả rõ ràng để chứng minh yêu cầu của mình là hợp lý."
+    ],
+    [
+      "market rate",
+      "/ˈmɑːkɪt reɪt/",
+      "phrase",
+      "mức lương/giá theo thị trường",
+      "the usual amount paid for a job in the same industry",
+      "We try to pay our engineers at or above the market rate.",
+      "Chúng tôi cố gắng trả lương cho kỹ sư bằng hoặc cao hơn mức thị trường."
+    ],
+    [
+      "bonus",
+      "/ˈbəʊnəs/",
+      "n",
+      "tiền thưởng",
+      "extra money added to your pay as a reward",
+      "Everyone received a year-end bonus last December.",
+      "Mọi người đều nhận được tiền thưởng cuối năm vào tháng Mười Hai năm ngoái."
+    ],
+    [
+      "merit",
+      "/ˈmerɪt/",
+      "n",
+      "thành tích, năng lực xứng đáng",
+      "good qualities or work that deserve praise or reward",
+      "Raises at our firm are based on merit, not length of service.",
+      "Việc tăng lương ở công ty chúng tôi dựa trên thành tích, không dựa trên thâm niên."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Park's sales figures this year were ____ than those of anyone else on her team.",
+      "o": [
+        "high",
+        "higher",
+        "highest",
+        "most high"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"than\" phía sau nên dùng dạng so sánh hơn \"higher\"."
+    },
+    {
+      "q": "Pay raises ____ to employees after the annual review is completed.",
+      "o": [
+        "are given",
+        "give",
+        "are giving",
+        "have given"
+      ],
+      "a": 0,
+      "gp": "passive",
+      "x": "Chủ ngữ \"Pay raises\" không tự thực hiện hành động mà \"được trao\", nên dùng câu bị động \"are given\"."
+    },
+    {
+      "q": "Mr. Nguyen is considering ____ for a raise at his next performance review.",
+      "o": [
+        "ask",
+        "to ask",
+        "asking",
+        "asked"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau động từ \"consider\" dùng danh động từ (V-ing), nên chọn \"asking\"."
+    },
+    {
+      "q": "The number of employees requesting a pay raise ____ increased this year.",
+      "o": [
+        "have",
+        "has",
+        "are",
+        "were"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "\"The number of\" + danh từ số nhiều vẫn đi với động từ số ít, nên dùng \"has\"."
+    },
+    {
+      "q": "Linda explained the new bonus system very ____ during the staff meeting.",
+      "o": [
+        "clear",
+        "clearly",
+        "clarity",
+        "clearness"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ để bổ nghĩa cho động từ \"explained\", nên chọn \"clearly\"."
+    },
+    {
+      "q": "____ employee who meets the annual sales target will receive a bonus.",
+      "o": [
+        "All",
+        "Every",
+        "Many",
+        "Several"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "\"Employee\" là danh từ số ít và động từ \"meets\" chia số ít, nên dùng \"Every\"; các từ còn lại đi với danh từ số nhiều."
+    }
+  ]
+}

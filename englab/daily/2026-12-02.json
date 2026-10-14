@@ -1,0 +1,202 @@
+{
+ "date": "2026-12-02",
+ "title": "Cùng chuẩn bị slide họp với khách hàng",
+ "scene": {
+  "title": "Hoàn thiện bài thuyết trình",
+  "topic": "Công sở",
+  "names": [
+   "Hương",
+   "Daniel"
+  ],
+  "lines": [
+   [
+    0,
+    "Daniel, the client meeting is on Friday. Shall we finalize the slide deck today?",
+    "Daniel, buổi họp với khách hàng là vào thứ Sáu. Hôm nay chúng ta chốt bộ slide luôn nhé?"
+   ],
+   [
+    1,
+    "Yes. I've finished the market analysis section, but the layout looks crowded.",
+    "Được. Tôi đã làm xong phần phân tích thị trường, nhưng bố cục trông hơi chật chội."
+   ],
+   [
+    0,
+    "Let's turn the long tables into a chart. Visuals are easier to remember.",
+    "Mình chuyển các bảng dài thành biểu đồ đi. Hình ảnh minh họa dễ nhớ hơn."
+   ],
+   [
+    1,
+    "Good idea. We should also use the same font so the slides look consistent.",
+    "Ý hay. Chúng ta cũng nên dùng cùng một phông chữ để các slide trông đồng bộ."
+   ],
+   [
+    0,
+    "Agreed. I'll use the company template for every slide this afternoon.",
+    "Đồng ý. Chiều nay tôi sẽ dùng mẫu của công ty cho tất cả các slide."
+   ],
+   [
+    1,
+    "How long should the whole presentation be?",
+    "Toàn bộ bài thuyết trình nên dài bao lâu?"
+   ],
+   [
+    0,
+    "About twenty minutes, so we have time for questions at the end.",
+    "Khoảng hai mươi phút, để chúng ta còn thời gian trả lời câu hỏi ở cuối."
+   ],
+   [
+    1,
+    "Then let's rehearse together on Thursday morning before we send the file.",
+    "Vậy thì sáng thứ Năm chúng ta cùng tập dượt trước khi gửi tệp đi nhé."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "finalize",
+   "/ˈfaɪnəlaɪz/",
+   "v",
+   "hoàn thiện, chốt",
+   "to complete the last details of something",
+   "We need to finalize the slides before Thursday.",
+   "Chúng ta cần hoàn thiện bản slide trước thứ Năm."
+  ],
+  [
+   "slide deck",
+   "/ˈslaɪd dek/",
+   "n",
+   "bộ slide thuyết trình",
+   "a set of slides used for a presentation",
+   "I'll send you the slide deck before the client meeting.",
+   "Tôi sẽ gửi bạn bộ slide trước buổi họp với khách hàng."
+  ],
+  [
+   "chart",
+   "/tʃɑːt/",
+   "n",
+   "biểu đồ",
+   "a picture that shows information as lines, bars, or circles",
+   "This chart shows how our user numbers grew over three years.",
+   "Biểu đồ này cho thấy số lượng người dùng của chúng tôi đã tăng như thế nào trong ba năm."
+  ],
+  [
+   "visual",
+   "/ˈvɪʒuəl/",
+   "n",
+   "hình ảnh minh họa",
+   "a picture, chart, or video used to explain something",
+   "Add more visuals to make the presentation interesting.",
+   "Hãy thêm nhiều hình ảnh minh họa để bài thuyết trình hấp dẫn hơn."
+  ],
+  [
+   "consistent",
+   "/kənˈsɪstənt/",
+   "adj",
+   "nhất quán, đồng bộ",
+   "always the same in style or quality",
+   "Use consistent colors on all of your slides.",
+   "Hãy dùng màu sắc nhất quán trên tất cả các slide."
+  ],
+  [
+   "template",
+   "/ˈtempleɪt/",
+   "n",
+   "mẫu (có sẵn)",
+   "a ready-made file used as a starting point",
+   "Please use the company template for all client presentations.",
+   "Vui lòng dùng mẫu của công ty cho mọi bài thuyết trình với khách hàng."
+  ],
+  [
+   "presentation",
+   "/ˌpreznˈteɪʃn/",
+   "n",
+   "bài thuyết trình",
+   "a talk that gives information to a group of people",
+   "Her presentation lasted twenty minutes.",
+   "Bài thuyết trình của cô ấy kéo dài hai mươi phút."
+  ],
+  [
+   "rehearse",
+   "/rɪˈhɜːs/",
+   "v",
+   "tập dượt, diễn tập",
+   "to practice a speech or performance before the real event",
+   "We rehearsed the presentation twice before the meeting.",
+   "Chúng tôi đã tập dượt bài thuyết trình hai lần trước buổi họp."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "Please make sure the font size is ____ throughout the presentation.",
+   "o": [
+    "consistent",
+    "consistently",
+    "consistency",
+    "consist"
+   ],
+   "a": 0,
+   "gp": "wordform",
+   "x": "Sau động từ \"is\" cần một tính từ làm bổ ngữ, nên chọn \"consistent\"."
+  },
+  {
+   "q": "Ms. Tran and Mr. Hill ____ the slides together since early this morning.",
+   "o": [
+    "are prepared",
+    "was preparing",
+    "have been preparing",
+    "prepare"
+   ],
+   "a": 2,
+   "gp": "tense",
+   "x": "\"since early this morning\" diễn tả hành động bắt đầu trong quá khứ và vẫn đang tiếp diễn, nên dùng hiện tại hoàn thành tiếp diễn."
+  },
+  {
+   "q": "The final version of the slides must ____ to the client by Thursday.",
+   "o": [
+    "be sent",
+    "send",
+    "sending",
+    "have sent"
+   ],
+   "a": 0,
+   "gp": "passive",
+   "x": "Bản slide \"được gửi\" đến khách hàng, nên sau \"must\" dùng bị động \"be + V3\": \"be sent\"."
+  },
+  {
+   "q": "We have very ____ time left, so let's focus on the most important slides.",
+   "o": [
+    "few",
+    "many",
+    "a few",
+    "little"
+   ],
+   "a": 3,
+   "gp": "quant",
+   "x": "\"time\" là danh từ không đếm được nên dùng \"little\"; \"very little\" nghĩa là rất ít."
+  },
+  {
+   "q": "The presentation will be shorter ____ we remove the detailed tables.",
+   "o": [
+    "whereas",
+    "if",
+    "unless",
+    "although"
+   ],
+   "a": 1,
+   "gp": "conj",
+   "x": "\"if\" nêu điều kiện: nếu bỏ các bảng chi tiết thì bài thuyết trình sẽ ngắn hơn; \"unless\" làm câu sai nghĩa."
+  },
+  {
+   "q": "Visuals are often ____ effective than long paragraphs of text.",
+   "o": [
+    "most",
+    "much",
+    "many",
+    "more"
+   ],
+   "a": 3,
+   "gp": "compare",
+   "x": "Có \"than\" nên dùng so sánh hơn; \"effective\" là tính từ dài nên dùng \"more effective\"."
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-17",
+  "title": "Phỏng vấn xin thị thực",
+  "scene": {
+    "title": "Buổi phỏng vấn tại đại sứ quán",
+    "topic": "Du lịch",
+    "names": [
+      "Officer Wilson",
+      "Ngọc Hân"
+    ],
+    "lines": [
+      [
+        0,
+        "Good morning. What is the purpose of your visit, and how long will you stay?",
+        "Chào buổi sáng. Mục đích chuyến đi của chị là gì và chị sẽ ở lại bao lâu?"
+      ],
+      [
+        1,
+        "I'm going to a five-day trade fair in London for my company.",
+        "Tôi sẽ tham dự một hội chợ thương mại năm ngày ở London cho công ty."
+      ],
+      [
+        0,
+        "Do you have an invitation letter from the event organizer?",
+        "Chị có thư mời từ ban tổ chức sự kiện không?"
+      ],
+      [
+        1,
+        "Yes, here it is, along with my passport and hotel booking.",
+        "Có ạ, đây là thư mời, cùng với hộ chiếu và xác nhận đặt phòng khách sạn của tôi."
+      ],
+      [
+        0,
+        "Thank you. Can you show proof of funds for your stay?",
+        "Cảm ơn chị. Chị có thể cho xem chứng minh tài chính cho thời gian lưu trú không?"
+      ],
+      [
+        1,
+        "Here are my bank statements and a letter saying my employer will cover my costs.",
+        "Đây là sao kê ngân hàng và thư xác nhận công ty sẽ chi trả chi phí cho tôi."
+      ],
+      [
+        0,
+        "Everything looks fine. Please go to window five to provide your biometrics.",
+        "Mọi thứ đều ổn. Mời chị đến cửa số năm để lấy dữ liệu sinh trắc học."
+      ],
+      [
+        1,
+        "Thank you. Is it possible to get a multiple-entry visa? I travel there often.",
+        "Cảm ơn anh. Tôi có thể xin thị thực nhập cảnh nhiều lần không? Tôi thường xuyên đến đó."
+      ],
+      [
+        0,
+        "You can request one, but the final decision depends on your travel history.",
+        "Chị có thể đề nghị, nhưng quyết định cuối cùng phụ thuộc vào lịch sử đi lại của chị."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "embassy",
+      "/ˈembəsi/",
+      "n",
+      "đại sứ quán",
+      "the official office of a foreign country's government in another country",
+      "Mr. Phúc went to the embassy to collect his visa.",
+      "Anh Phúc đến đại sứ quán để nhận thị thực."
+    ],
+    [
+      "passport",
+      "/ˈpæspɔːrt/",
+      "n",
+      "hộ chiếu",
+      "an official document that shows who you are when you travel abroad",
+      "Make sure your passport has at least two blank pages.",
+      "Hãy chắc chắn hộ chiếu của bạn còn ít nhất hai trang trống."
+    ],
+    [
+      "invitation letter",
+      "/ˌɪnvɪˈteɪʃn ˌletər/",
+      "n",
+      "thư mời",
+      "a letter from a company or person asking you to visit",
+      "Our partner in Germany sent me an invitation letter for the visa.",
+      "Đối tác ở Đức đã gửi cho tôi thư mời để xin thị thực."
+    ],
+    [
+      "consular officer",
+      "/ˈkɑːnsələr ˌɔːfɪsər/",
+      "n",
+      "viên chức lãnh sự",
+      "an official who interviews visa applicants and makes decisions",
+      "The consular officer asked me about my job and travel plans.",
+      "Viên chức lãnh sự hỏi tôi về công việc và kế hoạch đi lại."
+    ],
+    [
+      "proof of funds",
+      "/ˌpruːf əv ˈfʌndz/",
+      "n",
+      "chứng minh tài chính",
+      "documents that show you have enough money for a trip",
+      "Bank statements are often used as proof of funds.",
+      "Sao kê ngân hàng thường được dùng làm chứng minh tài chính."
+    ],
+    [
+      "expiry date",
+      "/ɪkˈspaɪəri deɪt/",
+      "n",
+      "ngày hết hạn",
+      "the date after which a document can no longer be used",
+      "Check the expiry date on your passport before you book your trip.",
+      "Hãy kiểm tra ngày hết hạn trên hộ chiếu trước khi đặt chuyến đi."
+    ],
+    [
+      "biometrics",
+      "/ˌbaɪoʊˈmetrɪks/",
+      "n",
+      "dữ liệu sinh trắc học",
+      "personal body data such as fingerprints and a face photo",
+      "All visa applicants must give their biometrics at the visa center.",
+      "Tất cả người xin thị thực phải cung cấp dữ liệu sinh trắc học tại trung tâm thị thực."
+    ],
+    [
+      "multiple-entry",
+      "/ˌmʌltɪpl ˈentri/",
+      "adj",
+      "nhập cảnh nhiều lần",
+      "allowing you to enter a country many times",
+      "A multiple-entry visa is useful for people who travel for business often.",
+      "Thị thực nhập cảnh nhiều lần rất hữu ích cho người thường xuyên đi công tác."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Applicants must make sure that their passports are ____ for at least six months after arrival.",
+      "o": [
+        "valid",
+        "validly",
+        "validate",
+        "validity"
+      ],
+      "a": 0,
+      "gp": "wordform",
+      "x": "Sau động từ 'are' cần tính từ làm vị ngữ, nên chọn 'valid' (còn hiệu lực)."
+    },
+    {
+      "q": "Each of the applicants ____ required to bring two passport photos.",
+      "o": [
+        "is",
+        "are",
+        "were",
+        "be"
+      ],
+      "a": 0,
+      "gp": "agreement",
+      "x": "Chủ ngữ 'Each of + danh từ số nhiều' đi với động từ số ít, nên chọn 'is'."
+    },
+    {
+      "q": "Visa applications ____ at least three weeks before the planned travel date.",
+      "o": [
+        "should send",
+        "should be sent",
+        "should sending",
+        "sent"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Đơn xin thị thực 'được gửi' nên dùng bị động với động từ khuyết thiếu: 'should be sent'."
+    },
+    {
+      "q": "Ms. Hân arrived at the embassy early ____ she would not miss her interview.",
+      "o": [
+        "so that",
+        "because of",
+        "despite",
+        "as if"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "'So that' + mệnh đề chỉ mục đích (để mà); 'because of' và 'despite' phải đi với danh từ."
+    },
+    {
+      "q": "Please bring all supporting documents, ____ bank statements and an invitation letter.",
+      "o": [
+        "including",
+        "involving",
+        "containing",
+        "consisting"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "'Including' nghĩa là 'bao gồm', dùng để liệt kê ví dụ cụ thể của 'supporting documents'."
+    },
+    {
+      "q": "Applicants who have visited the country before usually wait ____ time than first-time applicants.",
+      "o": [
+        "less",
+        "fewer",
+        "little",
+        "least"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "'Time' là danh từ không đếm được và có 'than' nên dùng 'less'; 'fewer' chỉ đi với danh từ đếm được."
+    }
+  ]
+}

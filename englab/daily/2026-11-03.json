@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-03",
+  "title": "Đăng ký khóa đào tạo của công ty",
+  "scene": {
+    "title": "Ghi danh khóa học quản lý dự án",
+    "topic": "Công sở",
+    "names": ["Quang", "Emily"],
+    "lines": [
+      [0, "Hi Emily, I saw the e-mail about the new project management workshop.", "Chào Emily, tôi đã thấy e-mail về buổi tập huấn quản lý dự án mới."],
+      [1, "Yes, it starts next month. Would you like to enroll?", "Đúng vậy, khóa học bắt đầu vào tháng sau. Anh có muốn ghi danh không?"],
+      [0, "I'd love to. Are there any prerequisites for the course?", "Tôi rất muốn. Khóa học có điều kiện tiên quyết nào không?"],
+      [1, "You need to finish the online basics module first. It takes two hours.", "Anh cần hoàn thành học phần cơ bản trực tuyến trước. Học phần đó mất hai tiếng."],
+      [0, "That's fine. Who is the instructor, and how many sessions are there?", "Được thôi. Giảng viên là ai, và có bao nhiêu buổi học?"],
+      [1, "Mr. Patel will teach six sessions, and each participant gets a certificate.", "Anh Patel sẽ dạy sáu buổi, và mỗi học viên sẽ nhận được chứng chỉ."],
+      [0, "Great. It's a good chance to upskill. Please sign me up.", "Tuyệt quá. Đây là cơ hội tốt để nâng cao kỹ năng. Vui lòng đăng ký cho tôi nhé."],
+      [1, "Done! There were only two seats left, so you were lucky.", "Xong rồi! Chỉ còn hai chỗ trống, nên anh thật may mắn đấy."]
+    ]
+  },
+  "vocab": [
+    ["enroll", "/ɪnˈrəʊl/", "v", "ghi danh, đăng ký học", "to officially join a course or class", "Over thirty employees enrolled in the English course this year.", "Hơn ba mươi nhân viên đã ghi danh khóa tiếng Anh năm nay."],
+    ["workshop", "/ˈwɜːkʃɒp/", "n", "buổi tập huấn, hội thảo chuyên đề", "a meeting where people learn and practice something together", "The workshop on time management lasts three hours.", "Buổi tập huấn về quản lý thời gian kéo dài ba tiếng."],
+    ["prerequisite", "/ˌpriːˈrekwəzɪt/", "n", "điều kiện tiên quyết", "something you must have or do before you can do something else", "Basic Excel knowledge is a prerequisite for this course.", "Kiến thức Excel cơ bản là điều kiện tiên quyết của khóa học này."],
+    ["instructor", "/ɪnˈstrʌktə(r)/", "n", "giảng viên, người hướng dẫn", "a person who teaches a practical subject", "The instructor gave us useful tips for public speaking.", "Giảng viên đã cho chúng tôi những mẹo hữu ích về nói trước công chúng."],
+    ["session", "/ˈseʃn/", "n", "buổi (học, tập huấn)", "a period of time used for a particular activity", "The first session begins at 9 a.m. on Monday.", "Buổi học đầu tiên bắt đầu lúc 9 giờ sáng thứ Hai."],
+    ["participant", "/pɑːˈtɪsɪpənt/", "n", "người tham gia, học viên", "a person who takes part in an activity", "Each participant must bring a laptop to class.", "Mỗi học viên phải mang theo máy tính xách tay đến lớp."],
+    ["certificate", "/səˈtɪfɪkət/", "n", "chứng chỉ, giấy chứng nhận", "an official paper showing that you have finished a course", "You will receive a certificate after the final test.", "Bạn sẽ nhận được chứng chỉ sau bài kiểm tra cuối khóa."],
+    ["upskill", "/ˌʌpˈskɪl/", "v", "nâng cao kỹ năng", "to learn new abilities that help you in your job", "The company helps staff upskill through free online courses.", "Công ty giúp nhân viên nâng cao kỹ năng qua các khóa học trực tuyến miễn phí."]
+  ],
+  "toeic": [
+    {"q": "Employees interested in ____ the workshop should contact the training team.", "o": ["join", "joining", "joined", "to join"], "a": 1, "gp": "gerund", "x": "Sau giới từ \"in\" phải dùng danh động từ (V-ing), nên chọn \"joining\"."},
+    {"q": "Certificates ____ to all participants at the end of the course.", "o": ["will award", "will be awarded", "are awarding", "awarded"], "a": 1, "gp": "passive", "x": "Chứng chỉ \"được trao\" cho học viên nên cần câu bị động tương lai \"will be awarded\"."},
+    {"q": "Only a ____ seats are left for the Excel training session.", "o": ["few", "little", "much", "less"], "a": 0, "gp": "quant", "x": "\"Seats\" là danh từ đếm được số nhiều nên dùng \"a few\"; \"little\" và \"much\" đi với danh từ không đếm được."},
+    {"q": "The instructor ____ led last month's workshop will teach this course as well.", "o": ["who", "whom", "whose", "which"], "a": 0, "gp": "relative", "x": "Cần đại từ quan hệ chỉ người làm chủ ngữ cho động từ \"led\", nên chọn \"who\"."},
+    {"q": "The online course is ____ convenient than the classroom version for busy staff.", "o": ["much", "more", "most", "very"], "a": 1, "gp": "compare", "x": "Có \"than\" và tính từ dài \"convenient\" nên dùng so sánh hơn \"more convenient\"."},
+    {"q": "You may enroll in the advanced course ____ you have completed the basic module.", "o": ["although", "unless", "once", "whereas"], "a": 2, "gp": "conj", "x": "\"Once\" nghĩa là \"một khi/sau khi\", phù hợp với ý phải hoàn thành học phần cơ bản trước."}
+  ]
+}

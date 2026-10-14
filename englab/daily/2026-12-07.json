@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-07",
+  "title": "Phỏng vấn ứng viên thực tập",
+  "scene": {
+    "title": "Buổi phỏng vấn thực tập sinh marketing",
+    "topic": "Kinh doanh",
+    "names": [
+      "Anna",
+      "Bảo"
+    ],
+    "lines": [
+      [
+        0,
+        "Welcome, Bảo. Why are you interested in this marketing internship?",
+        "Chào mừng em, Bảo. Tại sao em quan tâm đến vị trí thực tập marketing này?"
+      ],
+      [
+        1,
+        "I'm studying business, and I want to learn how real campaigns work.",
+        "Em đang học ngành kinh doanh và muốn tìm hiểu các chiến dịch thực tế vận hành như thế nào."
+      ],
+      [
+        0,
+        "I see. Can you tell me a little about your background?",
+        "Chị hiểu rồi. Em có thể kể một chút về quá trình học tập và hoạt động của mình không?"
+      ],
+      [
+        1,
+        "Sure. I ran the social media pages for my university's English club.",
+        "Dạ. Em từng quản lý các trang mạng xã hội cho câu lạc bộ tiếng Anh của trường."
+      ],
+      [
+        0,
+        "Interesting. Did you bring a portfolio of your work?",
+        "Thú vị đấy. Em có mang theo hồ sơ tác phẩm của mình không?"
+      ],
+      [
+        1,
+        "Yes, here it is. It includes posters and videos I designed.",
+        "Dạ có, đây ạ. Trong đó có các áp phích và video em đã thiết kế."
+      ],
+      [
+        0,
+        "What would you say is your greatest strength?",
+        "Em nghĩ điểm mạnh lớn nhất của mình là gì?"
+      ],
+      [
+        1,
+        "I'm adaptable and motivated, and I really enjoy teamwork.",
+        "Em là người dễ thích nghi, có động lực và em rất thích làm việc nhóm."
+      ],
+      [
+        0,
+        "Thank you. We'll contact all candidates by the end of next week.",
+        "Cảm ơn em. Chúng tôi sẽ liên hệ với tất cả ứng viên trước cuối tuần sau."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "internship",
+      "/ˈɪntɜːrnʃɪp/",
+      "n",
+      "kỳ thực tập",
+      "a short period of work that helps students learn about a job",
+      "She did a three-month internship at a logistics company.",
+      "Cô ấy đã thực tập ba tháng tại một công ty logistics."
+    ],
+    [
+      "interviewee",
+      "/ˌɪntərvjuːˈiː/",
+      "n",
+      "người được phỏng vấn",
+      "a person who is being asked questions in an interview",
+      "Each interviewee will meet two managers from the marketing team.",
+      "Mỗi người được phỏng vấn sẽ gặp hai quản lý của nhóm marketing."
+    ],
+    [
+      "motivated",
+      "/ˈmoʊtɪveɪtɪd/",
+      "adj",
+      "có động lực, nhiệt huyết",
+      "eager to work hard and reach a goal",
+      "We are looking for a motivated student to help with our campaigns.",
+      "Chúng tôi đang tìm một sinh viên nhiệt huyết để hỗ trợ các chiến dịch."
+    ],
+    [
+      "strength",
+      "/streŋθ/",
+      "n",
+      "điểm mạnh",
+      "a good quality or ability that someone has",
+      "His biggest strength is solving problems quickly.",
+      "Điểm mạnh lớn nhất của anh ấy là giải quyết vấn đề nhanh chóng."
+    ],
+    [
+      "background",
+      "/ˈbækɡraʊnd/",
+      "n",
+      "lý lịch, nền tảng (học vấn, công việc)",
+      "a person's education, past work, and life history",
+      "She has a background in finance and accounting.",
+      "Cô ấy có nền tảng về tài chính và kế toán."
+    ],
+    [
+      "teamwork",
+      "/ˈtiːmwɜːrk/",
+      "n",
+      "tinh thần làm việc nhóm",
+      "the ability of people to work well together",
+      "Good teamwork helped us finish the project early.",
+      "Tinh thần làm việc nhóm tốt đã giúp chúng tôi hoàn thành dự án sớm."
+    ],
+    [
+      "adaptable",
+      "/əˈdæptəbəl/",
+      "adj",
+      "dễ thích nghi",
+      "able to change easily to fit new situations",
+      "Interns need to be adaptable because their tasks change every week.",
+      "Thực tập sinh cần dễ thích nghi vì nhiệm vụ của họ thay đổi mỗi tuần."
+    ],
+    [
+      "portfolio",
+      "/pɔːrtˈfoʊlioʊ/",
+      "n",
+      "hồ sơ tác phẩm, hồ sơ năng lực",
+      "a collection of examples of someone's work",
+      "Please bring your design portfolio to the interview.",
+      "Vui lòng mang theo hồ sơ thiết kế của bạn đến buổi phỏng vấn."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The candidate ____ we interviewed this morning has a strong background in design.",
+      "o": [
+        "whom",
+        "whose",
+        "which",
+        "what"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "\"Whom\" thay cho người và làm tân ngữ của động từ \"interviewed\" trong mệnh đề quan hệ."
+    },
+    {
+      "q": "Interns are expected to work closely ____ the marketing team.",
+      "o": [
+        "to",
+        "with",
+        "by",
+        "for"
+      ],
+      "a": 1,
+      "gp": "prep",
+      "x": "Cụm \"work closely with\" nghĩa là \"làm việc chặt chẽ với\" ai đó."
+    },
+    {
+      "q": "All applications for the internship ____ carefully by the selection committee.",
+      "o": [
+        "review",
+        "are reviewed",
+        "are reviewing",
+        "reviewing"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Đơn ứng tuyển được xem xét (bị động), nên dùng \"are reviewed\"."
+    },
+    {
+      "q": "Mr. Lee is the most ____ candidate we have met this year.",
+      "o": [
+        "motivate",
+        "motivation",
+        "motivated",
+        "motivates"
+      ],
+      "a": 2,
+      "gp": "wordform",
+      "x": "Cần tính từ mô tả cảm xúc/trạng thái của người, nên chọn \"motivated\" (có động lực)."
+    },
+    {
+      "q": "Several interns ____ during the summer helped organize our product fair.",
+      "o": [
+        "work",
+        "working",
+        "worked",
+        "were worked"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "Mệnh đề quan hệ rút gọn dạng chủ động dùng V-ing: \"interns working\" = \"interns who were working\"."
+    },
+    {
+      "q": "We will contact ____ candidate by email within two weeks.",
+      "o": [
+        "all",
+        "every",
+        "many",
+        "few"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "\"Candidate\" là danh từ số ít đếm được nên đi với \"every\"; \"all, many, few\" cần danh từ số nhiều."
+    }
+  ]
+}

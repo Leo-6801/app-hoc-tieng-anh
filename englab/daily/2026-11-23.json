@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-23",
+  "title": "Thuê xe ô tô ở nước ngoài",
+  "scene": {
+    "title": "Tại quầy cho thuê xe",
+    "topic": "Du lịch",
+    "names": ["Lucas", "Đức Anh"],
+    "lines": [
+      [0, "Welcome to the rental agency. Did you book a car with us online?", "Chào mừng anh đến công ty cho thuê xe. Anh đã đặt xe trực tuyến với chúng tôi chưa?"],
+      [1, "Yes, under Nguyễn Đức Anh. A compact car for four days.", "Rồi, đặt dưới tên Nguyễn Đức Anh. Một chiếc xe cỡ nhỏ trong bốn ngày."],
+      [0, "Perfect. May I see your passport and international driving permit?", "Tốt quá. Cho tôi xem hộ chiếu và giấy phép lái xe quốc tế của anh được không?"],
+      [1, "Here you go. Does the price include unlimited mileage?", "Đây ạ. Giá thuê đã bao gồm số km không giới hạn chưa?"],
+      [0, "Yes, it does. Would you like full insurance coverage, including collision damage?", "Rồi ạ. Anh có muốn mua bảo hiểm toàn diện, bao gồm cả thiệt hại do va chạm không?"],
+      [1, "Yes, please. I'm not used to driving on the left side of the road.", "Có, làm ơn. Tôi chưa quen lái xe bên trái đường."],
+      [0, "Good idea. The car comes with a navigation system and a full fuel tank.", "Ý hay đấy. Xe có sẵn hệ thống định vị và bình xăng đầy."],
+      [1, "So I should return it with a full tank too? Where do I drop off the car?", "Vậy tôi cũng phải trả xe với bình xăng đầy à? Tôi trả xe ở đâu?"],
+      [0, "Exactly. You can drop off the car at any of our airport branches.", "Đúng vậy. Anh có thể trả xe tại bất kỳ chi nhánh nào của chúng tôi ở sân bay."]
+    ]
+  },
+  "vocab": [
+    ["rental agency", "/ˈrentl ˌeɪdʒənsi/", "n", "công ty cho thuê (xe)", "a business that lets people use cars for a fee", "The rental agency at the airport is open 24 hours a day.", "Công ty cho thuê xe ở sân bay mở cửa 24 giờ mỗi ngày."],
+    ["driving permit", "/ˈdraɪvɪŋ ˌpɜːrmɪt/", "n", "giấy phép lái xe", "an official document that allows you to drive", "You need an international driving permit to rent a car in Japan.", "Bạn cần giấy phép lái xe quốc tế để thuê xe ở Nhật Bản."],
+    ["mileage", "/ˈmaɪlɪdʒ/", "n", "quãng đường đã đi (tính theo dặm/km)", "the distance a vehicle travels", "The daily price includes unlimited mileage.", "Giá thuê theo ngày đã bao gồm quãng đường không giới hạn."],
+    ["insurance coverage", "/ɪnˈʃʊrəns ˌkʌvərɪdʒ/", "n", "phạm vi bảo hiểm", "the protection that an insurance plan gives you", "Check your insurance coverage before you drive abroad.", "Hãy kiểm tra phạm vi bảo hiểm trước khi lái xe ở nước ngoài."],
+    ["collision", "/kəˈlɪʒn/", "n", "vụ va chạm", "an accident in which a vehicle hits something", "Luckily, nobody was hurt in the collision.", "May mắn là không ai bị thương trong vụ va chạm."],
+    ["fuel tank", "/ˈfjuːəl tæŋk/", "n", "bình xăng", "the container in a car that holds petrol", "Please fill the fuel tank before you return the car.", "Vui lòng đổ đầy bình xăng trước khi trả xe."],
+    ["navigation system", "/ˌnævɪˈɡeɪʃn ˌsɪstəm/", "n", "hệ thống định vị", "a device in a car that shows you the way to a place", "The navigation system can give directions in Vietnamese.", "Hệ thống định vị có thể chỉ đường bằng tiếng Việt."],
+    ["drop off", "/ˌdrɑːp ˈɔːf/", "phrase", "trả lại (xe); thả (ai) xuống", "to return something or leave someone at a place", "You can drop off the car at the downtown office.", "Bạn có thể trả xe tại văn phòng ở trung tâm thành phố."]
+  ],
+  "toeic": [
+    {"q": "Customers must return the car with a full tank; ____, a refueling fee will be charged.", "o": ["otherwise", "therefore", "moreover", "similarly"], "a": 0, "gp": "conj", "x": "'Otherwise' nghĩa là 'nếu không thì', diễn tả hậu quả khi không trả xe với bình xăng đầy."},
+    {"q": "Mr. Wong is not used to ____ on the left side of the road.", "o": ["drive", "driving", "drove", "be driven"], "a": 1, "gp": "gerund", "x": "Cấu trúc 'be used to + V-ing' (quen với việc gì), nên chọn 'driving'."},
+    {"q": "The navigation system in this model is ____ to use than the one in older cars.", "o": ["easy", "easier", "easiest", "more easily"], "a": 1, "gp": "compare", "x": "Có 'than' và cần tính từ sau 'is', nên dùng so sánh hơn 'easier'."},
+    {"q": "If Ms. Trang had bought full coverage, she ____ for the damage herself.", "o": ["would not have paid", "will not pay", "did not pay", "would not pay"], "a": 0, "gp": "conditional", "x": "Câu điều kiện loại 3 (If + had V3) nên mệnh đề chính dùng 'would (not) have + V3'."},
+    {"q": "Please inspect the vehicle carefully and report any ____ before leaving the parking lot.", "o": ["damage", "mileage", "coverage", "permit"], "a": 0, "gp": "vocab", "x": "Khi nhận xe cần kiểm tra và báo cáo 'damage' (hư hỏng) để tránh bị tính phí sau này."},
+    {"q": "The rental agency is located ____ the arrivals hall, next to the information desk.", "o": ["inside", "among", "onto", "between"], "a": 0, "gp": "prep", "x": "'Inside' nghĩa là 'bên trong' một nơi; 'among' và 'between' cần nhiều đối tượng, 'onto' chỉ chuyển động."}
+  ]
+}

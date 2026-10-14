@@ -1,0 +1,38 @@
+{
+  "date": "2026-12-04",
+  "title": "Khảo sát ý kiến khách hàng",
+  "scene": {
+    "title": "Cuộc khảo sát ngắn qua điện thoại",
+    "topic": "Kinh doanh",
+    "names": ["Bùi Ngọc Lan", "Tom Harris"],
+    "lines": [
+      [0, "Hi, Mr. Harris. Do you have five minutes for a short feedback survey?", "Chào anh Harris. Anh có năm phút cho một cuộc khảo sát ý kiến ngắn không ạ?"],
+      [1, "Sure, as long as it's quick. What would you like to know?", "Được, miễn là nhanh thôi. Chị muốn biết điều gì?"],
+      [0, "First, how would you rate our service on a scale of one to five?", "Đầu tiên, anh đánh giá dịch vụ của chúng tôi thế nào trên thang điểm từ một đến năm?"],
+      [1, "I'd give you a four. Your staff are friendly and always reply quickly.", "Tôi cho bốn điểm. Nhân viên bên chị thân thiện và luôn trả lời nhanh."],
+      [0, "Thank you. What is your overall satisfaction with the product quality?", "Cảm ơn anh. Nhìn chung anh hài lòng với chất lượng sản phẩm đến mức nào?"],
+      [1, "Very high. The only issue is that the instructions are a bit confusing.", "Rất hài lòng. Vấn đề duy nhất là phần hướng dẫn hơi khó hiểu."],
+      [0, "That's useful. Do you have any suggestions for improving them?", "Thông tin đó rất hữu ích. Anh có gợi ý nào để cải thiện phần hướng dẫn không?"],
+      [1, "Maybe add more pictures and shorter steps. Will my answers be anonymous?", "Có lẽ nên thêm nhiều hình ảnh và các bước ngắn hơn. Câu trả lời của tôi có được ẩn danh không?"],
+      [0, "Yes, completely. Thank you for your time and your honest feedback.", "Vâng, hoàn toàn ẩn danh. Cảm ơn anh đã dành thời gian và cho ý kiến thẳng thắn."]
+    ]
+  },
+  "vocab": [
+    ["feedback", "/ˈfiːdbæk/", "n", "ý kiến phản hồi", "comments about how good or bad something is", "We value your feedback on our new service.", "Chúng tôi trân trọng ý kiến phản hồi của bạn về dịch vụ mới."],
+    ["survey", "/ˈsɜːveɪ/", "n", "cuộc khảo sát", "a set of questions asked to many people to learn their opinions", "Please take a few minutes to complete our online survey.", "Vui lòng dành vài phút để hoàn thành khảo sát trực tuyến của chúng tôi."],
+    ["satisfaction", "/ˌsætɪsˈfækʃn/", "n", "sự hài lòng", "the good feeling when you get what you wanted", "Client satisfaction is our top priority.", "Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi."],
+    ["rate", "/reɪt/", "v", "đánh giá, chấm điểm", "to give something a score to show how good it is", "Clients rated our delivery service as excellent.", "Khách hàng đánh giá dịch vụ giao hàng của chúng tôi là xuất sắc."],
+    ["questionnaire", "/ˌkwestʃəˈneər/", "n", "bảng câu hỏi", "a written list of questions that people answer", "Each visitor was asked to fill in a short questionnaire.", "Mỗi khách tham quan được đề nghị điền vào một bảng câu hỏi ngắn."],
+    ["anonymous", "/əˈnɒnɪməs/", "adj", "ẩn danh, không nêu tên", "without giving a person's name", "All answers in this survey are anonymous.", "Mọi câu trả lời trong cuộc khảo sát này đều ẩn danh."],
+    ["suggestion", "/səˈdʒestʃən/", "n", "lời gợi ý, đề xuất", "an idea about what someone could do", "Thank you for your helpful suggestion.", "Cảm ơn bạn vì lời gợi ý hữu ích."],
+    ["overall", "/ˌəʊvərˈɔːl/", "adj", "tổng thể, nói chung", "considering everything together", "Our overall sales increased by ten percent this year.", "Doanh số tổng thể của chúng tôi tăng mười phần trăm trong năm nay."]
+  ],
+  "toeic": [
+    {"q": "Clients who are ____ with our service are more likely to order again.", "o": ["satisfy", "satisfied", "satisfying", "satisfaction"], "a": 1, "gp": "wordform", "x": "Sau \"are\" cần tính từ chỉ cảm xúc của người; \"satisfied with\" nghĩa là hài lòng với điều gì."},
+    {"q": "Only a ____ clients did not complete the survey.", "o": ["few", "little", "many", "much"], "a": 0, "gp": "quant", "x": "\"Clients\" là danh từ đếm được số nhiều, nên dùng \"a few\" (một vài). \"A little\" dùng cho danh từ không đếm được."},
+    {"q": "All responses will remain ____, so please answer honestly.", "o": ["anonymous", "ambitious", "annual", "accurate"], "a": 0, "gp": "vocab", "x": "Câu trả lời được giữ ẩn danh (\"anonymous\") nên người tham gia có thể trả lời thật lòng."},
+    {"q": "This year's survey results were ____ than last year's.", "o": ["positive", "more positive", "most positive", "positively"], "a": 1, "gp": "compare", "x": "Có \"than\" nên dùng so sánh hơn; \"positive\" là tính từ dài nên dùng \"more positive\"."},
+    {"q": "Please drop the completed questionnaire ____ the box near the exit.", "o": ["into", "onto", "from", "over"], "a": 0, "gp": "prep", "x": "\"Into\" diễn tả sự chuyển động vào bên trong một vật, phù hợp với việc bỏ phiếu vào hộp."},
+    {"q": "We ____ client feedback every month since we opened the store.", "o": ["collect", "collected", "have collected", "are collecting"], "a": 2, "gp": "tense", "x": "Có \"since + mốc thời gian\" diễn tả hành động từ quá khứ kéo dài đến hiện tại, nên dùng hiện tại hoàn thành \"have collected\"."}
+  ]
+}

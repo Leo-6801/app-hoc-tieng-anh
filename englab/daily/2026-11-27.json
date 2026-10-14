@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-27",
+  "title": "Diễn tập phòng cháy và an toàn lao động",
+  "scene": {
+    "title": "Buổi hướng dẫn an toàn trước diễn tập",
+    "topic": "Công sở",
+    "names": ["Rachel", "Khoa"],
+    "lines": [
+      [0, "Good morning, everyone. Today we'll practice our emergency procedure with a fire drill.", "Chào buổi sáng mọi người. Hôm nay chúng ta sẽ thực hành quy trình khẩn cấp bằng một buổi diễn tập phòng cháy."],
+      [1, "Rachel, what should we do when the alarm goes off?", "Rachel, chúng tôi nên làm gì khi chuông báo động reo?"],
+      [0, "Stop working, leave your belongings, and evacuate the building calmly.", "Ngừng làm việc, để lại đồ đạc và sơ tán khỏi tòa nhà một cách bình tĩnh."],
+      [1, "Should we take the elevator or use the stairs?", "Chúng tôi nên đi thang máy hay đi cầu thang bộ?"],
+      [0, "Never use the elevator. Go to the nearest emergency exit and take the stairs.", "Tuyệt đối không dùng thang máy. Hãy đến lối thoát hiểm gần nhất và đi cầu thang bộ."],
+      [1, "Where is the assembly point for our floor?", "Điểm tập trung của tầng chúng ta ở đâu?"],
+      [0, "It's in the parking lot across the street. Team leaders will count everyone there.", "Nó ở bãi đỗ xe bên kia đường. Các trưởng nhóm sẽ điểm danh mọi người ở đó."],
+      [1, "Got it. Also, the fire extinguisher near the kitchen seems to be missing.", "Tôi hiểu rồi. Ngoài ra, bình chữa cháy gần nhà bếp có vẻ bị mất."],
+      [0, "Thanks for reporting that hazard. I'll replace it today to prevent any injury.", "Cảm ơn anh đã báo mối nguy hiểm đó. Tôi sẽ thay bình mới trong hôm nay để phòng tránh thương tích."]
+    ]
+  },
+  "vocab": [
+    ["evacuate", "/ɪˈvækjueɪt/", "v", "sơ tán", "to leave a dangerous place quickly and safely", "All staff evacuated the building in less than five minutes.", "Toàn bộ nhân viên đã sơ tán khỏi tòa nhà trong chưa đầy năm phút."],
+    ["emergency exit", "/ɪˈmɜːdʒənsi ˈeksɪt/", "phrase", "lối thoát hiểm", "a door used to leave a building when there is danger", "Do not block the emergency exit with boxes.", "Không được chắn lối thoát hiểm bằng thùng hàng."],
+    ["assembly point", "/əˈsembli pɔɪnt/", "phrase", "điểm tập trung (khi sơ tán)", "the place where people meet after leaving a building in an emergency", "Please wait at the assembly point until your name is called.", "Vui lòng đợi ở điểm tập trung cho đến khi tên bạn được gọi."],
+    ["fire extinguisher", "/ˈfaɪə(r) ɪkˌstɪŋɡwɪʃə(r)/", "phrase", "bình chữa cháy", "a container of chemicals used to put out a small fire", "There is a fire extinguisher at the end of each hallway.", "Có một bình chữa cháy ở cuối mỗi hành lang."],
+    ["alarm", "/əˈlɑːm/", "n", "chuông báo động", "a loud sound that warns people of danger", "The fire alarm will be tested at 10 a.m. tomorrow.", "Chuông báo cháy sẽ được kiểm tra lúc 10 giờ sáng mai."],
+    ["hazard", "/ˈhæzəd/", "n", "mối nguy hiểm", "something that could cause harm or an accident", "Wet floors are a common hazard in the kitchen.", "Sàn ướt là mối nguy hiểm thường gặp trong nhà bếp."],
+    ["injury", "/ˈɪndʒəri/", "n", "chấn thương, thương tích", "physical harm to a person's body", "Report any injury at work to the safety officer immediately.", "Hãy báo ngay mọi chấn thương trong lúc làm việc cho cán bộ an toàn."],
+    ["procedure", "/prəˈsiːdʒə(r)/", "n", "quy trình, thủ tục", "a set of steps for doing something in the correct way", "Every new employee must learn the safety procedure.", "Mọi nhân viên mới đều phải học quy trình an toàn."]
+  ],
+  "toeic": [
+    {"q": "All employees ____ to leave the building quickly during the fire drill on Thursday.", "o": ["are asked", "ask", "are asking", "have asked"], "a": 0, "gp": "passive", "x": "Nhân viên \"được yêu cầu\" rời tòa nhà, nên dùng câu bị động \"are asked\"."},
+    {"q": "Fire extinguishers are located ____ the elevators on every floor.", "o": ["next to", "among", "into", "onto"], "a": 0, "gp": "prep", "x": "\"Next to\" nghĩa là \"bên cạnh\", chỉ vị trí phù hợp; \"into\" và \"onto\" chỉ sự chuyển động."},
+    {"q": "Do not use the elevators ____ the fire alarm is ringing.", "o": ["while", "during", "despite", "so"], "a": 0, "gp": "conj", "x": "Cần liên từ nối với mệnh đề \"the fire alarm is ringing\"; \"while\" (trong khi) phù hợp, còn \"during\" là giới từ."},
+    {"q": "The list of safety rules ____ posted next to every emergency exit.", "o": ["is", "are", "be", "were"], "a": 0, "gp": "agreement", "x": "Chủ ngữ chính là \"The list\" (số ít), nên động từ chia số ít \"is\"."},
+    {"q": "When the alarm rang yesterday, most employees ____ lunch in the cafeteria.", "o": ["have", "were having", "are having", "will have"], "a": 1, "gp": "tense", "x": "Một hành động đang diễn ra trong quá khứ thì bị hành động khác (\"rang\") xen vào, nên dùng quá khứ tiếp diễn."},
+    {"q": "Please ____ any damaged safety equipment to the facilities team right away.", "o": ["report", "repeat", "reply", "reduce"], "a": 0, "gp": "vocab", "x": "\"Report something to someone\" nghĩa là báo cáo điều gì cho ai, phù hợp với ngữ cảnh."}
+  ]
+}

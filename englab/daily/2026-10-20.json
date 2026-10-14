@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-20",
+  "title": "Lên kế hoạch chiến dịch marketing",
+  "scene": {
+    "title": "Chiến dịch cho sản phẩm mới",
+    "topic": "Kinh doanh",
+    "names": [
+      "Lan",
+      "Daniel"
+    ],
+    "lines": [
+      [
+        0,
+        "Daniel, we need a marketing campaign for our new water bottle.",
+        "Daniel, chúng ta cần một chiến dịch marketing cho mẫu bình nước mới."
+      ],
+      [
+        1,
+        "Sure. Who is our target audience for this product?",
+        "Được thôi. Đối tượng khách hàng mục tiêu của sản phẩm này là ai?"
+      ],
+      [
+        0,
+        "Mainly young office workers who care about health and the environment.",
+        "Chủ yếu là nhân viên văn phòng trẻ quan tâm đến sức khỏe và môi trường."
+      ],
+      [
+        1,
+        "Then we should focus on social media rather than TV advertisements.",
+        "Vậy chúng ta nên tập trung vào mạng xã hội thay vì quảng cáo trên truyền hình."
+      ],
+      [
+        0,
+        "I agree. Our market research shows they spend hours online every day.",
+        "Tôi đồng ý. Nghiên cứu thị trường cho thấy họ dành hàng giờ trên mạng mỗi ngày."
+      ],
+      [
+        1,
+        "We also need a catchy slogan that is different from our competitors.",
+        "Chúng ta cũng cần một khẩu hiệu dễ nhớ và khác biệt so với đối thủ cạnh tranh."
+      ],
+      [
+        0,
+        "Good point. Could you prepare three slogan ideas by Thursday?",
+        "Ý hay đấy. Anh có thể chuẩn bị ba ý tưởng khẩu hiệu trước thứ Năm không?"
+      ],
+      [
+        1,
+        "No problem. Should we also work with a few influencers on TikTok?",
+        "Không vấn đề gì. Chúng ta có nên hợp tác với vài người có tầm ảnh hưởng trên TikTok không?"
+      ],
+      [
+        0,
+        "Yes. We launch early next month, so we can build brand awareness before the holidays.",
+        "Có. Chúng ta sẽ ra mắt vào đầu tháng sau để kịp nâng cao nhận diện thương hiệu trước kỳ nghỉ lễ."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "campaign",
+      "/kæmˈpeɪn/",
+      "n",
+      "chiến dịch",
+      "a planned series of activities to achieve a business goal",
+      "The new campaign increased online orders by 20 percent.",
+      "Chiến dịch mới đã làm tăng đơn hàng trực tuyến thêm 20 phần trăm."
+    ],
+    [
+      "target audience",
+      "/ˈtɑːrɡɪt ˈɔːdiəns/",
+      "phrase",
+      "đối tượng khách hàng mục tiêu",
+      "the specific group of people a product or message is aimed at",
+      "Our target audience is university students in big cities.",
+      "Đối tượng mục tiêu của chúng tôi là sinh viên đại học ở các thành phố lớn."
+    ],
+    [
+      "slogan",
+      "/ˈsloʊɡən/",
+      "n",
+      "khẩu hiệu",
+      "a short, easy-to-remember phrase used in advertising",
+      "The team chose a short slogan that people can remember easily.",
+      "Nhóm đã chọn một khẩu hiệu ngắn mà mọi người có thể dễ dàng ghi nhớ."
+    ],
+    [
+      "brand awareness",
+      "/brænd əˈwernəs/",
+      "phrase",
+      "mức độ nhận diện thương hiệu",
+      "how well people know and recognize a brand",
+      "Sponsoring the marathon helped improve brand awareness in the region.",
+      "Việc tài trợ giải marathon đã giúp nâng cao mức độ nhận diện thương hiệu trong khu vực."
+    ],
+    [
+      "influencer",
+      "/ˈɪnfluənsər/",
+      "n",
+      "người có tầm ảnh hưởng (trên mạng xã hội)",
+      "a person who can affect what their online followers buy",
+      "We paid a food influencer to review our new snack.",
+      "Chúng tôi đã trả tiền cho một người có tầm ảnh hưởng về ẩm thực để đánh giá món ăn vặt mới."
+    ],
+    [
+      "advertisement",
+      "/ˌædvərˈtaɪzmənt/",
+      "n",
+      "quảng cáo",
+      "a notice or video that tells people about a product or service",
+      "We placed an advertisement in the city's most popular newspaper.",
+      "Chúng tôi đã đăng một mẩu quảng cáo trên tờ báo nổi tiếng nhất thành phố."
+    ],
+    [
+      "competitor",
+      "/kəmˈpetɪtər/",
+      "n",
+      "đối thủ cạnh tranh",
+      "a company that sells similar products to the same buyers",
+      "Our main competitor lowered its prices last week.",
+      "Đối thủ cạnh tranh chính của chúng tôi đã giảm giá vào tuần trước."
+    ],
+    [
+      "market research",
+      "/ˈmɑːrkɪt rɪˈsɜːrtʃ/",
+      "phrase",
+      "nghiên cứu thị trường",
+      "the collection of information about what buyers want and need",
+      "Market research showed that buyers prefer smaller packages.",
+      "Nghiên cứu thị trường cho thấy người mua thích bao bì nhỏ hơn."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The marketing team is working ____ on the new campaign to meet the launch date.",
+      "o": [
+        "intense",
+        "intensity",
+        "intensely",
+        "intensify"
+      ],
+      "a": 2,
+      "gp": "wordform",
+      "x": "Cần trạng từ để bổ nghĩa cho động từ \"is working\", nên chọn \"intensely\"."
+    },
+    {
+      "q": "By the end of this month, the agency ____ three different slogans for our review.",
+      "o": [
+        "creates",
+        "will have created",
+        "has created",
+        "created"
+      ],
+      "a": 1,
+      "gp": "tense",
+      "x": "\"By the end of this month\" là mốc trong tương lai, dùng thì tương lai hoàn thành \"will have created\"."
+    },
+    {
+      "q": "The results of the market research ____ to all managers next Monday.",
+      "o": [
+        "will send",
+        "sent",
+        "will be sent",
+        "are sending"
+      ],
+      "a": 2,
+      "gp": "passive",
+      "x": "Chủ ngữ \"the results\" không tự gửi được nên dùng bị động; \"next Monday\" chỉ tương lai nên chọn \"will be sent\"."
+    },
+    {
+      "q": "Our new advertisement is more creative ____ the one our competitor released last year.",
+      "o": [
+        "than",
+        "as",
+        "that",
+        "then"
+      ],
+      "a": 0,
+      "gp": "compare",
+      "x": "Cấu trúc so sánh hơn \"more + adj + than\", nên chọn \"than\"."
+    },
+    {
+      "q": "The campaign will target customers ____ the ages of 18 and 30.",
+      "o": [
+        "among",
+        "between",
+        "within",
+        "from"
+      ],
+      "a": 1,
+      "gp": "prep",
+      "x": "Cấu trúc \"between ... and ...\" dùng để chỉ khoảng giữa hai mốc, nên chọn \"between\"."
+    },
+    {
+      "q": "The company hopes to increase brand ____ by sponsoring local sports events.",
+      "o": [
+        "awareness",
+        "attendance",
+        "occupation",
+        "admission"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Brand awareness\" (mức độ nhận diện thương hiệu) là cụm từ cố định phù hợp với nghĩa của câu."
+    }
+  ]
+}

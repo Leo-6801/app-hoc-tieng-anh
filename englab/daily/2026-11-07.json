@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-07",
+  "title": "Nhà cung cấp giao hàng kém chất lượng",
+  "scene": {
+    "title": "Lô vải bị lỗi",
+    "topic": "Kinh doanh",
+    "names": [
+      "Thảo",
+      "Robert"
+    ],
+    "lines": [
+      [
+        0,
+        "Robert, there's a problem with the fabric we received from our supplier.",
+        "Robert, có vấn đề với lô vải chúng ta nhận từ nhà cung cấp."
+      ],
+      [
+        1,
+        "Oh no. What exactly is wrong with it?",
+        "Ôi không. Cụ thể là nó bị lỗi gì vậy?"
+      ],
+      [
+        0,
+        "About thirty percent of the batch is substandard. The color has obvious flaws.",
+        "Khoảng ba mươi phần trăm của lô hàng kém chất lượng. Màu sắc có lỗi rõ ràng."
+      ],
+      [
+        1,
+        "Did our quality control team inspect all the rolls?",
+        "Nhóm kiểm soát chất lượng của chúng ta đã kiểm tra tất cả các cuộn vải chưa?"
+      ],
+      [
+        0,
+        "Yes, and none of them match the specifications in our order.",
+        "Rồi, và không cuộn nào khớp với thông số kỹ thuật trong đơn đặt hàng của chúng ta."
+      ],
+      [
+        1,
+        "Then we should ask them to replace the whole consignment as soon as possible.",
+        "Vậy chúng ta nên yêu cầu họ thay toàn bộ lô hàng càng sớm càng tốt."
+      ],
+      [
+        0,
+        "I agree. Should we also ask them to compensate us for the delay in production?",
+        "Tôi đồng ý. Chúng ta có nên yêu cầu họ bồi thường cho việc chậm sản xuất không?"
+      ],
+      [
+        1,
+        "Yes. I'll call their sales manager and send photos of the damaged fabric.",
+        "Có. Tôi sẽ gọi cho quản lý bán hàng của họ và gửi ảnh vải bị hỏng."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "supplier",
+      "/səˈplaɪər/",
+      "n",
+      "nhà cung cấp",
+      "a company that provides goods or materials to another business",
+      "We are looking for a new supplier of packaging materials.",
+      "Chúng tôi đang tìm một nhà cung cấp vật liệu đóng gói mới."
+    ],
+    [
+      "substandard",
+      "/ˌsʌbˈstændərd/",
+      "adj",
+      "kém chất lượng, dưới tiêu chuẩn",
+      "lower in quality than what is expected or required",
+      "We refused the substandard materials and asked for new ones.",
+      "Chúng tôi đã từ chối vật liệu kém chất lượng và yêu cầu hàng mới."
+    ],
+    [
+      "consignment",
+      "/kənˈsaɪnmənt/",
+      "n",
+      "lô hàng gửi",
+      "a quantity of goods sent to a buyer at one time",
+      "The next consignment of cotton will arrive by ship on Monday.",
+      "Lô hàng bông tiếp theo sẽ đến bằng tàu vào thứ Hai."
+    ],
+    [
+      "batch",
+      "/bætʃ/",
+      "n",
+      "lô (hàng)",
+      "a group of products made or delivered at the same time",
+      "The latest batch of screws arrived without any problems.",
+      "Lô ốc vít mới nhất đã đến mà không gặp vấn đề gì."
+    ],
+    [
+      "inspect",
+      "/ɪnˈspekt/",
+      "v",
+      "kiểm tra kỹ",
+      "to look at something carefully to find any problems",
+      "Workers inspected every box before it left the warehouse.",
+      "Công nhân đã kiểm tra kỹ từng thùng hàng trước khi rời kho."
+    ],
+    [
+      "quality control",
+      "/ˈkwɑːləti kənˈtroʊl/",
+      "phrase",
+      "kiểm soát chất lượng",
+      "the process of checking that products meet a required standard",
+      "Quality control found scratches on several of the glass panels.",
+      "Bộ phận kiểm soát chất lượng phát hiện vết xước trên một số tấm kính."
+    ],
+    [
+      "flaw",
+      "/flɔː/",
+      "n",
+      "lỗi, khuyết điểm",
+      "a mistake or weakness that makes something less good",
+      "Workers found a small flaw in the color of the fabric.",
+      "Công nhân phát hiện một lỗi nhỏ về màu sắc của vải."
+    ],
+    [
+      "specification",
+      "/ˌspesɪfɪˈkeɪʃən/",
+      "n",
+      "thông số kỹ thuật",
+      "a detailed description of how something must be made",
+      "The steel must meet the specifications listed in the order.",
+      "Thép phải đáp ứng các thông số kỹ thuật được liệt kê trong đơn hàng."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The defective materials ____ back to the supplier yesterday afternoon.",
+      "o": [
+        "returned",
+        "were returned",
+        "are returning",
+        "return"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "\"The defective materials\" bị gửi trả nên dùng bị động; \"yesterday\" chỉ quá khứ nên chọn \"were returned\"."
+    },
+    {
+      "q": "Neither the supplier nor its drivers ____ responsible for the damaged boxes.",
+      "o": [
+        "was",
+        "were",
+        "is",
+        "has been"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Với \"neither ... nor ...\", động từ chia theo chủ ngữ gần nhất \"its drivers\" (số nhiều), nên chọn \"were\"."
+    },
+    {
+      "q": "The factory manager insisted on ____ every batch before it is shipped.",
+      "o": [
+        "inspect",
+        "inspected",
+        "inspecting",
+        "to inspect"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau giới từ \"on\" (insist on) động từ phải ở dạng V-ing, nên chọn \"inspecting\"."
+    },
+    {
+      "q": "The supplier ____ materials did not meet our standards has offered a full replacement.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "whom"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "\"Whose\" chỉ sự sở hữu (vật liệu của nhà cung cấp) và đứng trước danh từ \"materials\"."
+    },
+    {
+      "q": "The new fabric is ____ more durable than the material we received last month.",
+      "o": [
+        "very",
+        "much",
+        "most",
+        "so"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Để nhấn mạnh so sánh hơn ta dùng \"much\" trước \"more + adj\"; \"very\" không đi với so sánh hơn."
+    },
+    {
+      "q": "Our quality control team checks a random ____ of products from every delivery.",
+      "o": [
+        "sample",
+        "example",
+        "symbol",
+        "signal"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"A random sample\" là mẫu ngẫu nhiên được lấy để kiểm tra, phù hợp với ngữ cảnh kiểm soát chất lượng."
+    }
+  ]
+}

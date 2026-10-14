@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-18",
+  "title": "Mua đồ tạp hóa online bị giao nhầm",
+  "scene": {
+    "title": "Gọi tổng đài báo giao nhầm hàng",
+    "topic": "Đời sống",
+    "names": ["Kevin", "Hà"],
+    "lines": [
+      [0, "Thank you for calling FreshMart Online. How can I help you?", "Cảm ơn chị đã gọi đến FreshMart Online. Tôi có thể giúp gì cho chị?"],
+      [1, "Hi, I ordered groceries this morning, but one item is wrong.", "Chào anh, sáng nay tôi đặt mua đồ tạp hóa, nhưng có một món bị giao nhầm."],
+      [0, "I'm sorry to hear that. What did you receive instead?", "Rất tiếc về điều đó. Chị đã nhận được món gì thay vào đó ạ?"],
+      [1, "I ordered whole milk, but you sent soy milk as a substitute.", "Tôi đặt sữa tươi nguyên kem, nhưng bên anh lại gửi sữa đậu nành để thay thế."],
+      [0, "Whole milk was out of stock, but we should have asked you first.", "Sữa nguyên kem đã hết hàng, nhưng lẽ ra chúng tôi phải hỏi chị trước."],
+      [1, "Also, the quantity of eggs is wrong, and two are damaged.", "Ngoài ra, số lượng trứng bị sai, và có hai quả bị vỡ."],
+      [0, "I'll record your complaint and send a replacement this afternoon.", "Tôi sẽ ghi nhận khiếu nại của chị và gửi hàng thay thế vào chiều nay."],
+      [1, "Thanks. Please check the expiration date on the milk this time.", "Cảm ơn anh. Lần này nhờ anh kiểm tra hạn sử dụng của sữa nhé."],
+      [0, "Of course. You'll also get a voucher for your next order.", "Tất nhiên rồi. Chị cũng sẽ nhận được một phiếu mua hàng cho đơn tiếp theo."]
+    ]
+  },
+  "vocab": [
+    ["groceries", "/ˈɡroʊsəriz/", "n", "thực phẩm, đồ tạp hóa", "food and other things for the home that you buy at a shop", "I usually buy groceries online on Sunday evenings.", "Tôi thường mua đồ tạp hóa trực tuyến vào tối Chủ nhật."],
+    ["substitute", "/ˈsʌbstɪtuːt/", "n", "món thay thế", "a thing used in place of another", "The store sent a substitute because my tea was sold out.", "Cửa hàng đã gửi món thay thế vì loại trà của tôi đã bán hết."],
+    ["out of stock", "/ˌaʊt əv ˈstɑːk/", "phrase", "hết hàng", "not in the shop at the moment", "The rice I wanted was out of stock.", "Loại gạo tôi muốn mua đã hết hàng."],
+    ["quantity", "/ˈkwɑːntəti/", "n", "số lượng", "the amount or number of something", "Please check the quantity before you sign for the delivery.", "Vui lòng kiểm tra số lượng trước khi ký nhận hàng."],
+    ["damaged", "/ˈdæmɪdʒd/", "adj", "bị hư hỏng", "broken or harmed", "Two of the bottles arrived damaged.", "Hai trong số các chai bị hỏng khi giao đến."],
+    ["complaint", "/kəmˈpleɪnt/", "n", "lời phàn nàn, khiếu nại", "a statement saying that something is wrong or not good enough", "She made a complaint about the late delivery.", "Cô ấy đã khiếu nại về việc giao hàng trễ."],
+    ["replacement", "/rɪˈpleɪsmənt/", "n", "hàng thay thế, sự thay thế", "a thing that takes the place of something broken or wrong", "The shop promised to send a replacement tomorrow.", "Cửa hàng hứa sẽ gửi hàng thay thế vào ngày mai."],
+    ["expiration date", "/ˌekspəˈreɪʃən deɪt/", "phrase", "hạn sử dụng", "the date after which food or medicine should not be used", "Always look at the expiration date before you drink milk.", "Luôn xem hạn sử dụng trước khi uống sữa."]
+  ],
+  "toeic": [
+    {"q": "The wrong item ____ to Ms. Ha's apartment by mistake yesterday.", "o": ["delivered", "was delivered", "has delivered", "delivering"], "a": 1, "gp": "passive", "x": "Món hàng được giao (không tự giao) và có yesterday nên dùng bị động quá khứ: was delivered."},
+    {"q": "Shoppers can return damaged items ____ 7 days of delivery.", "o": ["within", "during", "among", "since"], "a": 0, "gp": "prep", "x": "Within + khoảng thời gian nghĩa là trong vòng: trong vòng 7 ngày kể từ khi giao hàng."},
+    {"q": "The store sent a substitute ____ the original item was out of stock.", "o": ["because", "although", "unless", "so that"], "a": 0, "gp": "conj", "x": "Because nêu lý do: cửa hàng gửi món thay thế vì món gốc đã hết hàng."},
+    {"q": "Mr. Park checked the bags ____ before the driver left.", "o": ["he", "his", "himself", "him"], "a": 2, "gp": "pronoun", "x": "Đại từ phản thân himself dùng để nhấn mạnh rằng chính ông Park tự kiểm tra."},
+    {"q": "Thank you for ____ us about the problem with your order.", "o": ["tell", "telling", "told", "to tell"], "a": 1, "gp": "gerund", "x": "Sau giới từ for dùng danh động từ (V-ing): thank you for telling."},
+    {"q": "Shoppers ____ orders arrive damaged can request a free replacement.", "o": ["who", "whose", "which", "whom"], "a": 1, "gp": "relative", "x": "Whose chỉ sự sở hữu: những người mua mà đơn hàng của họ bị hư hỏng."}
+  ]
+}

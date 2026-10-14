@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-22",
+  "title": "Gửi báo giá và giải đáp thắc mắc",
+  "scene": {
+    "title": "Trao đổi về bảng báo giá",
+    "topic": "Kinh doanh",
+    "names": [
+      "Nguyễn Thị Mai",
+      "Robert Kim"
+    ],
+    "lines": [
+      [
+        0,
+        "Hello, Mr. Kim. I've just emailed you the quotation for the printing services.",
+        "Xin chào anh Kim. Tôi vừa gửi email cho anh bảng báo giá dịch vụ in ấn."
+      ],
+      [
+        1,
+        "Thanks, I got it. Is the unit price the same for all three sizes?",
+        "Cảm ơn chị, tôi nhận được rồi. Đơn giá có giống nhau cho cả ba kích cỡ không?"
+      ],
+      [
+        0,
+        "No, larger sizes cost more. The itemized list shows the price of each size.",
+        "Không ạ, kích cỡ lớn hơn thì giá cao hơn. Danh sách chi tiết từng mục thể hiện giá của mỗi cỡ."
+      ],
+      [
+        1,
+        "I see. Are these prices inclusive of tax and delivery?",
+        "Tôi hiểu rồi. Các mức giá này đã bao gồm thuế và phí giao hàng chưa?"
+      ],
+      [
+        0,
+        "Tax is included, but delivery is listed separately at the bottom of the page.",
+        "Đã bao gồm thuế, nhưng phí giao hàng được ghi riêng ở cuối trang."
+      ],
+      [
+        1,
+        "How long is the quotation valid? We need approval from our director first.",
+        "Báo giá có hiệu lực trong bao lâu? Chúng tôi cần giám đốc phê duyệt trước."
+      ],
+      [
+        0,
+        "It's valid for thirty days, so you have plenty of time.",
+        "Báo giá có hiệu lực ba mươi ngày, nên anh có nhiều thời gian."
+      ],
+      [
+        1,
+        "Good. Your prices look quite competitive compared to other suppliers.",
+        "Tốt. Giá của bên chị khá cạnh tranh so với các nhà cung cấp khác."
+      ],
+      [
+        0,
+        "Thank you. If you need a more detailed breakdown, just let me know.",
+        "Cảm ơn anh. Nếu anh cần bảng phân tích chi tiết hơn, cứ báo cho tôi nhé."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "quotation",
+      "/kwəʊˈteɪʃn/",
+      "n",
+      "bảng báo giá",
+      "a document that shows how much a product or service will cost",
+      "Could you send us a quotation for 200 laptops?",
+      "Bạn có thể gửi cho chúng tôi bảng báo giá cho 200 máy tính xách tay không?"
+    ],
+    [
+      "unit price",
+      "/ˈjuːnɪt praɪs/",
+      "n",
+      "đơn giá",
+      "the price of one single item",
+      "The unit price drops when you order more than 100 pieces.",
+      "Đơn giá sẽ giảm khi bạn đặt hơn 100 chiếc."
+    ],
+    [
+      "expire",
+      "/ɪkˈspaɪər/",
+      "v",
+      "hết hạn",
+      "to stop being valid after a period of time",
+      "This quotation expires at the end of the month.",
+      "Bảng báo giá này hết hạn vào cuối tháng."
+    ],
+    [
+      "inclusive",
+      "/ɪnˈkluːsɪv/",
+      "adj",
+      "đã bao gồm",
+      "including all costs or items",
+      "All prices are inclusive of tax.",
+      "Tất cả các mức giá đã bao gồm thuế."
+    ],
+    [
+      "subtotal",
+      "/ˈsʌbtəʊtl/",
+      "n",
+      "tổng phụ (tổng trước thuế, phí)",
+      "the total before tax or other costs are added",
+      "The subtotal does not include the delivery fee.",
+      "Tổng phụ chưa bao gồm phí giao hàng."
+    ],
+    [
+      "itemized",
+      "/ˈaɪtəmaɪzd/",
+      "adj",
+      "được liệt kê chi tiết từng mục",
+      "showing each item separately in a list",
+      "The client asked for an itemized list of all the charges.",
+      "Khách hàng yêu cầu một danh sách liệt kê chi tiết tất cả các khoản phí."
+    ],
+    [
+      "competitive",
+      "/kəmˈpetətɪv/",
+      "adj",
+      "cạnh tranh (giá cả)",
+      "as good as or cheaper than others",
+      "We offer competitive prices for large orders.",
+      "Chúng tôi đưa ra mức giá cạnh tranh cho các đơn hàng lớn."
+    ],
+    [
+      "breakdown",
+      "/ˈbreɪkdaʊn/",
+      "n",
+      "bảng phân tích chi tiết",
+      "a list that shows all the parts of a total amount",
+      "Please send me a breakdown of the installation costs.",
+      "Vui lòng gửi cho tôi bảng phân tích chi tiết chi phí lắp đặt."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The quotation includes a ____ breakdown of all delivery costs.",
+      "o": [
+        "detail",
+        "detailed",
+        "detailing",
+        "details"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Trước danh từ \"breakdown\" cần một tính từ, nên chọn \"detailed\" (chi tiết)."
+    },
+    {
+      "q": "We ____ you the updated quotation as soon as the manager approves it.",
+      "o": [
+        "send",
+        "sent",
+        "will send",
+        "have sent"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "Mệnh đề \"as soon as\" dùng hiện tại đơn để nói về tương lai, còn mệnh đề chính dùng thì tương lai \"will send\"."
+    },
+    {
+      "q": "The prices in this quotation are valid ____ December 31.",
+      "o": [
+        "until",
+        "during",
+        "since",
+        "among"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "\"Until + mốc thời gian\" diễn tả trạng thái kéo dài đến thời điểm đó: báo giá có hiệu lực đến ngày 31/12."
+    },
+    {
+      "q": "Our prices are highly ____, so many clients choose us over larger suppliers.",
+      "o": [
+        "competitive",
+        "complete",
+        "comfortable",
+        "confident"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Competitive prices\" là giá cả cạnh tranh, lý do khách hàng chọn công ty thay vì đối thủ lớn hơn."
+    },
+    {
+      "q": "The second quotation was much ____ than the first one.",
+      "o": [
+        "cheap",
+        "cheaper",
+        "cheapest",
+        "more cheap"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"than\" và \"much\" (nhấn mạnh so sánh hơn) nên dùng so sánh hơn của tính từ ngắn: \"cheaper\"."
+    },
+    {
+      "q": "If the client had accepted the quotation earlier, he ____ the old price.",
+      "o": [
+        "will get",
+        "would get",
+        "would have gotten",
+        "gets"
+      ],
+      "a": 2,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 3 (giả định trái với quá khứ): \"If + had + V3\", mệnh đề chính dùng \"would have + V3\"."
+    }
+  ]
+}

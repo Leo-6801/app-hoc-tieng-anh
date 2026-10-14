@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-30",
+  "title": "Đi taxi ra sân bay giờ cao điểm",
+  "scene": {
+    "title": "Kẹt xe trên đường ra sân bay",
+    "topic": "Du lịch",
+    "names": [
+      "Quang",
+      "Ahmed"
+    ],
+    "lines": [
+      [
+        0,
+        "Could you take me to Tân Sơn Nhất Airport, the international terminal, please?",
+        "Anh chở tôi đến sân bay Tân Sơn Nhất, nhà ga quốc tế nhé?"
+      ],
+      [
+        1,
+        "Sure. But it's rush hour, so Cộng Hòa Street may be in gridlock.",
+        "Được ạ. Nhưng giờ đang là giờ cao điểm nên đường Cộng Hòa có thể bị tắc nghẽn hoàn toàn."
+      ],
+      [
+        0,
+        "My flight leaves at six. How long do you estimate it will take?",
+        "Chuyến bay của tôi cất cánh lúc sáu giờ. Anh ước tính mất bao lâu?"
+      ],
+      [
+        1,
+        "About forty-five minutes. But I know a shortcut through the back streets.",
+        "Khoảng bốn mươi lăm phút. Nhưng tôi biết một đường tắt đi qua các con hẻm."
+      ],
+      [
+        0,
+        "Great, let's take it. Do we have to pay a toll on that road?",
+        "Tuyệt, đi đường đó nhé. Đường đó có phải trả phí cầu đường không?"
+      ],
+      [
+        1,
+        "No toll, but there is a short detour because of construction near the bridge.",
+        "Không có phí, nhưng phải đi vòng một đoạn ngắn vì đang thi công gần cây cầu."
+      ],
+      [
+        0,
+        "That's fine. Will you use the meter, or is it a fixed price?",
+        "Không sao. Anh tính tiền theo đồng hồ hay giá cố định?"
+      ],
+      [
+        1,
+        "I'll use the meter. Don't worry, we'll reach the terminal in time.",
+        "Tôi tính theo đồng hồ. Anh đừng lo, chúng ta sẽ đến nhà ga kịp giờ."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "rush hour",
+      "/ˈrʌʃ ˌaʊər/",
+      "n",
+      "giờ cao điểm",
+      "the busy time of day when many people travel to or from work",
+      "Taxis are hard to find during rush hour in the city center.",
+      "Rất khó bắt taxi vào giờ cao điểm ở trung tâm thành phố."
+    ],
+    [
+      "gridlock",
+      "/ˈɡrɪdlɑːk/",
+      "n",
+      "tình trạng tắc nghẽn hoàn toàn",
+      "a situation where traffic cannot move at all",
+      "The city center was in gridlock after the heavy rain.",
+      "Trung tâm thành phố bị tắc nghẽn hoàn toàn sau trận mưa lớn."
+    ],
+    [
+      "shortcut",
+      "/ˈʃɔːrtkʌt/",
+      "n",
+      "đường tắt",
+      "a quicker or shorter way to get somewhere",
+      "The driver took a shortcut to avoid the busy highway.",
+      "Tài xế đi đường tắt để tránh đường cao tốc đông xe."
+    ],
+    [
+      "toll",
+      "/toʊl/",
+      "n",
+      "phí cầu đường",
+      "money you pay to use a road or bridge",
+      "There is a small toll on the expressway to the airport.",
+      "Có một khoản phí nhỏ trên đường cao tốc ra sân bay."
+    ],
+    [
+      "detour",
+      "/ˈdiːtʊr/",
+      "n",
+      "đường vòng",
+      "a longer route you take because the usual road is closed",
+      "Because of the accident, we had to make a detour.",
+      "Vì vụ tai nạn, chúng tôi phải đi đường vòng."
+    ],
+    [
+      "meter",
+      "/ˈmiːtər/",
+      "n",
+      "đồng hồ tính tiền (taxi)",
+      "a machine in a taxi that shows how much you must pay",
+      "Please make sure the driver turns on the meter.",
+      "Hãy chắc chắn rằng tài xế bật đồng hồ tính tiền."
+    ],
+    [
+      "terminal",
+      "/ˈtɜːrmɪnl/",
+      "n",
+      "nhà ga (sân bay)",
+      "a building at an airport where travelers arrive and leave",
+      "Domestic flights leave from Terminal 1.",
+      "Các chuyến bay nội địa khởi hành từ Nhà ga 1."
+    ],
+    [
+      "flag down",
+      "/ˌflæɡ ˈdaʊn/",
+      "phrase",
+      "vẫy (xe taxi)",
+      "to wave at a vehicle to make it stop for you",
+      "It is easy to flag down a taxi outside the hotel.",
+      "Rất dễ vẫy taxi bên ngoài khách sạn."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "____ the traffic was very heavy, we arrived at the airport on time.",
+      "o": [
+        "Although",
+        "Because",
+        "Unless",
+        "Since"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Hai vế trái ngược nhau (kẹt xe nhưng vẫn đến kịp) nên dùng 'Although' (mặc dù)."
+    },
+    {
+      "q": "Ms. Linh suggested ____ a taxi earlier to avoid the evening rush hour.",
+      "o": [
+        "book",
+        "booking",
+        "to book",
+        "booked"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Sau động từ 'suggest' dùng danh động từ (V-ing): 'booking'."
+    },
+    {
+      "q": "By the time we reach the airport, the check-in counter ____.",
+      "o": [
+        "will have closed",
+        "closes",
+        "has closed",
+        "closed"
+      ],
+      "a": 0,
+      "gp": "tense",
+      "x": "'By the time' + hiện tại đơn chỉ tương lai thì mệnh đề chính dùng tương lai hoàn thành 'will have closed'."
+    },
+    {
+      "q": "The road to the terminal was ____ crowded than usual because of the holiday.",
+      "o": [
+        "much",
+        "more",
+        "most",
+        "many"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có 'than' nên cần so sánh hơn với tính từ dài: 'more crowded'."
+    },
+    {
+      "q": "There were very ____ taxis outside the hotel, so we had to order one through an app.",
+      "o": [
+        "few",
+        "little",
+        "much",
+        "less"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "'Taxis' là danh từ đếm được số nhiều; 'very few' nghĩa là rất ít, hợp với ý phải gọi xe qua ứng dụng."
+    },
+    {
+      "q": "Travelers should allow ____ time for traffic when going to the airport during rush hour.",
+      "o": [
+        "addition",
+        "additional",
+        "additionally",
+        "add"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần tính từ bổ nghĩa cho danh từ 'time', nên chọn 'additional' (thêm)."
+    }
+  ]
+}

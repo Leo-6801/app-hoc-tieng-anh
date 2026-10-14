@@ -1,0 +1,202 @@
+{
+ "date": "2026-10-21",
+ "title": "Hẹn lịch gọi với đối tác khác múi giờ",
+ "scene": {
+  "title": "Tìm giờ họp cho ba thành phố",
+  "topic": "Công sở",
+  "names": [
+   "Hà",
+   "Oliver"
+  ],
+  "lines": [
+   [
+    0,
+    "Oliver, we need a conference call with our partners in Sydney and London.",
+    "Oliver, chúng ta cần tổ chức một cuộc gọi hội nghị với các đối tác ở Sydney và London."
+   ],
+   [
+    1,
+    "That's tricky. The time zones are very different, so finding a good time is hard.",
+    "Khó đấy. Các múi giờ chênh lệch nhiều lắm nên rất khó tìm được thời điểm phù hợp."
+   ],
+   [
+    0,
+    "I checked, and our working hours only overlap for about an hour.",
+    "Tôi đã kiểm tra rồi, giờ làm việc của chúng ta chỉ trùng nhau khoảng một tiếng."
+   ],
+   [
+    1,
+    "What about 3 p.m. Hanoi time? That's 7 p.m. in Sydney and 9 a.m. in London.",
+    "Thế còn 3 giờ chiều giờ Hà Nội thì sao? Lúc đó là 7 giờ tối ở Sydney và 9 giờ sáng ở London."
+   ],
+   [
+    0,
+    "That time slot sounds good. I'll propose it to both teams by email.",
+    "Khung giờ đó nghe ổn đấy. Tôi sẽ đề xuất khung giờ này với cả hai nhóm qua email."
+   ],
+   [
+    1,
+    "Please mention each city's local time so nobody gets confused.",
+    "Nhớ ghi rõ giờ địa phương của từng thành phố để không ai bị nhầm nhé."
+   ],
+   [
+    0,
+    "Good idea. Once they agree, I'll send everyone a calendar invite.",
+    "Ý hay đấy. Khi họ đồng ý, tôi sẽ gửi lời mời qua lịch cho mọi người."
+   ],
+   [
+    1,
+    "Great. I'll coordinate with the Sydney office about the meeting room.",
+    "Tuyệt. Tôi sẽ phối hợp với văn phòng Sydney về phòng họp."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "conference call",
+   "/ˈkɒnfərəns kɔːl/",
+   "n",
+   "cuộc gọi hội nghị",
+   "a phone or video call with several people",
+   "We have a conference call with the Tokyo team at 10 a.m.",
+   "Chúng tôi có một cuộc gọi hội nghị với nhóm Tokyo lúc 10 giờ sáng."
+  ],
+  [
+   "time zone",
+   "/ˈtaɪm zəʊn/",
+   "n",
+   "múi giờ",
+   "an area of the world that uses the same time",
+   "Our partners work in a different time zone, so we often email them at night.",
+   "Đối tác của chúng tôi làm việc ở múi giờ khác, nên chúng tôi thường gửi email cho họ vào buổi tối."
+  ],
+  [
+   "overlap",
+   "/ˌəʊvəˈlæp/",
+   "v",
+   "trùng nhau, chồng lên nhau",
+   "to share part of the same time or space",
+   "Our office hours overlap with theirs for only two hours.",
+   "Giờ làm việc của chúng tôi chỉ trùng với họ hai tiếng."
+  ],
+  [
+   "time slot",
+   "/ˈtaɪm slɒt/",
+   "n",
+   "khung giờ",
+   "a period of time kept for a particular activity",
+   "Please choose a time slot that works for your team.",
+   "Vui lòng chọn một khung giờ phù hợp với nhóm của bạn."
+  ],
+  [
+   "propose",
+   "/prəˈpəʊz/",
+   "v",
+   "đề xuất",
+   "to suggest a plan or idea for others to consider",
+   "I'd like to propose a new time for the weekly call.",
+   "Tôi muốn đề xuất một thời gian mới cho cuộc gọi hằng tuần."
+  ],
+  [
+   "local time",
+   "/ˌləʊkl ˈtaɪm/",
+   "n",
+   "giờ địa phương",
+   "the time in a particular place",
+   "The call starts at 9 a.m. local time in London.",
+   "Cuộc gọi bắt đầu lúc 9 giờ sáng theo giờ địa phương ở London."
+  ],
+  [
+   "calendar invite",
+   "/ˈkælɪndər ˈɪnvaɪt/",
+   "n",
+   "lời mời qua lịch (điện tử)",
+   "an electronic meeting request added to people's calendars",
+   "Did you get the calendar invite for Thursday's call?",
+   "Bạn đã nhận được lời mời qua lịch cho cuộc gọi hôm thứ Năm chưa?"
+  ],
+  [
+   "coordinate",
+   "/kəʊˈɔːdɪneɪt/",
+   "v",
+   "phối hợp, điều phối",
+   "to organize people or activities so they work well together",
+   "Lan will coordinate the meeting times with the overseas offices.",
+   "Lan sẽ điều phối thời gian họp với các văn phòng ở nước ngoài."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "Finding a time that suits partners in five countries can be ____ difficult.",
+   "o": [
+    "extreme",
+    "extremity",
+    "extremes",
+    "extremely"
+   ],
+   "a": 3,
+   "gp": "wordform",
+   "x": "Để bổ nghĩa cho tính từ \"difficult\" cần một trạng từ, nên chọn \"extremely\"."
+  },
+  {
+   "q": "The meeting ____ to Thursday morning because several partners were traveling.",
+   "o": [
+    "has moved",
+    "was moved",
+    "moved",
+    "was moving"
+   ],
+   "a": 1,
+   "gp": "passive",
+   "x": "Cuộc họp \"được dời\" sang sáng thứ Năm (chủ ngữ chịu tác động), nên dùng bị động quá khứ \"was moved\"."
+  },
+  {
+   "q": "Ms. Kim, ____ office is in Seoul, will join the call from home tonight.",
+   "o": [
+    "who",
+    "whom",
+    "which",
+    "whose"
+   ],
+   "a": 3,
+   "gp": "relative",
+   "x": "Trước danh từ \"office\" cần đại từ quan hệ chỉ sở hữu, nên dùng \"whose\"."
+  },
+  {
+   "q": "Our team in London starts work ____ 9 a.m., which is 3 p.m. in Hanoi.",
+   "o": [
+    "in",
+    "for",
+    "at",
+    "on"
+   ],
+   "a": 2,
+   "gp": "prep",
+   "x": "Dùng giới từ \"at\" trước một giờ cụ thể như \"9 a.m.\"."
+  },
+  {
+   "q": "We sent the calendar invite early ____ everyone could plan their day.",
+   "o": [
+    "so that",
+    "even though",
+    "unless",
+    "as if"
+   ],
+   "a": 0,
+   "gp": "conj",
+   "x": "\"so that\" nghĩa là \"để mà\", dùng để chỉ mục đích của hành động gửi lời mời sớm."
+  },
+  {
+   "q": "Of all the proposed times, Tuesday afternoon is the ____ option for everyone.",
+   "o": [
+    "convenient",
+    "most conveniently",
+    "most convenient",
+    "more convenient"
+   ],
+   "a": 2,
+   "gp": "compare",
+   "x": "Cụm \"of all\" và mạo từ \"the\" báo hiệu so sánh nhất, nên chọn \"most convenient\"."
+  }
+ ]
+}

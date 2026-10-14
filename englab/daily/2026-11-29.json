@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-29",
+  "title": "Mua vé tàu và tìm sân ga",
+  "scene": {
+    "title": "Tại nhà ga Frankfurt",
+    "topic": "Du lịch",
+    "names": [
+      "Khánh Linh",
+      "Hans"
+    ],
+    "lines": [
+      [
+        0,
+        "Excuse me, I'd like a one-way ticket to Munich on the next express train.",
+        "Xin lỗi, tôi muốn mua một vé một chiều đi Munich trên chuyến tàu tốc hành kế tiếp."
+      ],
+      [
+        1,
+        "The next one leaves at 10:40. That's 89 euros in second class.",
+        "Chuyến kế tiếp khởi hành lúc 10 giờ 40. Giá vé hạng hai là 89 euro."
+      ],
+      [
+        0,
+        "Can I buy it from the ticket machine, or only here at the counter?",
+        "Tôi có thể mua ở máy bán vé không, hay chỉ mua được ở quầy này?"
+      ],
+      [
+        1,
+        "Either is fine, but the machine is quicker if you have a card.",
+        "Cách nào cũng được, nhưng mua ở máy nhanh hơn nếu chị có thẻ."
+      ],
+      [
+        0,
+        "Which platform does it leave from? The timetable on the screen is confusing.",
+        "Tàu chạy từ sân ga nào vậy? Bảng giờ tàu trên màn hình khó hiểu quá."
+      ],
+      [
+        1,
+        "Platform 7. Your seat is in carriage 12, near the back of the train.",
+        "Sân ga số 7. Ghế của chị ở toa số 12, gần cuối đoàn tàu."
+      ],
+      [
+        0,
+        "Do I need to transfer anywhere, or is it a direct train?",
+        "Tôi có cần đổi tàu ở đâu không, hay đây là tàu đi thẳng?"
+      ],
+      [
+        1,
+        "It's direct. Just show your ticket when the conductor comes around.",
+        "Tàu đi thẳng. Chị chỉ cần xuất trình vé khi nhân viên soát vé đi qua."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "platform",
+      "/ˈplætfɔːrm/",
+      "n",
+      "sân ga",
+      "the raised area in a station where you get on and off trains",
+      "The train to Hải Phòng leaves from platform 3.",
+      "Tàu đi Hải Phòng khởi hành từ sân ga số 3."
+    ],
+    [
+      "one-way ticket",
+      "/ˌwʌn weɪ ˈtɪkɪt/",
+      "n",
+      "vé một chiều",
+      "a ticket for traveling to a place but not coming back",
+      "I bought a one-way ticket because I will fly home.",
+      "Tôi mua vé một chiều vì tôi sẽ bay về nhà."
+    ],
+    [
+      "express train",
+      "/ɪkˈspres treɪn/",
+      "n",
+      "tàu tốc hành",
+      "a fast train that stops at only a few stations",
+      "The express train gets to the city center in 20 minutes.",
+      "Tàu tốc hành đến trung tâm thành phố trong 20 phút."
+    ],
+    [
+      "ticket machine",
+      "/ˈtɪkɪt məˌʃiːn/",
+      "n",
+      "máy bán vé",
+      "a machine where you can buy tickets by yourself",
+      "The ticket machine accepts both cash and cards.",
+      "Máy bán vé nhận cả tiền mặt lẫn thẻ."
+    ],
+    [
+      "timetable",
+      "/ˈtaɪmteɪbl/",
+      "n",
+      "bảng giờ tàu/xe",
+      "a list of the times when trains or buses arrive and leave",
+      "Check the timetable before you go to the station.",
+      "Hãy xem bảng giờ tàu trước khi ra ga."
+    ],
+    [
+      "carriage",
+      "/ˈkærɪdʒ/",
+      "n",
+      "toa tàu",
+      "one of the separate parts of a train where people sit",
+      "The quiet carriage is at the front of the train.",
+      "Toa yên tĩnh nằm ở đầu đoàn tàu."
+    ],
+    [
+      "change trains",
+      "/ˌtʃeɪndʒ ˈtreɪnz/",
+      "phrase",
+      "đổi tàu",
+      "to get off one train and get on another to continue a trip",
+      "We changed trains at Cologne to reach Amsterdam.",
+      "Chúng tôi đổi tàu ở Cologne để đến Amsterdam."
+    ],
+    [
+      "conductor",
+      "/kənˈdʌktər/",
+      "n",
+      "nhân viên soát vé (trên tàu)",
+      "a person on a train who checks tickets",
+      "The conductor checked our tickets after the first stop.",
+      "Nhân viên soát vé đã kiểm tra vé của chúng tôi sau ga dừng đầu tiên."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The express train to Munich ____ from Platform 7 every hour.",
+      "o": [
+        "departs",
+        "depart",
+        "departing",
+        "have departed"
+      ],
+      "a": 0,
+      "gp": "agreement",
+      "x": "Chủ ngữ số ít 'The express train' và hành động lặp lại nên dùng hiện tại đơn số ít 'departs'."
+    },
+    {
+      "q": "Travelers ____ to transfer at Frankfurt should check the timetable carefully.",
+      "o": [
+        "who need",
+        "whose need",
+        "which needs",
+        "whom need"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "Cần mệnh đề quan hệ chỉ người làm chủ ngữ, động từ chia theo 'travelers' số nhiều: 'who need'."
+    },
+    {
+      "q": "Tickets can be bought either online ____ from the machines in the main hall.",
+      "o": [
+        "or",
+        "nor",
+        "and",
+        "but"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Cấu trúc cặp liên từ 'either... or' (hoặc... hoặc)."
+    },
+    {
+      "q": "The train ____ by the time Ms. Linh finally found the right platform.",
+      "o": [
+        "had already left",
+        "already leaves",
+        "will leave",
+        "is leaving"
+      ],
+      "a": 0,
+      "gp": "tense",
+      "x": "Hành động tàu rời đi xảy ra trước một hành động khác trong quá khứ (found), nên dùng quá khứ hoàn thành 'had already left'."
+    },
+    {
+      "q": "Seats in the first carriage are reserved for ____ holding first-class tickets.",
+      "o": [
+        "that",
+        "those",
+        "these",
+        "them"
+      ],
+      "a": 1,
+      "gp": "pronoun",
+      "x": "'Those + V-ing/mệnh đề' nghĩa là 'những người mà...'; 'those holding' = những người cầm vé hạng nhất."
+    },
+    {
+      "q": "Please listen ____ to messages about last-minute platform changes.",
+      "o": [
+        "careful",
+        "carefully",
+        "care",
+        "caring"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ 'listen', nên chọn 'carefully'."
+    }
+  ]
+}

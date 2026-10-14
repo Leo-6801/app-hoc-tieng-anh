@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-24",
+  "title": "Gửi bưu kiện ở bưu điện",
+  "scene": {
+    "title": "Tại quầy bưu điện",
+    "topic": "Đời sống",
+    "names": ["Phương", "Mr. Taylor"],
+    "lines": [
+      [0, "Hello, I'd like to send this parcel to my sister in Canada.", "Xin chào, tôi muốn gửi bưu kiện này cho em gái tôi ở Canada."],
+      [1, "Sure. Please put it on the scale so I can weigh it.", "Vâng. Chị đặt nó lên cân để tôi cân nhé."],
+      [0, "It contains glass bowls, so it's quite fragile.", "Bên trong có bát thủy tinh, nên khá dễ vỡ."],
+      [1, "Then I'll add a fragile sticker. It weighs 2.3 kilograms.", "Vậy tôi sẽ dán nhãn hàng dễ vỡ. Bưu kiện nặng 2,3 ki-lô-gam."],
+      [0, "How much is the postage, and how long will it take?", "Cước phí là bao nhiêu, và mất bao lâu thì đến ạ?"],
+      [1, "Standard post takes two weeks. Express mail takes about five days.", "Gửi thường mất hai tuần. Chuyển phát nhanh mất khoảng năm ngày."],
+      [0, "I'll use express mail. Do I fill in the recipient's details here?", "Tôi sẽ gửi chuyển phát nhanh. Tôi điền thông tin người nhận vào đây phải không?"],
+      [1, "Yes, and here's your tracking number to check the parcel online.", "Đúng rồi, và đây là mã vận đơn để chị theo dõi bưu kiện trên mạng."],
+      [0, "Thank you. I also need one large envelope for some documents.", "Cảm ơn anh. Tôi cũng cần một phong bì lớn để đựng giấy tờ."]
+    ]
+  },
+  "vocab": [
+    ["parcel", "/ˈpɑːrsəl/", "n", "bưu kiện, gói hàng", "a wrapped box or package sent by post", "I received a parcel from my parents yesterday.", "Hôm qua tôi nhận được một bưu kiện từ bố mẹ."],
+    ["fragile", "/ˈfrædʒəl/", "adj", "dễ vỡ", "easily broken", "Please handle this box carefully because it is fragile.", "Vui lòng cầm hộp này cẩn thận vì nó dễ vỡ."],
+    ["postage", "/ˈpoʊstɪdʒ/", "n", "cước phí bưu điện", "the money paid for sending letters or parcels", "The postage for this letter is 15,000 dong.", "Cước phí gửi lá thư này là 15.000 đồng."],
+    ["weigh", "/weɪ/", "v", "cân, đo trọng lượng", "to measure how heavy something is", "The clerk will weigh your package at the counter.", "Nhân viên sẽ cân gói hàng của bạn tại quầy."],
+    ["recipient", "/rɪˈsɪpiənt/", "n", "người nhận", "a person who receives something", "Write the recipient's name and address clearly.", "Hãy ghi rõ tên và địa chỉ người nhận."],
+    ["tracking number", "/ˈtrækɪŋ ˌnʌmbər/", "phrase", "mã vận đơn, mã theo dõi", "a number used to follow a parcel while it is being delivered", "Enter your tracking number on the website to see where your parcel is.", "Nhập mã vận đơn trên trang web để xem bưu kiện của bạn đang ở đâu."],
+    ["envelope", "/ˈenvəloʊp/", "n", "phong bì", "a flat paper cover for a letter", "She put the photos in an envelope and sealed it.", "Cô ấy cho những tấm ảnh vào phong bì và dán lại."],
+    ["express mail", "/ɪkˈspres meɪl/", "phrase", "thư chuyển phát nhanh", "a faster and more expensive way of sending post", "Express mail usually arrives within two days.", "Thư chuyển phát nhanh thường đến trong vòng hai ngày."]
+  ],
+  "toeic": [
+    {"q": "Express mail is ____ than standard post, but it arrives much sooner.", "o": ["expensive", "more expensive", "most expensive", "expensively"], "a": 1, "gp": "compare", "x": "Có than và expensive là tính từ dài nên dùng so sánh hơn: more expensive."},
+    {"q": "All parcels must ____ before they are sent overseas.", "o": ["weigh", "weighing", "be weighed", "have weighed"], "a": 2, "gp": "passive", "x": "Bưu kiện được cân (không tự cân) nên dùng bị động sau động từ khuyết thiếu: must be weighed."},
+    {"q": "Please make sure ____ the information on the form is correct.", "o": ["all", "every", "each", "many"], "a": 0, "gp": "quant", "x": "Information là danh từ không đếm được nên dùng all; every, each và many không đi với danh từ không đếm được."},
+    {"q": "The cost of sending three parcels ____ about 500,000 dong.", "o": ["are", "is", "be", "were"], "a": 1, "gp": "agreement", "x": "Chủ ngữ chính là The cost (số ít), không phải parcels, nên động từ chia is."},
+    {"q": "The post office is located ____ the bank and the supermarket.", "o": ["between", "among", "along", "across"], "a": 0, "gp": "prep", "x": "Between ... and ... dùng để chỉ vị trí ở giữa hai địa điểm."},
+    {"q": "The clerk asked me to ____ a customs form for the international parcel.", "o": ["fill out", "pick up", "turn off", "run out"], "a": 0, "gp": "vocab", "x": "Fill out a form nghĩa là điền vào mẫu đơn, phù hợp với tờ khai hải quan."}
+  ]
+}

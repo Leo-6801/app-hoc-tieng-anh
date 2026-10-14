@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-17",
+  "title": "Gọi điện chào hàng khách hàng mới",
+  "scene": {
+    "title": "Cuộc gọi chào hàng đầu tiên",
+    "topic": "Kinh doanh",
+    "names": [
+      "Minh Anh",
+      "David Clarke"
+    ],
+    "lines": [
+      [
+        0,
+        "Good morning, Mr. Clarke. This is Minh Anh calling from BrightPack Solutions.",
+        "Chào buổi sáng, ông Clarke. Tôi là Minh Anh gọi từ công ty BrightPack Solutions."
+      ],
+      [
+        1,
+        "Good morning. I'm quite busy right now, so what is this about?",
+        "Chào cô. Lúc này tôi khá bận, cô gọi có việc gì vậy?"
+      ],
+      [
+        0,
+        "I'll be brief. We help companies like yours cut packaging costs by up to twenty percent.",
+        "Tôi xin nói ngắn gọn. Chúng tôi giúp các công ty như của ông giảm chi phí bao bì đến hai mươi phần trăm."
+      ],
+      [
+        1,
+        "That sounds interesting, but I'm not the only decision-maker on packaging here.",
+        "Nghe cũng thú vị, nhưng tôi không phải là người duy nhất quyết định về bao bì ở đây."
+      ],
+      [
+        0,
+        "I understand. Could I send you a short pitch and follow up with your team next week?",
+        "Tôi hiểu ạ. Tôi có thể gửi ông một bản giới thiệu ngắn và liên hệ lại với nhóm của ông vào tuần sau không?"
+      ],
+      [
+        1,
+        "Sure. Email me the details, and include a few examples from your client base.",
+        "Được. Cô gửi email chi tiết cho tôi, và kèm vài ví dụ từ các khách hàng hiện có của bên cô nhé."
+      ],
+      [
+        0,
+        "Of course. Would Tuesday afternoon be a good time for a quick follow-up call?",
+        "Dạ vâng. Chiều thứ Ba có tiện cho một cuộc gọi trao đổi tiếp ngắn không ạ?"
+      ],
+      [
+        1,
+        "Tuesday at three works for me. Thanks for reaching out.",
+        "Ba giờ chiều thứ Ba thì được. Cảm ơn cô đã liên hệ."
+      ],
+      [
+        0,
+        "Thank you, Mr. Clarke. I'll send the email today. Have a great day.",
+        "Cảm ơn ông Clarke. Tôi sẽ gửi email ngay hôm nay. Chúc ông một ngày tốt lành."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "prospect",
+      "/ˈprɒspekt/",
+      "n",
+      "khách hàng tiềm năng",
+      "a person or company that may become a client",
+      "Our sales team called twenty new prospects this morning.",
+      "Đội bán hàng của chúng tôi đã gọi cho hai mươi khách hàng tiềm năng mới sáng nay."
+    ],
+    [
+      "decision-maker",
+      "/dɪˈsɪʒn ˌmeɪkər/",
+      "n",
+      "người ra quyết định",
+      "the person who has the power to make important choices",
+      "Try to speak directly with the decision-maker in the company.",
+      "Hãy cố gắng nói chuyện trực tiếp với người ra quyết định trong công ty."
+    ],
+    [
+      "pitch",
+      "/pɪtʃ/",
+      "n",
+      "bài chào hàng, lời giới thiệu sản phẩm",
+      "a short talk to persuade someone to buy something",
+      "She practiced her sales pitch before calling the client.",
+      "Cô ấy đã luyện tập bài chào hàng trước khi gọi cho khách hàng."
+    ],
+    [
+      "lead",
+      "/liːd/",
+      "n",
+      "đầu mối khách hàng, thông tin khách hàng tiềm năng",
+      "information about a person who may want to buy",
+      "The trade fair gave us ten new sales leads.",
+      "Hội chợ thương mại đã mang lại cho chúng tôi mười đầu mối khách hàng mới."
+    ],
+    [
+      "cold call",
+      "/ˌkəʊld ˈkɔːl/",
+      "n",
+      "cuộc gọi chào hàng (cho người chưa quen biết)",
+      "a phone call to sell something to someone you have not contacted before",
+      "Making a cold call can be stressful for new sales staff.",
+      "Thực hiện một cuộc gọi chào hàng có thể gây căng thẳng cho nhân viên bán hàng mới."
+    ],
+    [
+      "reach out",
+      "/riːtʃ aʊt/",
+      "phrase",
+      "liên hệ, liên lạc",
+      "to contact someone to talk or offer help",
+      "Please reach out to us if you have any questions.",
+      "Vui lòng liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi nào."
+    ],
+    [
+      "potential",
+      "/pəˈtenʃl/",
+      "adj",
+      "tiềm năng",
+      "possible in the future",
+      "We see this company as a potential client for next year.",
+      "Chúng tôi xem công ty này là một khách hàng tiềm năng cho năm tới."
+    ],
+    [
+      "client base",
+      "/ˈklaɪənt beɪs/",
+      "n",
+      "tập khách hàng, lượng khách hàng hiện có",
+      "all the clients that a company has",
+      "Our client base has grown quickly in Southeast Asia.",
+      "Tập khách hàng của chúng tôi đã tăng nhanh ở khu vực Đông Nam Á."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Lan made a very ____ pitch to the new client yesterday.",
+      "o": [
+        "persuade",
+        "persuasive",
+        "persuasion",
+        "persuasively"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Trước danh từ \"pitch\" và sau trạng từ \"very\" cần một tính từ, nên chọn \"persuasive\" (có sức thuyết phục)."
+    },
+    {
+      "q": "Mr. Tanaka ____ three potential clients since the beginning of this week.",
+      "o": [
+        "calls",
+        "is calling",
+        "has called",
+        "will call"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "Có \"since\" chỉ mốc thời gian bắt đầu đến hiện tại nên dùng thì hiện tại hoàn thành \"has called\"."
+    },
+    {
+      "q": "Please call the client back ____ Friday afternoon at the latest.",
+      "o": [
+        "by",
+        "until",
+        "since",
+        "among"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "\"By + thời điểm\" nghĩa là \"trước/chậm nhất là\", đi cùng \"at the latest\". \"Until\" diễn tả hành động kéo dài liên tục nên không hợp."
+    },
+    {
+      "q": "____ the client seemed busy, the sales representative kept the call short.",
+      "o": [
+        "Because",
+        "Unless",
+        "Although",
+        "Despite"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Khách hàng có vẻ bận nên nhân viên nói ngắn gọn – đây là quan hệ nguyên nhân – kết quả, dùng \"Because\". \"Despite\" không đi với mệnh đề."
+    },
+    {
+      "q": "The sales manager asked Minh to make the calls ____ because everyone else was busy.",
+      "o": [
+        "he",
+        "his",
+        "him",
+        "himself"
+      ],
+      "a": 3,
+      "gp": "pronoun",
+      "x": "Đại từ phản thân \"himself\" dùng để nhấn mạnh rằng chính Minh tự gọi các cuộc gọi đó."
+    },
+    {
+      "q": "Cold calling can help a small company ____ new clients quickly.",
+      "o": [
+        "attract",
+        "appear",
+        "arrive",
+        "belong"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Attract new clients\" nghĩa là thu hút khách hàng mới. Các động từ còn lại là nội động từ, không đi trực tiếp với tân ngữ."
+    }
+  ]
+}

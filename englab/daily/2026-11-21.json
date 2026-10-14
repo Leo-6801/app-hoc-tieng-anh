@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-21",
+  "title": "Xin làm việc từ xa hai ngày mỗi tuần",
+  "scene": {
+    "title": "Đề nghị làm việc tại nhà",
+    "topic": "Công sở",
+    "names": [
+      "Thảo",
+      "James"
+    ],
+    "lines": [
+      [
+        0,
+        "James, may I talk to you about my work arrangement?",
+        "James, em có thể nói chuyện với anh về cách sắp xếp công việc của em không?"
+      ],
+      [
+        1,
+        "Sure, Thảo. What would you like to change?",
+        "Được thôi, Thảo. Em muốn thay đổi điều gì?"
+      ],
+      [
+        0,
+        "I'd like a hybrid model, with remote work on Tuesdays and Thursdays.",
+        "Em muốn làm theo mô hình kết hợp, làm việc từ xa vào thứ Ba và thứ Năm."
+      ],
+      [
+        1,
+        "I see. Can I ask why you're requesting this?",
+        "Anh hiểu. Anh có thể hỏi vì sao em đề nghị việc này không?"
+      ],
+      [
+        0,
+        "My trip to the office takes almost two hours, and I'm more productive at home.",
+        "Quãng đường đến văn phòng mất gần hai tiếng, và em làm việc năng suất hơn ở nhà."
+      ],
+      [
+        1,
+        "How will you deal with distractions and stay in touch with the team?",
+        "Em sẽ xử lý những điều gây xao nhãng và giữ liên lạc với nhóm như thế nào?"
+      ],
+      [
+        0,
+        "I have a quiet home office, and I'll be online during all core hours.",
+        "Em có một góc làm việc yên tĩnh ở nhà, và em sẽ trực tuyến trong mọi giờ làm việc chính."
+      ],
+      [
+        1,
+        "Okay. I'll grant your request for a three-month trial period first.",
+        "Được. Anh sẽ chấp thuận đề nghị của em trong thời gian thử nghiệm ba tháng trước."
+      ],
+      [
+        0,
+        "Thank you! I'll show that this arrangement works well for the team.",
+        "Cảm ơn anh! Em sẽ chứng minh rằng cách sắp xếp này hiệu quả với cả nhóm."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "arrangement",
+      "/əˈreɪndʒmənt/",
+      "n",
+      "sự sắp xếp, thỏa thuận",
+      "a plan or agreement about how something will be done",
+      "We made a new arrangement so that I can leave early on Fridays.",
+      "Chúng tôi đã có một sự sắp xếp mới để tôi có thể về sớm vào thứ Sáu."
+    ],
+    [
+      "remote work",
+      "/rɪˈməʊt wɜːk/",
+      "phrase",
+      "làm việc từ xa",
+      "doing your job from home or another place outside the office",
+      "Remote work has become common in many industries.",
+      "Làm việc từ xa đã trở nên phổ biến trong nhiều ngành."
+    ],
+    [
+      "hybrid",
+      "/ˈhaɪbrɪd/",
+      "adj",
+      "kết hợp (làm ở văn phòng và tại nhà)",
+      "mixing two ways of doing something, such as office work and home work",
+      "Our team follows a hybrid model with three office days a week.",
+      "Nhóm chúng tôi theo mô hình kết hợp với ba ngày làm ở văn phòng mỗi tuần."
+    ],
+    [
+      "productive",
+      "/prəˈdʌktɪv/",
+      "adj",
+      "năng suất, làm việc hiệu quả",
+      "doing or producing a lot of work",
+      "I am most productive in the early morning.",
+      "Tôi làm việc năng suất nhất vào sáng sớm."
+    ],
+    [
+      "distraction",
+      "/dɪˈstrækʃn/",
+      "n",
+      "điều gây xao nhãng",
+      "something that stops you from paying attention",
+      "Loud phone calls are a big distraction in an open office.",
+      "Những cuộc gọi điện thoại ồn ào là điều gây xao nhãng lớn trong văn phòng mở."
+    ],
+    [
+      "grant",
+      "/ɡrɑːnt/",
+      "v",
+      "chấp thuận, cho phép",
+      "to officially give or allow something that someone asked for",
+      "The director granted her request for two remote days a week.",
+      "Giám đốc đã chấp thuận đề nghị làm việc từ xa hai ngày mỗi tuần của cô ấy."
+    ],
+    [
+      "trial period",
+      "/ˈtraɪəl ˌpɪəriəd/",
+      "phrase",
+      "thời gian thử nghiệm",
+      "a short time to test whether something works well",
+      "The new plan will start with a three-month trial period.",
+      "Kế hoạch mới sẽ bắt đầu với thời gian thử nghiệm ba tháng."
+    ],
+    [
+      "home office",
+      "/ˌhəʊm ˈɒfɪs/",
+      "phrase",
+      "góc/phòng làm việc tại nhà",
+      "a room or space at home used for work",
+      "I turned the spare bedroom into a home office.",
+      "Tôi đã biến phòng ngủ trống thành phòng làm việc tại nhà."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "If Ms. Vo ____ closer to the office, she would not need to work from home.",
+      "o": [
+        "lives",
+        "lived",
+        "has lived",
+        "will live"
+      ],
+      "a": 1,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 2 (mệnh đề chính có \"would\") nên mệnh đề \"if\" dùng quá khứ đơn \"lived\"."
+    },
+    {
+      "q": "Staff may work from home on Fridays ____ their tasks are completed on time.",
+      "o": [
+        "as long as",
+        "even though",
+        "because of",
+        "in spite of"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "\"As long as\" (miễn là) là liên từ chỉ điều kiện, phù hợp nghĩa; \"because of\" và \"in spite of\" là giới từ."
+    },
+    {
+      "q": "Working from home allows employees to manage their time more ____.",
+      "o": [
+        "efficient",
+        "efficiently",
+        "efficiency",
+        "efficiencies"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ \"manage\", nên chọn \"efficiently\"."
+    },
+    {
+      "q": "Employees who work remotely must keep ____ laptops secure at all times.",
+      "o": [
+        "they",
+        "them",
+        "their",
+        "themselves"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Đứng trước danh từ \"laptops\" cần tính từ sở hữu \"their\"."
+    },
+    {
+      "q": "Remote employees must be reachable by phone ____ 9 a.m. and 5 p.m.",
+      "o": [
+        "from",
+        "between",
+        "during",
+        "within"
+      ],
+      "a": 1,
+      "gp": "prep",
+      "x": "Cấu trúc \"between ... and ...\" dùng để chỉ khoảng thời gian giữa hai mốc."
+    },
+    {
+      "q": "____ of the staff in the design team have asked to work from home on Mondays.",
+      "o": [
+        "Much",
+        "Each",
+        "Most",
+        "Every"
+      ],
+      "a": 2,
+      "gp": "quant",
+      "x": "\"Most of the staff\" đi với động từ số nhiều \"have\"; \"Each of\" cần động từ số ít, \"Every\" không đi với \"of\"."
+    }
+  ]
+}

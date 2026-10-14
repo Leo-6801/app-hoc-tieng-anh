@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-09",
+  "title": "Thông báo nghỉ việc một cách lịch sự",
+  "scene": {
+    "title": "Báo với quản lý rằng mình sẽ rời công ty",
+    "topic": "Công sở",
+    "names": [
+      "Phương",
+      "Mark"
+    ],
+    "lines": [
+      [
+        0,
+        "Mark, could we talk privately? I have some news to share.",
+        "Mark, chúng ta có thể nói chuyện riêng được không? Em có tin muốn chia sẻ."
+      ],
+      [
+        1,
+        "Of course, Phương. Let's use the small meeting room.",
+        "Tất nhiên rồi, Phương. Chúng ta vào phòng họp nhỏ nhé."
+      ],
+      [
+        0,
+        "I've decided to leave the company. I've accepted an opportunity in Singapore.",
+        "Em đã quyết định rời công ty. Em đã nhận một cơ hội ở Singapore."
+      ],
+      [
+        1,
+        "That's a surprise, but congratulations. When is your last day?",
+        "Thật bất ngờ, nhưng chúc mừng em. Ngày làm việc cuối cùng của em là khi nào?"
+      ],
+      [
+        0,
+        "My notice period is one month, so my last day is December 9th.",
+        "Thời gian báo trước của em là một tháng, nên ngày cuối cùng của em là 9 tháng 12."
+      ],
+      [
+        1,
+        "Is there anything we could do to change your mind?",
+        "Có điều gì chúng tôi có thể làm để em đổi ý không?"
+      ],
+      [
+        0,
+        "Thank you, but I'm sure. I'm truly grateful for everything I've learned here.",
+        "Cảm ơn anh, nhưng em đã quyết định rồi. Em thật sự biết ơn mọi điều em đã học được ở đây."
+      ],
+      [
+        1,
+        "We'll miss you. HR will also arrange an exit interview with you.",
+        "Chúng tôi sẽ nhớ em. Phòng nhân sự cũng sẽ sắp xếp một buổi phỏng vấn nghỉ việc với em."
+      ],
+      [
+        0,
+        "Certainly. And I'll prepare detailed notes for my successor to make the transition easy.",
+        "Chắc chắn rồi. Và em sẽ chuẩn bị ghi chú chi tiết cho người kế nhiệm để việc chuyển giao được dễ dàng."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "notice period",
+      "/ˈnəʊtɪs ˌpɪəriəd/",
+      "phrase",
+      "thời gian báo trước (khi nghỉ việc)",
+      "the time you must keep working after you say you will leave",
+      "Staff at our company have a thirty-day notice period.",
+      "Nhân viên ở công ty chúng tôi có thời gian báo trước là ba mươi ngày."
+    ],
+    [
+      "opportunity",
+      "/ˌɒpəˈtjuːnəti/",
+      "n",
+      "cơ hội",
+      "a chance to do something good, such as a new job",
+      "She left to pursue an opportunity at a larger firm.",
+      "Cô ấy nghỉ việc để theo đuổi một cơ hội ở một công ty lớn hơn."
+    ],
+    [
+      "grateful",
+      "/ˈɡreɪtfl/",
+      "adj",
+      "biết ơn",
+      "feeling thankful for something",
+      "I am grateful for the support my team gave me.",
+      "Tôi biết ơn sự hỗ trợ mà nhóm đã dành cho tôi."
+    ],
+    [
+      "exit interview",
+      "/ˈeksɪt ˌɪntəvjuː/",
+      "phrase",
+      "buổi phỏng vấn nghỉ việc",
+      "a meeting with HR before an employee leaves the company",
+      "In the exit interview, she explained why she was leaving.",
+      "Trong buổi phỏng vấn nghỉ việc, cô ấy đã giải thích lý do mình rời đi."
+    ],
+    [
+      "successor",
+      "/səkˈsesə(r)/",
+      "n",
+      "người kế nhiệm",
+      "a person who takes a job after someone else leaves it",
+      "Her successor will start work next Monday.",
+      "Người kế nhiệm của cô ấy sẽ bắt đầu làm việc vào thứ Hai tới."
+    ],
+    [
+      "transition",
+      "/trænˈzɪʃn/",
+      "n",
+      "sự chuyển giao, giai đoạn chuyển tiếp",
+      "the process of changing from one situation to another",
+      "We want a smooth transition when the new manager arrives.",
+      "Chúng tôi muốn quá trình chuyển giao diễn ra suôn sẻ khi quản lý mới đến."
+    ],
+    [
+      "counteroffer",
+      "/ˈkaʊntərɒfə(r)/",
+      "n",
+      "lời đề nghị giữ chân",
+      "a better offer your employer makes to stop you from leaving",
+      "He turned down the counteroffer and joined the new company.",
+      "Anh ấy đã từ chối lời đề nghị giữ chân và gia nhập công ty mới."
+    ],
+    [
+      "career change",
+      "/kəˈrɪə(r) tʃeɪndʒ/",
+      "phrase",
+      "sự chuyển đổi nghề nghiệp",
+      "a move to a different type of work",
+      "After ten years in banking, she made a career change to teaching.",
+      "Sau mười năm làm ngân hàng, cô ấy đã chuyển sang nghề dạy học."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Le wrote the handover notes ____ because her successor had not started yet.",
+      "o": [
+        "her",
+        "hers",
+        "herself",
+        "she"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Đại từ phản thân \"herself\" dùng để nhấn mạnh cô ấy tự mình làm việc đó."
+    },
+    {
+      "q": "By the time Mr. Hall leaves the company next month, he ____ here for twelve years.",
+      "o": [
+        "works",
+        "worked",
+        "will have worked",
+        "has worked"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "\"By the time\" + mốc tương lai cho thấy hành động sẽ kéo dài đến thời điểm đó, nên dùng tương lai hoàn thành."
+    },
+    {
+      "q": "Please inform your manager in writing ____ least thirty days before your last day.",
+      "o": [
+        "at",
+        "in",
+        "on",
+        "by"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "Cụm cố định \"at least\" nghĩa là \"ít nhất\"."
+    },
+    {
+      "q": "Departing employees are asked to ____ their laptops and ID cards to the IT team.",
+      "o": [
+        "return",
+        "retire",
+        "remove",
+        "refer"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Return something to someone\" nghĩa là trả lại thứ gì cho ai, phù hợp với ngữ cảnh."
+    },
+    {
+      "q": "Mr. Kim ____ thanked his manager for the support he had received over the years.",
+      "o": [
+        "sincere",
+        "sincerely",
+        "sincerity",
+        "sincerest"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ \"thanked\", nên chọn \"sincerely\"."
+    },
+    {
+      "q": "If the company had offered a higher salary, Ms. Do ____ in her position.",
+      "o": [
+        "stays",
+        "will stay",
+        "would have stayed",
+        "had stayed"
+      ],
+      "a": 2,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 3 (mệnh đề \"if\" dùng quá khứ hoàn thành) nên mệnh đề chính dùng \"would have + V3\"."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-25",
+  "title": "Hỏi mua thuốc ở nhà thuốc",
+  "scene": {
+    "title": "Tại quầy nhà thuốc",
+    "topic": "Đời sống",
+    "names": ["Minh", "Emily"],
+    "lines": [
+      [0, "Excuse me, I need something for a bad headache and a runny nose.", "Xin lỗi, tôi cần thuốc trị đau đầu nặng và sổ mũi."],
+      [1, "Sure. Do you have a prescription, or would you like something over-the-counter?", "Vâng. Anh có đơn thuốc không, hay anh muốn mua thuốc không kê đơn?"],
+      [0, "I don't have a prescription, so something over-the-counter is fine.", "Tôi không có đơn thuốc, nên thuốc không kê đơn cũng được."],
+      [1, "Are you allergic to any medicine, such as aspirin or penicillin?", "Anh có dị ứng với loại thuốc nào không, như aspirin hay penicillin?"],
+      [0, "Not that I know of. What's the dosage for these tablets?", "Theo tôi biết thì không. Liều dùng của loại viên này thế nào?"],
+      [1, "Take two tablets every six hours, but no more than eight a day.", "Uống hai viên mỗi sáu tiếng, nhưng không quá tám viên một ngày."],
+      [0, "Are there any side effects I should know about?", "Có tác dụng phụ nào tôi cần biết không?"],
+      [1, "They might make you drowsy, so please don't drive after taking them.", "Thuốc có thể làm anh buồn ngủ, nên vui lòng đừng lái xe sau khi uống."],
+      [0, "Thanks for the advice. I'll take them before bed, then.", "Cảm ơn lời khuyên của chị. Vậy tôi sẽ uống trước khi đi ngủ."]
+    ]
+  },
+  "vocab": [
+    ["pharmacist", "/ˈfɑːrməsɪst/", "n", "dược sĩ", "a person whose job is to prepare and sell medicine", "The pharmacist explained how to take the medicine.", "Dược sĩ đã giải thích cách uống thuốc."],
+    ["prescription", "/prɪˈskrɪpʃən/", "n", "đơn thuốc", "a doctor's written order for medicine", "You need a prescription to buy this antibiotic.", "Bạn cần có đơn thuốc để mua loại kháng sinh này."],
+    ["dosage", "/ˈdoʊsɪdʒ/", "n", "liều dùng, liều lượng", "the amount of medicine you should take and how often", "Check the dosage on the label before giving it to children.", "Hãy kiểm tra liều dùng trên nhãn trước khi cho trẻ uống."],
+    ["side effect", "/ˈsaɪd ɪˌfekt/", "phrase", "tác dụng phụ", "an extra, unwanted effect of a medicine", "Headaches are a possible side effect of this drug.", "Đau đầu là một tác dụng phụ có thể xảy ra của thuốc này."],
+    ["tablet", "/ˈtæblət/", "n", "viên thuốc", "a small, hard piece of medicine that you swallow", "Take one tablet after each meal.", "Uống một viên sau mỗi bữa ăn."],
+    ["allergic", "/əˈlɜːrdʒɪk/", "adj", "bị dị ứng", "having a bad reaction to something you eat, touch, or breathe", "My sister is allergic to seafood.", "Chị gái tôi bị dị ứng hải sản."],
+    ["over-the-counter", "/ˌoʊvər ðə ˈkaʊntər/", "adj", "(thuốc) không cần kê đơn", "able to be bought without a doctor's written order", "You can buy over-the-counter painkillers at any pharmacy.", "Bạn có thể mua thuốc giảm đau không kê đơn ở bất kỳ nhà thuốc nào."],
+    ["drowsy", "/ˈdraʊzi/", "adj", "buồn ngủ, lơ mơ", "feeling sleepy and tired", "This cold medicine may make you feel drowsy.", "Thuốc cảm này có thể khiến bạn thấy buồn ngủ."]
+  ],
+  "toeic": [
+    {"q": "Please avoid ____ alcohol while you are taking this medicine.", "o": ["drink", "to drink", "drinking", "drank"], "a": 2, "gp": "gerund", "x": "Sau động từ avoid ta dùng danh động từ (V-ing): avoid drinking."},
+    {"q": "Patients ____ have a prescription should go to counter 2.", "o": ["who", "which", "whose", "whom"], "a": 0, "gp": "relative", "x": "Who thay cho danh từ chỉ người (patients) và làm chủ ngữ cho động từ have."},
+    {"q": "This new cough syrup works ____ than the one I bought last month.", "o": ["fast", "faster", "fastest", "more fast"], "a": 1, "gp": "compare", "x": "Có than nên dùng so sánh hơn; fast là từ ngắn nên thêm -er: faster."},
+    {"q": "Each box of tablets ____ a leaflet with instructions.", "o": ["contain", "contains", "containing", "have contained"], "a": 1, "gp": "agreement", "x": "Chủ ngữ Each box là số ít nên động từ chia số ít: contains."},
+    {"q": "The pharmacist told Mr. Lee to keep the medicine away from ____ children.", "o": ["he", "him", "his", "himself"], "a": 2, "gp": "pronoun", "x": "Trước danh từ children cần tính từ sở hữu his (con của ông ấy)."},
+    {"q": "Read the label ____ before taking any over-the-counter medicine.", "o": ["care", "careful", "carefully", "carefulness"], "a": 2, "gp": "wordform", "x": "Cần trạng từ carefully để bổ nghĩa cho động từ read."}
+  ]
+}

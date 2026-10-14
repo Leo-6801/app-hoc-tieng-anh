@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-12",
+  "title": "Đăng ký tập gym",
+  "scene": {
+    "title": "Đăng ký hội viên phòng tập",
+    "topic": "Đời sống",
+    "names": [
+      "Jessica",
+      "Tuấn"
+    ],
+    "lines": [
+      [
+        0,
+        "Welcome to FitLife! Are you interested in a membership?",
+        "Chào mừng anh đến FitLife! Anh có quan tâm đến gói hội viên không?"
+      ],
+      [
+        1,
+        "Yes. How much is the monthly fee for a basic membership?",
+        "Có. Phí hằng tháng của gói hội viên cơ bản là bao nhiêu?"
+      ],
+      [
+        0,
+        "It's 600,000 dong, and that includes your own locker.",
+        "Là 600.000 đồng, đã bao gồm một tủ đồ riêng cho anh."
+      ],
+      [
+        1,
+        "I often finish work late. Are you open in the evening?",
+        "Tôi thường tan làm muộn. Phòng tập có mở cửa buổi tối không?"
+      ],
+      [
+        0,
+        "No problem. We're open from 5 a.m. until 11 p.m. every day.",
+        "Không vấn đề gì. Chúng tôi mở cửa từ 5 giờ sáng đến 11 giờ tối mỗi ngày."
+      ],
+      [
+        1,
+        "Can I try a free trial before I sign up?",
+        "Tôi có thể tập thử miễn phí trước khi đăng ký không?"
+      ],
+      [
+        0,
+        "Sure, you get a three-day free trial and one session with a trainer.",
+        "Được chứ, anh được tập thử miễn phí ba ngày và một buổi với huấn luyện viên."
+      ],
+      [
+        1,
+        "Great. And if I move, can I cancel my membership easily?",
+        "Tuyệt. Nếu tôi chuyển nhà, tôi có thể hủy gói hội viên dễ dàng không?"
+      ],
+      [
+        0,
+        "Yes, just give us thirty days' notice. Shall we plan your first workout?",
+        "Có, anh chỉ cần báo trước ba mươi ngày. Mình lên kế hoạch cho buổi tập đầu tiên nhé?"
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "membership",
+      "/ˈmembərʃɪp/",
+      "n",
+      "tư cách hội viên, gói hội viên",
+      "the state of being a member of a club or group",
+      "My gym membership ends at the end of the year.",
+      "Gói hội viên phòng gym của tôi hết hạn vào cuối năm."
+    ],
+    [
+      "trainer",
+      "/ˈtreɪnər/",
+      "n",
+      "huấn luyện viên",
+      "a person who teaches people how to exercise",
+      "My trainer created a special exercise plan for me.",
+      "Huấn luyện viên đã lập một kế hoạch tập luyện riêng cho tôi."
+    ],
+    [
+      "monthly fee",
+      "/ˈmʌnθli fiː/",
+      "phrase",
+      "phí hằng tháng",
+      "an amount of money paid every month",
+      "The monthly fee includes yoga and swimming classes.",
+      "Phí hằng tháng bao gồm các lớp yoga và bơi lội."
+    ],
+    [
+      "cancel",
+      "/ˈkænsəl/",
+      "v",
+      "hủy, hủy bỏ",
+      "to end an agreement or plan",
+      "You can cancel your membership at any time.",
+      "Bạn có thể hủy gói hội viên bất cứ lúc nào."
+    ],
+    [
+      "locker",
+      "/ˈlɑːkər/",
+      "n",
+      "tủ đồ có khóa",
+      "a small cupboard with a lock for keeping your things",
+      "Leave your bag in a locker before entering the gym.",
+      "Hãy để túi vào tủ đồ trước khi vào phòng tập."
+    ],
+    [
+      "workout",
+      "/ˈwɜːrkaʊt/",
+      "n",
+      "buổi tập luyện",
+      "a period of physical exercise",
+      "I do a 30-minute workout before breakfast.",
+      "Tôi tập luyện 30 phút trước bữa sáng."
+    ],
+    [
+      "sign up",
+      "/ˌsaɪn ˈʌp/",
+      "phrase",
+      "đăng ký (tham gia)",
+      "to put your name on a list to join a class or club",
+      "I signed up for a yoga class last week.",
+      "Tuần trước tôi đã đăng ký một lớp yoga."
+    ],
+    [
+      "free trial",
+      "/ˌfriː ˈtraɪəl/",
+      "phrase",
+      "dùng thử miễn phí",
+      "a period when you can try something without paying",
+      "Sign up for a free trial to see if you like the classes.",
+      "Hãy đăng ký dùng thử miễn phí để xem bạn có thích các lớp học không."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "If I ____ more free time, I would go to the gym every day.",
+      "o": [
+        "have",
+        "had",
+        "will have",
+        "would have"
+      ],
+      "a": 1,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 2 (không có thật ở hiện tại): If + quá khứ đơn (had), mệnh đề chính dùng would."
+    },
+    {
+      "q": "____ member receives a free towel at the front desk.",
+      "o": [
+        "All",
+        "Every",
+        "Many",
+        "Several"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "Member là danh từ số ít và động từ receives chia số ít, nên dùng Every."
+    },
+    {
+      "q": "The yoga and swimming classes ____ included in the premium membership.",
+      "o": [
+        "is",
+        "are",
+        "was",
+        "has been"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "Chủ ngữ classes là số nhiều nên động từ to be chia are."
+    },
+    {
+      "q": "Members who wish to ____ their membership must give thirty days' notice.",
+      "o": [
+        "cancel",
+        "exercise",
+        "arrive",
+        "borrow"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "Cancel their membership nghĩa là hủy gói hội viên, phù hợp với việc báo trước ba mươi ngày."
+    },
+    {
+      "q": "By the end of this month, Lan ____ at the gym for six months.",
+      "o": [
+        "works out",
+        "worked out",
+        "will have worked out",
+        "has worked out"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "By the end of + thời điểm tương lai và for six months nên dùng tương lai hoàn thành: will have worked out."
+    },
+    {
+      "q": "Regular exercise can ____ improve your mood and energy levels.",
+      "o": [
+        "significant",
+        "significantly",
+        "significance",
+        "signify"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ significantly để bổ nghĩa cho động từ improve."
+    }
+  ]
+}

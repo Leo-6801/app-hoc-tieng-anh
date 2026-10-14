@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-19",
+  "title": "Đặt lịch khám bác sĩ",
+  "scene": {
+    "title": "Gọi điện đặt lịch khám bệnh",
+    "topic": "Đời sống",
+    "names": ["Sarah", "Nguyễn Linh"],
+    "lines": [
+      [0, "Good morning, Green Valley Clinic. How can I help you today?", "Chào buổi sáng, Phòng khám Green Valley xin nghe. Tôi có thể giúp gì cho chị?"],
+      [1, "Hi, I'd like to make an appointment with Dr. Patel, please.", "Chào chị, tôi muốn đặt lịch hẹn khám với bác sĩ Patel."],
+      [0, "Of course. Could you briefly describe your symptoms for me?", "Dạ được. Chị có thể mô tả ngắn gọn các triệu chứng của mình không?"],
+      [1, "I've had a fever and a sore throat since Monday.", "Tôi bị sốt và đau họng từ thứ Hai."],
+      [0, "Do you also have a cough, or do you feel dizzy at all?", "Chị có bị ho không, hay có cảm thấy chóng mặt không?"],
+      [1, "I cough a lot at night, but I'm not dizzy.", "Tôi ho nhiều vào ban đêm, nhưng không bị chóng mặt."],
+      [0, "Dr. Patel can examine you tomorrow at 9:30 a.m. Is that okay?", "Bác sĩ Patel có thể khám cho chị lúc 9 giờ 30 sáng mai. Như vậy được không ạ?"],
+      [1, "That's perfect. Should I bring anything with me?", "Vậy thì tốt quá. Tôi có cần mang theo gì không?"],
+      [0, "Please bring your health insurance card and arrive ten minutes early.", "Chị vui lòng mang theo thẻ bảo hiểm y tế và đến sớm mười phút nhé."]
+    ]
+  },
+  "vocab": [
+    ["appointment", "/əˈpɔɪntmənt/", "n", "cuộc hẹn, lịch hẹn", "a time arranged to meet someone, such as a doctor", "I have a dental appointment at three o'clock.", "Tôi có lịch hẹn nha khoa lúc ba giờ."],
+    ["symptom", "/ˈsɪmptəm/", "n", "triệu chứng", "a sign that you may have an illness", "A runny nose is a common symptom of a cold.", "Sổ mũi là một triệu chứng thường gặp của bệnh cảm."],
+    ["fever", "/ˈfiːvər/", "n", "cơn sốt", "a body temperature that is higher than normal", "My son had a high fever last night.", "Tối qua con trai tôi bị sốt cao."],
+    ["sore throat", "/ˌsɔːr ˈθroʊt/", "phrase", "đau họng", "pain in the throat, often when you swallow", "Drink warm water with honey if you have a sore throat.", "Hãy uống nước ấm pha mật ong nếu bạn bị đau họng."],
+    ["clinic", "/ˈklɪnɪk/", "n", "phòng khám", "a place where people go to see a doctor", "The clinic near my office opens at 7 a.m.", "Phòng khám gần văn phòng tôi mở cửa lúc 7 giờ sáng."],
+    ["cough", "/kɔːf/", "n", "cơn ho, sự ho", "the action or sound of pushing air out of your throat suddenly", "This cough has kept me awake for three nights.", "Cơn ho này khiến tôi mất ngủ ba đêm liền."],
+    ["examine", "/ɪɡˈzæmɪn/", "v", "khám, kiểm tra kỹ", "to look at someone carefully to check their health", "The doctor examined my ears and throat.", "Bác sĩ đã khám tai và họng cho tôi."],
+    ["dizzy", "/ˈdɪzi/", "adj", "chóng mặt", "feeling as if everything is spinning around you", "I felt dizzy after standing up too quickly.", "Tôi thấy chóng mặt sau khi đứng dậy quá nhanh."]
+  ],
+  "toeic": [
+    {"q": "Please describe your symptoms as ____ as possible so the doctor can help you.", "o": ["clear", "clearly", "clearer", "clarity"], "a": 1, "gp": "wordform", "x": "Trong cấu trúc as ... as bổ nghĩa cho động từ describe, ta cần trạng từ clearly."},
+    {"q": "Ms. Tran ____ a sore throat since last Friday.", "o": ["has", "had", "has had", "is having"], "a": 2, "gp": "tense", "x": "Có since + mốc thời gian nên dùng thì hiện tại hoàn thành: has had."},
+    {"q": "The clinic is open from 8 a.m. ____ 6 p.m. on weekdays.", "o": ["to", "at", "on", "by"], "a": 0, "gp": "prep", "x": "Cấu trúc from ... to ... diễn tả khoảng thời gian từ lúc này đến lúc khác."},
+    {"q": "All patients ____ by a nurse before they see the doctor.", "o": ["check", "are checked", "checking", "have checked"], "a": 1, "gp": "passive", "x": "Bệnh nhân được y tá kiểm tra, có by a nurse nên dùng bị động hiện tại: are checked."},
+    {"q": "Call the clinic immediately ____ your fever gets worse.", "o": ["if", "although", "unless", "so"], "a": 0, "gp": "conj", "x": "If (nếu) diễn tả điều kiện: gọi phòng khám ngay nếu cơn sốt nặng hơn."},
+    {"q": "Dr. Kim will ____ your test results with you next week.", "o": ["review", "prevent", "borrow", "decline"], "a": 0, "gp": "vocab", "x": "Review nghĩa là xem lại, xem xét; bác sĩ sẽ xem kết quả xét nghiệm cùng bạn."}
+  ]
+}

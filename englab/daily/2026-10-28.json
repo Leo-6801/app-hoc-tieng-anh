@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-28",
+  "title": "Đặt mục tiêu công việc cho quý tới",
+  "scene": {
+    "title": "Thiết lập mục tiêu hiệu suất",
+    "topic": "Công sở",
+    "names": [
+      "David",
+      "Hà"
+    ],
+    "lines": [
+      [
+        0,
+        "Hà, let's set your goals for the next quarter today.",
+        "Hà, hôm nay chúng ta hãy đặt ra mục tiêu của em cho quý tới nhé."
+      ],
+      [
+        1,
+        "Great. I'd like to focus on improving our response time to clients.",
+        "Tuyệt ạ. Em muốn tập trung cải thiện thời gian phản hồi khách hàng."
+      ],
+      [
+        0,
+        "Good idea, but let's make it measurable. Which KPI will you use?",
+        "Ý hay đấy, nhưng hãy làm cho nó đo lường được. Em sẽ dùng chỉ số KPI nào?"
+      ],
+      [
+        1,
+        "Average reply time. I want to answer every client e-mail within four hours.",
+        "Thời gian phản hồi trung bình. Em muốn trả lời mọi e-mail của khách hàng trong vòng bốn tiếng."
+      ],
+      [
+        0,
+        "That's realistic. How will you monitor your progress?",
+        "Như vậy là thực tế. Em sẽ theo dõi tiến độ của mình bằng cách nào?"
+      ],
+      [
+        1,
+        "I'll check our support system every Friday and record the numbers.",
+        "Em sẽ kiểm tra hệ thống hỗ trợ vào mỗi thứ Sáu và ghi lại các con số."
+      ],
+      [
+        0,
+        "Perfect. Let's also add a stretch goal: three hours by December.",
+        "Hoàn hảo. Chúng ta thêm một mục tiêu nâng cao nữa: ba tiếng trước tháng Mười Hai."
+      ],
+      [
+        1,
+        "Sounds good. I'll list the key deliverables so we can review the outcome together.",
+        "Nghe hay đấy ạ. Em sẽ liệt kê các sản phẩm cần bàn giao chính để chúng ta cùng xem xét kết quả."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "KPI",
+      "/ˌkeɪ piː ˈaɪ/",
+      "n",
+      "chỉ số đánh giá hiệu quả công việc",
+      "a number used to measure how well a person or team is doing (key performance indicator)",
+      "Customer response time is one KPI for our support team.",
+      "Thời gian phản hồi khách hàng là một chỉ số KPI của nhóm hỗ trợ chúng tôi."
+    ],
+    [
+      "quarter",
+      "/ˈkwɔːtə(r)/",
+      "n",
+      "quý (ba tháng)",
+      "a period of three months in a business year",
+      "Sales rose by ten percent in the third quarter.",
+      "Doanh số tăng mười phần trăm trong quý ba."
+    ],
+    [
+      "measurable",
+      "/ˈmeʒərəbl/",
+      "adj",
+      "có thể đo lường được",
+      "able to be counted or measured",
+      "Each goal should be specific and measurable.",
+      "Mỗi mục tiêu nên cụ thể và có thể đo lường được."
+    ],
+    [
+      "stretch goal",
+      "/ˈstretʃ ɡəʊl/",
+      "phrase",
+      "mục tiêu nâng cao (vượt mức)",
+      "a goal that is harder than usual and pushes you to do more",
+      "Our stretch goal is to double sales by the end of the year.",
+      "Mục tiêu nâng cao của chúng tôi là tăng gấp đôi doanh số vào cuối năm."
+    ],
+    [
+      "monitor",
+      "/ˈmɒnɪtə(r)/",
+      "v",
+      "giám sát, theo dõi",
+      "to watch and check something over a period of time",
+      "Team leaders monitor sales figures every week.",
+      "Các trưởng nhóm theo dõi số liệu bán hàng mỗi tuần."
+    ],
+    [
+      "deliverable",
+      "/dɪˈlɪvərəbl/",
+      "n",
+      "sản phẩm/kết quả cần bàn giao",
+      "a piece of work that must be finished and handed in",
+      "The main deliverable for this month is a training video.",
+      "Sản phẩm cần bàn giao chính của tháng này là một video đào tạo."
+    ],
+    [
+      "outcome",
+      "/ˈaʊtkʌm/",
+      "n",
+      "kết quả",
+      "the final result of an action or process",
+      "The outcome of the project was better than expected.",
+      "Kết quả của dự án tốt hơn mong đợi."
+    ],
+    [
+      "realistic",
+      "/ˌriːəˈlɪstɪk/",
+      "adj",
+      "thực tế, khả thi",
+      "sensible and possible to do",
+      "Set realistic goals that you can reach in three months.",
+      "Hãy đặt những mục tiêu thực tế mà bạn có thể đạt được trong ba tháng."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Employees ____ goals are not met by the end of the quarter will meet with their managers.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "whom"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ chỉ sở hữu đứng trước danh từ \"goals\" (mục tiêu của nhân viên), nên chọn \"whose\"."
+    },
+    {
+      "q": "If the team ____ its sales target, everyone will receive a bonus.",
+      "o": [
+        "reaches",
+        "reached",
+        "will reach",
+        "would reach"
+      ],
+      "a": 0,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 1: mệnh đề \"if\" dùng thì hiện tại đơn khi mệnh đề chính dùng \"will\"."
+    },
+    {
+      "q": "Managers should set goals that are ____ and easy to measure.",
+      "o": [
+        "specify",
+        "specific",
+        "specifically",
+        "specification"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Sau động từ \"are\" và song song với tính từ \"easy\" cần một tính từ, nên chọn \"specific\"."
+    },
+    {
+      "q": "Progress toward each goal will be reviewed ____ a monthly basis.",
+      "o": [
+        "in",
+        "on",
+        "at",
+        "for"
+      ],
+      "a": 1,
+      "gp": "prep",
+      "x": "Cụm cố định \"on a monthly basis\" nghĩa là \"hằng tháng\"."
+    },
+    {
+      "q": "Since January, Ms. Hoang ____ three major goals in the project.",
+      "o": [
+        "reaches",
+        "reached",
+        "has reached",
+        "will reach"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "\"Since January\" diễn tả khoảng thời gian từ quá khứ đến hiện tại, nên dùng thì hiện tại hoàn thành."
+    },
+    {
+      "q": "Please ____ your progress in the shared spreadsheet every Friday.",
+      "o": [
+        "record",
+        "remain",
+        "remind",
+        "relate"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Record your progress\" nghĩa là ghi lại tiến độ; các từ còn lại không phù hợp về nghĩa."
+    }
+  ]
+}

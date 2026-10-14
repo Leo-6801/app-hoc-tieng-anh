@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-01",
+  "title": "Trình bày kết quả doanh số quý",
+  "scene": {
+    "title": "Báo cáo doanh số bằng biểu đồ",
+    "topic": "Kinh doanh",
+    "names": [
+      "Mai",
+      "James"
+    ],
+    "lines": [
+      [
+        0,
+        "Good morning, everyone. Let me show you our sales results for the third quarter.",
+        "Chào buổi sáng mọi người. Tôi xin trình bày kết quả doanh số quý ba của chúng ta."
+      ],
+      [
+        1,
+        "Thanks, Mai. What does this bar chart show?",
+        "Cảm ơn Mai. Biểu đồ cột này thể hiện điều gì?"
+      ],
+      [
+        0,
+        "It compares monthly sales. As you can see, they grew steadily from July.",
+        "Nó so sánh doanh số hàng tháng. Như mọi người thấy, doanh số tăng đều từ tháng Bảy."
+      ],
+      [
+        1,
+        "And sales reached their peak in September, right?",
+        "Và doanh số đạt đỉnh vào tháng Chín, đúng không?"
+      ],
+      [
+        0,
+        "Exactly. September's figures exceeded our target by fifteen percent.",
+        "Chính xác. Số liệu tháng Chín đã vượt mục tiêu mười lăm phần trăm."
+      ],
+      [
+        1,
+        "That's impressive. How did we do compared to the same quarter last year?",
+        "Ấn tượng đấy. So với cùng quý năm ngoái thì chúng ta thế nào?"
+      ],
+      [
+        0,
+        "We saw a significant increase of about twenty percent overall.",
+        "Chúng ta thấy mức tăng đáng kể khoảng hai mươi phần trăm nói chung."
+      ],
+      [
+        1,
+        "Were there any areas where sales went down?",
+        "Có khu vực nào doanh số đi xuống không?"
+      ],
+      [
+        0,
+        "Yes, there was a small downturn in the northern region because of heavy rain.",
+        "Có, doanh số ở khu vực phía Bắc giảm nhẹ do mưa lớn."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "figure",
+      "/ˈfɪɡjər/",
+      "n",
+      "số liệu, con số",
+      "a number, especially an official one in a report",
+      "The sales figures for October will be ready tomorrow.",
+      "Số liệu doanh số tháng Mười sẽ sẵn sàng vào ngày mai."
+    ],
+    [
+      "downturn",
+      "/ˈdaʊntɜːrn/",
+      "n",
+      "sự đi xuống, suy giảm",
+      "a period when business activity or sales go down",
+      "The chart shows a downturn in sales during the rainy season.",
+      "Biểu đồ cho thấy doanh số đi xuống trong mùa mưa."
+    ],
+    [
+      "steadily",
+      "/ˈstedəli/",
+      "adv",
+      "một cách đều đặn, ổn định",
+      "gradually and at an even rate",
+      "Online orders have grown steadily over the past two years.",
+      "Đơn hàng trực tuyến đã tăng đều đặn trong hai năm qua."
+    ],
+    [
+      "significant",
+      "/sɪɡˈnɪfɪkənt/",
+      "adj",
+      "đáng kể",
+      "large or important enough to be noticed",
+      "There was a significant rise in sales after the TV ads.",
+      "Doanh số đã tăng đáng kể sau các quảng cáo truyền hình."
+    ],
+    [
+      "compared to",
+      "/kəmˈperd tuː/",
+      "phrase",
+      "so với",
+      "when measured against something else",
+      "Sales rose by ten percent compared to last quarter.",
+      "Doanh số tăng mười phần trăm so với quý trước."
+    ],
+    [
+      "peak",
+      "/piːk/",
+      "n",
+      "đỉnh, mức cao nhất",
+      "the highest point or level of something",
+      "Sales usually reach their peak just before Tết.",
+      "Doanh số thường đạt đỉnh ngay trước Tết."
+    ],
+    [
+      "bar chart",
+      "/bɑːr tʃɑːrt/",
+      "phrase",
+      "biểu đồ cột",
+      "a chart that uses bars of different lengths to compare amounts",
+      "The bar chart compares sales in our five largest cities.",
+      "Biểu đồ cột so sánh doanh số tại năm thành phố lớn nhất của chúng tôi."
+    ],
+    [
+      "exceed",
+      "/ɪkˈsiːd/",
+      "v",
+      "vượt quá",
+      "to be greater than a number or amount",
+      "Our team exceeded its sales target for the third month in a row.",
+      "Nhóm chúng tôi đã vượt chỉ tiêu doanh số ba tháng liên tiếp."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Sales in the southern region rose ____ throughout the third quarter.",
+      "o": [
+        "steady",
+        "steadily",
+        "steadiness",
+        "steadied"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ \"rose\", nên chọn \"steadily\"."
+    },
+    {
+      "q": "September was the ____ month of the year for our online store.",
+      "o": [
+        "busy",
+        "busier",
+        "busiest",
+        "more busy"
+      ],
+      "a": 2,
+      "gp": "compare",
+      "x": "Có \"the\" và phạm vi \"of the year\" nên dùng so sánh nhất \"busiest\"."
+    },
+    {
+      "q": "Our sales figures ____ the target in each of the last three quarters.",
+      "o": [
+        "exceed",
+        "have exceeded",
+        "are exceeding",
+        "will exceed"
+      ],
+      "a": 1,
+      "gp": "tense",
+      "x": "\"In each of the last three quarters\" chỉ khoảng thời gian kéo dài đến hiện tại, dùng hiện tại hoàn thành \"have exceeded\"."
+    },
+    {
+      "q": "There was a sharp decline ____ sales after the rainy season began.",
+      "o": [
+        "of",
+        "in",
+        "on",
+        "at"
+      ],
+      "a": 1,
+      "gp": "prep",
+      "x": "Cụm cố định \"a decline in + danh từ\" diễn tả sự sụt giảm về một lĩnh vực nào đó."
+    },
+    {
+      "q": "____ of the three charts in the report shows a different region.",
+      "o": [
+        "Each",
+        "All",
+        "Both",
+        "Many"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "Động từ \"shows\" chia số ít nên chủ ngữ phải là \"Each of\"; \"All, Both, Many\" đi với động từ số nhiều."
+    },
+    {
+      "q": "The sales director thanked the team for ____ hard work during the busy season.",
+      "o": [
+        "they",
+        "them",
+        "their",
+        "theirs"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Trước cụm danh từ \"hard work\" cần tính từ sở hữu \"their\"."
+    }
+  ]
+}

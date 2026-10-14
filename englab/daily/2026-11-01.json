@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-01",
+  "title": "Rà soát chi tiêu hàng quý",
+  "scene": {
+    "title": "Họp rà soát chi tiêu với phòng tài chính",
+    "topic": "Kinh doanh",
+    "names": [
+      "Hùng",
+      "Emily"
+    ],
+    "lines": [
+      [
+        0,
+        "Emily, thanks for joining. Let's go through the quarterly spending report.",
+        "Emily, cảm ơn chị đã tham gia. Chúng ta cùng xem qua báo cáo chi tiêu quý nhé."
+      ],
+      [
+        1,
+        "Sure. It looks like the marketing team overspent by about twelve percent.",
+        "Được. Có vẻ như nhóm marketing đã chi vượt khoảng mười hai phần trăm."
+      ],
+      [
+        0,
+        "That's mostly because of the extra trade fair in September.",
+        "Điều đó chủ yếu là do hội chợ thương mại bổ sung vào tháng Chín."
+      ],
+      [
+        1,
+        "I see. But our revenue was lower than the forecast this quarter.",
+        "Tôi hiểu. Nhưng doanh thu quý này lại thấp hơn dự báo."
+      ],
+      [
+        0,
+        "So do we need to cut costs for the rest of the fiscal year?",
+        "Vậy chúng ta có cần cắt giảm chi phí trong phần còn lại của năm tài chính không?"
+      ],
+      [
+        1,
+        "Yes, a little. We could allocate less money to printed materials.",
+        "Có, một chút. Chúng ta có thể phân bổ ít tiền hơn cho tài liệu in ấn."
+      ],
+      [
+        0,
+        "That makes sense. What about staff travel reimbursements?",
+        "Hợp lý đấy. Còn khoản hoàn trả chi phí đi lại của nhân viên thì sao?"
+      ],
+      [
+        1,
+        "Those should stay the same, but every claim needs a manager's signature.",
+        "Những khoản đó vẫn giữ nguyên, nhưng mọi yêu cầu thanh toán đều cần chữ ký của quản lý."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "quarterly",
+      "/ˈkwɔːrtərli/",
+      "adj",
+      "hàng quý",
+      "happening or produced every three months",
+      "The quarterly report shows a small increase in sales.",
+      "Báo cáo hàng quý cho thấy doanh số tăng nhẹ."
+    ],
+    [
+      "overspend",
+      "/ˌoʊvərˈspend/",
+      "v",
+      "chi tiêu vượt mức",
+      "to spend more money than you planned",
+      "Departments that overspend this quarter must explain why.",
+      "Các phòng ban chi vượt mức trong quý này phải giải trình lý do."
+    ],
+    [
+      "allocate",
+      "/ˈæləkeɪt/",
+      "v",
+      "phân bổ",
+      "to give a certain amount of money or resources for a purpose",
+      "The board allocated two billion dong to online advertising.",
+      "Hội đồng quản trị đã phân bổ hai tỷ đồng cho quảng cáo trực tuyến."
+    ],
+    [
+      "reimbursement",
+      "/ˌriːɪmˈbɜːrsmənt/",
+      "n",
+      "khoản hoàn trả chi phí",
+      "money paid back to someone who spent it for work",
+      "Please send your taxi receipts to finance for reimbursement.",
+      "Vui lòng gửi hóa đơn taxi cho phòng tài chính để được hoàn trả chi phí."
+    ],
+    [
+      "forecast",
+      "/ˈfɔːrkæst/",
+      "n",
+      "dự báo",
+      "a statement about what is expected to happen in the future",
+      "The sales forecast for next year looks very positive.",
+      "Dự báo doanh số cho năm tới trông rất khả quan."
+    ],
+    [
+      "cut costs",
+      "/kʌt kɔːsts/",
+      "phrase",
+      "cắt giảm chi phí",
+      "to reduce the amount of money a business spends",
+      "We can cut costs by using less paper in the office.",
+      "Chúng ta có thể cắt giảm chi phí bằng cách dùng ít giấy hơn trong văn phòng."
+    ],
+    [
+      "revenue",
+      "/ˈrevənuː/",
+      "n",
+      "doanh thu",
+      "the total money a company receives from its business",
+      "Revenue from online sales doubled this year.",
+      "Doanh thu từ bán hàng trực tuyến đã tăng gấp đôi trong năm nay."
+    ],
+    [
+      "fiscal year",
+      "/ˈfɪskəl jɪr/",
+      "phrase",
+      "năm tài chính",
+      "a twelve-month period a company uses for its accounts",
+      "Our fiscal year begins on the first of April.",
+      "Năm tài chính của chúng tôi bắt đầu vào ngày một tháng Tư."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The finance team found that travel costs had risen ____ during the third quarter.",
+      "o": [
+        "significant",
+        "significance",
+        "significantly",
+        "signify"
+      ],
+      "a": 2,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ \"had risen\", nên chọn \"significantly\"."
+    },
+    {
+      "q": "If we had cut costs earlier, we ____ within our spending limit this quarter.",
+      "o": [
+        "will stay",
+        "would stay",
+        "would have stayed",
+        "had stayed"
+      ],
+      "a": 2,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 3 (giả định trái với quá khứ): \"If + had V3, would have V3\"."
+    },
+    {
+      "q": "Only a ____ employees have sent their reimbursement forms so far.",
+      "o": [
+        "few",
+        "little",
+        "much",
+        "lot"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "\"Employees\" là danh từ đếm được số nhiều nên dùng \"a few\"; \"a little\" dùng cho danh từ không đếm được."
+    },
+    {
+      "q": "Additional funds ____ to the IT team after the review last month.",
+      "o": [
+        "allocated",
+        "were allocated",
+        "are allocating",
+        "have allocated"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Chủ ngữ \"additional funds\" chịu tác động và có mốc quá khứ \"last month\", nên dùng bị động quá khứ \"were allocated\"."
+    },
+    {
+      "q": "The company's revenue this year is ____ than the forecast predicted.",
+      "o": [
+        "high",
+        "higher",
+        "highest",
+        "more high"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"than\" nên dùng so sánh hơn; tính từ ngắn \"high\" thành \"higher\"."
+    },
+    {
+      "q": "Please send all expense claims to the finance office ____ Friday afternoon.",
+      "o": [
+        "by",
+        "until",
+        "since",
+        "during"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "\"By + thời điểm\" nghĩa là \"trước hoặc muộn nhất vào\" một hạn chót, phù hợp với việc nộp giấy tờ."
+    }
+  ]
+}

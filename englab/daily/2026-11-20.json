@@ -1,0 +1,202 @@
+{
+ "date": "2026-11-20",
+ "title": "Buổi động não tìm ý tưởng mới",
+ "scene": {
+  "title": "Ý tưởng cho ứng dụng nội bộ",
+  "topic": "Công sở",
+  "names": [
+   "Trang",
+   "Carlos"
+  ],
+  "lines": [
+   [
+    0,
+    "Thanks for joining, everyone. Today we'll brainstorm ideas for our new internal app.",
+    "Cảm ơn mọi người đã tham gia. Hôm nay chúng ta sẽ cùng động não tìm ý tưởng cho ứng dụng nội bộ mới."
+   ],
+   [
+    1,
+    "Here's my input. What if staff could book meeting rooms through the app?",
+    "Đây là ý kiến của tôi. Nếu nhân viên có thể đặt phòng họp qua ứng dụng thì sao?"
+   ],
+   [
+    0,
+    "Great idea. Let me jot down everything on the whiteboard first.",
+    "Ý tưởng hay. Để tôi ghi nhanh mọi thứ lên bảng trắng trước đã."
+   ],
+   [
+    1,
+    "We could build on that and add a desk-booking feature too.",
+    "Chúng ta có thể phát triển thêm từ ý đó và bổ sung cả tính năng đặt chỗ ngồi."
+   ],
+   [
+    0,
+    "That's innovative. Is it feasible with our current IT team, though?",
+    "Sáng tạo đấy. Nhưng với đội IT hiện tại thì có khả thi không?"
+   ],
+   [
+    1,
+    "I think so, if we take a simple approach and start with one floor.",
+    "Tôi nghĩ là được, nếu chúng ta làm theo cách đơn giản và bắt đầu thử ở một tầng."
+   ],
+   [
+    0,
+    "I like it. Remember, there are no bad ideas in this session.",
+    "Tôi thích ý này. Hãy nhớ, trong buổi này không có ý tưởng nào là tồi cả."
+   ],
+   [
+    1,
+    "Then here's another one: a page where people can share potential improvements.",
+    "Vậy thì thêm một ý nữa: một trang để mọi người chia sẻ những cải tiến tiềm năng."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "brainstorm",
+   "/ˈbreɪnstɔːm/",
+   "v",
+   "động não, cùng nghĩ ý tưởng",
+   "to come up with many ideas quickly as a group",
+   "Let's brainstorm names for the new product.",
+   "Chúng ta hãy cùng động não đặt tên cho sản phẩm mới."
+  ],
+  [
+   "input",
+   "/ˈɪnpʊt/",
+   "n",
+   "ý kiến đóng góp",
+   "ideas or advice that you give to help with something",
+   "Thanks for your input on the new app design.",
+   "Cảm ơn ý kiến đóng góp của bạn về thiết kế ứng dụng mới."
+  ],
+  [
+   "jot down",
+   "/ˌdʒɒt ˈdaʊn/",
+   "phrase",
+   "ghi nhanh, ghi vội",
+   "to write something quickly",
+   "I jotted down a few ideas during the meeting.",
+   "Tôi đã ghi nhanh vài ý tưởng trong cuộc họp."
+  ],
+  [
+   "build on",
+   "/ˈbɪld ɒn/",
+   "phrase",
+   "phát triển dựa trên",
+   "to use something as a base for further progress",
+   "We can build on Mai's idea to create a better plan.",
+   "Chúng ta có thể phát triển dựa trên ý tưởng của Mai để tạo ra kế hoạch tốt hơn."
+  ],
+  [
+   "innovative",
+   "/ˈɪnəveɪtɪv/",
+   "adj",
+   "sáng tạo, đổi mới",
+   "new and original",
+   "The team came up with an innovative way to share files.",
+   "Nhóm đã nghĩ ra một cách chia sẻ tệp đầy sáng tạo."
+  ],
+  [
+   "feasible",
+   "/ˈfiːzəbl/",
+   "adj",
+   "khả thi",
+   "possible and likely to work",
+   "Is it feasible to launch the app before March?",
+   "Liệu có khả thi để ra mắt ứng dụng trước tháng Ba không?"
+  ],
+  [
+   "approach",
+   "/əˈprəʊtʃ/",
+   "n",
+   "cách tiếp cận, phương pháp",
+   "a way of dealing with something",
+   "We need a fresh approach to internal communication.",
+   "Chúng ta cần một cách tiếp cận mới cho việc truyền thông nội bộ."
+  ],
+  [
+   "whiteboard",
+   "/ˈwaɪtbɔːd/",
+   "n",
+   "bảng trắng",
+   "a white board that you write on with special pens",
+   "She wrote all of our ideas on the whiteboard.",
+   "Cô ấy đã viết tất cả ý tưởng của chúng tôi lên bảng trắng."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "The marketing team came up with several ____ ideas during yesterday's session.",
+   "o": [
+    "innovation",
+    "innovatively",
+    "innovative",
+    "innovate"
+   ],
+   "a": 2,
+   "gp": "wordform",
+   "x": "Trước danh từ \"ideas\" cần một tính từ, nên chọn \"innovative\" (sáng tạo)."
+  },
+  {
+   "q": "If we ____ more time, we would test all three ideas before choosing one.",
+   "o": [
+    "had",
+    "have",
+    "will have",
+    "would have"
+   ],
+   "a": 0,
+   "gp": "conditional",
+   "x": "Mệnh đề chính dùng \"would test\" nên đây là câu điều kiện loại 2; mệnh đề \"if\" dùng quá khứ đơn \"had\"."
+  },
+  {
+   "q": "Ms. Pham's suggestion was the ____ of all the ideas presented at the meeting.",
+   "o": [
+    "practical",
+    "practically",
+    "most practical",
+    "more practical"
+   ],
+   "a": 2,
+   "gp": "compare",
+   "x": "Cụm \"the ... of all\" báo hiệu so sánh nhất, nên chọn \"most practical\"."
+  },
+  {
+   "q": "____ participant had a chance to share at least one idea.",
+   "o": [
+    "Both",
+    "Every",
+    "All",
+    "Many"
+   ],
+   "a": 1,
+   "gp": "quant",
+   "x": "\"Every\" đi với danh từ đếm được số ít \"participant\"; \"All\", \"Many\", \"Both\" đi với danh từ số nhiều."
+  },
+  {
+   "q": "All of the ideas ____ by the team will be reviewed next Monday.",
+   "o": [
+    "proposing",
+    "propose",
+    "proposes",
+    "proposed"
+   ],
+   "a": 3,
+   "gp": "passive",
+   "x": "Các ý tưởng \"được đề xuất\" bởi nhóm, nên dùng quá khứ phân từ \"proposed\" mang nghĩa bị động."
+  },
+  {
+   "q": "We should consider ____ a short survey before choosing the final idea.",
+   "o": [
+    "conducted",
+    "conducting",
+    "to conduct",
+    "conduct"
+   ],
+   "a": 1,
+   "gp": "gerund",
+   "x": "Sau động từ \"consider\" ta dùng danh động từ (V-ing), nên chọn \"conducting\"."
+  }
+ ]
+}

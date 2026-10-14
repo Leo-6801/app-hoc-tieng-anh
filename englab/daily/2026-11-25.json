@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-25",
+  "title": "Đào tạo bảo mật dữ liệu và nhận diện lừa đảo",
+  "scene": {
+    "title": "Cảnh giác với email lừa đảo",
+    "topic": "Kinh doanh",
+    "names": ["Quân", "Linda"],
+    "lines": [
+      [0, "Linda, I got a strange email asking me to update my bank details.", "Linda, tôi nhận được một email lạ yêu cầu cập nhật thông tin ngân hàng."],
+      [1, "That sounds like phishing. Did you click on any links in it?", "Nghe giống lừa đảo qua mạng đấy. Anh có bấm vào đường link nào trong đó không?"],
+      [0, "No, I didn't. The sender's address looked suspicious, so I stopped.", "Không. Địa chỉ người gửi trông đáng ngờ nên tôi dừng lại."],
+      [1, "Good. Always verify the sender before you open any attachments.", "Tốt lắm. Luôn xác minh người gửi trước khi mở bất kỳ tệp đính kèm nào."],
+      [0, "What could happen if someone opens a malicious file?", "Điều gì có thể xảy ra nếu ai đó mở một tệp độc hại?"],
+      [1, "It could cause a data breach and expose our clients' confidential information.", "Nó có thể gây rò rỉ dữ liệu và làm lộ thông tin bảo mật của khách hàng."],
+      [0, "That's scary. What other precautions should we take?", "Thật đáng sợ. Chúng ta nên có những biện pháp phòng ngừa nào khác?"],
+      [1, "Never share passwords, and lock your computer whenever you leave your desk.", "Không bao giờ chia sẻ mật khẩu và hãy khóa máy tính mỗi khi rời khỏi bàn."],
+      [0, "Thanks. I'll forward that email to the security team now.", "Cảm ơn chị. Tôi sẽ chuyển tiếp email đó cho nhóm bảo mật ngay."]
+    ]
+  },
+  "vocab": [
+    ["phishing", "/ˈfɪʃɪŋ/", "n", "lừa đảo qua mạng (giả mạo để đánh cắp thông tin)", "the act of sending fake messages to steal personal information", "Phishing emails often pretend to come from a bank.", "Email lừa đảo thường giả danh được gửi từ ngân hàng."],
+    ["suspicious", "/səˈspɪʃəs/", "adj", "đáng ngờ", "making you think something is wrong or dishonest", "Report any suspicious messages to the security team.", "Hãy báo cáo mọi tin nhắn đáng ngờ cho nhóm bảo mật."],
+    ["confidential", "/ˌkɑːnfɪˈdenʃəl/", "adj", "bảo mật, tuyệt mật", "meant to be kept secret within a group", "These financial reports are confidential and must not be shared.", "Những báo cáo tài chính này là tài liệu bảo mật và không được chia sẻ."],
+    ["verify", "/ˈverɪfaɪ/", "v", "xác minh", "to check that something is true or correct", "Please verify the caller's identity before giving any information.", "Vui lòng xác minh danh tính người gọi trước khi cung cấp bất kỳ thông tin nào."],
+    ["sensitive", "/ˈsensətɪv/", "adj", "nhạy cảm (thông tin)", "needing to be kept private because it could cause harm", "Sensitive data such as bank numbers must be encrypted.", "Dữ liệu nhạy cảm như số tài khoản ngân hàng phải được mã hóa."],
+    ["breach", "/briːtʃ/", "n", "sự xâm phạm, rò rỉ (dữ liệu)", "an event where private information is accessed without permission", "The data breach affected thousands of online shoppers.", "Vụ rò rỉ dữ liệu đã ảnh hưởng đến hàng nghìn người mua sắm trực tuyến."],
+    ["malicious", "/məˈlɪʃəs/", "adj", "độc hại", "designed to cause harm or damage", "The antivirus program blocked a malicious file yesterday.", "Phần mềm diệt virus đã chặn một tệp độc hại vào hôm qua."],
+    ["precaution", "/prɪˈkɔːʃən/", "n", "biện pháp phòng ngừa", "an action taken to prevent something bad from happening", "As a precaution, change your password every three months.", "Như một biện pháp phòng ngừa, hãy đổi mật khẩu ba tháng một lần."]
+  ],
+  "toeic": [
+    {"q": "Employees ____ receive suspicious emails should report them to the IT team immediately.", "o": ["which", "who", "whose", "whom"], "a": 1, "gp": "relative", "x": "Đại từ quan hệ thay cho người (\"employees\") và làm chủ ngữ là \"who\"."},
+    {"q": "If all employees ____ stronger passwords, hackers would not access our accounts so easily.", "o": ["use", "used", "will use", "had used"], "a": 1, "gp": "conditional", "x": "Câu điều kiện loại 2 (giả định ở hiện tại): \"If + quá khứ đơn, would + V\", nên chọn \"used\"."},
+    {"q": "All staff are required to complete the security training ____ the end of the month.", "o": ["by", "at", "on", "since"], "a": 0, "gp": "prep", "x": "\"By the end of the month\" nghĩa là \"trước/muộn nhất vào cuối tháng\", chỉ hạn chót."},
+    {"q": "Confidential documents should never be left ____ on your desk.", "o": ["attend", "unattended", "attending", "attention"], "a": 1, "gp": "wordform", "x": "Cấu trúc \"leave something + adj/V3\": \"left unattended\" nghĩa là để mà không có người trông coi."},
+    {"q": "Every computer in the office ____ protected by the new antivirus software.", "o": ["are", "is", "were", "have been"], "a": 1, "gp": "agreement", "x": "\"Every + danh từ số ít\" đi với động từ số ít, nên chọn \"is\"."},
+    {"q": "As a ____, the company now requires two-step login for all email accounts.", "o": ["precaution", "precise", "precede", "prescription"], "a": 0, "gp": "vocab", "x": "\"As a precaution\" nghĩa là \"như một biện pháp phòng ngừa\", phù hợp với ngữ cảnh bảo mật."}
+  ]
+}

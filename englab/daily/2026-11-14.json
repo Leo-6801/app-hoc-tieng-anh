@@ -1,0 +1,202 @@
+{
+ "date": "2026-11-14",
+ "title": "Xin nghỉ phép năm với quản lý",
+ "scene": {
+  "title": "Xin nghỉ phép cuối năm",
+  "topic": "Công sở",
+  "names": [
+   "Ngọc",
+   "James"
+  ],
+  "lines": [
+   [
+    0,
+    "James, do you have a minute? I'd like to request some annual leave.",
+    "Anh James, anh có rảnh một phút không ạ? Em muốn xin nghỉ phép năm."
+   ],
+   [
+    1,
+    "Of course. Which dates are you thinking about?",
+    "Tất nhiên rồi. Em định nghỉ những ngày nào?"
+   ],
+   [
+    0,
+    "From December 20th to 24th. My family is planning a trip to Đà Lạt.",
+    "Từ ngày 20 đến 24 tháng 12 ạ. Gia đình em đang lên kế hoạch đi Đà Lạt."
+   ],
+   [
+    1,
+    "Thanks for asking in advance. Who will cover for you while you're away?",
+    "Cảm ơn em đã xin trước. Ai sẽ làm thay em trong thời gian em vắng mặt?"
+   ],
+   [
+    0,
+    "Huy agreed to help. I'll prepare a handover document for him next week.",
+    "Huy đã đồng ý giúp ạ. Tuần sau em sẽ chuẩn bị tài liệu bàn giao cho anh ấy."
+   ],
+   [
+    1,
+    "Sounds good. Please also turn on an out-of-office reply for your email.",
+    "Nghe ổn đấy. Em cũng nhớ bật thư trả lời tự động báo vắng mặt cho email nhé."
+   ],
+   [
+    0,
+    "Sure. Will you approve the request in the HR system today?",
+    "Vâng ạ. Hôm nay anh sẽ duyệt đơn trên hệ thống nhân sự chứ ạ?"
+   ],
+   [
+    1,
+    "Yes, I'll approve it this afternoon. Enjoy your days off!",
+    "Ừ, chiều nay anh sẽ duyệt. Chúc em có những ngày nghỉ vui vẻ!"
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "annual leave",
+   "/ˌænjuəl ˈliːv/",
+   "n",
+   "nghỉ phép năm",
+   "paid days off work that you get each year",
+   "Employees get twelve days of annual leave per year.",
+   "Nhân viên được hưởng mười hai ngày nghỉ phép năm mỗi năm."
+  ],
+  [
+   "request",
+   "/rɪˈkwest/",
+   "v",
+   "xin, đề nghị",
+   "to ask for something politely or formally",
+   "I'd like to request three days off next month.",
+   "Tôi muốn xin nghỉ ba ngày vào tháng sau."
+  ],
+  [
+   "approve",
+   "/əˈpruːv/",
+   "v",
+   "phê duyệt, chấp thuận",
+   "to officially agree to a plan or request",
+   "My manager approved my leave request this morning.",
+   "Quản lý của tôi đã duyệt đơn xin nghỉ phép sáng nay."
+  ],
+  [
+   "in advance",
+   "/ɪn ədˈvɑːns/",
+   "phrase",
+   "trước (một thời điểm)",
+   "before a particular time or event",
+   "Please ask for leave at least two weeks in advance.",
+   "Vui lòng xin nghỉ phép trước ít nhất hai tuần."
+  ],
+  [
+   "cover for",
+   "/ˈkʌvə fɔː(r)/",
+   "phrase",
+   "làm thay, đảm nhận thay",
+   "to do someone's work while they are away",
+   "Can you cover for me while I'm on vacation?",
+   "Bạn có thể làm thay tôi trong thời gian tôi đi nghỉ không?"
+  ],
+  [
+   "handover",
+   "/ˈhændəʊvə(r)/",
+   "n",
+   "sự bàn giao",
+   "the act of passing work to another person",
+   "I wrote a handover note so Huy knows what to do.",
+   "Tôi đã viết ghi chú bàn giao để Huy biết phải làm gì."
+  ],
+  [
+   "absence",
+   "/ˈæbsəns/",
+   "n",
+   "sự vắng mặt",
+   "a time when someone is not at work",
+   "Mr. Tan will lead the team during my absence.",
+   "Anh Tân sẽ dẫn dắt nhóm trong thời gian tôi vắng mặt."
+  ],
+  [
+   "day off",
+   "/ˌdeɪ ˈɒf/",
+   "n",
+   "ngày nghỉ",
+   "a day when you do not have to work",
+   "I'm taking a day off on Friday to visit my parents.",
+   "Tôi sẽ nghỉ một ngày vào thứ Sáu để về thăm bố mẹ."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "Leave requests should be made at least two weeks ____ advance.",
+   "o": [
+    "on",
+    "at",
+    "by",
+    "in"
+   ],
+   "a": 3,
+   "gp": "prep",
+   "x": "\"in advance\" là cụm cố định, nghĩa là \"trước\"."
+  },
+  {
+   "q": "Ms. Vo ____ her annual leave request before the busy season started.",
+   "o": [
+    "will send",
+    "had sent",
+    "has sent",
+    "sends"
+   ],
+   "a": 1,
+   "gp": "tense",
+   "x": "Hành động gửi đơn xảy ra trước một hành động khác trong quá khứ (\"started\"), nên dùng quá khứ hoàn thành \"had sent\"."
+  },
+  {
+   "q": "Your request will be ____ once your manager has reviewed the handover plan.",
+   "o": [
+    "removed",
+    "improved",
+    "proved",
+    "approved"
+   ],
+   "a": 3,
+   "gp": "vocab",
+   "x": "\"approved\" nghĩa là \"được phê duyệt\", phù hợp với danh từ \"request\"; các từ còn lại không hợp nghĩa."
+  },
+  {
+   "q": "Thank you for ____ me know about your vacation plans so early.",
+   "o": [
+    "to let",
+    "lets",
+    "letting",
+    "let"
+   ],
+   "a": 2,
+   "gp": "gerund",
+   "x": "Sau giới từ \"for\" phải dùng danh động từ (V-ing), nên chọn \"letting\"."
+  },
+  {
+   "q": "Mr. Nam will handle all client emails ____ Ms. Lan is on leave.",
+   "o": [
+    "while",
+    "during",
+    "despite",
+    "because of"
+   ],
+   "a": 0,
+   "gp": "conj",
+   "x": "\"while\" là liên từ, đi với mệnh đề \"Ms. Lan is on leave\"; \"during\", \"despite\", \"because of\" chỉ đi với danh từ."
+  },
+  {
+   "q": "Each employee ____ entitled to twelve days of paid leave per year.",
+   "o": [
+    "were",
+    "be",
+    "is",
+    "are"
+   ],
+   "a": 2,
+   "gp": "agreement",
+   "x": "\"Each + danh từ số ít\" đi với động từ số ít, nên chọn \"is\"."
+  }
+ ]
+}

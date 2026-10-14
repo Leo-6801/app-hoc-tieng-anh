@@ -792,6 +792,7 @@ document.addEventListener("keydown",e=>{ if(tab==="vocab"&&VS.mode==="card"&&VS.
 function act(a,b){ const d=b?b.dataset:{};
   switch(a){
   /* listen */
+  case "dsmore": dsMore=!dsMore; render(); break;
   case "dopen": stopSpeak(); L.view="lesson"; L.id=d.id; L.line=0; L.playing=-1; L.mode="dict"; render(); window.scrollTo({top:0}); break;
   case "dvocab": goTab("vocab"); VS.topic="day"; VS.mode="card"; VS.g=null; VS.qz=null; VS.fc=null; render(); window.scrollTo({top:0}); break;
   case "add": L.view="add"; L.err=""; render(); break;
@@ -875,12 +876,14 @@ function dailyBanner(){ const r=DAILY[0]; if(!r) return "";
   <div class="row">${r.scene?`<button class="btn primary" data-act="dopen" data-id="${esc(r.scene.id)}">Nghe: ${esc(r.scene.title)}</button>`:""}${r.vocab.length?`<button class="btn" data-act="dvocab">Học ${r.vocab.length} từ mới</button>`:""}${r.toeic.length?`<button class="btn" data-act="tstart" data-id="d:${esc(r.date)}" data-m="practice">Làm ${r.toeic.length} câu TOEIC</button>`:""}</div></section>` }
 function dailyToeicCards(){ return DAILY.filter(r=>r.toeic.length).slice(0,6).map(r=>`<section class="panel"><div><div class="label">${r.toeic.length} câu · ${Math.max(5,r.toeic.length)} phút · Part 5</div><h3 style="font-size:1.3rem">Đề hằng ngày ${esc(r.tag)}</h3></div><span class="small muted">${esc(r.title)}</span>
   <div class="row"><button class="btn" data-act="tstart" data-id="d:${esc(r.date)}" data-m="practice">Luyện tập</button><button class="btn primary" data-act="tstart" data-id="d:${esc(r.date)}" data-m="exam">Thi thử</button></div></section>`).join("") }
-function dailyScenesSection(){ const ds=SCENES.filter(s=>s.daily); if(!ds.length) return "";
-  return `<section class="panel"><div class="row between"><h3>Hội thoại hằng ngày</h3><span class="small muted">Bài mới mỗi sáng</span></div>
-  <div class="grid">${ds.map(s=>`<button class="card" data-act="open" data-id="${esc(s.id)}"><div class="meta"><span class="pill a">${esc(ddmm(s.daily))}</span><span class="pill">${esc(s.topic)}</span><span class="small muted">${s.lines.length} câu</span></div><h3>${esc(s.title)}</h3><span class="small muted">${esc(s.lines[0].en)}</span></button>`).join("")}</div></section>` }
+let dsMore=false;
+function dailyScenesSection(){ const all=SCENES.filter(s=>s.daily); if(!all.length) return ""; const ds=dsMore?all:all.slice(0,8);
+  return `<section class="panel"><div class="row between"><h3>Hội thoại hằng ngày</h3><span class="small muted">${all.length} bài đã mở · bài mới mỗi ngày</span></div>
+  <div class="grid">${ds.map(s=>`<button class="card" data-act="open" data-id="${esc(s.id)}"><div class="meta"><span class="pill a">${esc(ddmm(s.daily))}</span><span class="pill">${esc(s.topic)}</span><span class="small muted">${s.lines.length} câu</span></div><h3>${esc(s.title)}</h3><span class="small muted">${esc(s.lines[0].en)}</span></button>`).join("")}</div>${all.length>8?`<div><button class="btn sm" data-act="dsmore">${dsMore?"Thu gọn":"Xem tất cả "+all.length+" bài đã mở"}</button></div>`:""}</section>` }
 (async function(){ try{
   const r=await fetch("daily/index.json",{cache:"no-cache"}); if(!r.ok) return; const idx=await r.json();
-  const dates=(Array.isArray(idx.dates)?idx.dates:[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)).sort().reverse().slice(0,14);
+  const now=new Date(), tk=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+  const dates=(Array.isArray(idx.dates)?idx.dates:[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x)&&x<=tk).sort().reverse().slice(0,120);
   const docs=await Promise.all(dates.map(x=>fetch("daily/"+x+".json",{cache:"no-cache"}).then(q=>q.ok?q.json():null).catch(()=>null)));
   docs.reverse().forEach(x=>{ try{ addDaily(x) }catch(e){} });
   if(DAILY.length&&((tab==="listen"&&L.view==="list")||(tab==="toeic"&&T.view==="home"))) render();

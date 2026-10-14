@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-16",
+  "title": "Tiếp khách tại gian hàng hội chợ",
+  "scene": {
+    "title": "Tại gian hàng triển lãm thương mại",
+    "topic": "Kinh doanh",
+    "names": [
+      "Võ Thanh Tâm",
+      "James Lee"
+    ],
+    "lines": [
+      [
+        0,
+        "Hello, welcome to our booth! Are you familiar with Green Leaf Tea?",
+        "Xin chào, chào mừng anh đến gian hàng của chúng tôi! Anh đã biết đến trà Green Leaf chưa?"
+      ],
+      [
+        1,
+        "Not really. I'm a buyer for a chain of cafés in Singapore.",
+        "Chưa lắm. Tôi là người thu mua cho một chuỗi quán cà phê ở Singapore."
+      ],
+      [
+        0,
+        "Great to meet you. We just launched a new line of organic iced teas.",
+        "Rất vui được gặp anh. Chúng tôi vừa ra mắt dòng trà đá hữu cơ mới."
+      ],
+      [
+        1,
+        "They look nice. Can I try a sample of the peach flavor?",
+        "Trông hấp dẫn đấy. Tôi có thể thử một mẫu vị đào không?"
+      ],
+      [
+        0,
+        "Of course, here you go. We're one of the few exhibitors offering tastings today.",
+        "Dĩ nhiên rồi, mời anh. Chúng tôi là một trong số ít đơn vị trưng bày có cho nếm thử hôm nay."
+      ],
+      [
+        1,
+        "It's delicious and not too sweet. Do you have a brochure with prices?",
+        "Ngon và không quá ngọt. Chị có tờ giới thiệu kèm bảng giá không?"
+      ],
+      [
+        0,
+        "Here's our catalog, with wholesale prices on the last page.",
+        "Đây là cuốn danh mục sản phẩm của chúng tôi, giá sỉ ở trang cuối."
+      ],
+      [
+        1,
+        "Thank you. Here's my business card. Please contact me next week.",
+        "Cảm ơn chị. Đây là danh thiếp của tôi. Tuần sau chị liên hệ với tôi nhé."
+      ],
+      [
+        0,
+        "I will. Thanks for stopping by, and enjoy the rest of the show!",
+        "Chắc chắn rồi. Cảm ơn anh đã ghé qua, chúc anh tham quan hội chợ vui vẻ!"
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "booth",
+      "/buːð/",
+      "n",
+      "gian hàng (tại hội chợ, triển lãm)",
+      "a small area where a company shows its products at an event",
+      "Our company will have a booth at the Hanoi trade fair.",
+      "Công ty chúng tôi sẽ có một gian hàng tại hội chợ thương mại Hà Nội."
+    ],
+    [
+      "exhibitor",
+      "/ɪɡˈzɪbɪtər/",
+      "n",
+      "đơn vị trưng bày, nhà triển lãm",
+      "a company or person that shows products at an exhibition",
+      "More than 300 exhibitors took part in the trade show.",
+      "Hơn 300 đơn vị trưng bày đã tham gia triển lãm thương mại."
+    ],
+    [
+      "trade show",
+      "/ˈtreɪd ʃəʊ/",
+      "n",
+      "triển lãm thương mại",
+      "a large event where companies show their products",
+      "We met many new buyers at the trade show.",
+      "Chúng tôi đã gặp nhiều người mua mới tại triển lãm thương mại."
+    ],
+    [
+      "sample",
+      "/ˈsɑːmpl/",
+      "n",
+      "hàng mẫu",
+      "a small amount of a product that people can try",
+      "Visitors can get free samples at the front of the booth.",
+      "Khách tham quan có thể nhận hàng mẫu miễn phí ở phía trước gian hàng."
+    ],
+    [
+      "business card",
+      "/ˈbɪznəs kɑːd/",
+      "n",
+      "danh thiếp",
+      "a small card with your name, job and contact details",
+      "He handed me his business card after our conversation.",
+      "Anh ấy đưa cho tôi danh thiếp sau cuộc trò chuyện."
+    ],
+    [
+      "stop by",
+      "/stɒp baɪ/",
+      "phrase",
+      "ghé qua",
+      "to visit a place for a short time",
+      "Many visitors stopped by our booth on the first day.",
+      "Nhiều khách tham quan đã ghé qua gian hàng của chúng tôi trong ngày đầu tiên."
+    ],
+    [
+      "launch",
+      "/lɔːntʃ/",
+      "v",
+      "ra mắt, tung ra (sản phẩm)",
+      "to make a new product available to the public",
+      "The company will launch its new product in December.",
+      "Công ty sẽ ra mắt sản phẩm mới vào tháng Mười Hai."
+    ],
+    [
+      "catalog",
+      "/ˈkætəlɒɡ/",
+      "n",
+      "danh mục sản phẩm, ca-ta-lô",
+      "a book or list showing all the products a company sells",
+      "You can find all our products in this catalog.",
+      "Bạn có thể tìm thấy tất cả sản phẩm của chúng tôi trong cuốn danh mục này."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Visitors ____ leave their business cards will receive a free gift.",
+      "o": [
+        "who",
+        "which",
+        "whose",
+        "what"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "\"Visitors\" là người và đại từ quan hệ làm chủ ngữ cho \"leave\", nên chọn \"who\"."
+    },
+    {
+      "q": "Mr. Lee forgot his business cards, so Ms. Tâm gave him one of ____.",
+      "o": [
+        "her",
+        "hers",
+        "she",
+        "herself"
+      ],
+      "a": 1,
+      "gp": "pronoun",
+      "x": "Sau \"one of\" cần đại từ sở hữu thay cho \"her business cards\", nên chọn \"hers\"."
+    },
+    {
+      "q": "Thank you for ____ by our booth at this year's trade show.",
+      "o": [
+        "stop",
+        "stopped",
+        "stopping",
+        "to stop"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau giới từ \"for\" dùng danh động từ (V-ing): \"Thank you for stopping by\"."
+    },
+    {
+      "q": "The award for best booth design ____ by the organizers on the final day of the show.",
+      "o": [
+        "will present",
+        "will be presented",
+        "presenting",
+        "has presented"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Giải thưởng được ban tổ chức trao (có \"by the organizers\") vào một thời điểm trong tương lai, nên dùng bị động tương lai \"will be presented\"."
+    },
+    {
+      "q": "____ exhibitor at the fair must display a company sign above the booth.",
+      "o": [
+        "All",
+        "Every",
+        "Many",
+        "Several"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "\"Exhibitor\" là danh từ số ít, nên chỉ \"Every\" phù hợp. \"All, Many, Several\" đi với danh từ số nhiều."
+    },
+    {
+      "q": "____ the hall was crowded, the staff managed to talk to every visitor.",
+      "o": [
+        "Although",
+        "Because",
+        "Unless",
+        "Despite"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Hai mệnh đề mang ý đối lập (đông người nhưng vẫn nói chuyện được với mọi khách) nên dùng \"Although\". \"Despite\" không đi với mệnh đề."
+    }
+  ]
+}

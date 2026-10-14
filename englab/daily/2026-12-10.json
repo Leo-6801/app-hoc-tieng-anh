@@ -1,0 +1,38 @@
+{
+  "date": "2026-12-10",
+  "title": "Gia hạn thỏa thuận dài hạn",
+  "scene": {
+    "title": "Thương lượng gia hạn hợp tác",
+    "topic": "Kinh doanh",
+    "names": ["Phan Đức Thịnh", "Olivia Brown"],
+    "lines": [
+      [0, "Ms. Brown, our current agreement ends next month. Would you like to renew it?", "Chị Brown, thỏa thuận hiện tại của chúng ta sẽ hết hạn vào tháng sau. Chị có muốn gia hạn không?"],
+      [1, "Yes, we've been happy with your service. We'd like a long-term arrangement this time.", "Có, chúng tôi rất hài lòng với dịch vụ của anh. Lần này chúng tôi muốn một thỏa thuận dài hạn."],
+      [0, "Wonderful. We could extend the agreement for three years instead of one.", "Tuyệt vời. Chúng ta có thể kéo dài thỏa thuận thành ba năm thay vì một năm."],
+      [1, "Three years sounds good. Will the prices stay the same for the whole period?", "Ba năm nghe hợp lý đấy. Giá có giữ nguyên trong suốt thời gian đó không?"],
+      [0, "Yes, prices are fixed for three years as a thank-you for your loyalty.", "Có, giá được cố định trong ba năm như lời cảm ơn vì sự gắn bó của chị."],
+      [1, "That's generous. Could you also add free training for our new staff?", "Thật hào phóng. Anh có thể thêm khóa đào tạo miễn phí cho nhân viên mới của chúng tôi không?"],
+      [0, "Certainly. I'm sure we can find a mutually beneficial solution.", "Chắc chắn rồi. Tôi tin chúng ta có thể tìm được một giải pháp đôi bên cùng có lợi."],
+      [1, "Great. Please send me the final version, and I'll sign it this week.", "Tốt quá. Anh gửi cho tôi bản cuối cùng, tôi sẽ ký trong tuần này."],
+      [0, "I'll send it today. We truly value our partnership with your company.", "Tôi sẽ gửi ngay hôm nay. Chúng tôi thật sự trân trọng mối quan hệ hợp tác với công ty chị."]
+    ]
+  },
+  "vocab": [
+    ["renew", "/rɪˈnjuː/", "v", "gia hạn", "to make an agreement continue for a longer time", "We decided to renew our agreement with the supplier for two more years.", "Chúng tôi quyết định gia hạn thỏa thuận với nhà cung cấp thêm hai năm."],
+    ["agreement", "/əˈɡriːmənt/", "n", "thỏa thuận, bản thỏa thuận", "an arrangement between people or companies about what they will do", "The two companies signed an agreement last week.", "Hai công ty đã ký một bản thỏa thuận vào tuần trước."],
+    ["loyalty", "/ˈlɔɪəlti/", "n", "sự trung thành, sự gắn bó", "the quality of staying with one company or person for a long time", "We offer special prices to reward client loyalty.", "Chúng tôi đưa ra giá đặc biệt để tri ân sự gắn bó của khách hàng."],
+    ["long-term", "/ˌlɒŋ ˈtɜːm/", "adj", "dài hạn, lâu dài", "lasting for a long period of time", "Our goal is to build long-term relationships with our clients.", "Mục tiêu của chúng tôi là xây dựng mối quan hệ lâu dài với khách hàng."],
+    ["partnership", "/ˈpɑːtnəʃɪp/", "n", "quan hệ đối tác, sự hợp tác", "a relationship in which two groups work together", "The partnership between our companies has lasted ten years.", "Quan hệ đối tác giữa hai công ty chúng tôi đã kéo dài mười năm."],
+    ["extend", "/ɪkˈstend/", "v", "kéo dài, gia hạn thêm", "to make something last longer", "The client asked to extend the agreement until next June.", "Khách hàng đề nghị kéo dài thỏa thuận đến tháng Sáu năm sau."],
+    ["mutually", "/ˈmjuːtʃuəli/", "adv", "lẫn nhau, cho cả hai bên", "in a way that affects or helps both sides", "We found a mutually acceptable price.", "Chúng tôi đã tìm được mức giá mà cả hai bên đều chấp nhận."],
+    ["sign", "/saɪn/", "v", "ký (tên)", "to write your name on a document to show you agree", "Both managers will sign the documents tomorrow.", "Cả hai quản lý sẽ ký các tài liệu vào ngày mai."]
+  ],
+  "toeic": [
+    {"q": "If we offered a longer agreement, the client ____ more likely to renew.", "o": ["is", "will be", "would be", "has been"], "a": 2, "gp": "conditional", "x": "Câu điều kiện loại 2: mệnh đề \"if\" ở quá khứ đơn (\"offered\"), mệnh đề chính dùng \"would + V\", nên chọn \"would be\"."},
+    {"q": "Ms. Brown, ____ company has been our client for ten years, agreed to renew the agreement.", "o": ["who", "whose", "which", "whom"], "a": 1, "gp": "relative", "x": "Cần đại từ quan hệ chỉ sở hữu đứng trước danh từ \"company\" (công ty của bà Brown), nên chọn \"whose\"."},
+    {"q": "We would like to thank you for your continued ____.", "o": ["loyal", "loyally", "loyalty", "loyalist"], "a": 2, "gp": "wordform", "x": "Sau tính từ \"continued\" cần một danh từ; \"loyalty\" (sự gắn bó, trung thành) phù hợp nghĩa nhất."},
+    {"q": "The two companies agreed to ____ their partnership for another three years.", "o": ["extend", "exceed", "explore", "expire"], "a": 0, "gp": "vocab", "x": "\"Extend a partnership for three years\" nghĩa là kéo dài quan hệ hợp tác thêm ba năm."},
+    {"q": "Both the manager and her assistant ____ attending the signing ceremony.", "o": ["is", "are", "was", "has"], "a": 1, "gp": "agreement", "x": "Chủ ngữ \"Both A and B\" là số nhiều, nên động từ chia số nhiều \"are\"."},
+    {"q": "The client is looking forward to ____ the new agreement next week.", "o": ["sign", "signed", "signing", "be signed"], "a": 2, "gp": "gerund", "x": "Trong cụm \"look forward to\", \"to\" là giới từ nên theo sau là danh động từ \"signing\"."}
+  ]
+}

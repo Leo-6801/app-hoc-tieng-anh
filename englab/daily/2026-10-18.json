@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-18",
+  "title": "Đặt vé máy bay đi công tác",
+  "scene": {
+    "title": "Đặt chuyến bay đi Singapore",
+    "topic": "Du lịch",
+    "names": [
+      "Thảo",
+      "Daniel"
+    ],
+    "lines": [
+      [
+        0,
+        "Good morning. I need to book a flight to Singapore for a business trip next week.",
+        "Chào buổi sáng. Tôi cần đặt một chuyến bay đi Singapore cho chuyến công tác tuần sau."
+      ],
+      [
+        1,
+        "Of course. Would you prefer a nonstop flight or one with a short layover?",
+        "Vâng ạ. Chị muốn bay thẳng hay bay có một chặng quá cảnh ngắn?"
+      ],
+      [
+        0,
+        "Nonstop, please. I have a meeting right after I land on Tuesday.",
+        "Bay thẳng nhé. Tôi có cuộc họp ngay sau khi hạ cánh vào thứ Ba."
+      ],
+      [
+        1,
+        "There is a morning flight at 8:15. The economy class fare is 4.2 million dong.",
+        "Có một chuyến buổi sáng lúc 8 giờ 15. Giá vé hạng phổ thông là 4,2 triệu đồng."
+      ],
+      [
+        0,
+        "That sounds fine. Can I get an aisle seat near the front of the plane?",
+        "Được đấy. Tôi có thể lấy ghế cạnh lối đi ở gần đầu máy bay không?"
+      ],
+      [
+        1,
+        "Sure. Are you a frequent flyer member? You might get a free upgrade.",
+        "Chắc chắn rồi. Chị có phải hội viên khách hàng thường xuyên không? Chị có thể được nâng hạng miễn phí đấy."
+      ],
+      [
+        0,
+        "Yes, here is my membership number. Will you send me an e-ticket?",
+        "Có, đây là số hội viên của tôi. Anh sẽ gửi vé điện tử cho tôi chứ?"
+      ],
+      [
+        1,
+        "Yes, the e-ticket will arrive in your inbox within ten minutes.",
+        "Vâng, vé điện tử sẽ được gửi vào hộp thư của chị trong vòng mười phút."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "layover",
+      "/ˈleɪˌoʊvər/",
+      "n",
+      "chặng dừng quá cảnh",
+      "a short stop at an airport between two flights",
+      "Our flight to London has a three-hour layover in Dubai.",
+      "Chuyến bay của chúng tôi đến London có chặng quá cảnh ba tiếng ở Dubai."
+    ],
+    [
+      "nonstop",
+      "/ˌnɑːnˈstɑːp/",
+      "adj",
+      "bay thẳng, không dừng",
+      "going directly to a place without stopping",
+      "I always choose a nonstop flight when I travel for work.",
+      "Tôi luôn chọn chuyến bay thẳng khi đi công tác."
+    ],
+    [
+      "fare",
+      "/fer/",
+      "n",
+      "giá vé (đi lại)",
+      "the money you pay to travel by plane, bus, train, or taxi",
+      "The fare to Tokyo is cheaper if you book a month ahead.",
+      "Giá vé đi Tokyo rẻ hơn nếu bạn đặt trước một tháng."
+    ],
+    [
+      "economy class",
+      "/ɪˈkɑːnəmi klæs/",
+      "n",
+      "hạng phổ thông",
+      "the cheapest seats on a plane",
+      "Most employees fly economy class on short business trips.",
+      "Hầu hết nhân viên bay hạng phổ thông trong các chuyến công tác ngắn."
+    ],
+    [
+      "aisle seat",
+      "/ˈaɪl siːt/",
+      "n",
+      "ghế cạnh lối đi",
+      "a seat next to the path between rows on a plane or train",
+      "I asked for an aisle seat so I could stand up easily.",
+      "Tôi xin ghế cạnh lối đi để có thể đứng dậy dễ dàng."
+    ],
+    [
+      "business class",
+      "/ˈbɪznəs klæs/",
+      "n",
+      "hạng thương gia",
+      "the more expensive and comfortable seats on a plane",
+      "Senior managers usually fly business class on long trips.",
+      "Các quản lý cấp cao thường bay hạng thương gia trong những chuyến đi dài."
+    ],
+    [
+      "frequent flyer",
+      "/ˈfriːkwənt ˈflaɪər/",
+      "n",
+      "khách hàng bay thường xuyên",
+      "a person who often flies with the same airline and collects points",
+      "As a frequent flyer, Ms. Mai can use the airport lounge.",
+      "Là khách hàng bay thường xuyên, chị Mai được sử dụng phòng chờ sân bay."
+    ],
+    [
+      "e-ticket",
+      "/ˈiː ˌtɪkɪt/",
+      "n",
+      "vé điện tử",
+      "a ticket that is sent and stored electronically",
+      "Please show your e-ticket on your phone at the counter.",
+      "Vui lòng xuất trình vé điện tử trên điện thoại tại quầy."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Ms. Lan asked the travel agent for the ____ of the three morning flights to Bangkok.",
+      "o": [
+        "early",
+        "earliest",
+        "earlier",
+        "earliness"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có 'the' và so sánh giữa ba chuyến bay nên dùng so sánh nhất 'earliest'."
+    },
+    {
+      "q": "All employees traveling overseas must book their flights ____ the company's approved travel agency.",
+      "o": [
+        "through",
+        "among",
+        "upon",
+        "beside"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "'Through' nghĩa là 'thông qua' (một đơn vị, tổ chức), phù hợp với việc đặt vé qua đại lý du lịch."
+    },
+    {
+      "q": "The agent ____ three different routes by the time Mr. Hùng arrived at the office.",
+      "o": [
+        "had found",
+        "finds",
+        "will find",
+        "is finding"
+      ],
+      "a": 0,
+      "gp": "tense",
+      "x": "'By the time' + quá khứ đơn (arrived) thì mệnh đề chính dùng quá khứ hoàn thành 'had found'."
+    },
+    {
+      "q": "Travelers ____ book their tickets at least two weeks in advance often pay lower fares.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "whom"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ làm chủ ngữ chỉ người cho động từ 'book', nên chọn 'who'."
+    },
+    {
+      "q": "Business-class seats on this route are ____ more expensive than economy seats.",
+      "o": [
+        "considerable",
+        "considerably",
+        "consider",
+        "consideration"
+      ],
+      "a": 1,
+      "gp": "wordform",
+      "x": "Cần trạng từ để bổ nghĩa cho cụm so sánh 'more expensive', nên chọn 'considerably'."
+    },
+    {
+      "q": "Please keep a copy of your e-ticket ____ the airline staff ask to see it at the counter.",
+      "o": [
+        "in case",
+        "so that",
+        "even though",
+        "unless"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "'In case' nghĩa là 'phòng khi', phù hợp với ý giữ bản sao vé phòng khi nhân viên yêu cầu xem."
+    }
+  ]
+}

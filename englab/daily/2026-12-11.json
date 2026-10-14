@@ -1,0 +1,207 @@
+{
+  "date": "2026-12-11",
+  "title": "Ăn tối cùng đối tác nước ngoài",
+  "scene": {
+    "title": "Bữa tối công việc ở Hà Nội",
+    "topic": "Du lịch",
+    "names": [
+      "Thanh Hương",
+      "Mr. Tanaka"
+    ],
+    "lines": [
+      [
+        0,
+        "Welcome to Hà Nội, Mr. Tanaka. I hope you enjoy Vietnamese cuisine.",
+        "Chào mừng ông đến Hà Nội, ông Tanaka. Tôi hy vọng ông sẽ thích ẩm thực Việt Nam."
+      ],
+      [
+        1,
+        "I'm looking forward to it. What would you suggest for a first-time visitor?",
+        "Tôi rất mong chờ. Chị gợi ý món gì cho người lần đầu đến đây?"
+      ],
+      [
+        0,
+        "You should try bún chả. It's a local specialty here in Hà Nội.",
+        "Ông nên thử bún chả. Đó là đặc sản địa phương của Hà Nội."
+      ],
+      [
+        1,
+        "That sounds wonderful. My assistant, Ms. Sato, is vegetarian, though. Is that a problem?",
+        "Nghe tuyệt quá. Nhưng trợ lý của tôi, cô Sato, ăn chay. Có vấn đề gì không?"
+      ],
+      [
+        0,
+        "Not at all. We'll ask the waiter about dishes that suit her dietary restriction.",
+        "Không sao cả. Chúng ta sẽ hỏi phục vụ về những món phù hợp với chế độ ăn kiêng của cô ấy."
+      ],
+      [
+        1,
+        "Thank you. Let's also order some spring rolls as an appetizer for the table.",
+        "Cảm ơn chị. Chúng ta gọi thêm ít nem rán làm món khai vị cho cả bàn nhé."
+      ],
+      [
+        0,
+        "Good idea. Before we start, I'd like to propose a toast to our partnership.",
+        "Ý hay đấy. Trước khi bắt đầu, tôi xin đề nghị nâng ly chúc mừng sự hợp tác của chúng ta."
+      ],
+      [
+        1,
+        "Cheers! By the way, please let me pick up the bill tonight.",
+        "Cạn ly! Nhân tiện, tối nay hãy để tôi trả tiền nhé."
+      ],
+      [
+        0,
+        "That's very kind, but you're our guest. In Vietnamese etiquette, the host pays.",
+        "Ông thật tốt bụng, nhưng ông là khách của chúng tôi. Theo phép lịch sự của người Việt, chủ nhà sẽ trả tiền."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "cuisine",
+      "/kwɪˈziːn/",
+      "n",
+      "ẩm thực",
+      "a style of cooking from a particular country or area",
+      "Many foreign visitors love Vietnamese cuisine.",
+      "Nhiều du khách nước ngoài yêu thích ẩm thực Việt Nam."
+    ],
+    [
+      "local specialty",
+      "/ˌloʊkl ˈspeʃəlti/",
+      "n",
+      "đặc sản địa phương",
+      "a food or product that a place is famous for",
+      "Cao lầu is a local specialty of Hội An.",
+      "Cao lầu là đặc sản địa phương của Hội An."
+    ],
+    [
+      "vegetarian",
+      "/ˌvedʒəˈteriən/",
+      "adj",
+      "ăn chay",
+      "not eating meat or fish",
+      "The restaurant has a separate vegetarian menu.",
+      "Nhà hàng có thực đơn chay riêng."
+    ],
+    [
+      "dietary restriction",
+      "/ˈdaɪəteri rɪˈstrɪkʃn/",
+      "n",
+      "chế độ ăn kiêng, hạn chế ăn uống",
+      "a rule about what food a person cannot or will not eat",
+      "Ms. Sato has a dietary restriction, so she does not eat meat.",
+      "Cô Sato có chế độ ăn kiêng nên cô ấy không ăn thịt."
+    ],
+    [
+      "appetizer",
+      "/ˈæpɪtaɪzər/",
+      "n",
+      "món khai vị",
+      "a small dish eaten before the main meal",
+      "We ordered fresh spring rolls as an appetizer.",
+      "Chúng tôi gọi gỏi cuốn làm món khai vị."
+    ],
+    [
+      "set menu",
+      "/ˌset ˈmenjuː/",
+      "n",
+      "thực đơn định sẵn",
+      "a meal with fixed dishes at a fixed price",
+      "The set menu includes four courses and a dessert.",
+      "Thực đơn định sẵn gồm bốn món và một món tráng miệng."
+    ],
+    [
+      "pick up the bill",
+      "/ˌpɪk ʌp ðə ˈbɪl/",
+      "phrase",
+      "trả tiền (cho cả bàn)",
+      "to pay for everyone's meal",
+      "Our partners insisted on picking up the bill.",
+      "Các đối tác của chúng tôi nhất quyết đòi trả tiền bữa ăn."
+    ],
+    [
+      "etiquette",
+      "/ˈetɪket/",
+      "n",
+      "phép lịch sự, nghi thức",
+      "the rules of polite behavior in a society or group",
+      "Learning basic dining etiquette helps you make a good impression.",
+      "Học phép lịch sự cơ bản khi ăn uống giúp bạn tạo ấn tượng tốt."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Mr. Tanaka thanked his hosts for ____ him to such a wonderful restaurant.",
+      "o": [
+        "invite",
+        "inviting",
+        "invited",
+        "invitation"
+      ],
+      "a": 1,
+      "gp": "gerund",
+      "x": "Sau giới từ 'for' dùng danh động từ (V-ing), và cần động từ có tân ngữ 'him', nên chọn 'inviting'."
+    },
+    {
+      "q": "The restaurant, ____ is famous for its seafood, is a short walk from our office.",
+      "o": [
+        "which",
+        "who",
+        "where",
+        "whose"
+      ],
+      "a": 0,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ làm chủ ngữ chỉ vật (the restaurant) cho động từ 'is', nên chọn 'which'; 'where' không làm chủ ngữ."
+    },
+    {
+      "q": "Ms. Hương asked the waiter whether the soup was suitable ____ vegetarians.",
+      "o": [
+        "for",
+        "to",
+        "with",
+        "at"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "Cụm cố định 'suitable for' (phù hợp với ai/cái gì)."
+    },
+    {
+      "q": "If our partners ____ spicy food, we can order milder dishes instead.",
+      "o": [
+        "dislike",
+        "will dislike",
+        "disliking",
+        "disliked"
+      ],
+      "a": 0,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 1: mệnh đề 'if' dùng hiện tại đơn 'dislike', mệnh đề chính dùng 'can + V'."
+    },
+    {
+      "q": "Please inform the restaurant in advance of any dietary ____ your guests may have.",
+      "o": [
+        "restrictions",
+        "directions",
+        "conditions",
+        "instructions"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "Cụm từ 'dietary restrictions' nghĩa là những hạn chế trong ăn uống (ví dụ ăn chay, dị ứng)."
+    },
+    {
+      "q": "The dinner went ____ than expected, and both companies agreed to meet again next month.",
+      "o": [
+        "smooth",
+        "smoothly",
+        "more smoothly",
+        "most smoothly"
+      ],
+      "a": 2,
+      "gp": "compare",
+      "x": "Cần trạng từ bổ nghĩa cho động từ 'went' và có 'than', nên dùng so sánh hơn 'more smoothly'."
+    }
+  ]
+}

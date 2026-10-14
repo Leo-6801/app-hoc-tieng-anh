@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-10",
+  "title": "Đàm phán đơn hàng số lượng lớn",
+  "scene": {
+    "title": "Thương lượng giá và giao hàng",
+    "topic": "Kinh doanh",
+    "names": [
+      "Lê Văn Hùng",
+      "Anna Schmidt"
+    ],
+    "lines": [
+      [
+        0,
+        "Thanks for meeting with me, Ms. Schmidt. Shall we talk about your bulk order?",
+        "Cảm ơn chị Schmidt đã gặp tôi. Chúng ta bàn về đơn hàng số lượng lớn của chị nhé?"
+      ],
+      [
+        1,
+        "Yes. We need 3,000 office chairs, but your unit price is a bit high for us.",
+        "Vâng. Chúng tôi cần 3.000 chiếc ghế văn phòng, nhưng đơn giá của anh hơi cao với chúng tôi."
+      ],
+      [
+        0,
+        "For an order this size, we can negotiate. What price did you have in mind?",
+        "Với đơn hàng cỡ này, chúng ta có thể thương lượng. Chị đang nghĩ đến mức giá nào?"
+      ],
+      [
+        1,
+        "We were hoping for ten percent off, plus free freight to our warehouse.",
+        "Chúng tôi mong được giảm mười phần trăm, cộng thêm miễn phí vận chuyển đến kho của chúng tôi."
+      ],
+      [
+        0,
+        "Ten percent is difficult, but I can offer seven percent and free freight.",
+        "Mười phần trăm thì khó, nhưng tôi có thể giảm bảy phần trăm và miễn phí vận chuyển."
+      ],
+      [
+        1,
+        "That's a fair compromise. How quickly can you deliver everything?",
+        "Đó là một sự thỏa hiệp hợp lý. Anh có thể giao toàn bộ hàng nhanh đến mức nào?"
+      ],
+      [
+        0,
+        "We have 1,500 chairs in stock, so half can arrive within two weeks.",
+        "Chúng tôi có sẵn 1.500 chiếc ghế trong kho, nên một nửa có thể đến trong vòng hai tuần."
+      ],
+      [
+        1,
+        "And the rest? Our new office opens at the end of next month, so timing matters.",
+        "Còn số còn lại thì sao? Văn phòng mới của chúng tôi khai trương vào cuối tháng sau nên thời gian rất quan trọng."
+      ],
+      [
+        0,
+        "We're flexible. The second half can arrive in four weeks, well before your opening.",
+        "Chúng tôi rất linh hoạt. Nửa còn lại có thể đến trong bốn tuần, sớm hơn nhiều so với ngày khai trương của chị."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "bulk order",
+      "/bʌlk ˈɔːdər/",
+      "n",
+      "đơn hàng số lượng lớn",
+      "an order for a large quantity of goods",
+      "A bulk order of 5,000 units qualifies for a lower price.",
+      "Đơn hàng số lượng lớn 5.000 sản phẩm sẽ được hưởng giá thấp hơn."
+    ],
+    [
+      "bargain",
+      "/ˈbɑːɡən/",
+      "v",
+      "mặc cả, trả giá",
+      "to discuss the price of something to get a better deal",
+      "The buyer bargained hard for a lower price.",
+      "Người mua đã mặc cả rất gắt để có giá thấp hơn."
+    ],
+    [
+      "minimum order",
+      "/ˈmɪnɪməm ˈɔːdər/",
+      "n",
+      "số lượng đặt hàng tối thiểu",
+      "the smallest amount you are allowed to buy",
+      "The minimum order for this product is 500 units.",
+      "Số lượng đặt hàng tối thiểu cho sản phẩm này là 500 chiếc."
+    ],
+    [
+      "freight",
+      "/freɪt/",
+      "n",
+      "cước vận chuyển hàng hóa, hàng hóa vận chuyển",
+      "goods carried by truck, ship or plane, or the cost of this",
+      "The price does not include freight to your warehouse.",
+      "Giá này chưa bao gồm cước vận chuyển đến kho của bạn."
+    ],
+    [
+      "terms",
+      "/tɜːmz/",
+      "n",
+      "điều khoản, điều kiện",
+      "the conditions that people agree to in a deal",
+      "Both sides agreed on the delivery terms.",
+      "Hai bên đã đồng ý về các điều khoản giao hàng."
+    ],
+    [
+      "in stock",
+      "/ɪn stɒk/",
+      "phrase",
+      "có sẵn trong kho",
+      "ready to be sold or sent immediately",
+      "We have 2,000 units in stock right now.",
+      "Hiện tại chúng tôi có sẵn 2.000 sản phẩm trong kho."
+    ],
+    [
+      "concession",
+      "/kənˈseʃn/",
+      "n",
+      "sự nhượng bộ",
+      "something you agree to give up in a negotiation",
+      "The supplier made a small concession on the price.",
+      "Nhà cung cấp đã nhượng bộ một chút về giá."
+    ],
+    [
+      "compromise",
+      "/ˈkɒmprəmaɪz/",
+      "n",
+      "sự thỏa hiệp",
+      "an agreement where each side gives up something",
+      "After a long discussion, both sides reached a compromise.",
+      "Sau một cuộc thảo luận dài, hai bên đã đạt được thỏa hiệp."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The supplier offered a lower price because we ordered a large ____ of chairs.",
+      "o": [
+        "number",
+        "amount",
+        "many",
+        "much"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "\"Chairs\" là danh từ đếm được số nhiều nên dùng \"a large number of\". \"Amount\" dùng cho danh từ không đếm được."
+    },
+    {
+      "q": "This is the ____ offer we have received from any supplier this year.",
+      "o": [
+        "good",
+        "better",
+        "best",
+        "well"
+      ],
+      "a": 2,
+      "gp": "compare",
+      "x": "Có \"the\" và phạm vi so sánh với tất cả nhà cung cấp nên dùng so sánh nhất \"best\"."
+    },
+    {
+      "q": "If you ordered 5,000 units, we ____ give you an extra five percent off.",
+      "o": [
+        "will",
+        "would",
+        "can",
+        "have"
+      ],
+      "a": 1,
+      "gp": "conditional",
+      "x": "Câu điều kiện loại 2: mệnh đề \"if\" dùng quá khứ đơn (\"ordered\"), mệnh đề chính dùng \"would + V\"."
+    },
+    {
+      "q": "Both companies reached a ____ after two hours of negotiation.",
+      "o": [
+        "compromise",
+        "complaint",
+        "condition",
+        "connection"
+      ],
+      "a": 0,
+      "gp": "vocab",
+      "x": "\"Reach a compromise\" nghĩa là đạt được thỏa hiệp, phù hợp với ngữ cảnh đàm phán."
+    },
+    {
+      "q": "The chairs will be delivered ____ two separate shipments.",
+      "o": [
+        "in",
+        "on",
+        "at",
+        "by"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "Cụm \"in two shipments\" nghĩa là được giao thành hai đợt; giới từ \"in\" dùng để chỉ cách chia thành các phần."
+    },
+    {
+      "q": "By the time the meeting ended, the two sides ____ on all the main terms.",
+      "o": [
+        "agree",
+        "have agreed",
+        "had agreed",
+        "will agree"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "\"By the time + quá khứ đơn\" cho thấy hành động xảy ra trước một mốc trong quá khứ, nên dùng quá khứ hoàn thành \"had agreed\"."
+    }
+  ]
+}

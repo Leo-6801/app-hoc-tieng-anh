@@ -1,0 +1,202 @@
+{
+ "date": "2026-11-02",
+ "title": "Viết báo cáo tiến độ và nhận góp ý",
+ "scene": {
+  "title": "Góp ý cho báo cáo tháng",
+  "topic": "Công sở",
+  "names": [
+   "Thảo",
+   "Mark"
+  ],
+  "lines": [
+   [
+    0,
+    "Mark, I've finished the first draft of my monthly progress report.",
+    "Anh Mark, em đã hoàn thành bản nháp đầu tiên của báo cáo tiến độ tháng."
+   ],
+   [
+    1,
+    "Thanks, Thảo. I read it this morning, and the structure is clear.",
+    "Cảm ơn em, Thảo. Anh đã đọc sáng nay, bố cục rất rõ ràng."
+   ],
+   [
+    0,
+    "I'm glad to hear that. Do you have any feedback for me?",
+    "Em rất vui khi nghe vậy. Anh có góp ý gì cho em không ạ?"
+   ],
+   [
+    1,
+    "The summary is too long. Try to make it more concise, maybe five sentences.",
+    "Phần tóm tắt hơi dài. Em thử viết ngắn gọn hơn, khoảng năm câu thôi."
+   ],
+   [
+    0,
+    "Okay. Should I highlight the results from the new training program?",
+    "Vâng. Em có nên làm nổi bật kết quả của chương trình đào tạo mới không ạ?"
+   ],
+   [
+    1,
+    "Yes, list them as bullet points near the top of the first page.",
+    "Có, hãy liệt kê chúng dưới dạng gạch đầu dòng ở gần đầu trang đầu tiên."
+   ],
+   [
+    0,
+    "Got it. I'll revise it today and proofread it again before sending.",
+    "Em hiểu rồi. Em sẽ chỉnh sửa trong hôm nay và đọc soát lỗi lại trước khi gửi."
+   ],
+   [
+    1,
+    "Great. Please send me the final version by tomorrow afternoon.",
+    "Tốt lắm. Gửi anh bản cuối cùng trước chiều mai nhé."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "comment",
+   "/ˈkɒment/",
+   "n",
+   "nhận xét, ý kiến",
+   "a written or spoken opinion about something",
+   "I added a few comments in the margin of your report.",
+   "Tôi đã thêm vài nhận xét bên lề báo cáo của bạn."
+  ],
+  [
+   "key point",
+   "/ˌkiː ˈpɔɪnt/",
+   "n",
+   "ý chính, điểm mấu chốt",
+   "one of the most important ideas",
+   "The key point of the report is on the first page.",
+   "Ý chính của báo cáo nằm ở trang đầu tiên."
+  ],
+  [
+   "summary",
+   "/ˈsʌməri/",
+   "n",
+   "bản tóm tắt",
+   "a short statement of the main points",
+   "Please add a one-page summary at the beginning of the report.",
+   "Vui lòng thêm một bản tóm tắt dài một trang ở đầu báo cáo."
+  ],
+  [
+   "concise",
+   "/kənˈsaɪs/",
+   "adj",
+   "ngắn gọn, súc tích",
+   "giving information clearly in few words",
+   "Keep your emails concise so people can read them quickly.",
+   "Hãy viết email ngắn gọn để mọi người có thể đọc nhanh."
+  ],
+  [
+   "bullet point",
+   "/ˈbʊlɪt pɔɪnt/",
+   "n",
+   "gạch đầu dòng",
+   "a short item in a list, marked with a dot",
+   "Each bullet point should be one short sentence.",
+   "Mỗi gạch đầu dòng nên là một câu ngắn."
+  ],
+  [
+   "edit",
+   "/ˈedɪt/",
+   "v",
+   "biên tập, chỉnh sửa",
+   "to make changes to a text to correct or improve it",
+   "Please edit the introduction to make it shorter.",
+   "Vui lòng chỉnh sửa phần mở đầu cho ngắn hơn."
+  ],
+  [
+   "proofread",
+   "/ˈpruːfriːd/",
+   "v",
+   "đọc soát lỗi",
+   "to read a text carefully to find and correct mistakes",
+   "Always proofread your report before sending it to the director.",
+   "Luôn đọc soát lỗi báo cáo trước khi gửi cho giám đốc."
+  ],
+  [
+   "outline",
+   "/ˈaʊtlaɪn/",
+   "n",
+   "dàn ý, đề cương",
+   "a list of the main ideas of a document",
+   "Let's write an outline before we start the full report.",
+   "Chúng ta hãy viết dàn ý trước khi bắt đầu viết toàn bộ báo cáo."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "The final version of the report ____ to all managers yesterday afternoon.",
+   "o": [
+    "has sent",
+    "was sent",
+    "sent",
+    "is sending"
+   ],
+   "a": 1,
+   "gp": "passive",
+   "x": "Báo cáo \"được gửi\" đi (chủ ngữ chịu tác động) và có \"yesterday\", nên dùng bị động quá khứ \"was sent\"."
+  },
+  {
+   "q": "Ms. Hoang revised the report ____ after reading her manager's comments.",
+   "o": [
+    "careful",
+    "care",
+    "carefulness",
+    "carefully"
+   ],
+   "a": 3,
+   "gp": "wordform",
+   "x": "Để bổ nghĩa cho động từ \"revised\" cần trạng từ, nên chọn \"carefully\"."
+  },
+  {
+   "q": "Each of the monthly reports ____ a short summary on the first page.",
+   "o": [
+    "have included",
+    "includes",
+    "include",
+    "including"
+   ],
+   "a": 1,
+   "gp": "agreement",
+   "x": "Cấu trúc \"Each of + danh từ số nhiều\" đi với động từ số ít, nên chọn \"includes\"."
+  },
+  {
+   "q": "The manager's comments were very helpful, ____ the report still needed a few changes.",
+   "o": [
+    "but",
+    "so",
+    "because",
+    "unless"
+   ],
+   "a": 0,
+   "gp": "conj",
+   "x": "Hai vế mang ý tương phản (góp ý hữu ích nhưng vẫn cần sửa), nên dùng liên từ \"but\"."
+  },
+  {
+   "q": "Mr. Davis asked his staff to keep their reports short and ____.",
+   "o": [
+    "confident",
+    "considerable",
+    "concise",
+    "constant"
+   ],
+   "a": 2,
+   "gp": "vocab",
+   "x": "\"concise\" nghĩa là ngắn gọn, súc tích, phù hợp nghĩa với \"short\"; các từ còn lại không hợp ngữ cảnh."
+  },
+  {
+   "q": "This month's report is ____ than last month's because it includes data from three new branches.",
+   "o": [
+    "longer",
+    "long",
+    "longest",
+    "more long"
+   ],
+   "a": 0,
+   "gp": "compare",
+   "x": "Có \"than\" nên dùng so sánh hơn; \"long\" là tính từ ngắn nên thêm \"-er\" thành \"longer\"."
+  }
+ ]
+}

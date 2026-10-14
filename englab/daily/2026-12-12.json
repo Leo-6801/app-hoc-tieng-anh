@@ -1,0 +1,38 @@
+{
+  "date": "2026-12-12",
+  "title": "Rủ hàng xóm đi chơi cuối tuần",
+  "scene": {
+    "title": "Kế hoạch cuối tuần",
+    "topic": "Đời sống",
+    "names": ["Anna", "Khánh"],
+    "lines": [
+      [0, "Hi, Khánh! Do you have any plans for this weekend?", "Chào Khánh! Cuối tuần này bạn có kế hoạch gì chưa?"],
+      [1, "Not yet. I might go hiking if the weather is nice.", "Chưa có. Nếu trời đẹp thì có lẽ tôi sẽ đi leo núi."],
+      [0, "The weather forecast says it will be sunny on Saturday.", "Dự báo thời tiết nói thứ Bảy trời sẽ nắng."],
+      [1, "Perfect! There's a nice trail in the nearby national park.", "Tuyệt! Có một con đường mòn đẹp ở vườn quốc gia gần đây."],
+      [0, "Actually, we're having a barbecue on Sunday. Would you like to come?", "À, Chủ nhật nhà mình tổ chức tiệc nướng. Bạn có muốn đến không?"],
+      [1, "Thanks for inviting me! Should I bring anything?", "Cảm ơn bạn đã mời! Tôi có cần mang gì theo không?"],
+      [0, "Just some drinks. It's a small get-together with a few neighbors.", "Chỉ cần mang ít đồ uống thôi. Đây là buổi gặp mặt nhỏ với vài người hàng xóm."],
+      [1, "Great. Maybe we can all have a picnic in the park next month.", "Hay quá. Có lẽ tháng sau tất cả mình có thể đi dã ngoại ở công viên."],
+      [0, "Good idea! I'm really looking forward to Sunday, then.", "Ý hay đấy! Vậy mình rất mong đến Chủ nhật."]
+    ]
+  },
+  "vocab": [
+    ["hiking", "/ˈhaɪkɪŋ/", "n", "đi bộ đường dài, leo núi", "walking a long way in the countryside or mountains for fun", "We went hiking in Ba Vi last weekend.", "Cuối tuần trước chúng tôi đã đi leo núi ở Ba Vì."],
+    ["weather forecast", "/ˈweðər ˌfɔːrkæst/", "phrase", "dự báo thời tiết", "a report about what the weather will be like", "According to the weather forecast, it will rain tomorrow.", "Theo dự báo thời tiết, ngày mai trời sẽ mưa."],
+    ["nearby", "/ˌnɪrˈbaɪ/", "adj", "gần đó, lân cận", "not far away", "We often eat at a nearby café on weekends.", "Cuối tuần chúng tôi thường ăn ở một quán cà phê gần nhà."],
+    ["barbecue", "/ˈbɑːrbɪkjuː/", "n", "tiệc nướng ngoài trời", "a meal or party where food is cooked outside over a fire", "Our family has a barbecue in the garden every summer.", "Gia đình tôi tổ chức tiệc nướng trong vườn mỗi mùa hè."],
+    ["invite", "/ɪnˈvaɪt/", "v", "mời", "to ask someone to come to an event", "I'd like to invite you to my birthday party.", "Tôi muốn mời bạn đến dự tiệc sinh nhật của tôi."],
+    ["get-together", "/ˈɡet təˌɡeðər/", "n", "buổi gặp mặt, buổi tụ tập", "an informal social meeting or party", "We're having a small get-together at our place on Friday.", "Chúng tôi tổ chức một buổi gặp mặt nhỏ ở nhà vào thứ Sáu."],
+    ["picnic", "/ˈpɪknɪk/", "n", "chuyến dã ngoại, bữa ăn ngoài trời", "a meal that you eat outdoors", "The kids love having a picnic by the lake.", "Bọn trẻ rất thích đi dã ngoại bên hồ."],
+    ["look forward to", "/lʊk ˈfɔːrwərd tə/", "phrase", "mong chờ, háo hức", "to feel happy about something that is going to happen", "I look forward to seeing you at the party.", "Tôi rất mong được gặp bạn ở bữa tiệc."]
+  ],
+  "toeic": [
+    {"q": "We are looking forward to ____ our new neighbors this weekend.", "o": ["meet", "meeting", "met", "be meeting"], "a": 1, "gp": "gerund", "x": "Trong look forward to, to là giới từ nên theo sau là V-ing: meeting."},
+    {"q": "If it ____ on Saturday, we will have the barbecue indoors.", "o": ["rains", "rained", "will rain", "had rained"], "a": 0, "gp": "conditional", "x": "Câu điều kiện loại 1: If + hiện tại đơn (rains), mệnh đề chính dùng will."},
+    {"q": "My neighbor lent me ____ tent for the camping trip.", "o": ["she", "her", "hers", "herself"], "a": 1, "gp": "pronoun", "x": "Trước danh từ tent cần tính từ sở hữu her (cái lều của cô ấy)."},
+    {"q": "Let's meet ____ front of the apartment building at 7 a.m.", "o": ["in", "on", "at", "by"], "a": 0, "gp": "prep", "x": "Cụm cố định in front of nghĩa là phía trước."},
+    {"q": "Mr. Garcia, ____ lives next door, has invited us to a picnic.", "o": ["who", "which", "whom", "whose"], "a": 0, "gp": "relative", "x": "Who thay cho người (Mr. Garcia) và làm chủ ngữ cho động từ lives."},
+    {"q": "By the time we arrived at the park, our neighbors ____ the picnic area.", "o": ["prepare", "are preparing", "had already prepared", "will prepare"], "a": 2, "gp": "tense", "x": "Hành động hoàn tất trước một hành động khác trong quá khứ (arrived) nên dùng quá khứ hoàn thành: had already prepared."}
+  ]
+}

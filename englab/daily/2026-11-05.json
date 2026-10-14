@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-05",
+  "title": "Báo mất hành lý ở sân bay",
+  "scene": {
+    "title": "Chiếc vali không xuất hiện",
+    "topic": "Du lịch",
+    "names": [
+      "Hà My",
+      "Mark"
+    ],
+    "lines": [
+      [
+        0,
+        "Excuse me, my suitcase didn't come out on the carousel from the Tokyo flight.",
+        "Xin lỗi, vali của tôi không xuất hiện trên băng chuyền của chuyến bay từ Tokyo."
+      ],
+      [
+        1,
+        "I'm sorry to hear that. May I see your ticket and your claim tag?",
+        "Tôi rất tiếc. Cho tôi xem vé và thẻ nhận hành lý của chị được không?"
+      ],
+      [
+        0,
+        "Here they are. It's a dark blue suitcase with a red ribbon on the handle.",
+        "Đây ạ. Đó là một chiếc vali xanh đậm có buộc ruy băng đỏ ở tay cầm."
+      ],
+      [
+        1,
+        "Thank you. I'll enter the details into our system and try to trace it.",
+        "Cảm ơn chị. Tôi sẽ nhập thông tin vào hệ thống và cố gắng truy tìm nó."
+      ],
+      [
+        0,
+        "I have a presentation tomorrow morning, and my suit is in that bag.",
+        "Sáng mai tôi có buổi thuyết trình, mà bộ vest của tôi lại ở trong túi đó."
+      ],
+      [
+        1,
+        "We usually find bags within 24 hours and deliver them directly to your hotel.",
+        "Chúng tôi thường tìm thấy hành lý trong vòng 24 giờ và giao thẳng đến khách sạn của chị."
+      ],
+      [
+        0,
+        "What should I do tonight? My toiletries and other belongings are all inside.",
+        "Tối nay tôi phải làm sao? Đồ vệ sinh cá nhân và các đồ dùng khác của tôi đều ở trong đó."
+      ],
+      [
+        1,
+        "You can buy basic items, keep the bills, and claim compensation from the airline.",
+        "Chị có thể mua đồ dùng cơ bản, giữ lại hóa đơn và yêu cầu hãng bay bồi thường."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "baggage claim",
+      "/ˈbæɡɪdʒ kleɪm/",
+      "n",
+      "khu nhận hành lý",
+      "the area at an airport where you collect your bags after a flight",
+      "Please wait for your bags at baggage claim area B.",
+      "Vui lòng chờ hành lý của bạn tại khu nhận hành lý B."
+    ],
+    [
+      "carousel",
+      "/ˌkærəˈsel/",
+      "n",
+      "băng chuyền hành lý",
+      "a moving belt at the airport that brings bags to travelers",
+      "Bags from flight VN301 will arrive on carousel 4.",
+      "Hành lý của chuyến bay VN301 sẽ ra ở băng chuyền số 4."
+    ],
+    [
+      "suitcase",
+      "/ˈsuːtkeɪs/",
+      "n",
+      "va li",
+      "a large case with a handle for carrying clothes when traveling",
+      "My suitcase was too heavy, so I paid an extra fee.",
+      "Va li của tôi quá nặng nên tôi phải trả thêm phí."
+    ],
+    [
+      "claim tag",
+      "/ˈkleɪm tæɡ/",
+      "n",
+      "thẻ nhận hành lý",
+      "a small paper with a number that matches the label on your checked bag",
+      "Keep your claim tag until you have collected your bag.",
+      "Hãy giữ thẻ nhận hành lý cho đến khi bạn lấy được túi của mình."
+    ],
+    [
+      "trace",
+      "/treɪs/",
+      "v",
+      "truy tìm, lần theo",
+      "to find where someone or something is by searching",
+      "The airline traced the missing bag to Bangkok.",
+      "Hãng bay đã lần ra chiếc túi thất lạc đang ở Bangkok."
+    ],
+    [
+      "belongings",
+      "/bɪˈlɔːŋɪŋz/",
+      "n",
+      "đồ đạc, tư trang",
+      "the things that a person owns and carries",
+      "Please take all your belongings with you when you leave the plane.",
+      "Vui lòng mang theo tất cả tư trang khi rời máy bay."
+    ],
+    [
+      "toiletries",
+      "/ˈtɔɪlətriz/",
+      "n",
+      "đồ vệ sinh cá nhân",
+      "things like soap, toothpaste, and shampoo",
+      "I always pack my toiletries in my carry-on bag.",
+      "Tôi luôn để đồ vệ sinh cá nhân trong túi xách tay."
+    ],
+    [
+      "carry-on bag",
+      "/ˈkæri ɑːn bæɡ/",
+      "n",
+      "hành lý xách tay",
+      "a small bag you can take with you into the plane cabin",
+      "Keep your laptop and medicine in your carry-on bag.",
+      "Hãy để máy tính xách tay và thuốc trong hành lý xách tay của bạn."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Travelers ____ bags have not arrived should go to the baggage service office.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "whom"
+      ],
+      "a": 1,
+      "gp": "relative",
+      "x": "Cần đại từ quan hệ chỉ sở hữu đứng trước danh từ 'bags', nên chọn 'whose'."
+    },
+    {
+      "q": "The missing suitcase ____ to Ms. Park's hotel early this morning.",
+      "o": [
+        "delivered",
+        "was delivered",
+        "delivers",
+        "is delivering"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Chiếc vali được giao (bị động) và sự việc đã xảy ra sáng nay nên dùng 'was delivered'."
+    },
+    {
+      "q": "When you have filled out the form, please return it to ____ at the counter.",
+      "o": [
+        "I",
+        "my",
+        "me",
+        "mine"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Sau giới từ 'to' cần đại từ tân ngữ 'me'."
+    },
+    {
+      "q": "The airline will pay for ____ necessary items bought while you wait for your bag.",
+      "o": [
+        "any",
+        "much",
+        "each",
+        "every"
+      ],
+      "a": 0,
+      "gp": "quant",
+      "x": "'Items' là danh từ số nhiều; 'any' dùng được với danh từ số nhiều, còn 'each' và 'every' đi với danh từ số ít."
+    },
+    {
+      "q": "Your bag will be delivered ____ 24 hours of being found.",
+      "o": [
+        "within",
+        "during",
+        "between",
+        "along"
+      ],
+      "a": 0,
+      "gp": "prep",
+      "x": "'Within + khoảng thời gian' nghĩa là 'trong vòng', phù hợp với cam kết thời gian giao hàng."
+    },
+    {
+      "q": "The claim form must be completed ____ before you leave the baggage claim area.",
+      "o": [
+        "accurate",
+        "accuracy",
+        "accurately",
+        "more accurate"
+      ],
+      "a": 2,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ 'be completed', nên chọn 'accurately'."
+    }
+  ]
+}

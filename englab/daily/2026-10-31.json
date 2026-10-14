@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-31",
+  "title": "Mở tài khoản ngân hàng",
+  "scene": {
+    "title": "Tại quầy giao dịch ngân hàng",
+    "topic": "Đời sống",
+    "names": ["Mr. Brown", "Thu Trang"],
+    "lines": [
+      [0, "Good afternoon. What can I do for you today?", "Chào buổi chiều. Hôm nay tôi có thể giúp gì cho chị?"],
+      [1, "I'd like to open a savings account, please.", "Tôi muốn mở một tài khoản tiết kiệm."],
+      [0, "Certainly. May I see some identification, like your ID card or passport?", "Tất nhiên rồi. Chị cho tôi xem giấy tờ tùy thân, như căn cước hoặc hộ chiếu nhé?"],
+      [1, "Here's my ID card. What's the interest rate on savings accounts?", "Đây là căn cước của tôi. Lãi suất của tài khoản tiết kiệm là bao nhiêu?"],
+      [0, "It's currently 4.5 percent per year, with no minimum balance.", "Hiện tại là 4,5% một năm, và không yêu cầu số dư tối thiểu."],
+      [1, "Great. Will I get a debit card with the account?", "Tuyệt. Tôi có được cấp thẻ ghi nợ kèm tài khoản không?"],
+      [0, "Yes, and you can withdraw cash from any of our ATMs for free.", "Có ạ, và chị có thể rút tiền mặt miễn phí ở bất kỳ cây ATM nào của chúng tôi."],
+      [1, "Can I transfer money to other banks using the mobile app?", "Tôi có thể chuyển tiền sang ngân hàng khác bằng ứng dụng di động không?"],
+      [0, "Absolutely. Would you like to deposit some money into your account today?", "Chắc chắn rồi. Hôm nay chị có muốn nộp tiền vào tài khoản không?"]
+    ]
+  },
+  "vocab": [
+    ["deposit", "/dɪˈpɑːzɪt/", "v", "gửi tiền, nộp tiền (vào tài khoản)", "to put money into a bank account", "I deposit part of my pay into my savings every month.", "Tôi gửi một phần thu nhập vào tài khoản tiết kiệm mỗi tháng."],
+    ["withdraw", "/wɪðˈdrɔː/", "v", "rút (tiền)", "to take money out of a bank account", "You can withdraw up to ten million dong a day.", "Bạn có thể rút tối đa mười triệu đồng mỗi ngày."],
+    ["savings account", "/ˈseɪvɪŋz əˌkaʊnt/", "phrase", "tài khoản tiết kiệm", "a bank account for keeping money and earning extra money over time", "I opened a savings account for my children's education.", "Tôi đã mở một tài khoản tiết kiệm cho việc học của các con."],
+    ["interest rate", "/ˈɪntrəst reɪt/", "phrase", "lãi suất", "the percentage a bank pays or charges on money", "The bank raised its interest rate last month.", "Ngân hàng đã tăng lãi suất vào tháng trước."],
+    ["identification", "/aɪˌdentɪfɪˈkeɪʃən/", "n", "giấy tờ tùy thân", "an official document that shows who you are", "Please bring identification when you visit the bank.", "Vui lòng mang theo giấy tờ tùy thân khi bạn đến ngân hàng."],
+    ["balance", "/ˈbæləns/", "n", "số dư (tài khoản)", "the amount of money in a bank account", "I check my balance on the app every morning.", "Tôi kiểm tra số dư trên ứng dụng mỗi sáng."],
+    ["debit card", "/ˈdebɪt kɑːrd/", "phrase", "thẻ ghi nợ", "a card that takes money directly from your bank account", "I paid for dinner with my debit card.", "Tôi đã trả tiền bữa tối bằng thẻ ghi nợ."],
+    ["transfer", "/trænsˈfɜːr/", "v", "chuyển (tiền)", "to move money from one account to another", "Please transfer the money before Friday.", "Vui lòng chuyển tiền trước thứ Sáu."]
+  ],
+  "toeic": [
+    {"q": "A new debit card ____ to your home address within seven days.", "o": ["will send", "will be sent", "is sending", "sends"], "a": 1, "gp": "passive", "x": "Thẻ được gửi đến (không tự gửi) nên dùng bị động tương lai: will be sent."},
+    {"q": "You can withdraw cash at ____ of our 300 ATMs nationwide.", "o": ["any", "much", "little", "every"], "a": 0, "gp": "quant", "x": "Any of + danh từ số nhiều nghĩa là bất kỳ cái nào; every không đi với of, much và little dùng cho danh từ không đếm được."},
+    {"q": "If you ____ a balance of over 50 million dong, you will receive a higher interest rate.", "o": ["keep", "kept", "will keep", "had kept"], "a": 0, "gp": "conditional", "x": "Câu điều kiện loại 1: mệnh đề If dùng hiện tại đơn (keep), mệnh đề chính dùng will."},
+    {"q": "The bank is closed ____ Sundays and public holidays.", "o": ["on", "in", "at", "by"], "a": 0, "gp": "prep", "x": "Dùng giới từ on trước các ngày trong tuần và ngày lễ cụ thể."},
+    {"q": "You need to show identification ____ you open an account.", "o": ["although", "before", "unless", "because of"], "a": 1, "gp": "conj", "x": "Before (trước khi) nối hai mệnh đề theo trình tự thời gian; because of phải đi với danh từ."},
+    {"q": "Online banking is very ____ for people who work long hours.", "o": ["convenience", "convenient", "conveniently", "convene"], "a": 1, "gp": "wordform", "x": "Sau động từ to be và very cần tính từ: convenient (tiện lợi)."}
+  ]
+}

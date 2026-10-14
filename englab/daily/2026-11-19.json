@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-19",
+  "title": "Ra mắt website mới của công ty",
+  "scene": {
+    "title": "Website mới sắp chạy chính thức",
+    "topic": "Kinh doanh",
+    "names": [
+      "Phương",
+      "Tom"
+    ],
+    "lines": [
+      [
+        0,
+        "Tom, is everything ready for the new website to go live tomorrow?",
+        "Tom, mọi thứ đã sẵn sàng để website mới chạy chính thức vào ngày mai chưa?"
+      ],
+      [
+        1,
+        "Almost. We just need to finish the content for the About Us page.",
+        "Gần xong rồi. Chúng ta chỉ cần hoàn thiện nội dung cho trang Giới thiệu."
+      ],
+      [
+        0,
+        "Great. I really like the new homepage. The layout looks much cleaner.",
+        "Tuyệt. Tôi rất thích trang chủ mới. Bố cục trông gọn gàng hơn nhiều."
+      ],
+      [
+        1,
+        "Thanks. We also made the navigation simpler, so visitors find products faster.",
+        "Cảm ơn chị. Chúng tôi cũng đơn giản hóa thanh điều hướng để khách truy cập tìm sản phẩm nhanh hơn."
+      ],
+      [
+        0,
+        "Is the design responsive on mobile phones too?",
+        "Thiết kế có hiển thị tốt trên điện thoại di động không?"
+      ],
+      [
+        1,
+        "Yes, we tested it on several phones last week.",
+        "Có, chúng tôi đã thử nghiệm trên nhiều điện thoại vào tuần trước."
+      ],
+      [
+        0,
+        "Good. Where will the ads for our holiday sale lead visitors?",
+        "Tốt. Quảng cáo cho đợt giảm giá dịp lễ sẽ dẫn khách truy cập đến đâu?"
+      ],
+      [
+        1,
+        "To a special landing page. We expect it to bring much more traffic.",
+        "Đến một trang đích riêng. Chúng tôi kỳ vọng nó sẽ mang lại nhiều lượt truy cập hơn."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "go live",
+      "/ɡoʊ laɪv/",
+      "phrase",
+      "chính thức hoạt động",
+      "to start working and become available to the public",
+      "The online store will go live on the first of December.",
+      "Cửa hàng trực tuyến sẽ chính thức hoạt động vào ngày một tháng Mười Hai."
+    ],
+    [
+      "homepage",
+      "/ˈhoʊmpeɪdʒ/",
+      "n",
+      "trang chủ",
+      "the main page of a website",
+      "Our homepage shows the three best-selling products.",
+      "Trang chủ của chúng tôi hiển thị ba sản phẩm bán chạy nhất."
+    ],
+    [
+      "responsive",
+      "/rɪˈspɑːnsɪv/",
+      "adj",
+      "tương thích (hiển thị tốt trên mọi thiết bị)",
+      "able to change its layout to fit any screen size",
+      "A responsive website looks good on both phones and laptops.",
+      "Một website tương thích hiển thị đẹp trên cả điện thoại và máy tính xách tay."
+    ],
+    [
+      "navigation",
+      "/ˌnævɪˈɡeɪʃən/",
+      "n",
+      "sự điều hướng (trên website)",
+      "the menus and links that help people move around a website",
+      "Clear navigation helps visitors find information quickly.",
+      "Điều hướng rõ ràng giúp khách truy cập tìm thông tin nhanh chóng."
+    ],
+    [
+      "traffic",
+      "/ˈtræfɪk/",
+      "n",
+      "lượt truy cập",
+      "the number of people who visit a website",
+      "Website traffic increased after we posted the video.",
+      "Lượt truy cập website đã tăng sau khi chúng tôi đăng video."
+    ],
+    [
+      "landing page",
+      "/ˈlændɪŋ peɪdʒ/",
+      "phrase",
+      "trang đích",
+      "a web page that visitors reach after clicking an ad or link",
+      "The landing page for the sale has a big \"Order Now\" button.",
+      "Trang đích của đợt khuyến mãi có một nút \"Đặt hàng ngay\" lớn."
+    ],
+    [
+      "layout",
+      "/ˈleɪaʊt/",
+      "n",
+      "bố cục",
+      "the way text and images are arranged on a page",
+      "The designer changed the layout to make the page easier to read.",
+      "Nhà thiết kế đã thay đổi bố cục để trang dễ đọc hơn."
+    ],
+    [
+      "content",
+      "/ˈkɑːntent/",
+      "n",
+      "nội dung",
+      "the text, pictures, and videos on a website",
+      "We update the content on our blog twice a week.",
+      "Chúng tôi cập nhật nội dung trên blog hai lần mỗi tuần."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "The new website is ____ to use than the old one, according to our survey.",
+      "o": [
+        "easy",
+        "easier",
+        "easiest",
+        "more easy"
+      ],
+      "a": 1,
+      "gp": "compare",
+      "x": "Có \"than\" nên dùng so sánh hơn; \"easy\" chuyển thành \"easier\"."
+    },
+    {
+      "q": "Visitors can now find our products ____ thanks to the improved navigation.",
+      "o": [
+        "quick",
+        "quickest",
+        "quickness",
+        "quickly"
+      ],
+      "a": 3,
+      "gp": "wordform",
+      "x": "Cần trạng từ bổ nghĩa cho động từ \"find\", nên chọn \"quickly\"."
+    },
+    {
+      "q": "The website ____ by an outside agency over the past six months.",
+      "o": [
+        "has been redesigned",
+        "redesigned",
+        "has redesigned",
+        "is redesigning"
+      ],
+      "a": 0,
+      "gp": "passive",
+      "x": "Website được thiết kế lại (bị động) và \"over the past six months\" dùng thì hiện tại hoàn thành, nên chọn \"has been redesigned\"."
+    },
+    {
+      "q": "The site will go live on Monday ____ the final tests are successful.",
+      "o": [
+        "unless",
+        "provided that",
+        "even though",
+        "whereas"
+      ],
+      "a": 1,
+      "gp": "conj",
+      "x": "\"Provided that\" nghĩa là \"với điều kiện là\", phù hợp: website chạy nếu kiểm tra thành công."
+    },
+    {
+      "q": "The team is considering ____ a live chat feature to the homepage.",
+      "o": [
+        "add",
+        "to add",
+        "adding",
+        "added"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau động từ \"consider\" dùng V-ing, nên chọn \"adding\"."
+    },
+    {
+      "q": "Most of the content on the new site ____ written by our marketing staff.",
+      "o": [
+        "were",
+        "was",
+        "have been",
+        "are"
+      ],
+      "a": 1,
+      "gp": "agreement",
+      "x": "\"Most of + danh từ không đếm được (content)\" đi với động từ số ít, nên chọn \"was\"."
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+ "date": "2026-10-27",
+ "title": "Gọi video gặp sự cố âm thanh và màn hình",
+ "scene": {
+  "title": "Cuộc gọi video trục trặc",
+  "topic": "Công sở",
+  "names": [
+   "Minh",
+   "Sarah"
+  ],
+  "lines": [
+   [
+    0,
+    "Hi Sarah, can you hear me? Your voice keeps cutting out.",
+    "Chào Sarah, chị có nghe tôi nói không? Giọng chị cứ bị ngắt quãng."
+   ],
+   [
+    1,
+    "Sorry, my connection is weak today. Is it better now?",
+    "Xin lỗi, hôm nay đường truyền của tôi yếu. Bây giờ đã đỡ hơn chưa?"
+   ],
+   [
+    0,
+    "Yes, much better. But there's an echo, so maybe you should use a headset.",
+    "Ừ, tốt hơn nhiều rồi. Nhưng có tiếng vọng, có lẽ chị nên dùng tai nghe có micro."
+   ],
+   [
+    1,
+    "Good point. Also, could everyone else please mute their microphones?",
+    "Ý hay. Ngoài ra, mọi người khác có thể tắt micro giúp được không?"
+   ],
+   [
+    0,
+    "Done. Now, can you start screen sharing so we can see the report?",
+    "Xong rồi. Giờ chị có thể bắt đầu chia sẻ màn hình để mọi người xem báo cáo không?"
+   ],
+   [
+    1,
+    "I'm trying, but the window keeps freezing, and there's a lag of several seconds.",
+    "Tôi đang thử, nhưng cửa sổ cứ bị đơ, và hình bị trễ mấy giây liền."
+   ],
+   [
+    0,
+    "Let's not waste time. Could you send the file in the chat instead?",
+    "Đừng mất thời gian nữa. Chị gửi tệp vào khung chat thay thế được không?"
+   ],
+   [
+    1,
+    "Sure. After the call, I'll ask IT to help me troubleshoot my laptop.",
+    "Được. Sau cuộc gọi, tôi sẽ nhờ bộ phận IT giúp khắc phục sự cố laptop."
+   ]
+  ]
+ },
+ "vocab": [
+  [
+   "connection",
+   "/kəˈnekʃn/",
+   "n",
+   "kết nối, đường truyền",
+   "a link to the internet or a network",
+   "The video kept stopping because of a poor internet connection.",
+   "Video liên tục bị dừng vì kết nối internet kém."
+  ],
+  [
+   "echo",
+   "/ˈekəʊ/",
+   "n",
+   "tiếng vọng",
+   "a sound that you hear again after it is made",
+   "There's an echo on the line, so please turn down your speakers.",
+   "Có tiếng vọng trên đường dây, vì vậy vui lòng vặn nhỏ loa của bạn."
+  ],
+  [
+   "headset",
+   "/ˈhedset/",
+   "n",
+   "tai nghe có micro",
+   "headphones with a small microphone attached",
+   "Wear a headset during video calls to reduce background noise.",
+   "Hãy đeo tai nghe có micro khi gọi video để giảm tiếng ồn xung quanh."
+  ],
+  [
+   "mute",
+   "/mjuːt/",
+   "v",
+   "tắt tiếng",
+   "to turn off the sound of a microphone or device",
+   "Please mute your microphone when you are not speaking.",
+   "Vui lòng tắt micro khi bạn không nói."
+  ],
+  [
+   "screen sharing",
+   "/ˈskriːn ˌʃeərɪŋ/",
+   "n",
+   "chia sẻ màn hình",
+   "showing your computer screen to others during a call",
+   "Screen sharing makes it easier to explain the new design.",
+   "Chia sẻ màn hình giúp việc giải thích thiết kế mới dễ dàng hơn."
+  ],
+  [
+   "freeze",
+   "/friːz/",
+   "v",
+   "bị đơ, đứng hình",
+   "(of a computer or video) to suddenly stop moving or working",
+   "The video may freeze if too many people turn on their cameras.",
+   "Video có thể bị đứng hình nếu quá nhiều người bật camera."
+  ],
+  [
+   "lag",
+   "/læɡ/",
+   "n",
+   "độ trễ",
+   "a delay between an action and its result",
+   "There is a short lag between my voice and the video.",
+   "Có một độ trễ ngắn giữa giọng nói của tôi và hình ảnh."
+  ],
+  [
+   "bandwidth",
+   "/ˈbændwɪdθ/",
+   "n",
+   "băng thông",
+   "the amount of data an internet connection can carry",
+   "Video calls use a lot of bandwidth, so close other programs.",
+   "Cuộc gọi video dùng nhiều băng thông, vì vậy hãy đóng các chương trình khác."
+  ]
+ ],
+ "toeic": [
+  {
+   "q": "If the sound quality ____ better, we could continue the meeting online.",
+   "o": [
+    "will be",
+    "has been",
+    "were",
+    "is"
+   ],
+   "a": 2,
+   "gp": "conditional",
+   "x": "Mệnh đề chính dùng \"could continue\" nên đây là câu điều kiện loại 2; mệnh đề \"if\" dùng \"were\"."
+  },
+  {
+   "q": "Participants are asked to keep ____ microphones muted during the presentation.",
+   "o": [
+    "their",
+    "them",
+    "they",
+    "theirs"
+   ],
+   "a": 0,
+   "gp": "pronoun",
+   "x": "Trước danh từ \"microphones\" cần tính từ sở hữu, nên chọn \"their\"."
+  },
+  {
+   "q": "The video call was interrupted ____ a power outage in the building.",
+   "o": [
+    "so",
+    "although",
+    "due to",
+    "because"
+   ],
+   "a": 2,
+   "gp": "prep",
+   "x": "\"due to\" là giới từ, đi với cụm danh từ \"a power outage\"; \"because\", \"so\", \"although\" phải đi với mệnh đề."
+  },
+  {
+   "q": "Ms. Lee suggested ____ the meeting with audio only to improve the connection.",
+   "o": [
+    "continued",
+    "continuing",
+    "to continue",
+    "continue"
+   ],
+   "a": 1,
+   "gp": "gerund",
+   "x": "Sau động từ \"suggest\" ta dùng danh động từ (V-ing), nên chọn \"continuing\"."
+  },
+  {
+   "q": "The new headsets are ____ more reliable than the ones we used last year.",
+   "o": [
+    "very",
+    "most",
+    "many",
+    "much"
+   ],
+   "a": 3,
+   "gp": "compare",
+   "x": "Để nhấn mạnh so sánh hơn ta dùng \"much\" trước \"more + tính từ\"; \"very\" không dùng với so sánh hơn."
+  },
+  {
+   "q": "Please restart your computer if the screen ____ again during the call.",
+   "o": [
+    "freezing",
+    "freezes",
+    "will freeze",
+    "froze"
+   ],
+   "a": 1,
+   "gp": "tense",
+   "x": "Trong mệnh đề \"if\" nói về tương lai, ta dùng thì hiện tại đơn \"freezes\", không dùng \"will\"."
+  }
+ ]
+}

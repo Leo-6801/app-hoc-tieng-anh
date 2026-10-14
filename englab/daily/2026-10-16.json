@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "title": "Gọi điện hỏi kết quả phỏng vấn",
+  "scene": {
+    "title": "Hỏi thăm phòng nhân sự sau buổi phỏng vấn",
+    "topic": "Công sở",
+    "names": ["Minh Anh", "Sarah"],
+    "lines": [
+      [0, "Hello, this is Minh Anh. I interviewed for the marketing position last Tuesday.", "Xin chào, tôi là Minh Anh. Tôi đã phỏng vấn cho vị trí marketing vào thứ Ba tuần trước."],
+      [1, "Hi, Minh Anh. Thanks for calling. How can I help you today?", "Chào Minh Anh. Cảm ơn bạn đã gọi. Hôm nay tôi có thể giúp gì cho bạn?"],
+      [0, "I just wanted to follow up and ask whether there is any news.", "Tôi chỉ muốn liên hệ lại để hỏi xem đã có tin gì chưa."],
+      [1, "Of course. The interviewer was impressed, and you are on our shortlist.", "Tất nhiên rồi. Người phỏng vấn rất ấn tượng, và bạn đang nằm trong danh sách rút gọn của chúng tôi."],
+      [0, "That's great news! Is there anything else you need from me?", "Thật là tin tốt! Chị có cần thêm gì từ tôi không?"],
+      [1, "Yes, please send us the contact details of two references by Friday.", "Có, vui lòng gửi cho chúng tôi thông tin liên lạc của hai người tham chiếu trước thứ Sáu."],
+      [0, "No problem. Will there also be a background check?", "Không vấn đề gì. Sẽ có cả bước kiểm tra lý lịch nữa phải không ạ?"],
+      [1, "Yes, it usually takes about a week. We'll call you after that.", "Đúng vậy, thường mất khoảng một tuần. Chúng tôi sẽ gọi cho bạn sau đó."],
+      [0, "Thank you so much. I look forward to hearing from you.", "Cảm ơn chị rất nhiều. Tôi mong sớm nhận được tin từ chị."]
+    ]
+  },
+  "vocab": [
+    ["candidate", "/ˈkændɪdət/", "n", "ứng viên", "a person who is being considered for a job", "Three candidates were invited to the final interview.", "Ba ứng viên đã được mời đến vòng phỏng vấn cuối cùng."],
+    ["interviewer", "/ˈɪntəvjuːə(r)/", "n", "người phỏng vấn", "the person who asks the questions in a job interview", "The interviewer asked me about my previous job.", "Người phỏng vấn hỏi tôi về công việc trước đây của tôi."],
+    ["shortlist", "/ˈʃɔːtlɪst/", "n", "danh sách rút gọn (ứng viên vào vòng sau)", "a small list of the best people chosen from a larger group", "Your name is on the shortlist for the second round.", "Tên của bạn có trong danh sách rút gọn cho vòng hai."],
+    ["follow up", "/ˌfɒləʊ ˈʌp/", "phrase", "liên hệ lại, hỏi thăm tiếp", "to contact someone again to get more information", "I will follow up with HR if I hear nothing by Monday.", "Tôi sẽ liên hệ lại với phòng nhân sự nếu đến thứ Hai vẫn chưa có tin."],
+    ["position", "/pəˈzɪʃn/", "n", "vị trí (công việc)", "a job in a company or organization", "She is interviewing for a sales position next week.", "Tuần sau cô ấy sẽ phỏng vấn cho một vị trí bán hàng."],
+    ["qualification", "/ˌkwɒlɪfɪˈkeɪʃn/", "n", "bằng cấp, trình độ chuyên môn", "an official record or ability that shows you can do a job", "A university degree is the minimum qualification for this job.", "Bằng đại học là trình độ tối thiểu cho công việc này."],
+    ["background check", "/ˈbækɡraʊnd tʃek/", "phrase", "kiểm tra lý lịch", "a review of a person's history before they start a job", "The company runs a background check on every new employee.", "Công ty tiến hành kiểm tra lý lịch đối với mọi nhân viên mới."],
+    ["reference", "/ˈrefrəns/", "n", "người tham chiếu, người giới thiệu", "a person who can describe your work to a new employer", "My former manager agreed to be a reference for me.", "Quản lý cũ của tôi đã đồng ý làm người tham chiếu cho tôi."]
+  ],
+  "toeic": [
+    {"q": "All candidates must provide ____ of their qualifications before the final interview.", "o": ["prove", "proof", "proven", "proving"], "a": 1, "gp": "wordform", "x": "Sau động từ \"provide\" cần một danh từ làm tân ngữ; \"proof\" (bằng chứng) là danh từ."},
+    {"q": "The HR manager ____ all the shortlisted candidates by the end of next week.", "o": ["contacts", "contacted", "will have contacted", "has contacted"], "a": 2, "gp": "tense", "x": "\"By the end of next week\" chỉ một mốc trong tương lai mà hành động sẽ hoàn tất trước đó, nên dùng thì tương lai hoàn thành."},
+    {"q": "Please send the contact details of your references ____ Friday, October 23.", "o": ["by", "until", "since", "during"], "a": 0, "gp": "prep", "x": "\"By\" + mốc thời gian nghĩa là \"trước/không muộn hơn\" hạn chót; \"until\" dùng cho hành động kéo dài liên tục."},
+    {"q": "Mr. Lee thanked the interviewers for ____ time after the meeting.", "o": ["they", "them", "their", "theirs"], "a": 2, "gp": "pronoun", "x": "Đứng trước danh từ \"time\" cần tính từ sở hữu, nên chọn \"their\"."},
+    {"q": "Candidates who are not selected will be ____ by e-mail within two weeks.", "o": ["notified", "announced", "declared", "expressed"], "a": 0, "gp": "vocab", "x": "\"Notify someone\" nghĩa là thông báo cho ai đó; các động từ còn lại không dùng với tân ngữ chỉ người theo nghĩa này."},
+    {"q": "____ the background check is complete, the company will send you a formal job offer.", "o": ["Once", "Unless", "Although", "Despite"], "a": 0, "gp": "conj", "x": "\"Once\" (một khi, ngay khi) là liên từ phù hợp về nghĩa; \"Despite\" là giới từ, không đi với mệnh đề."}
+  ]
+}

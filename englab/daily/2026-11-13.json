@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-13",
+  "title": "Kiểm tra lượng hàng tồn kho",
+  "scene": {
+    "title": "Một buổi sáng ở nhà kho",
+    "topic": "Kinh doanh",
+    "names": [
+      "Kevin",
+      "Ngọc"
+    ],
+    "lines": [
+      [
+        0,
+        "Ngọc, can you check our inventory of printer paper in the warehouse?",
+        "Ngọc, em có thể kiểm tra lượng giấy in tồn kho trong nhà kho không?"
+      ],
+      [
+        1,
+        "Sure. I just scanned the barcodes, and we have only five boxes left.",
+        "Dạ được. Em vừa quét mã vạch, chúng ta chỉ còn năm thùng."
+      ],
+      [
+        0,
+        "That's not enough. We'll probably run out of paper by next week.",
+        "Như vậy không đủ. Có lẽ chúng ta sẽ hết giấy trước tuần sau."
+      ],
+      [
+        1,
+        "Should I reorder from our usual supplier today?",
+        "Em có nên đặt hàng lại từ nhà cung cấp quen thuộc ngay hôm nay không?"
+      ],
+      [
+        0,
+        "Yes, please order twenty boxes to avoid another shortage.",
+        "Có, em hãy đặt hai mươi thùng để tránh tình trạng thiếu hàng lần nữa."
+      ],
+      [
+        1,
+        "Okay. But do we have enough storage space for twenty boxes?",
+        "Vâng. Nhưng chúng ta có đủ chỗ lưu trữ cho hai mươi thùng không?"
+      ],
+      [
+        0,
+        "We can move the empty pallets near the back door to make room.",
+        "Chúng ta có thể chuyển các pallet trống gần cửa sau để lấy chỗ."
+      ],
+      [
+        1,
+        "Great. I'll update the stock list once the new boxes arrive.",
+        "Tuyệt. Em sẽ cập nhật danh sách hàng tồn khi thùng hàng mới đến."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "inventory",
+      "/ˈɪnvəntɔːri/",
+      "n",
+      "hàng tồn kho",
+      "all the goods a company has in stock at a given time",
+      "We check our inventory at the end of every month.",
+      "Chúng tôi kiểm tra hàng tồn kho vào cuối mỗi tháng."
+    ],
+    [
+      "warehouse",
+      "/ˈwerhaʊs/",
+      "n",
+      "nhà kho",
+      "a large building where goods are stored before they are sold",
+      "The new warehouse is located near the port.",
+      "Nhà kho mới nằm gần cảng."
+    ],
+    [
+      "run out of",
+      "/rʌn aʊt əv/",
+      "phrase",
+      "hết, cạn kiệt",
+      "to use all of something so that none is left",
+      "If the store runs out of small sizes, we will order more.",
+      "Nếu cửa hàng hết cỡ nhỏ, chúng tôi sẽ đặt thêm."
+    ],
+    [
+      "reorder",
+      "/riˈɔːrdər/",
+      "v",
+      "đặt hàng lại",
+      "to order more of a product that you have ordered before",
+      "We reorder ink cartridges when only ten are left.",
+      "Chúng tôi đặt hàng lại hộp mực khi chỉ còn mười hộp."
+    ],
+    [
+      "shortage",
+      "/ˈʃɔːrtɪdʒ/",
+      "n",
+      "sự thiếu hụt",
+      "a situation where there is not enough of something",
+      "A shortage of plastic caused delays at the factory.",
+      "Sự thiếu hụt nhựa đã gây chậm trễ tại nhà máy."
+    ],
+    [
+      "pallet",
+      "/ˈpælət/",
+      "n",
+      "pallet, tấm kê hàng",
+      "a flat wooden or plastic frame used to move and store goods",
+      "Each pallet can hold up to forty boxes.",
+      "Mỗi tấm pallet có thể chứa tối đa bốn mươi thùng."
+    ],
+    [
+      "barcode",
+      "/ˈbɑːrkoʊd/",
+      "n",
+      "mã vạch",
+      "a pattern of lines on a product that a machine can read",
+      "Scan the barcode on each box to record it in the system.",
+      "Hãy quét mã vạch trên mỗi thùng để ghi nhận vào hệ thống."
+    ],
+    [
+      "storage",
+      "/ˈstɔːrɪdʒ/",
+      "n",
+      "sự lưu trữ, chỗ chứa",
+      "space or a place where things are kept until needed",
+      "The storage area on the second floor is almost full.",
+      "Khu vực lưu trữ trên tầng hai gần như đã đầy."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "There is very ____ storage space left in the warehouse after the holiday delivery.",
+      "o": [
+        "few",
+        "little",
+        "many",
+        "several"
+      ],
+      "a": 1,
+      "gp": "quant",
+      "x": "\"Storage space\" là danh từ không đếm được nên dùng \"little\"; \"few, many, several\" đi với danh từ đếm được."
+    },
+    {
+      "q": "The warehouse staff ____ the inventory since eight o'clock this morning.",
+      "o": [
+        "count",
+        "counted",
+        "have been counting",
+        "will count"
+      ],
+      "a": 2,
+      "gp": "tense",
+      "x": "\"Since + mốc thời gian\" diễn tả hành động bắt đầu trong quá khứ và còn tiếp diễn, dùng hiện tại hoàn thành tiếp diễn."
+    },
+    {
+      "q": "____ we reorder the paper today, we will run out by next Tuesday.",
+      "o": [
+        "Unless",
+        "If",
+        "Because",
+        "Although"
+      ],
+      "a": 0,
+      "gp": "conditional",
+      "x": "\"Unless\" nghĩa là \"nếu không\": nếu không đặt hàng hôm nay thì sẽ hết giấy, phù hợp với nghĩa của câu."
+    },
+    {
+      "q": "Please place the heavy boxes ____ the bottom shelf to keep them safe.",
+      "o": [
+        "at",
+        "in",
+        "on",
+        "over"
+      ],
+      "a": 2,
+      "gp": "prep",
+      "x": "Dùng \"on\" khi đặt vật lên bề mặt, như \"on the shelf\"."
+    },
+    {
+      "q": "Mr. Park and ____ assistant will check the stock levels every Friday.",
+      "o": [
+        "he",
+        "him",
+        "his",
+        "himself"
+      ],
+      "a": 2,
+      "gp": "pronoun",
+      "x": "Trước danh từ \"assistant\" cần tính từ sở hữu \"his\"."
+    },
+    {
+      "q": "Because of a ____ of cardboard, we could not pack all the orders on time.",
+      "o": [
+        "shortage",
+        "shortly",
+        "shorten",
+        "short"
+      ],
+      "a": 0,
+      "gp": "wordform",
+      "x": "Sau mạo từ \"a\" và trước \"of\" cần một danh từ, nên chọn \"shortage\" (sự thiếu hụt)."
+    }
+  ]
+}

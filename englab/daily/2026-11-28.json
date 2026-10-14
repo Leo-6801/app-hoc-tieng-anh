@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-28",
+  "title": "Xin lỗi khách vì giao hàng trễ",
+  "scene": {
+    "title": "Thông báo đơn hàng đến muộn",
+    "topic": "Kinh doanh",
+    "names": [
+      "Đặng Minh Khoa",
+      "Emily Carter"
+    ],
+    "lines": [
+      [
+        0,
+        "Ms. Carter, I'm calling to apologize. Your order will arrive three days late.",
+        "Chị Carter, tôi gọi để xin lỗi chị. Đơn hàng của chị sẽ đến trễ ba ngày."
+      ],
+      [
+        1,
+        "Three days? We promised those products to our own stores this week.",
+        "Ba ngày sao? Chúng tôi đã hứa giao số hàng đó cho các cửa hàng của mình trong tuần này."
+      ],
+      [
+        0,
+        "I understand. Our carrier had unforeseen problems at the port because of the storm.",
+        "Tôi hiểu ạ. Đơn vị vận chuyển của chúng tôi gặp sự cố ngoài dự kiến tại cảng do cơn bão."
+      ],
+      [
+        1,
+        "That's disappointing. Is there anything you can do to speed things up?",
+        "Thật đáng thất vọng. Anh có cách nào để đẩy nhanh mọi việc không?"
+      ],
+      [
+        0,
+        "Yes. We will expedite the order and dispatch it by air at no extra cost.",
+        "Có ạ. Chúng tôi sẽ xử lý gấp đơn hàng và gửi đi bằng đường hàng không mà không tính thêm phí."
+      ],
+      [
+        1,
+        "Good. Can I track the package online once it leaves your warehouse?",
+        "Tốt. Tôi có thể theo dõi kiện hàng trên mạng khi nó rời kho của anh không?"
+      ],
+      [
+        0,
+        "Absolutely. I'll email you the tracking number this afternoon.",
+        "Hoàn toàn được. Tôi sẽ gửi email mã vận đơn cho chị vào chiều nay."
+      ],
+      [
+        1,
+        "Please make sure this doesn't happen again. Late deliveries hurt our business.",
+        "Mong anh đảm bảo chuyện này không xảy ra nữa. Giao hàng trễ ảnh hưởng đến việc kinh doanh của chúng tôi."
+      ],
+      [
+        0,
+        "I assure you we're clearing our backlog and reviewing every step of the process.",
+        "Tôi cam đoan với chị rằng chúng tôi đang giải quyết lượng đơn tồn đọng và rà soát từng bước trong quy trình."
+      ]
+    ]
+  },
+  "vocab": [
+    [
+      "apologize",
+      "/əˈpɒlədʒaɪz/",
+      "v",
+      "xin lỗi",
+      "to say that you are sorry for something",
+      "We apologize for the late reply to your email.",
+      "Chúng tôi xin lỗi vì đã trả lời email của bạn muộn."
+    ],
+    [
+      "dispatch",
+      "/dɪˈspætʃ/",
+      "v",
+      "gửi đi, xuất hàng",
+      "to send goods to a place",
+      "Your order was dispatched from our warehouse this morning.",
+      "Đơn hàng của bạn đã được xuất khỏi kho của chúng tôi sáng nay."
+    ],
+    [
+      "in transit",
+      "/ɪn ˈtrænzɪt/",
+      "phrase",
+      "đang trên đường vận chuyển",
+      "being moved from one place to another",
+      "Your package is currently in transit to Hanoi.",
+      "Kiện hàng của bạn hiện đang trên đường vận chuyển đến Hà Nội."
+    ],
+    [
+      "carrier",
+      "/ˈkæriər/",
+      "n",
+      "đơn vị vận chuyển, hãng vận tải",
+      "a company that moves goods from one place to another",
+      "We use a reliable carrier for all international orders.",
+      "Chúng tôi sử dụng một đơn vị vận chuyển đáng tin cậy cho mọi đơn hàng quốc tế."
+    ],
+    [
+      "backlog",
+      "/ˈbæklɒɡ/",
+      "n",
+      "lượng công việc/đơn hàng tồn đọng",
+      "a number of jobs or orders that are waiting to be done",
+      "The factory has a backlog of orders after the holiday.",
+      "Nhà máy có một lượng đơn hàng tồn đọng sau kỳ nghỉ lễ."
+    ],
+    [
+      "expedite",
+      "/ˈekspədaɪt/",
+      "v",
+      "xúc tiến, đẩy nhanh",
+      "to make something happen more quickly",
+      "We will expedite your order so it arrives before Friday.",
+      "Chúng tôi sẽ xử lý gấp đơn hàng của bạn để hàng đến trước thứ Sáu."
+    ],
+    [
+      "assure",
+      "/əˈʃʊər/",
+      "v",
+      "cam đoan, đảm bảo",
+      "to tell someone that something is true so they do not worry",
+      "I assure you that the problem has been fixed.",
+      "Tôi cam đoan với bạn rằng sự cố đã được khắc phục."
+    ],
+    [
+      "unforeseen",
+      "/ˌʌnfɔːˈsiːn/",
+      "adj",
+      "không lường trước, ngoài dự kiến",
+      "not expected or planned",
+      "The late delivery was caused by unforeseen weather conditions.",
+      "Việc giao hàng trễ là do điều kiện thời tiết không lường trước được."
+    ]
+  ],
+  "toeic": [
+    {
+      "q": "Your order ____ from our warehouse yesterday afternoon.",
+      "o": [
+        "dispatched",
+        "was dispatched",
+        "is dispatching",
+        "has dispatch"
+      ],
+      "a": 1,
+      "gp": "passive",
+      "x": "Đơn hàng được gửi đi (bị tác động) và có mốc \"yesterday afternoon\", nên dùng bị động quá khứ \"was dispatched\"."
+    },
+    {
+      "q": "The list of late orders ____ updated every morning.",
+      "o": [
+        "is",
+        "are",
+        "were",
+        "be"
+      ],
+      "a": 0,
+      "gp": "agreement",
+      "x": "Chủ ngữ chính là \"The list\" (số ít), không phải \"orders\", và hành động lặp lại hằng ngày nên dùng \"is\"."
+    },
+    {
+      "q": "We sincerely apologize for not ____ you about the problem sooner.",
+      "o": [
+        "inform",
+        "informed",
+        "informing",
+        "to inform"
+      ],
+      "a": 2,
+      "gp": "gerund",
+      "x": "Sau giới từ \"for\" (và \"not\") dùng danh động từ V-ing: \"for not informing\"."
+    },
+    {
+      "q": "The goods arrived late, ____ the client was still satisfied with their quality.",
+      "o": [
+        "but",
+        "because",
+        "so",
+        "or"
+      ],
+      "a": 0,
+      "gp": "conj",
+      "x": "Hai ý trái ngược nhau (hàng đến trễ nhưng khách vẫn hài lòng) nên dùng liên từ \"but\"."
+    },
+    {
+      "q": "The supplier promised to send the goods by air at ____ own cost.",
+      "o": [
+        "it",
+        "its",
+        "it's",
+        "itself"
+      ],
+      "a": 1,
+      "gp": "pronoun",
+      "x": "Trước \"own cost\" cần tính từ sở hữu; \"the supplier\" là công ty nên dùng \"its\". \"It's\" là viết tắt của \"it is\"."
+    },
+    {
+      "q": "The carrier ____ we used last year often delivered goods late.",
+      "o": [
+        "who",
+        "whose",
+        "which",
+        "where"
+      ],
+      "a": 2,
+      "gp": "relative",
+      "x": "\"The carrier\" ở đây là một công ty (vật) và là tân ngữ của \"used\", nên dùng đại từ quan hệ \"which\"."
+    }
+  ]
+}

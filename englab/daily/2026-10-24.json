@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-24",
+  "title": "Sự cố phòng khách sạn",
+  "scene": {
+    "title": "Điều hòa hỏng và phòng ồn",
+    "topic": "Du lịch",
+    "names": ["Minh Anh", "Sophie"],
+    "lines": [
+      [0, "Hi, this is room 812. The air conditioner seems to be out of order.", "Chào chị, tôi ở phòng 812. Máy điều hòa hình như bị hỏng rồi."],
+      [1, "I'm very sorry about that. I'll send a technician up right away.", "Tôi rất xin lỗi về việc này. Tôi sẽ cử kỹ thuật viên lên ngay."],
+      [0, "Thank you. Also, the room is very noisy because it faces the main street.", "Cảm ơn chị. Ngoài ra, phòng rất ồn vì nó nhìn ra đường lớn."],
+      [1, "I understand. We have a vacancy on the fourteenth floor with soundproof windows.", "Tôi hiểu ạ. Chúng tôi còn một phòng trống ở tầng mười bốn có cửa sổ cách âm."],
+      [0, "That would be great. Could you relocate me before I leave for my meeting?", "Vậy thì tốt quá. Chị có thể chuyển phòng cho tôi trước khi tôi đi họp không?"],
+      [1, "Certainly. Housekeeping will help move your things within twenty minutes.", "Chắc chắn rồi ạ. Bộ phận dọn phòng sẽ giúp chuyển đồ của anh trong vòng hai mươi phút."],
+      [0, "I appreciate it. Can I still use the gym and other amenities?", "Cảm ơn chị. Tôi vẫn được dùng phòng gym và các tiện nghi khác chứ?"],
+      [1, "Of course. We'll also give you complimentary breakfast for the inconvenience.", "Tất nhiên rồi ạ. Chúng tôi cũng sẽ tặng anh bữa sáng miễn phí vì sự bất tiện này."]
+    ]
+  },
+  "vocab": [
+    ["front desk", "/ˌfrʌnt ˈdesk/", "n", "quầy lễ tân", "the place in a hotel where guests get help and information", "Please call the front desk if you need extra towels.", "Vui lòng gọi quầy lễ tân nếu bạn cần thêm khăn tắm."],
+    ["out of order", "/ˌaʊt əv ˈɔːrdər/", "phrase", "bị hỏng, không hoạt động", "not working because something is broken", "The elevator on the east side is out of order today.", "Thang máy phía đông hôm nay bị hỏng."],
+    ["vacancy", "/ˈveɪkənsi/", "n", "phòng trống (khách sạn)", "a hotel room that is free for someone to stay in", "The hotel had no vacancy during the trade fair week.", "Khách sạn không còn phòng trống trong tuần hội chợ thương mại."],
+    ["soundproof", "/ˈsaʊndpruːf/", "adj", "cách âm", "not letting noise go in or out", "The meeting rooms have soundproof walls.", "Các phòng họp có tường cách âm."],
+    ["relocate", "/ˌriːˈloʊkeɪt/", "v", "chuyển sang chỗ khác", "to move someone or something to a different place", "The manager relocated us to a quieter room on a higher floor.", "Quản lý đã chuyển chúng tôi sang một phòng yên tĩnh hơn ở tầng cao hơn."],
+    ["housekeeping", "/ˈhaʊsˌkiːpɪŋ/", "n", "bộ phận dọn phòng", "the hotel staff who clean the rooms", "Housekeeping cleans the rooms every morning before noon.", "Bộ phận dọn phòng dọn các phòng mỗi sáng trước buổi trưa."],
+    ["amenities", "/əˈmenətiz/", "n", "tiện nghi", "useful features of a place, such as a pool or gym", "The hotel's amenities include a pool, a spa, and a business center.", "Tiện nghi của khách sạn gồm hồ bơi, spa và trung tâm dịch vụ văn phòng."],
+    ["complimentary", "/ˌkɑːmplɪˈmentəri/", "adj", "miễn phí, được tặng", "given free of charge", "All guests receive complimentary bottled water every day.", "Tất cả khách đều được tặng nước đóng chai miễn phí mỗi ngày."]
+  ],
+  "toeic": [
+    {"q": "The air conditioner in Room 512 ____ by a technician yesterday afternoon.", "o": ["repaired", "was repaired", "repairing", "has repaired"], "a": 1, "gp": "passive", "x": "Máy điều hòa được sửa (bị động) và có 'yesterday' nên dùng bị động quá khứ 'was repaired'."},
+    {"q": "Guests who are not satisfied with ____ rooms may ask the front desk for a change.", "o": ["they", "them", "their", "themselves"], "a": 2, "gp": "pronoun", "x": "Trước danh từ 'rooms' cần tính từ sở hữu 'their'."},
+    {"q": "If the room were quieter, Mr. Carter ____ better before his presentation.", "o": ["will sleep", "would sleep", "sleeps", "has slept"], "a": 1, "gp": "conditional", "x": "Câu điều kiện loại 2 (If + were) nên mệnh đề chính dùng 'would + V': 'would sleep'."},
+    {"q": "The hotel offers a ____ shuttle service to and from the convention center.", "o": ["complimentary", "complimenting", "compliment", "complimentarily"], "a": 0, "gp": "wordform", "x": "Cần tính từ đứng trước cụm danh từ 'shuttle service'; 'complimentary' nghĩa là miễn phí."},
+    {"q": "Housekeeping staff clean every room ____ 10 A.M. and 2 P.M. each day.", "o": ["between", "during", "among", "within"], "a": 0, "gp": "prep", "x": "Cấu trúc 'between A and B' chỉ khoảng thời gian giữa hai mốc."},
+    {"q": "Each of the renovated suites ____ a soundproof window and a work desk.", "o": ["include", "includes", "including", "have included"], "a": 1, "gp": "agreement", "x": "Chủ ngữ 'Each of + danh từ số nhiều' đi với động từ số ít, nên chọn 'includes'."}
+  ]
+}
