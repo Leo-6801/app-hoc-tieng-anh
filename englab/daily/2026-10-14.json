@@ -1,0 +1,202 @@
+{
+ "date": "2026-10-14",
+ "scene": {
+  "lines": [
+   [
+    0,
+    "Hi, you must be Tom. Welcome to the team!",
+    "Chào anh, chắc anh là Tom. Chào mừng anh đến với nhóm!"
+   ],
+   [
+    1,
+    "Thank you. I'm a little nervous, to be honest.",
+    "Cảm ơn chị. Thật ra tôi hơi hồi hộp."
+   ],
+   [
+    0,
+    "Don't worry, everyone here is very friendly. Let me show you around the office.",
+    "Đừng lo, mọi người ở đây rất thân thiện. Để tôi dẫn anh đi một vòng văn phòng."
+   ],
+   [
+    1,
+    "That would be great. Where will I be sitting?",
+    "Vậy thì tốt quá. Tôi sẽ ngồi ở đâu?"
+   ],
+   [
+    0,
+    "Your desk is next to the window, and your laptop is already set up.",
+    "Bàn của anh ở cạnh cửa sổ, và máy tính xách tay đã được cài đặt sẵn."
+   ],
+   [
+    1,
+    "Perfect. Is there anything I should do first?",
+    "Tuyệt. Có việc gì tôi nên làm trước không?"
+   ],
+   [
+    0,
+    "Please read the employee handbook this morning. We have an orientation session at two o'clock.",
+    "Sáng nay anh hãy đọc sổ tay nhân viên. Hai giờ chiều chúng ta có buổi định hướng."
+   ],
+   [
+    1,
+    "Got it. Thanks for your help, Mai.",
+    "Tôi hiểu rồi. Cảm ơn chị đã giúp, Mai."
+   ]
+  ],
+  "names": [
+   "Mai",
+   "Tom"
+  ],
+  "title": "Ngày đầu tiên ở công ty",
+  "topic": "Công sở"
+ },
+ "title": "Nhân viên mới ngày đầu đi làm",
+ "toeic": [
+  {
+   "a": 2,
+   "gp": "gerund",
+   "o": [
+    "attend",
+    "attending",
+    "to attend",
+    "attended"
+   ],
+   "q": "All new employees are required ____ the orientation session on Monday.",
+   "x": "be required + to V: được yêu cầu làm gì → to attend."
+  },
+  {
+   "a": 0,
+   "gp": "vocab",
+   "o": [
+    "introduce",
+    "inform",
+    "invite",
+    "include"
+   ],
+   "q": "Ms. Lee will ____ the new staff to the department heads this afternoon.",
+   "x": "introduce someone to someone: giới thiệu ai với ai. inform = thông báo, invite = mời, include = bao gồm."
+  },
+  {
+   "a": 1,
+   "gp": "passive",
+   "o": [
+    "will set up",
+    "will be set up",
+    "setting up",
+    "sets up"
+   ],
+   "q": "Your laptop ____ by the IT team before you arrive.",
+   "x": "Máy tính được cài đặt (không tự cài) → bị động tương lai: will be set up."
+  },
+  {
+   "a": 2,
+   "gp": "prep",
+   "o": [
+    "at",
+    "for",
+    "to",
+    "with"
+   ],
+   "q": "New staff usually need some time to adjust ____ the company culture.",
+   "x": "adjust to something: thích nghi với điều gì."
+  },
+  {
+   "a": 1,
+   "gp": "wordform",
+   "o": [
+    "simple",
+    "simply",
+    "simplicity",
+    "simplify"
+   ],
+   "q": "The handbook was written ____ so that every employee can understand it.",
+   "x": "Bổ nghĩa cho động từ was written → trạng từ simply."
+  },
+  {
+   "a": 2,
+   "gp": "conj",
+   "o": [
+    "Despite",
+    "Because of",
+    "Although",
+    "However"
+   ],
+   "q": "____ she had just joined the company, she was asked to lead the project.",
+   "x": "Sau chỗ trống là mệnh đề (she had just joined...) với ý đối lập → Although."
+  }
+ ],
+ "vocab": [
+  [
+   "orientation",
+   "/ˌɔːriənˈteɪʃn/",
+   "n",
+   "buổi định hướng (cho người mới)",
+   "a meeting that gives new people information about a place or job",
+   "All new staff must attend the orientation on Monday.",
+   "Mọi nhân viên mới phải dự buổi định hướng vào thứ Hai."
+  ],
+  [
+   "handbook",
+   "/ˈhændbʊk/",
+   "n",
+   "sổ tay hướng dẫn",
+   "a book that gives instructions or information about a subject",
+   "The employee handbook explains our leave policy.",
+   "Sổ tay nhân viên giải thích chính sách nghỉ phép của chúng tôi."
+  ],
+  [
+   "probation",
+   "/prəˈbeɪʃn/",
+   "n",
+   "thời gian thử việc",
+   "a period of time when a new worker is tested",
+   "New employees have a two-month probation period.",
+   "Nhân viên mới có thời gian thử việc hai tháng."
+  ],
+  [
+   "mentor",
+   "/ˈmentɔː/",
+   "n",
+   "người hướng dẫn, kèm cặp",
+   "an experienced person who advises someone with less experience",
+   "My mentor helped me learn the new system quickly.",
+   "Người hướng dẫn giúp tôi học hệ thống mới rất nhanh."
+  ],
+  [
+   "introduce",
+   "/ˌɪntrəˈdjuːs/",
+   "v",
+   "giới thiệu",
+   "to tell people each other's names when they meet for the first time",
+   "Let me introduce you to the rest of the team.",
+   "Để tôi giới thiệu anh với những người còn lại trong nhóm."
+  ],
+  [
+   "badge",
+   "/bædʒ/",
+   "n",
+   "thẻ nhân viên, thẻ ra vào",
+   "a small card with your name that you wear or use to enter a building",
+   "Please wear your badge at all times in the building.",
+   "Vui lòng đeo thẻ nhân viên mọi lúc trong tòa nhà."
+  ],
+  [
+   "set up",
+   "/set ʌp/",
+   "v",
+   "cài đặt, thiết lập",
+   "to prepare equipment so that it is ready to use",
+   "IT will set up your email account today.",
+   "Bộ phận IT sẽ thiết lập tài khoản email của bạn hôm nay."
+  ],
+  [
+   "adjust",
+   "/əˈdʒʌst/",
+   "v",
+   "thích nghi, điều chỉnh",
+   "to change your behaviour to fit a new situation",
+   "It took me a few weeks to adjust to the new job.",
+   "Tôi mất vài tuần để thích nghi với công việc mới."
+  ]
+ ]
+}
