@@ -17,6 +17,18 @@
     <div id="create-result" class="muted"></div>
   </div>
 
+  {% if settings.demo_mode %}
+  <div class="card" style="border-color:var(--warn)">
+    <h2>🧪 Giả lập tiền về (chế độ thử nghiệm)</h2>
+    <form id="demo" style="display:flex;gap:8px;flex-wrap:wrap;align-items:end">
+      <label>Số tiền (đ)<br><input name="amount" type="number" min="1" required></label>
+      <label>Nội dung chuyển khoản<br><input name="content" size="32" required></label>
+      <button>Gửi tin giả</button>
+    </form>
+    <div id="demo-result" class="muted">Bấm "Giả lập trả" ở bảng dưới để điền sẵn. Có thể thêm chữ trước/sau mã để thử ngân hàng đổi nội dung.</div>
+  </div>
+  {% endif %}
+
   <div class="card">
     <h2>Giao dịch cần xử lý <button class="ghost" onclick="loadAll()">Tải lại</button></h2>
     <div class="table-scroll"><table>
@@ -42,6 +54,22 @@ const TXN = { unmatched: "Không khớp mã", partial: "Trả thiếu", overpaid
   matched: "Khớp", late: "Khớp (trả sau hạn)", manual: "Ghép tay", ignored: "Tiền ra" };
 const RES = {{ resolutions | tojson }};
 const ERP_ON = {{ (settings.erp_callback_url != "") | tojson }};
+const DEMO = {{ settings.demo_mode | tojson }};
+function fillDemo(ref, amount) {
+  const f = document.getElementById("demo");
+  f.amount.value = amount; f.content.value = "MBVCB.123456." + ref + ".CT tu NGUYEN VAN B";
+  f.scrollIntoView({ behavior: "smooth" });
+}
+if (DEMO) document.getElementById("demo").addEventListener("submit", async e => {
+  e.preventDefault();
+  const out = document.getElementById("demo-result");
+  try {
+    const r = await api("/api/demo/bank-event", { method: "POST", body: JSON.stringify({
+      amount: Number(e.target.amount.value), content: e.target.content.value }) });
+    out.textContent = "Kết quả: " + (TXN[r.status] || r.status) + (r.ref_code ? " – mã " + r.ref_code : "");
+    loadAll();
+  } catch (err) { out.textContent = "Lỗi: " + err.message; }
+});
 const money = v => (v || 0).toLocaleString("vi-VN") + "đ";
 const time = ts => ts ? new Date(ts * 1000).toLocaleString("vi-VN", { timeZone: {{ settings.timezone | tojson }} }) : "";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -76,6 +104,7 @@ async function loadPayments() {
     <td>${p.expires_at ? time(p.expires_at) : "Không hạn"}</td>
     <td><a href="${esc(p.pay_url)}" target="_blank">Xem</a> · <a href="${esc(p.print_url)}" target="_blank">In</a>
       ${["pending","partial","expired"].includes(p.state) ? `· <a href="#" onclick="cancelPay('${esc(p.ref_code)}');return false">Hủy</a>` : ""}
+      ${DEMO && ["pending","partial","expired","paid"].includes(p.state) ? `· <a href="#" onclick="fillDemo('${esc(p.ref_code)}', ${p.remaining || p.amount});return false">Giả lập trả</a>` : ""}
       ${ERP_ON && p.state === "paid" && !p.erp_notified ?`· <a href="#" onclick="notifyErp('${esc(p.ref_code)}');return false">Gửi ERP</a>` : ""}
     </td></tr>`).join("") || `<tr><td colspan="7" class="muted">Chưa có mã</td></tr>`;
 }

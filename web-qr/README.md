@@ -50,6 +50,18 @@ uvicorn app.main:create_app --factory --host 0.0.0.0 --port 8000
   ```
 - Chạy kiểm thử: `pip install pytest && pytest`
 
+### Bản thử nghiệm trên Render (có link HTTPS công khai)
+
+File `render.yaml` ở thư mục gốc repo đã cấu hình sẵn (gói free, `DEMO_MODE=1`).
+
+1. Vào https://render.com, đăng ký bằng tài khoản GitHub.
+2. **New → Blueprint**, chọn repo `app-hoc-tieng-anh`. Nếu Render hỏi nhánh, chọn `ccr-cc07d8bd-mypsqs`.
+3. Điền các giá trị Render hỏi: `BANK_BIN`, `BANK_NAME`, `ACCOUNT_NUMBER`, `ACCOUNT_NAME`, `ADMIN_PASSWORD` (ít nhất 12 ký tự).
+4. Chờ build xong, mở `https://<tên>.onrender.com/admin` và đăng nhập `admin` / mật khẩu vừa đặt.
+
+Ở chế độ thử nghiệm, trang quản trị có ô **"Giả lập tiền về"** để thử khớp tiền mà không cần chuyển thật.
+Gói free **ngủ khi không dùng** (lần mở đầu chờ 30–60 giây) và **mất dữ liệu khi khởi động lại**. Chỉ dùng để thử.
+
 Khi chạy thật, đặt web sau **HTTPS** (Nginx/Caddy hoặc Cloudflare Tunnel), và đặt `PUBLIC_BASE_URL` bằng địa chỉ công khai.
 
 ## API

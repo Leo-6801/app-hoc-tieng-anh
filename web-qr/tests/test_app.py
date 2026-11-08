@@ -180,3 +180,14 @@ def test_erp_callback_signed(client, admin, reader, settings, monkeypatch):
     assert body["order_code"] == "DH9" and body["paid_amount"] == 1500000
     assert sent["headers"]["X-Signature"] == services.sign(sent["body"], "erp-secret")
     assert client.get(f"/api/payments/{p['ref_code']}", headers=admin).json()["erp_notified"] is True
+
+
+def test_demo_endpoint_only_in_demo_mode(client, admin, settings):
+    p = create(client, admin).json()
+    body = {"amount": 1500000, "content": f"MBVCB.1.{p['ref_code']}.CT"}
+    assert client.post("/api/demo/bank-event", json=body, headers=admin).status_code == 404
+    settings.demo_mode = True
+    assert client.post("/api/demo/bank-event", json=body).status_code == 401
+    r = client.post("/api/demo/bank-event", json=body, headers=admin).json()
+    assert r["status"] == "matched" and r["ref_code"] == p["ref_code"]
+    assert "Giả lập tiền về" in client.get("/admin", headers=admin).text

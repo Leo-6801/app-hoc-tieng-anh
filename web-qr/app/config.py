@@ -55,6 +55,8 @@ class Settings:
     deeplink_base: str = "https://dl.vietqr.io/pay"
     vietqr_show_seconds: int = 90
     timezone: str = "Asia/Ho_Chi_Minh"
+    # Chế độ thử nghiệm: hiện ô "Giả lập tiền về" trong trang quản trị. KHÔNG bật khi chạy thật.
+    demo_mode: bool = False
 
     def validate(self) -> None:
         if not re.fullmatch(r"[A-Z]{1,4}", self.ref_prefix):
@@ -75,7 +77,9 @@ def load_settings() -> Settings:
         bank_name=_get("BANK_NAME"),
         account_number=_get("ACCOUNT_NUMBER"),
         account_name=_get("ACCOUNT_NAME").upper(),
-        public_base_url=_get("PUBLIC_BASE_URL", "http://localhost:8000").rstrip("/"),
+        # Trên Render, RENDER_EXTERNAL_URL được cấp sẵn (https://<tên>.onrender.com)
+        public_base_url=(_get("PUBLIC_BASE_URL") or _get("RENDER_EXTERNAL_URL")
+                         or "http://localhost:8000").rstrip("/"),
         admin_api_key=_get("ADMIN_API_KEY"),
         admin_user=_get("ADMIN_USER", "admin"),
         admin_password=_get("ADMIN_PASSWORD"),
@@ -89,6 +93,7 @@ def load_settings() -> Settings:
         deeplink_base=_get("DEEPLINK_BASE", "https://dl.vietqr.io/pay"),
         vietqr_show_seconds=_int("VIETQR_SHOW_SECONDS", 90),
         timezone=_get("TIMEZONE", "Asia/Ho_Chi_Minh"),
+        demo_mode=_get("DEMO_MODE").lower() in ("1", "true", "yes"),
     )
     settings.validate()
     return settings

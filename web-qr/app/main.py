@@ -264,6 +264,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def api_resolve(txn_id: int, body: ResolveIn, actor: str = Depends(require_admin)):
         return services.resolve_txn(db, txn_id, body.resolution, body.note, actor)
 
+    # ------------------------------------------------------------ chế độ thử nghiệm
+    @app.post("/api/demo/bank-event")
+    def api_demo_bank_event(body: BankEventIn, background: BackgroundTasks,
+                            _: str = Depends(require_admin)):
+        """Giả lập app đọc tin gửi tiền về — chỉ khi DEMO_MODE bật."""
+        if not settings.demo_mode:
+            raise HTTPException(404)
+        data = body.model_dump()
+        data["bank"] = data["bank"] or "THU-NGHIEM"
+        data["txn_id"] = data["txn_id"] or secrets.token_hex(6)
+        result = services.process_bank_event(db, settings, services.BankEvent(**data))
+        after_process(result, background)
+        return {"status": result.status, "ref_code": result.payment["ref_code"] if result.payment else None,
+                "excess": result.excess}
+
     # ------------------------------------------------------------ app đọc tin ngân hàng
     @app.post("/api/bank-events", dependencies=[Depends(require_reader)])
     def api_bank_event(body: BankEventIn, background: BackgroundTasks):
