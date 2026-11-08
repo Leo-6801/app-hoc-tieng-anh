@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Quản trị Web QR{% endblock %}
+{% block body %}
+<div class="wrap wide">
+  <h1>Web QR – {{ settings.shop_name }}</h1>
+  <p class="muted">Tài khoản nhận: {{ settings.bank_name }} – {{ settings.account_number }} – {{ settings.account_name }}</p>
+
+  <div class="card">
+    <h2>Tạo mã thanh toán</h2>
+    <form id="create" style="display:flex;gap:8px;flex-wrap:wrap;align-items:end">
+      <label>Mã đơn<br><input name="order_code" required maxlength="64"></label>
+      <label>Số tiền (đ)<br><input name="amount" type="number" min="1" required></label>
+      <label>Hết hạn sau (phút, 0 = không hạn)<br>
+        <input name="expires_in_minutes" type="number" min="0" value="{{ settings.default_expire_minutes }}"></label>
+      <button>Tạo mã</button>
+    </form>
+    <div id="create-result" class="muted"></div>
+  </div>
+
+  <div class="card">
+    <h2>Giao dịch cần xử lý <button class="ghost" onclick="loadAll()">Tải lại</button></h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>Thời gian</th><th>Số tiền</th><th>Nội dung</th><th>Tình trạng</th><th>Đơn</th><th>Xử lý</th></tr></thead>
+      <tbody id="txns"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>Mã thanh toán gần đây</h2>
+    <div class="table-scroll"><table>
+      <thead><tr><th>Mã</th><th>Đơn</th><th>Số tiền</th><th>Đã nhận</th><th>Trạng thái</th><th>Hết hạn</th><th></th></tr></thead>
+      <tbody id="payments"></tbody>
+    </table></div>
+  </div>
+</div>
+
+<script>
+const STATE = { pending: "Chờ thanh toán", partial: "Trả một phần", paid: "Đã thanh toán",
+  expired: "Hết hạn", cancelled: "Đã hủy", closed: "Đã đóng (trả một phần)" };
+const TXN = { unmatched: "Không khớp mã", partial: "Trả thiếu", overpaid: "Trả thừa",
+  double_payment: "Chuyển 2 lần (đơn đã trả)", inactive_payment: "Đơn đã hủy/đóng",
+  matched: "Khớp", late: "Khớp (trả sau hạn)", manual: "Ghép tay", ignored: "Tiền ra" };
+const RES = {{ resolutions | tojson }};
+const ERP_ON = {{ (settings.erp_callback_url != "") | tojson }};
+const money = v => (v || 0).toLocaleString("vi-VN") + "đ";
+const time = ts => ts ? new Date(ts * 1000).toLocaleString("vi-VN", { timeZone: {{ settings.timezone | tojson }} }) : "";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, { headers: { "Content-Type": "application/json" }, ...opts });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || data.detail || r.statusText);
+  return data;
+}
+
+document.getElementById("create").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const out = document.getElementById("create-result");
+  try {
+    const p = await api("/api/payments", { method: "POST", body: JSON.stringify({
+      order_code: f.get("order_code"), amount: Number(f.get("amount")),
+      expires_in_minutes: Number(f.get("expires_in_minutes")) }) });
+    out.innerHTML = `Mã <b>${esc(p.ref_code)}</b> – <a href="${esc(p.pay_url)}" target="_blank">trang thanh toán</a>
+      – <a href="${esc(p.print_url)}" target="_blank">in mã</a>`;
+    e.target.reset(); loadAll();
+  } catch (err) { out.textContent = "Lỗi: " + err.message; }
+});
+
+async function loadPayments() {
+  const rows = await api("/api/payments?limit=50");
+  document.getElementById("payments").innerHTML = rows.map(p => `<tr>
+    <td><b>${esc(p.ref_code)}</b></td><td>${esc(p.order_code)}</td><td>${money(p.amount)}</td>
+    <td>${money(p.paid_amount)}</td>
+    <td><span class="tag">${STATE[p.state] || p.state}</span>${p.erp_error ? `<div class="muted">ERP lỗi: ${esc(p.erp_error)}</div>` : ""}</td>
+    <td>${p.expires_at ? time(p.expires_at) : "Không hạn"}</td>
+    <td><a href="${esc(p.pay_url)}" target="_blank">Xem</a> · <a href="${esc(p.print_url)}" target="_blank">In</a>
+      ${["pending","partial","expired"].includes(p.state) ? `· <a href="#" onclick="cancelPay('${esc(p.ref_code)}');return false">Hủy</a>` : ""}
+      ${ERP_ON && p.state === "paid" && !p.erp_notified ?`· <a href="#" onclick="notifyErp('${esc(p.ref_code)}');return false">Gửi ERP</a>` : ""}
+    </td></tr>`).join("") || `<tr><td colspan="7" class="muted">Chưa có mã</td></tr>`;
+}
+
+async function loadTxns() {
+  const rows = await api("/api/transactions?view=review");
+  document.getElementById("txns").innerHTML = rows.map(t => {
+    const canAssign = ["unmatched", "inactive_payment"].includes(t.match_status);
+    return `<tr>
+      <td>${time(t.received_at)}<div class="muted">${esc(t.bank)}</div></td>
+      <td><b>${money(t.amount)}</b></td><td>${esc(t.content)}</td>
+      <td><span class="tag">${TXN[t.match_status] || t.match_status}</span></td>
+      <td>${esc(t.ref_code || "")}<div class="muted">${esc(t.order_code || "")}</div></td>
+      <td>
+        ${canAssign ? `<div><input placeholder="Mã (vd PL...)" id="as-${t.id}" size="11">
+          <button class="ghost" onclick="assign(${t.id})">Ghép</button></div>` : ""}
+        <div><select id="rs-${t.id}">${Object.entries(RES).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select>
+          <input placeholder="Ghi chú" id="nt-${t.id}" size="12">
+          <button class="ghost" onclick="resolveTxn(${t.id})">Xong</button></div>
+      </td></tr>`;
+  }).join("") || `<tr><td colspan="6" class="muted">Không có giao dịch cần xử lý 👍</td></tr>`;
+}
+
+async function assign(id) {
+  try { await api(`/api/transactions/${id}/assign`, { method: "POST",
+      body: JSON.stringify({ ref_code: document.getElementById("as-" + id).value.trim() }) }); loadAll(); }
+  catch (err) { alert(err.message); }
+}
+async function resolveTxn(id) {
+  try { await api(`/api/transactions/${id}/resolve`, { method: "POST", body: JSON.stringify({
+      resolution: document.getElementById("rs-" + id).value, note: document.getElementById("nt-" + id).value }) }); loadAll(); }
+  catch (err) { alert(err.message); }
+}
+async function cancelPay(ref) {
+  if (!confirm("Hủy mã " + ref + "?")) return;
+  try { await api(`/api/payments/${ref}/cancel`, { method: "POST" }); loadAll(); } catch (err) { alert(err.message); }
+}
+async function notifyErp(ref) {
+  try { await api(`/api/payments/${ref}/notify-erp`, { method: "POST" }); loadAll(); } catch (err) { alert(err.message); }
+}
+function loadAll() { loadPayments().catch(e => alert(e.message)); loadTxns().catch(e => alert(e.message)); }
+loadAll(); setInterval(loadAll, 15000);
+</script>
+{% endblock %}

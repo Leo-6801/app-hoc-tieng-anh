@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Thanh toán đơn {{ payment.order_code }}{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="card">
+    <div class="muted">{{ settings.shop_name }}</div>
+    <h1>Đơn {{ payment.order_code }}</h1>
+    <div class="big">{{ (remaining if state in ('pending', 'partial') else payment.amount) | money }}</div>
+    {% if payment.paid_amount and state != 'paid' %}
+      <div class="muted">Đã nhận {{ payment.paid_amount | money }} / {{ payment.amount | money }}</div>
+    {% endif %}
+  </div>
+
+  {% if state == 'paid' %}
+    <div class="state ok">✅ Đơn đã thanh toán<br><span class="muted">{{ payment.paid_at | time }}</span></div>
+  {% elif state == 'expired' %}
+    <div class="state bad">⛔ Mã thanh toán đã hết hạn<br>
+      <span class="muted">Hết hạn lúc {{ payment.expires_at | time }}. Vui lòng liên hệ cửa hàng để nhận mã mới.</span></div>
+  {% elif state in ('cancelled', 'closed') %}
+    <div class="state bad">⛔ Mã thanh toán không còn hiệu lực<br>
+      <span class="muted">Vui lòng liên hệ cửa hàng.</span></div>
+  {% else %}
+    {% if seconds_left is not none %}
+      <div class="state warn">Mã hết hạn sau <span id="countdown">--:--</span></div>
+    {% endif %}
+
+    {% if deeplinks %}
+    <div class="card">
+      <h2>Mở app ngân hàng để thanh toán</h2>
+      {% for link in deeplinks %}
+        <a class="btn block" href="{{ link.url }}" rel="noreferrer">{{ link.label }}</a>
+      {% endfor %}
+      <div class="muted">Thông tin chuyển khoản được điền sẵn. Vui lòng không sửa số tiền và nội dung.</div>
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <h2>Thông tin chuyển khoản</h2>
+      <div class="row"><span>Ngân hàng</span><b>{{ bank.name }}</b></div>
+      <div class="row"><span>Số tài khoản</span><b>{{ bank.account_number }}
+        <button class="ghost" data-copy="{{ bank.account_number }}">Chép</button></b></div>
+      <div class="row"><span>Chủ tài khoản</span><b>{{ bank.account_name }}</b></div>
+      <div class="row"><span>Số tiền</span><b>{{ remaining | money }}
+        <button class="ghost" data-copy="{{ remaining }}">Chép</button></b></div>
+      <div class="row"><span>Nội dung</span><b>{{ payment.ref_code }}
+        <button class="ghost" data-copy="{{ payment.ref_code }}">Chép</button></b></div>
+      <div class="muted">⚠️ Ghi <b>đúng nội dung {{ payment.ref_code }}</b> để hệ thống tự xác nhận.</div>
+    </div>
+
+    <div class="card center">
+      <button id="show-qr" class="ghost">Hiện mã QR (quét từ thiết bị khác)</button>
+      <div id="qr-box" hidden>
+        <img class="qr" id="qr-img" alt="Mã QR chuyển khoản">
+        <div class="muted">Chỉ dùng cho đơn {{ payment.order_code }} – tự ẩn sau {{ settings.vietqr_show_seconds }} giây</div>
+      </div>
+    </div>
+
+    <div class="muted center">Trang tự cập nhật khi nhận được tiền. Vui lòng <b>không chuyển lại</b>.</div>
+  {% endif %}
+</div>
+
+<script>
+(() => {
+  const statusUrl = location.pathname.replace(/\/$/, "") + "/status";
+  const initialState = {{ state | tojson }};
+  let secondsLeft = {{ seconds_left | tojson }};
+
+  document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(btn.dataset.copy); btn.textContent = "Đã chép"; }
+    catch { btn.textContent = btn.dataset.copy; }
+    setTimeout(() => (btn.textContent = "Chép"), 1500);
+  }));
+
+  const showBtn = document.getElementById("show-qr");
+  if (showBtn) showBtn.addEventListener("click", () => {
+    const box = document.getElementById("qr-box");
+    document.getElementById("qr-img").src = statusUrl.replace(/status$/, "vietqr.svg") + "?t=" + Date.now();
+    box.hidden = false; showBtn.hidden = true;
+    setTimeout(() => { box.hidden = true; document.getElementById("qr-img").removeAttribute("src"); showBtn.hidden = false; },
+               {{ settings.vietqr_show_seconds }} * 1000);
+  });
+
+  const cd = document.getElementById("countdown");
+  function tick() {
+    if (cd == null || secondsLeft == null) return;
+    if (secondsLeft <= 0) { location.reload(); return; }
+    const m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+    cd.textContent = String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    secondsLeft -= 1;
+  }
+  tick(); setInterval(tick, 1000);
+
+  if (initialState === "pending" || initialState === "partial") {
+    setInterval(async () => {
+      try {
+        const r = await fetch(statusUrl, { cache: "no-store" });
+        const s = await r.json();
+        if (s.state !== initialState || (s.remaining !== {{ remaining }})) location.reload();
+        if (s.seconds_left != null) secondsLeft = s.seconds_left;
+      } catch {}
+    }, 3000);
+  }
+})();
+</script>
+{% endblock %}
