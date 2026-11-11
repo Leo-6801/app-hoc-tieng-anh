@@ -98,16 +98,16 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     }
 
     private fun buildWindow(title: String) {
+        // Không khung nền: chỉ có màn hình điện thoại và 2 thanh nhỏ trong suốt nhẹ ở trên/dưới.
         root.orientation = LinearLayout.VERTICAL
-        root.background = rounded(Color.parseColor("#1C1F24"), 28)
-        root.setPadding(dp(8), dp(4), dp(8), dp(8))
-        root.elevation = dp(12).toFloat()
+        root.gravity = Gravity.CENTER_HORIZONTAL
 
         // Thanh tiêu đề: kéo để di chuyển
         val titleBar = LinearLayout(context).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            setPadding(dp(8), dp(4), dp(4), dp(4))
+            setPadding(dp(12), dp(2), dp(4), dp(2))
+            background = rounded(Color.parseColor("#B3181A1F"), 14)
         }
         titleView.apply {
             text = title
@@ -133,7 +133,9 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         titleBar.addView(iconButton("—") { minimize() })
         titleBar.addView(iconButton("✕") { callbacks.onClose() })
         attachDrag(titleBar, root, windowParams)
-        root.addView(titleBar)
+        root.addView(titleBar, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            bottomMargin = dp(4)
+        })
 
         // Màn hình điện thoại
         screenBox.background = rounded(Color.BLACK, 18)
@@ -165,7 +167,8 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         val nav = LinearLayout(context).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
-            setPadding(0, dp(6), 0, 0)
+            setPadding(dp(4), dp(1), dp(4), dp(1))
+            background = rounded(Color.parseColor("#B3181A1F"), 14)
         }
         nav.addView(iconButton("◁") { callbacks.onKey(Proto.KEY_BACK) })
         nav.addView(iconButton("○") { callbacks.onKey(Proto.KEY_HOME) })
@@ -175,7 +178,9 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         val resize = iconButton("◢") {}
         attachResize(resize)
         nav.addView(resize)
-        root.addView(nav, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT))
+        root.addView(nav, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            topMargin = dp(4)
+        })
     }
 
     private fun buildBubble() {
