@@ -226,7 +226,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         val s = surface ?: return
         if (decoder != null || videoWidth <= 0 || videoHeight <= 0) return
         decoder = try {
-            VideoDecoder(s, videoWidth, videoHeight, codecConfig)
+            VideoDecoder(s, videoWidth, videoHeight, codecConfig) { send(Proto.REQUEST_KEYFRAME) }
         } catch (e: Exception) {
             null
         }

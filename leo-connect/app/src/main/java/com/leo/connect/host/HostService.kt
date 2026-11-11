@@ -26,7 +26,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.security.MessageDigest
 import java.security.SecureRandom
-import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.LinkedBlockingDeque
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import kotlin.math.max
@@ -184,6 +184,8 @@ class HostService : Service() {
         var mySession: Session? = null
         try {
             socket.tcpNoDelay = true
+            // Bộ đệm gửi nhỏ: khung hình không nằm chờ lâu trong hệ thống, việc bỏ khung có tác dụng ngay
+            socket.sendBufferSize = 64 * 1024
             socket.soTimeout = 15_000
             val nonce = ByteArray(16).also { SecureRandom().nextBytes(it) }
             channel.send(Proto.CHALLENGE, nonce)
@@ -272,7 +274,25 @@ class HostService : Service() {
         private var closed = false
 
         // Hàng đợi khung hình gửi đi. Khi mạng chậm, bỏ bớt khung để hình không bị trễ dồn.
-        private val outbox = LinkedBlockingQueue<Frame>()
+        private val outbox = LinkedBlockingDeque<Frame>()
+
+        // Bitrate tự điều chỉnh theo mạng
+        @Volatile
+        private var bitrate = Proto.QUALITIES[Proto.DEFAULT_QUALITY].bitrate
+
+        @Volatile
+        private var lastDropAt = 0L
+        private val adjustBitrate = object : Runnable {
+            override fun run() {
+                if (closed) return
+                val max = quality.bitrate
+                if (System.currentTimeMillis() - lastDropAt > 4_000 && bitrate < max) {
+                    bitrate = minOf(max, (bitrate * 1.15f).toInt())
+                    encoder?.setBitrate(bitrate)
+                }
+                video.postDelayed(this, 2_000)
+            }
+        }
 
         @Volatile
         private var waitingForKey = false
@@ -306,10 +326,13 @@ class HostService : Service() {
                 return
             }
             if (waitingForKey) return
-            if (outbox.count { it.droppable } >= 3) {
-                // Mạng không theo kịp: bỏ khung, xin khung khóa mới để bắt kịp.
+            if (outbox.count { it.droppable } >= 2) {
+                // Mạng không theo kịp: bỏ khung, hạ bitrate, xin khung khóa mới để bắt kịp.
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
+                lastDropAt = System.currentTimeMillis()
+                bitrate = maxOf(400_000, (bitrate * 0.7f).toInt())
+                encoder?.setBitrate(bitrate)
                 encoder?.requestKeyFrame()
                 return
             }
@@ -318,6 +341,7 @@ class HostService : Service() {
 
         fun start() {
             video.post { restartEncoder() }
+            video.postDelayed(adjustBitrate, 2_000)
         }
 
         fun onDisplayChanged() {
@@ -340,7 +364,8 @@ class HostService : Service() {
                 outbox.removeIf { it.droppable }
                 waitingForKey = false
                 outbox.add(Frame(Proto.VIDEO_CONFIG, Proto.encodeConfig(size.width, size.height), droppable = false))
-                val enc = ScreenEncoder(size.width, size.height, q.bitrate, q.fps) { flags, pts, data ->
+                bitrate = minOf(bitrate, q.bitrate)
+                val enc = ScreenEncoder(size.width, size.height, bitrate, q.fps) { flags, pts, data ->
                     if (!closed) enqueueFrame(flags, pts, data)
                 }
                 enc.start()
@@ -379,10 +404,12 @@ class HostService : Service() {
                         val q = Proto.QUALITIES[level]
                         if (q !== quality) {
                             quality = q
+                            bitrate = q.bitrate
                             video.post { restartEncoder() }
                         }
                     }
-                    Proto.PING -> outbox.add(Frame(Proto.PONG, m.data, droppable = false))
+                    // Trả lời đo độ trễ: chen lên đầu hàng đợi
+                    Proto.PING -> outbox.addFirst(Frame(Proto.PONG, m.data, droppable = false))
                 }
             }
         }
@@ -390,6 +417,7 @@ class HostService : Service() {
         fun stop() {
             closed = true
             senderThread.interrupt()
+            video.removeCallbacks(adjustBitrate)
             video.post {
                 virtualDisplay?.surface = null
                 encoder?.stop()

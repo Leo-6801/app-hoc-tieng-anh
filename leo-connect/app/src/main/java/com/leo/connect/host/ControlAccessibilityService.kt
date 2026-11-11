@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.Display
 import android.view.accessibility.AccessibilityEvent
+import com.leo.connect.CrashLog
 import com.leo.connect.Proto
 
 /**
@@ -206,7 +207,17 @@ class ControlAccessibilityService : AccessibilityService() {
     }
 
     private val pendingEdits = ArrayList<Edit>()
-    private val flushEdits = Runnable { applyEdits() }
+    private val flushEdits = Runnable { safe("gõ chữ") { applyEdits() } }
+
+    /** Lỗi khi gõ chữ không được làm văng app: ghi lại để xem trên màn hình chính. */
+    private inline fun safe(where: String, block: () -> Unit) {
+        try {
+            block()
+        } catch (e: Throwable) {
+            pendingEdits.clear()
+            CrashLog.record(this, e, where)
+        }
+    }
 
     fun typeText(text: String) {
         main.post {
@@ -289,11 +300,11 @@ class ControlAccessibilityService : AccessibilityService() {
 
     fun performKey(key: Int) {
         if (key == Proto.KEY_BACKSPACE) {
-            main.post { queueBackspace() }
+            main.post { safe("xóa lùi") { queueBackspace() } }
             return
         }
         if (key == Proto.KEY_ENTER) {
-            main.post { pressEnter() }
+            main.post { safe("Enter") { pressEnter() } }
             return
         }
         val action = when (key) {

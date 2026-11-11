@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.leo.connect.Prefs
 import com.leo.connect.Proto
 import kotlin.math.abs
 import kotlin.math.hypot
@@ -76,11 +77,13 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     // Chế độ bàn phím: cửa sổ nhận phím (bàn phím rời hoặc bàn phím ảo) và gửi chữ sang điện thoại
     private var keyboardMode = false
     private lateinit var keyboardButton: TextView
+    private lateinit var languageButton: TextView
+    private val prefs = Prefs(context)
     private val keyInput = KeyInputView(context, object : KeyInputView.Listener {
         override fun onText(text: String) = callbacks.onText(text)
         override fun onBackspace() = callbacks.onKey(Proto.KEY_BACKSPACE)
         override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
-    })
+    }).apply { telex = prefs.telex }
 
     init {
         buildWindow(title)
@@ -205,6 +208,14 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         nav.addView(iconButton("🔒") { callbacks.onKey(Proto.KEY_LOCK) })
         keyboardButton = iconButton("⌨") { setKeyboard(!keyboardMode) }
         nav.addView(keyboardButton)
+        languageButton = iconButton(if (keyInput.telex) "VI" else "EN") {
+            keyInput.telex = !keyInput.telex
+            keyInput.reset()
+            prefs.telex = keyInput.telex
+            languageButton.text = if (keyInput.telex) "VI" else "EN"
+        }
+        languageButton.textSize = 13f
+        nav.addView(languageButton)
         val resize = iconButton("◢") {}
         attachResize(resize)
         nav.addView(resize)
@@ -366,6 +377,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             val ny = (e.y / v.height).coerceIn(0f, 1f)
             when (e.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
+                    keyInput.reset() // chạm màn hình có thể làm đổi chỗ con trỏ trên điện thoại
                     points.clear()
                     points.add(floatArrayOf(nx, ny))
                     lastX = e.x; lastY = e.y

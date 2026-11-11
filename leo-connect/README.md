@@ -12,10 +12,13 @@
 - Nút **chất lượng** trên thanh tiêu đề: **Mượt** (1024px, 2 Mbps) · **Cân bằng** (1280px, 3,5 Mbps, mặc định) · **Nét** (1600px, 6 Mbps)
 - Hiện **độ trễ** (ms) trên thanh tiêu đề. Khi mạng nghẽn, app **bỏ bớt khung hình** để hình không bị trễ dồn
 - Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa · ⌨ Gõ phím**
-- **⌨ Gõ phím**: gõ bằng **bàn phím rời** (hoặc bàn phím ảo) của máy tính bảng vào ô nhập đang chọn trên điện thoại, **gõ được tiếng Việt** qua bộ gõ của máy tính bảng, có Backspace/Enter. Chạm ra ngoài cửa sổ thì tự tắt để gõ ở app khác
+- **⌨ Gõ phím**: gõ bằng **bàn phím rời** (hoặc bàn phím ảo) của máy tính bảng vào ô nhập đang chọn trên điện thoại, có Backspace/Enter. Chạm ra ngoài cửa sổ thì tự tắt để gõ ở app khác
+- **VI/EN**: app có sẵn **bộ gõ Telex** cho bàn phím rời (s f r x j, aa ee oo, aw ow uw, dd, z bỏ dấu). Chuyển sang **EN** để gõ tiếng Anh
 - Ghép đôi bằng **mã PIN 6 số**. Sai 5 lần thì điện thoại khóa 1 phút
 - Chỉ nhận kết nối từ **mạng Tailscale** (`100.64.0.0/10`)
 - Tự **kết nối lại** khi rớt mạng
+- **Tự hạ chất lượng** khi mạng yếu, tăng lại khi mạng tốt
+- App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính để gửi người phát triển
 
 ## Cài đặt
 1. Cài **Tailscale** trên cả 2 máy, đăng nhập **cùng một tài khoản**, bật kết nối.

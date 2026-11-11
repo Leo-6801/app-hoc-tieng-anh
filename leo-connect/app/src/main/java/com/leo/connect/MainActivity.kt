@@ -106,6 +106,23 @@ class MainActivity : Activity() {
         content.addView(roles)
         content.addView(View(this), LinearLayout.LayoutParams(1, dp(12)))
 
+        CrashLog.read(this)?.let { error ->
+            content.addView(card().apply {
+                addView(text("⚠️ Lần trước Leo Connect gặp lỗi", 16f, warnColor, bold = true))
+                addView(text("Chụp màn hình phần này gửi cho người phát triển để sửa.", 13f, mutedColor))
+                addView(text(error.take(1500), 11f, textColor).apply { setTextIsSelectable(true) })
+                addView(smallButton("Sao chép") {
+                    val cm = getSystemService(android.content.ClipboardManager::class.java)
+                    cm.setPrimaryClip(android.content.ClipData.newPlainText("Leo Connect lỗi", error))
+                    toast("Đã sao chép")
+                })
+                addView(smallButton("Xóa thông báo lỗi") {
+                    CrashLog.clear(this@MainActivity)
+                    render()
+                })
+            })
+        }
+
         when (prefs.role) {
             "host" -> renderHost()
             "controller" -> renderController()

@@ -88,6 +88,14 @@ class ScreenEncoder(
         }
     }
 
+    /** Đổi bitrate ngay khi đang chạy (tự hạ khi mạng yếu, tăng lại khi mạng tốt). */
+    fun setBitrate(bps: Int) {
+        try {
+            codec.setParameters(Bundle().apply { putInt(MediaCodec.PARAMETER_KEY_VIDEO_BITRATE, bps) })
+        } catch (_: Exception) {
+        }
+    }
+
     fun requestKeyFrame() {
         try {
             codec.setParameters(Bundle().apply { putInt(MediaCodec.PARAMETER_KEY_REQUEST_SYNC_FRAME, 0) })

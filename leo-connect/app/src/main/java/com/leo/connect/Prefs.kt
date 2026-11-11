@@ -39,6 +39,11 @@ class Prefs(context: Context) {
         get() = p.getString("target_name", "") ?: ""
         set(value) = p.edit().putString("target_name", value).apply()
 
+    /** Bộ gõ Telex của app cho bàn phím rời (VI) hoặc gõ thường (EN). */
+    var telex: Boolean
+        get() = p.getBoolean("telex", true)
+        set(value) = p.edit().putBoolean("telex", value).apply()
+
     /** Mức chất lượng hình (chỉ số trong Proto.QUALITIES). */
     var quality: Int
         get() = p.getInt("quality", Proto.DEFAULT_QUALITY).coerceIn(0, Proto.QUALITIES.size - 1)
