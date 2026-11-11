@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leo Connect</string>
+    <string name="a11y_label">Leo Connect – điều khiển từ máy tính bảng</string>
+    <string name="a11y_desc">Cho phép máy tính bảng đã ghép đôi chạm, vuốt và bấm Back/Home trên điện thoại này khi bạn bật chế độ sẵn sàng trong Leo Connect. Không đọc nội dung màn hình.</string>
+</resources>
