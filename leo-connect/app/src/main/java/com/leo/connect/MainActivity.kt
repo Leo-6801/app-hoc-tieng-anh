@@ -95,7 +95,7 @@ class MainActivity : Activity() {
         content.removeAllViews()
         statusText = null
         content.addView(text("Leo Connect", 26f, textColor, bold = true))
-        content.addView(text("Điều khiển điện thoại từ máy tính bảng qua Tailscale", 14f, mutedColor).apply {
+        content.addView(text("Điều khiển điện thoại từ máy tính bảng qua Tailscale · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
             setPadding(0, dp(2), 0, dp(16))
         })
 

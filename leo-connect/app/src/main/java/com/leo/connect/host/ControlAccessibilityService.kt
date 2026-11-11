@@ -233,18 +233,32 @@ class ControlAccessibilityService : AccessibilityService() {
         main.postDelayed(flushEdits, 30)
     }
 
+    // Nội dung ô nhập mà app vừa ghi. App đích (Zalo, Messenger...) có thể chưa kịp cập nhật,
+    // nên nếu đọc ra nội dung cũ thì dùng bản app tự nhớ thay vì nội dung cũ.
+    private var lastNode: android.view.accessibility.AccessibilityNodeInfo? = null
+    private var lastWritten: String? = null
+    private var lastBefore: String? = null
+    private var lastCursor = 0
+    private var lastWriteAt = 0L
+
     private fun pressEnter() {
         applyEdits()
-        val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return
-        val done = if (Build.VERSION.SDK_INT >= 30) {
-            node.performAction(android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_IME_ENTER.id)
+        val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT)
+        if (node == null || !node.isEditable) return
+        val enterAction = if (Build.VERSION.SDK_INT >= 30) {
+            android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_IME_ENTER
         } else {
-            false
+            null
         }
-        if (!done) {
-            pendingEdits.add(Edit.Insert("\n"))
-            applyEdits()
+        // Chỉ dùng lệnh "Gửi" của ô nhập khi ô đó thật sự có; nếu không thì xuống dòng
+        if (enterAction != null && node.actionList.any { it.id == enterAction.id } &&
+            node.performAction(enterAction.id)
+        ) {
+            lastWritten = null
+            return
         }
+        pendingEdits.add(Edit.Insert("\n"))
+        applyEdits()
     }
 
     /** Chạy trên luồng chính. */
@@ -255,9 +269,25 @@ class ControlAccessibilityService : AccessibilityService() {
         pendingEdits.clear()
         val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return
         if (!node.isEditable) return
-        val current = if (node.isShowingHintText) "" else (node.text?.toString() ?: "")
+        var current = if (node.isShowingHintText) "" else (node.text?.toString() ?: "")
         var start = node.textSelectionStart
         var end = node.textSelectionEnd
+
+        val remembered = lastWritten
+        val recent = System.currentTimeMillis() - lastWriteAt < 3_000
+        if (remembered != null && recent && node == lastNode && current != remembered && current == lastBefore) {
+            // App chưa cập nhật: dùng nội dung vừa ghi
+            current = remembered
+            start = lastCursor
+            end = lastCursor
+        } else if (remembered != null && recent && node == lastNode && current == remembered) {
+            // Nội dung đúng như vừa ghi nhưng con trỏ có thể chưa cập nhật
+            if (start < 0 || start == end && start != lastCursor && (start == 0 || start == current.length)) {
+                start = lastCursor
+                end = lastCursor
+            }
+        }
+
         if (start < 0 || end < 0) {
             start = current.length
             end = current.length
@@ -287,8 +317,9 @@ class ControlAccessibilityService : AccessibilityService() {
                 }
             }
         }
+        val result = sb.toString()
         val args = Bundle().apply {
-            putCharSequence(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, sb.toString())
+            putCharSequence(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, result)
         }
         node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_TEXT, args)
         val sel = Bundle().apply {
@@ -296,6 +327,11 @@ class ControlAccessibilityService : AccessibilityService() {
             putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, cursor)
         }
         node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_SELECTION, sel)
+        lastNode = node
+        lastBefore = current
+        lastWritten = result
+        lastCursor = cursor
+        lastWriteAt = System.currentTimeMillis()
     }
 
     fun performKey(key: Int) {
