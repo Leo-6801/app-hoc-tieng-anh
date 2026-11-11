@@ -35,7 +35,9 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     interface Callbacks {
         fun onSurface(surface: Surface?)
         fun onGesture(durationMs: Int, points: List<FloatArray>)
+        fun onTouch(action: Int, x: Float, y: Float)
         fun onKey(key: Int)
+        fun onQualityClick()
         fun onClose()
     }
 
@@ -57,6 +59,8 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     private val bubbleParams = overlayParams()
 
     private val titleView = TextView(context)
+    private val latencyView = TextView(context)
+    private val qualityView = TextView(context)
     private val statusView = TextView(context)
     private val surfaceView = SurfaceView(context)
     private val screenBox = FrameLayout(context)
@@ -112,6 +116,20 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             maxLines = 1
         }
         titleBar.addView(titleView, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+        latencyView.apply {
+            setTextColor(Color.parseColor("#9AA5B1"))
+            textSize = 12f
+            setPadding(dp(6), 0, dp(6), 0)
+        }
+        titleBar.addView(latencyView)
+        qualityView.apply {
+            setTextColor(Color.WHITE)
+            textSize = 12f
+            setPadding(dp(8), dp(3), dp(8), dp(3))
+            background = rounded(Color.parseColor("#33FFFFFF"), 10)
+            setOnClickListener { callbacks.onQualityClick() }
+        }
+        titleBar.addView(qualityView)
         titleBar.addView(iconButton("—") { minimize() })
         titleBar.addView(iconButton("✕") { callbacks.onClose() })
         attachDrag(titleBar, root, windowParams)
@@ -239,36 +257,70 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         }
     }
 
-    // Gom các điểm chạm thành một thao tác rồi gửi khi nhấc tay
+    // Chạm nhanh / vuốt nhanh (< 200 ms): gửi cả thao tác khi nhấc tay (giữ được lực vuốt).
+    // Giữ ngón tay lâu hơn: chuyển sang chạm trực tiếp, điện thoại kéo/cuộn theo ngón tay ngay.
     private val points = ArrayList<FloatArray>()
     private var downTime = 0L
     private var lastX = 0f
     private var lastY = 0f
+    private var touching = false
+    private var liveMode = false
+    private var lastLiveSend = 0L
+    private val goLive = Runnable { if (touching && !liveMode) startLive() }
+
+    private fun startLive() {
+        liveMode = true
+        val first = points.first()
+        callbacks.onTouch(Proto.TOUCH_DOWN, first[0], first[1])
+        for (p in downsample(points.drop(1), 20)) callbacks.onTouch(Proto.TOUCH_MOVE, p[0], p[1])
+        lastLiveSend = System.currentTimeMillis()
+    }
 
     private fun attachTouchForwarding() {
         surfaceView.setOnTouchListener { v, e ->
             if (v.width == 0 || v.height == 0) return@setOnTouchListener true
-            fun add(x: Float, y: Float) {
-                points.add(floatArrayOf((x / v.width).coerceIn(0f, 1f), (y / v.height).coerceIn(0f, 1f)))
-                lastX = x; lastY = y
-            }
+            val nx = (e.x / v.width).coerceIn(0f, 1f)
+            val ny = (e.y / v.height).coerceIn(0f, 1f)
             when (e.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
                     points.clear()
+                    points.add(floatArrayOf(nx, ny))
+                    lastX = e.x; lastY = e.y
                     downTime = e.eventTime
-                    add(e.x, e.y)
+                    touching = true
+                    liveMode = false
+                    surfaceView.postDelayed(goLive, 200)
                 }
-                MotionEvent.ACTION_MOVE -> if (hypot(e.x - lastX, e.y - lastY) > dp(3)) add(e.x, e.y)
-                MotionEvent.ACTION_UP -> {
-                    add(e.x, e.y)
-                    val duration = (e.eventTime - downTime).toInt().coerceIn(1, 60_000)
-                    val first = points.first()
-                    val maxMove = points.maxOf { hypot((it[0] - first[0]) * v.width, (it[1] - first[1]) * v.height) }
-                    val gesture = if (maxMove < dp(8)) listOf(first) else downsample(points, 60)
-                    callbacks.onGesture(duration, gesture)
+                MotionEvent.ACTION_MOVE -> {
+                    if (hypot(e.x - lastX, e.y - lastY) > dp(2)) {
+                        lastX = e.x; lastY = e.y
+                        if (liveMode) {
+                            val now = System.currentTimeMillis()
+                            if (now - lastLiveSend >= 16) {
+                                callbacks.onTouch(Proto.TOUCH_MOVE, nx, ny)
+                                lastLiveSend = now
+                            }
+                        } else {
+                            points.add(floatArrayOf(nx, ny))
+                        }
+                    }
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    surfaceView.removeCallbacks(goLive)
+                    touching = false
+                    if (liveMode) {
+                        callbacks.onTouch(Proto.TOUCH_UP, nx, ny)
+                        liveMode = false
+                    } else if (e.actionMasked == MotionEvent.ACTION_UP) {
+                        points.add(floatArrayOf(nx, ny))
+                        val duration = (e.eventTime - downTime).toInt().coerceIn(1, 60_000)
+                        val first = points.first()
+                        val maxMove = points.maxOf { hypot((it[0] - first[0]) * v.width, (it[1] - first[1]) * v.height) }
+                        val gesture = if (maxMove < dp(8)) listOf(first) else downsample(points, 60)
+                        callbacks.onGesture(duration, gesture)
+                    }
                     points.clear()
                 }
-                MotionEvent.ACTION_CANCEL -> points.clear()
             }
             true
         }
@@ -290,6 +342,14 @@ class PhoneWindow(private val context: Context, title: String, private val callb
 
     fun setTitle(title: String) {
         titleView.text = title
+    }
+
+    fun setLatency(text: String) {
+        latencyView.text = text
+    }
+
+    fun setQualityLabel(text: String) {
+        qualityView.text = text
     }
 
     /** null = ẩn lớp thông báo, hiện hình điện thoại. */

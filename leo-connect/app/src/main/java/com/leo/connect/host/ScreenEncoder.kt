@@ -17,6 +17,7 @@ class ScreenEncoder(
     val width: Int,
     val height: Int,
     private val bitrate: Int,
+    private val fps: Int,
     private val onFrame: (flags: Int, ptsUs: Long, data: ByteArray) -> Unit,
 ) {
     private val codec: MediaCodec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_VIDEO_AVC)
@@ -27,16 +28,32 @@ class ScreenEncoder(
     private var running = false
     private var drainThread: Thread? = null
 
-    fun start() {
-        val format = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, width, height).apply {
+    private fun format(lowLatency: Boolean) =
+        MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, width, height).apply {
             setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
             setInteger(MediaFormat.KEY_BIT_RATE, bitrate)
-            setInteger(MediaFormat.KEY_FRAME_RATE, 30)
+            setInteger(MediaFormat.KEY_FRAME_RATE, fps)
             setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 2)
             // Màn hình đứng yên vẫn gửi lại khung cũ, để máy tính bảng luôn có hình.
             setLong(MediaFormat.KEY_REPEAT_PREVIOUS_FRAME_AFTER, 200_000L)
+            if (lowLatency) {
+                // Baseline: không có khung B nên không phải chờ sắp xếp lại khung → bớt trễ.
+                setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.AVCProfileBaseline)
+                setInteger(MediaFormat.KEY_LEVEL, MediaCodecInfo.CodecProfileLevel.AVCLevel41)
+                setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = thời gian thực
+                setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_CBR)
+            }
         }
-        codec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+
+    fun start() {
+        try {
+            codec.configure(format(lowLatency = true), null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+        } catch (e: Exception) {
+            // Một số chip không nhận các tùy chọn trên → dùng cấu hình cơ bản
+            Log.w("LeoConnect", "Bộ nén không hỗ trợ chế độ trễ thấp: ${e.message}")
+            codec.reset()
+            codec.configure(format(lowLatency = false), null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+        }
         inputSurface = codec.createInputSurface()
         codec.start()
         running = true

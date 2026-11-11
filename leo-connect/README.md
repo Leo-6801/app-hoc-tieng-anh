@@ -7,7 +7,9 @@
   - kéo thanh tiêu đề để **di chuyển**, kéo **◢** để **đổi cỡ** (giữ đúng tỉ lệ)
   - nút **—** thu nhỏ thành **bong bóng 📱**, chạm bong bóng để mở lại
   - tự đổi khung khi điện thoại **xoay ngang/dọc**
-- **Chạm, vuốt, nhấn giữ** trực tiếp trên hình điện thoại
+- **Chạm, vuốt, nhấn giữ** trực tiếp trên hình điện thoại. Giữ ngón tay lâu hơn 0,2 giây thì điện thoại **kéo/cuộn theo ngón tay ngay lúc đang vuốt**
+- Nút **chất lượng** trên thanh tiêu đề: **Mượt** (1024px, 2 Mbps) · **Cân bằng** (1280px, 3,5 Mbps, mặc định) · **Nét** (1600px, 6 Mbps)
+- Hiện **độ trễ** (ms) trên thanh tiêu đề. Khi mạng nghẽn, app **bỏ bớt khung hình** để hình không bị trễ dồn
 - Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa**
 - Ghép đôi bằng **mã PIN 6 số**. Sai 5 lần thì điện thoại khóa 1 phút
 - Chỉ nhận kết nối từ **mạng Tailscale** (`100.64.0.0/10`)
@@ -37,7 +39,7 @@
 - Chưa có: kéo thả file, clipboard, nhập chữ bằng bàn phím máy tính bảng, âm thanh, chuyển tiếp thông báo (các giai đoạn sau).
 
 ## Kỹ thuật
-- Điện thoại: `MediaProjection` → `VirtualDisplay` → `MediaCodec` (H.264, tối đa 1600px, 6 Mbps) → TCP cổng **47800**. Lệnh chạm thực hiện bằng `AccessibilityService.dispatchGesture` (không đọc nội dung màn hình).
+- Điện thoại: `MediaProjection` → `VirtualDisplay` → `MediaCodec` (H.264 baseline, chế độ trễ thấp, 3 mức chất lượng) → TCP cổng **47800**. Lệnh chạm thực hiện bằng `AccessibilityService.dispatchGesture` (không đọc nội dung màn hình).
 - Máy tính bảng: giải mã `MediaCodec` lên `SurfaceView` trong cửa sổ `TYPE_APPLICATION_OVERLAY`.
 - Xác thực: HMAC-SHA256 với khóa suy ra từ PIN, hai chiều (cả hai máy chứng minh biết PIN). Đường truyền được Tailscale (WireGuard) mã hóa.
 - Build: GitHub Actions (`.github/workflows/leo-connect.yml`) tạo APK và bản phát hành mỗi lần có thay đổi trong `leo-connect/`.

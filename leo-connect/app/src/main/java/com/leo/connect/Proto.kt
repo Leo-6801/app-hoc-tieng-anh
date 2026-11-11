@@ -38,6 +38,29 @@ object Proto {
     const val GESTURE = 20
     const val KEY = 21
     const val REQUEST_KEYFRAME = 22
+    const val TOUCH = 23 // chạm trực tiếp theo ngón tay: [hành động][x][y]
+    const val QUALITY = 24 // [mức chất lượng]
+
+    // Đo độ trễ
+    const val PING = 30
+    const val PONG = 31
+
+    const val TOUCH_DOWN = 0
+    const val TOUCH_MOVE = 1
+    const val TOUCH_UP = 2
+
+    /** Mức chất lượng: cạnh dài tối đa (px), bitrate, khung hình/giây. */
+    class Quality(val label: String, val maxSide: Int, val bitrate: Int, val fps: Int)
+
+    val QUALITIES = listOf(
+        Quality("Mượt", 1024, 2_000_000, 30),
+        Quality("Cân bằng", 1280, 3_500_000, 30),
+        Quality("Nét", 1600, 6_000_000, 30),
+    )
+    const val DEFAULT_QUALITY = 1
+
+    fun encodeTouch(action: Int, x: Float, y: Float): ByteArray =
+        ByteBuffer.allocate(9).put(action.toByte()).putFloat(x).putFloat(y).array()
 
     const val FLAG_CONFIG = 1
     const val FLAG_KEY = 2

@@ -38,4 +38,9 @@ class Prefs(context: Context) {
     var targetName: String
         get() = p.getString("target_name", "") ?: ""
         set(value) = p.edit().putString("target_name", value).apply()
+
+    /** Mức chất lượng hình (chỉ số trong Proto.QUALITIES). */
+    var quality: Int
+        get() = p.getInt("quality", Proto.DEFAULT_QUALITY).coerceIn(0, Proto.QUALITIES.size - 1)
+        set(value) = p.edit().putInt("quality", value).apply()
 }

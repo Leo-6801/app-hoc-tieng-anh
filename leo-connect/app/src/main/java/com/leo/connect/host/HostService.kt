@@ -26,6 +26,8 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.security.MessageDigest
 import java.security.SecureRandom
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import kotlin.math.max
 import kotlin.math.min
@@ -43,8 +45,6 @@ class HostService : Service() {
         const val EXTRA_DATA = "data"
         private const val NOTIF_ID = 1
         private const val TAG = "LeoConnect"
-        private const val BITRATE = 6_000_000
-        private const val MAX_SIDE = 1600
 
         @Volatile
         var running = false
@@ -125,7 +125,7 @@ class HostService : Service() {
             }
         }, main)
 
-        val size = captureSize()
+        val size = captureSize(Proto.QUALITIES[Proto.DEFAULT_QUALITY].maxSide)
         // Android 14+: mỗi lần cấp quyền chỉ tạo được MỘT VirtualDisplay, nên giữ nó suốt phiên
         // và chỉ đổi Surface/kích thước khi có máy kết nối hoặc khi xoay màn hình.
         virtualDisplay = mp.createVirtualDisplay(
@@ -139,14 +139,14 @@ class HostService : Service() {
 
     private data class CaptureSize(val width: Int, val height: Int, val dpi: Int)
 
-    private fun captureSize(): CaptureSize {
+    private fun captureSize(maxSide: Int): CaptureSize {
         val metrics = DisplayMetrics()
         val display = getSystemService(DisplayManager::class.java).getDisplay(Display.DEFAULT_DISPLAY)
         @Suppress("DEPRECATION")
         display.getRealMetrics(metrics)
         val w = metrics.widthPixels
         val h = metrics.heightPixels
-        val scale = min(1f, MAX_SIDE.toFloat() / max(w, h))
+        val scale = min(1f, maxSide.toFloat() / max(w, h))
         // Bộ nén video cần kích thước chia hết cho 16
         val sw = max(16, ((w * scale).toInt() / 16) * 16)
         val sh = max(16, ((h * scale).toInt() / 16) * 16)
@@ -266,7 +266,57 @@ class HostService : Service() {
         private var lastSize: CaptureSize? = null
 
         @Volatile
+        private var quality = Proto.QUALITIES[Proto.DEFAULT_QUALITY]
+
+        @Volatile
         private var closed = false
+
+        // Hàng đợi khung hình gửi đi. Khi mạng chậm, bỏ bớt khung để hình không bị trễ dồn.
+        private class Frame(val type: Int, val payload: ByteArray, val droppable: Boolean)
+
+        private val outbox = LinkedBlockingQueue<Frame>()
+
+        @Volatile
+        private var waitingForKey = false
+        private val senderThread = thread(name = "leo-send") { sendLoop() }
+
+        private fun sendLoop() {
+            try {
+                while (!closed) {
+                    val f = outbox.poll(500, TimeUnit.MILLISECONDS) ?: continue
+                    channel.send(f.type, f.payload)
+                }
+            } catch (e: Exception) {
+                closed = true
+                channel.close()
+            }
+        }
+
+        private fun enqueueFrame(flags: Int, pts: Long, data: ByteArray) {
+            val isConfig = (flags and Proto.FLAG_CONFIG) != 0
+            val isKey = (flags and Proto.FLAG_KEY) != 0
+            val payload = Proto.encodeFrame(flags, pts, data, 0, data.size)
+            if (isConfig) {
+                outbox.add(Frame(Proto.VIDEO_FRAME, payload, droppable = false))
+                return
+            }
+            if (isKey) {
+                // Khung khóa: bỏ các khung cũ còn đang chờ, hình nhảy ngay tới hiện tại.
+                outbox.removeIf { it.droppable }
+                waitingForKey = false
+                outbox.add(Frame(Proto.VIDEO_FRAME, payload, droppable = true))
+                return
+            }
+            if (waitingForKey) return
+            if (outbox.count { it.droppable } >= 3) {
+                // Mạng không theo kịp: bỏ khung, xin khung khóa mới để bắt kịp.
+                outbox.removeIf { it.droppable }
+                waitingForKey = true
+                encoder?.requestKeyFrame()
+                return
+            }
+            outbox.add(Frame(Proto.VIDEO_FRAME, payload, droppable = true))
+        }
 
         fun start() {
             video.post { restartEncoder() }
@@ -274,7 +324,7 @@ class HostService : Service() {
 
         fun onDisplayChanged() {
             video.post {
-                val size = captureSize()
+                val size = captureSize(quality.maxSide)
                 if (!closed && size != lastSize) restartEncoder()
             }
         }
@@ -283,21 +333,17 @@ class HostService : Service() {
         private fun restartEncoder() {
             if (closed) return
             val vd = virtualDisplay ?: return
-            val size = captureSize()
+            val q = quality
+            val size = captureSize(q.maxSide)
             vd.surface = null
             encoder?.stop()
             encoder = null
             try {
-                channel.send(Proto.VIDEO_CONFIG, Proto.encodeConfig(size.width, size.height))
-                val enc = ScreenEncoder(size.width, size.height, BITRATE) { flags, pts, data ->
-                    if (!closed) {
-                        try {
-                            channel.send(Proto.VIDEO_FRAME, Proto.encodeFrame(flags, pts, data, 0, data.size))
-                        } catch (e: Exception) {
-                            closed = true
-                            channel.close()
-                        }
-                    }
+                outbox.removeIf { it.droppable }
+                waitingForKey = false
+                outbox.add(Frame(Proto.VIDEO_CONFIG, Proto.encodeConfig(size.width, size.height), droppable = false))
+                val enc = ScreenEncoder(size.width, size.height, q.bitrate, q.fps) { flags, pts, data ->
+                    if (!closed) enqueueFrame(flags, pts, data)
                 }
                 enc.start()
                 vd.resize(size.width, size.height, size.dpi)
@@ -318,16 +364,31 @@ class HostService : Service() {
                         val (duration, points) = Proto.decodeGesture(m.data)
                         ControlAccessibilityService.instance?.performGesture(duration, points)
                     }
+                    Proto.TOUCH -> if (m.data.size >= 9) {
+                        val bb = java.nio.ByteBuffer.wrap(m.data)
+                        val action = bb.get().toInt()
+                        ControlAccessibilityService.instance?.liveTouch(action, bb.float, bb.float)
+                    }
                     Proto.KEY -> if (m.data.isNotEmpty()) {
                         ControlAccessibilityService.instance?.performKey(m.data[0].toInt())
                     }
                     Proto.REQUEST_KEYFRAME -> encoder?.requestKeyFrame()
+                    Proto.QUALITY -> if (m.data.isNotEmpty()) {
+                        val level = m.data[0].toInt().coerceIn(0, Proto.QUALITIES.size - 1)
+                        val q = Proto.QUALITIES[level]
+                        if (q !== quality) {
+                            quality = q
+                            video.post { restartEncoder() }
+                        }
+                    }
+                    Proto.PING -> outbox.add(Frame(Proto.PONG, m.data, droppable = false))
                 }
             }
         }
 
         fun stop() {
             closed = true
+            senderThread.interrupt()
             video.post {
                 virtualDisplay?.surface = null
                 encoder?.stop()

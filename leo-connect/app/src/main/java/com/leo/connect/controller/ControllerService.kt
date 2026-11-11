@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.Surface
 import com.leo.connect.Channel
 import com.leo.connect.Notif
+import com.leo.connect.Prefs
 import com.leo.connect.Proto
 import java.io.IOException
 import java.net.InetSocketAddress
@@ -18,6 +19,8 @@ import java.net.Socket
 import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
 /**
@@ -53,6 +56,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     @Volatile
     private var channel: Channel? = null
     private var netThread: Thread? = null
+    private var pinger: ScheduledExecutorService? = null
+    private lateinit var prefs: Prefs
 
     // Trạng thái video (truy cập trong khóa decoderLock)
     private val decoderLock = Any()
@@ -98,7 +103,17 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
         running = true
         active = true
-        window = PhoneWindow(this, name, this).also { it.show() }
+        prefs = Prefs(this)
+        window = PhoneWindow(this, name, this).also {
+            it.show()
+            it.setQualityLabel(Proto.QUALITIES[prefs.quality].label)
+        }
+        // Đo độ trễ mỗi 2 giây
+        pinger = Executors.newSingleThreadScheduledExecutor().also {
+            it.scheduleWithFixedDelay({
+                if (connected) send(Proto.PING, java.nio.ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
+            }, 2, 2, TimeUnit.SECONDS)
+        }
         val key = Proto.keyFromPin(pin)
         netThread = thread(name = "leo-net") { netLoop(host, key) }
     }
@@ -135,6 +150,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 socket.soTimeout = 0
                 channel = ch
                 connected = true
+                send(Proto.QUALITY, byteArrayOf(prefs.quality.toByte()))
                 ui {
                     if (phoneName.isNotBlank()) setTitle(phoneName)
                     setStatus("Đang chờ hình ảnh…")
@@ -144,6 +160,11 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     when (m.type) {
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
                         Proto.VIDEO_FRAME -> onVideoFrame(m.data)
+                        Proto.PONG -> if (m.data.size >= 8) {
+                            val sent = java.nio.ByteBuffer.wrap(m.data).long
+                            val ms = (System.nanoTime() - sent) / 1_000_000
+                            ui { setLatency("$ms ms") }
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -158,6 +179,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             } finally {
                 connected = false
                 channel = null
+                ui { setLatency("") }
                 try {
                     socket?.close()
                 } catch (_: Exception) {
@@ -242,8 +264,20 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         send(Proto.GESTURE, Proto.encodeGesture(durationMs, points))
     }
 
+    override fun onTouch(action: Int, x: Float, y: Float) {
+        send(Proto.TOUCH, Proto.encodeTouch(action, x, y))
+    }
+
     override fun onKey(key: Int) {
         send(Proto.KEY, byteArrayOf(key.toByte()))
+    }
+
+    /** Chạm nút chất lượng: Mượt → Cân bằng → Nét → Mượt… */
+    override fun onQualityClick() {
+        val next = (prefs.quality + 1) % Proto.QUALITIES.size
+        prefs.quality = next
+        window?.setQualityLabel(Proto.QUALITIES[next].label)
+        send(Proto.QUALITY, byteArrayOf(next.toByte()))
     }
 
     override fun onClose() {
@@ -263,6 +297,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         window?.dismiss()
         window = null
         sender.shutdownNow()
+        pinger?.shutdownNow()
         super.onDestroy()
     }
 }
