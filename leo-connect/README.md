@@ -2,25 +2,18 @@
 
 Điều khiển **điện thoại Android** từ **máy tính bảng Android** qua Internet, màn hình điện thoại hiện trong một **cửa sổ nổi** trên máy tính bảng. Kết nối đi qua **Tailscale** (mạng riêng, mã hóa), nên không cần máy chủ riêng.
 
-## Tính năng (giai đoạn 1)
-- Màn hình điện thoại hiện trong **cửa sổ nổi** đè lên các app của máy tính bảng:
-  - kéo thanh tiêu đề để **di chuyển**, kéo **◢** hoặc **chụm/mở 2 ngón tay** trên màn hình để **thu phóng** (giữ đúng tỉ lệ)
-  - **chạm 2 lần vào thanh tiêu đề** để phóng to tối đa / trở về cỡ cũ
-  - nút **—** thu nhỏ thành **bong bóng 📱**, chạm bong bóng để mở lại
+## Tính năng
+- Màn hình điện thoại hiện trong **cửa sổ nổi** (không khung, không thanh tiêu đề) đè lên các app của máy tính bảng:
+  - **nắm một trong 4 góc** (chấm mờ) và kéo để **di chuyển**; chạm 2 lần vào góc để phóng to tối đa / trở lại
+  - **chụm/mở 2 ngón tay** để **thu phóng** (giữ đúng tỉ lệ)
+  - nút **—** thu nhỏ thành **bong bóng 📱**, chạm bong bóng để mở lại; nút **✕** để đóng
   - tự đổi khung khi điện thoại **xoay ngang/dọc**
-- **Chạm, vuốt, nhấn giữ** trực tiếp trên hình điện thoại. Giữ ngón tay lâu hơn 0,2 giây thì điện thoại **kéo/cuộn theo ngón tay ngay lúc đang vuốt**
-- Nút **chất lượng** trên thanh tiêu đề: **Mượt** (1024px, 2 Mbps) · **Cân bằng** (1280px, 3,5 Mbps, mặc định) · **Nét** (1600px, 6 Mbps)
-- Hiện **độ trễ** (ms) trên thanh tiêu đề. Khi mạng nghẽn, app **bỏ bớt khung hình** để hình không bị trễ dồn
-- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa · ⌨ Gõ phím**
-- **⌨ Gõ phím**: gõ bằng **bàn phím rời** (hoặc bàn phím ảo) của máy tính bảng vào ô nhập đang chọn trên điện thoại, có Backspace/Enter. Chạm ra ngoài cửa sổ thì tự tắt để gõ ở app khác
-- **VI/EN**: app có sẵn **bộ gõ Telex** cho bàn phím rời (s f r x j, aa ee oo, aw ow uw, dd, z bỏ dấu). Chuyển sang **EN** để gõ tiếng Anh
-- Ghép đôi bằng **mã PIN 6 số**. Sai 5 lần thì điện thoại khóa 1 phút
-- Chỉ nhận kết nối từ **mạng Tailscale** (`100.64.0.0/10`)
-- Tự **kết nối lại** khi rớt mạng
-- **Tự hạ chất lượng** khi mạng yếu, tăng lại khi mạng tốt
-- Dùng **H.265 (HEVC)** khi cả hai máy hỗ trợ: cùng độ nét chỉ tốn khoảng nửa dữ liệu so với H.264 (tự quay về H.264 nếu không được)
-- **Làm mới hình dần dần** và giới hạn xin khung khóa 1 lần/giây để tránh các cú giật độ trễ
-- App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính để gửi người phát triển
+- **Chạm, vuốt, nhấn giữ** trực tiếp. Giữ ngón tay hơn 0,2 giây thì điện thoại kéo/cuộn theo ngón tay
+- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · ⌨ Gõ phím · chất lượng hình (+ độ trễ ms) · — · ✕**
+- **⌨ Gõ phím** bằng bàn phím rời, **luôn gõ tiếng Việt kiểu Telex**. **Enter** = bấm nút Gửi của app, **Shift+Enter** = xuống dòng
+- Chất lượng **Mượt / Cân bằng / Nét**, tự hạ khi mạng yếu; dùng **H.265** khi hai máy hỗ trợ
+- Ghép đôi bằng **mã PIN 6 số**, chỉ nhận kết nối từ **mạng Tailscale**, tự **kết nối lại** khi rớt mạng
+- App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính
 
 ## Cài đặt
 1. Cài **Tailscale** trên cả 2 máy, đăng nhập **cùng một tài khoản**, bật kết nối.

@@ -77,14 +77,13 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     // Chế độ bàn phím: cửa sổ nhận phím (bàn phím rời hoặc bàn phím ảo) và gửi chữ sang điện thoại
     private var keyboardMode = false
     private lateinit var keyboardButton: TextView
-    private lateinit var languageButton: TextView
     private val prefs = Prefs(context)
     private val keyInput = KeyInputView(context, object : KeyInputView.Listener {
         override fun onText(text: String) = callbacks.onText(text)
         override fun onBackspace() = callbacks.onKey(Proto.KEY_BACKSPACE)
         override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
         override fun onNewline() = callbacks.onKey(Proto.KEY_NEWLINE)
-    }).apply { telex = prefs.telex }
+    }).apply { telex = true } // luôn gõ tiếng Việt (Telex)
 
     init {
         buildWindow(title)
@@ -115,53 +114,10 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     }
 
     private fun buildWindow(title: String) {
-        // Không khung nền: chỉ có màn hình điện thoại và 2 thanh nhỏ trong suốt nhẹ ở trên/dưới.
+        // Không khung nền, không thanh tiêu đề: chỉ có màn hình điện thoại và 1 thanh nút nhỏ bên dưới.
         root.orientation = LinearLayout.VERTICAL
         root.gravity = Gravity.CENTER_HORIZONTAL
-
-        // Thanh tiêu đề: kéo để di chuyển
-        val titleBar = LinearLayout(context).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            setPadding(dp(12), dp(2), dp(4), dp(2))
-            background = rounded(Color.parseColor("#B3181A1F"), 14)
-        }
-        titleView.apply {
-            text = title
-            setTextColor(Color.WHITE)
-            textSize = 14f
-            maxLines = 1
-        }
-        titleBar.addView(titleView, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
-        latencyView.apply {
-            setTextColor(Color.parseColor("#9AA5B1"))
-            textSize = 12f
-            setPadding(dp(6), 0, dp(6), 0)
-        }
-        titleBar.addView(latencyView)
-        qualityView.apply {
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            setPadding(dp(8), dp(3), dp(8), dp(3))
-            background = rounded(Color.parseColor("#33FFFFFF"), 10)
-            setOnClickListener { callbacks.onQualityClick() }
-        }
-        titleBar.addView(qualityView)
-        titleBar.addView(iconButton("—") { minimize() })
-        titleBar.addView(iconButton("✕") { callbacks.onClose() })
-        var lastTitleTap = 0L
-        attachDrag(titleBar, root, windowParams, onTap = {
-            val now = System.currentTimeMillis()
-            if (now - lastTitleTap < 350) {
-                toggleMaximize()
-                lastTitleTap = 0L
-            } else {
-                lastTitleTap = now
-            }
-        })
-        root.addView(titleBar, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-            bottomMargin = dp(4)
-        })
+        titleView.text = title
 
         // Màn hình điện thoại
         screenBox.background = rounded(Color.BLACK, 18)
@@ -177,6 +133,14 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         }
         screenBox.addView(statusView, FrameLayout.LayoutParams(-1, -1))
         screenBox.addView(keyInput, FrameLayout.LayoutParams(1, 1))
+
+        // 4 góc: nắm và kéo để di chuyển cửa sổ (chạm 2 lần để phóng to tối đa / trở lại)
+        val corners = listOf(
+            Gravity.TOP or Gravity.START, Gravity.TOP or Gravity.END,
+            Gravity.BOTTOM or Gravity.START, Gravity.BOTTOM or Gravity.END,
+        )
+        for (g in corners) screenBox.addView(cornerGrip(), FrameLayout.LayoutParams(dp(34), dp(34), g))
+
         // Chạm ra ngoài cửa sổ (sang app khác) thì tắt chế độ bàn phím để gõ được ở app đó
         root.setOnTouchListener { _, e ->
             if (e.actionMasked == MotionEvent.ACTION_OUTSIDE && keyboardMode) setKeyboard(false)
@@ -195,7 +159,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         })
         attachTouchForwarding()
 
-        // Thanh điều hướng
+        // Thanh nút: ◁ ○ ▢ ⌨ · chất lượng · — ✕
         val nav = LinearLayout(context).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -205,23 +169,43 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         nav.addView(iconButton("◁") { callbacks.onKey(Proto.KEY_BACK) })
         nav.addView(iconButton("○") { callbacks.onKey(Proto.KEY_HOME) })
         nav.addView(iconButton("▢") { callbacks.onKey(Proto.KEY_RECENTS) })
-        nav.addView(iconButton("🔔") { callbacks.onKey(Proto.KEY_NOTIFICATIONS) })
-        nav.addView(iconButton("🔒") { callbacks.onKey(Proto.KEY_LOCK) })
         keyboardButton = iconButton("⌨") { setKeyboard(!keyboardMode) }
         nav.addView(keyboardButton)
-        languageButton = iconButton(if (keyInput.telex) "VI" else "EN") {
-            keyInput.telex = !keyInput.telex
-            keyInput.reset()
-            prefs.telex = keyInput.telex
-            languageButton.text = if (keyInput.telex) "VI" else "EN"
+        qualityView.apply {
+            setTextColor(Color.WHITE)
+            textSize = 12f
+            setPadding(dp(8), dp(3), dp(8), dp(3))
+            background = rounded(Color.parseColor("#33FFFFFF"), 10)
+            setOnClickListener { callbacks.onQualityClick() }
         }
-        languageButton.textSize = 13f
-        nav.addView(languageButton)
-        val resize = iconButton("◢") {}
-        attachResize(resize)
-        nav.addView(resize)
-        root.addView(nav, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+        nav.addView(qualityView, LinearLayout.LayoutParams(-2, -2).apply { marginStart = dp(4) })
+        latencyView.apply {
+            setTextColor(Color.parseColor("#9AA5B1"))
+            textSize = 11f
+            setPadding(dp(6), 0, dp(2), 0)
+        }
+        nav.addView(latencyView)
+        nav.addView(iconButton("—") { minimize() })
+        nav.addView(iconButton("✕") { callbacks.onClose() })
+        root.addView(nav, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             topMargin = dp(4)
+        })
+    }
+
+    /** Vùng nắm ở góc màn hình: có chấm mờ để dễ thấy, kéo để di chuyển cửa sổ. */
+    private fun cornerGrip(): View = FrameLayout(context).apply {
+        addView(View(context).apply {
+            background = rounded(Color.parseColor("#66FFFFFF"), 6)
+        }, FrameLayout.LayoutParams(dp(12), dp(12), Gravity.CENTER))
+        var lastTap = 0L
+        attachDrag(this, root, windowParams, onTap = {
+            val now = System.currentTimeMillis()
+            if (now - lastTap < 350) {
+                toggleMaximize()
+                lastTap = 0L
+            } else {
+                lastTap = now
+            }
         })
     }
 

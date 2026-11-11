@@ -246,7 +246,7 @@ class MainActivity : Activity() {
 
         content.addView(card().apply {
             addView(text("Mẹo dùng cửa sổ điện thoại", 15f, textColor, bold = true))
-            addView(text("• Kéo thanh tiêu đề để di chuyển, kéo ◢ để đổi cỡ.\n• Nút — thu nhỏ thành bong bóng 📱, chạm bong bóng để mở lại.\n• Chạm, vuốt, nhấn giữ trực tiếp trên màn hình điện thoại.\n• Hàng dưới: ◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa · ⌨ Gõ phím.\n• Bật ⌨ rồi chạm vào ô nhập trên điện thoại để gõ bằng bàn phím rời (gõ được tiếng Việt). Chạm ra ngoài cửa sổ thì tự tắt ⌨.", 13f, mutedColor))
+            addView(text("• Nắm một trong 4 góc màn hình điện thoại (chấm mờ) và kéo để di chuyển cửa sổ; chạm 2 lần vào góc để phóng to tối đa.\n• Chụm/mở 2 ngón tay trên màn hình để thu phóng.\n• Chạm, vuốt, nhấn giữ trực tiếp trên màn hình điện thoại.\n• Thanh dưới: ◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · ⌨ Gõ phím · chất lượng hình · — Thu nhỏ · ✕ Đóng.\n• Bật ⌨ rồi chạm vào ô nhập trên điện thoại để gõ bằng bàn phím rời (Telex). Enter = bấm nút Gửi, Shift+Enter = xuống dòng.", 13f, mutedColor))
         })
     }
 
