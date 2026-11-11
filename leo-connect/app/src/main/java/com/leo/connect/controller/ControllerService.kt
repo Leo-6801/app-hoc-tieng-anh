@@ -153,7 +153,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 connected = true
                 val caps = if (Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = false)) Proto.CAPS_HEVC else 0
                 send(Proto.CAPS, byteArrayOf(caps.toByte()))
-                send(Proto.QUALITY, byteArrayOf(prefs.quality.toByte()))
+                // Luôn xin mức Nét; điện thoại tự hạ bitrate khi mạng yếu và tăng lại khi mạng tốt
+                send(Proto.QUALITY, byteArrayOf((Proto.QUALITIES.size - 1).toByte()))
                 ui {
                     if (phoneName.isNotBlank()) setTitle(phoneName)
                     setStatus("Đang chờ hình ảnh…")

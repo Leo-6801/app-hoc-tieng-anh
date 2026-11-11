@@ -9,9 +9,9 @@
   - nút **—** thu nhỏ thành **bong bóng 📱**, chạm bong bóng để mở lại; nút **✕** để đóng
   - tự đổi khung khi điện thoại **xoay ngang/dọc**
 - **Chạm, vuốt, nhấn giữ** trực tiếp. Giữ ngón tay hơn 0,2 giây thì điện thoại kéo/cuộn theo ngón tay
-- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · ⌨ Gõ phím · chất lượng hình (+ độ trễ ms) · — · ✕**
+- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · ⌨ Gõ phím · — · ✕**
 - **⌨ Gõ phím** bằng bàn phím rời, **luôn gõ tiếng Việt kiểu Telex**. **Enter** = bấm nút Gửi của app, **Shift+Enter** = xuống dòng
-- Chất lượng **Mượt / Cân bằng / Nét**, tự hạ khi mạng yếu; dùng **H.265** khi hai máy hỗ trợ
+- Luôn xin hình **nét nhất**, điện thoại **tự hạ chất lượng khi mạng yếu** và tăng lại khi mạng tốt; dùng **H.265** khi hai máy hỗ trợ
 - Ghép đôi bằng **mã PIN 6 số**, chỉ nhận kết nối từ **mạng Tailscale**, tự **kết nối lại** khi rớt mạng
 - App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính
 

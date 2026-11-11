@@ -159,7 +159,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         })
         attachTouchForwarding()
 
-        // Thanh nút: ◁ ○ ▢ ⌨ · chất lượng · — ✕
+        // Thanh nút: ◁ ○ ▢ ⌨ — ✕
         val nav = LinearLayout(context).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -171,20 +171,6 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         nav.addView(iconButton("▢") { callbacks.onKey(Proto.KEY_RECENTS) })
         keyboardButton = iconButton("⌨") { setKeyboard(!keyboardMode) }
         nav.addView(keyboardButton)
-        qualityView.apply {
-            setTextColor(Color.WHITE)
-            textSize = 12f
-            setPadding(dp(8), dp(3), dp(8), dp(3))
-            background = rounded(Color.parseColor("#33FFFFFF"), 10)
-            setOnClickListener { callbacks.onQualityClick() }
-        }
-        nav.addView(qualityView, LinearLayout.LayoutParams(-2, -2).apply { marginStart = dp(4) })
-        latencyView.apply {
-            setTextColor(Color.parseColor("#9AA5B1"))
-            textSize = 11f
-            setPadding(dp(6), 0, dp(2), 0)
-        }
-        nav.addView(latencyView)
         nav.addView(iconButton("—") { minimize() })
         nav.addView(iconButton("✕") { callbacks.onClose() })
         root.addView(nav, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
