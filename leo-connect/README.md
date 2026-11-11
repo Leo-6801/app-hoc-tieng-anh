@@ -4,7 +4,8 @@
 
 ## Tính năng (giai đoạn 1)
 - Màn hình điện thoại hiện trong **cửa sổ nổi** đè lên các app của máy tính bảng:
-  - kéo thanh tiêu đề để **di chuyển**, kéo **◢** để **đổi cỡ** (giữ đúng tỉ lệ)
+  - kéo thanh tiêu đề để **di chuyển**, kéo **◢** hoặc **chụm/mở 2 ngón tay** trên màn hình để **thu phóng** (giữ đúng tỉ lệ)
+  - **chạm 2 lần vào thanh tiêu đề** để phóng to tối đa / trở về cỡ cũ
   - nút **—** thu nhỏ thành **bong bóng 📱**, chạm bong bóng để mở lại
   - tự đổi khung khi điện thoại **xoay ngang/dọc**
 - **Chạm, vuốt, nhấn giữ** trực tiếp trên hình điện thoại. Giữ ngón tay lâu hơn 0,2 giây thì điện thoại **kéo/cuộn theo ngón tay ngay lúc đang vuốt**

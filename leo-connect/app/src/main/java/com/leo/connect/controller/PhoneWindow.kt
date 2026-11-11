@@ -7,6 +7,7 @@ import android.graphics.PixelFormat
 import android.graphics.drawable.GradientDrawable
 import android.view.Gravity
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -132,7 +133,16 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         titleBar.addView(qualityView)
         titleBar.addView(iconButton("—") { minimize() })
         titleBar.addView(iconButton("✕") { callbacks.onClose() })
-        attachDrag(titleBar, root, windowParams)
+        var lastTitleTap = 0L
+        attachDrag(titleBar, root, windowParams, onTap = {
+            val now = System.currentTimeMillis()
+            if (now - lastTitleTap < 350) {
+                toggleMaximize()
+                lastTitleTap = 0L
+            } else {
+                lastTitleTap = now
+            }
+        })
         root.addView(titleBar, LinearLayout.LayoutParams(-1, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             bottomMargin = dp(4)
         })
@@ -262,6 +272,36 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         }
     }
 
+    /** Chiều cao màn hình lớn nhất vừa với máy tính bảng (chừa chỗ cho 2 thanh). */
+    private fun maxScreenHeight(): Int =
+        min((tabletH * 0.95f).roundToInt() - dp(90), ((tabletW * 0.95f) / aspect).roundToInt())
+
+    private var heightBeforeMax = 0
+
+    private fun toggleMaximize() {
+        val maxH = maxScreenHeight()
+        if (heightBeforeMax == 0 || screenHeight < maxH - dp(4)) {
+            heightBeforeMax = screenHeight
+            screenHeight = maxH
+            windowParams.x = ((tabletW - screenHeight * aspect) / 2).roundToInt().coerceAtLeast(0)
+            windowParams.y = dp(8)
+        } else {
+            screenHeight = heightBeforeMax
+            heightBeforeMax = 0
+        }
+        applyScreenSize()
+    }
+
+    // Chụm/mở 2 ngón tay trên màn hình điện thoại: thu phóng cửa sổ (không gửi sang điện thoại)
+    private var pinching = false
+    private val scaleDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            screenHeight = (screenHeight * detector.scaleFactor).roundToInt().coerceIn(dp(240), maxScreenHeight())
+            applyScreenSize()
+            return true
+        }
+    })
+
     // Chạm nhanh / vuốt nhanh (< 200 ms): gửi cả thao tác khi nhấc tay (giữ được lực vuốt).
     // Giữ ngón tay lâu hơn: chuyển sang chạm trực tiếp, điện thoại kéo/cuộn theo ngón tay ngay.
     private val points = ArrayList<FloatArray>()
@@ -284,6 +324,24 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     private fun attachTouchForwarding() {
         surfaceView.setOnTouchListener { v, e ->
             if (v.width == 0 || v.height == 0) return@setOnTouchListener true
+            scaleDetector.onTouchEvent(e)
+            if (e.actionMasked == MotionEvent.ACTION_POINTER_DOWN) {
+                // Ngón thứ 2 chạm vào: hủy thao tác đang gửi, chuyển sang thu phóng
+                surfaceView.removeCallbacks(goLive)
+                if (liveMode) {
+                    val first = points.firstOrNull() ?: floatArrayOf(0.5f, 0.5f)
+                    callbacks.onTouch(Proto.TOUCH_UP, first[0], first[1])
+                    liveMode = false
+                }
+                points.clear()
+                touching = false
+                pinching = true
+                return@setOnTouchListener true
+            }
+            if (pinching) {
+                if (e.actionMasked == MotionEvent.ACTION_UP || e.actionMasked == MotionEvent.ACTION_CANCEL) pinching = false
+                return@setOnTouchListener true
+            }
             val nx = (e.x / v.width).coerceIn(0f, 1f)
             val ny = (e.y / v.height).coerceIn(0f, 1f)
             when (e.actionMasked) {
