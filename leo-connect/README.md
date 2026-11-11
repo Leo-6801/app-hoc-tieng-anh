@@ -18,6 +18,8 @@
 - Chỉ nhận kết nối từ **mạng Tailscale** (`100.64.0.0/10`)
 - Tự **kết nối lại** khi rớt mạng
 - **Tự hạ chất lượng** khi mạng yếu, tăng lại khi mạng tốt
+- Dùng **H.265 (HEVC)** khi cả hai máy hỗ trợ: cùng độ nét chỉ tốn khoảng nửa dữ liệu so với H.264 (tự quay về H.264 nếu không được)
+- **Làm mới hình dần dần** và giới hạn xin khung khóa 1 lần/giây để tránh các cú giật độ trễ
 - App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính để gửi người phát triển
 
 ## Cài đặt

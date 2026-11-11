@@ -3,6 +3,7 @@ package com.leo.connect.host
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
 import android.media.MediaFormat
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Surface
@@ -18,9 +19,10 @@ class ScreenEncoder(
     val height: Int,
     private val bitrate: Int,
     private val fps: Int,
+    private val mime: String,
     private val onFrame: (flags: Int, ptsUs: Long, data: ByteArray) -> Unit,
 ) {
-    private val codec: MediaCodec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_VIDEO_AVC)
+    private val codec: MediaCodec = MediaCodec.createEncoderByType(mime)
     lateinit var inputSurface: Surface
         private set
 
@@ -29,7 +31,7 @@ class ScreenEncoder(
     private var drainThread: Thread? = null
 
     private fun format(lowLatency: Boolean) =
-        MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, width, height).apply {
+        MediaFormat.createVideoFormat(mime, width, height).apply {
             setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
             setInteger(MediaFormat.KEY_BIT_RATE, bitrate)
             setInteger(MediaFormat.KEY_FRAME_RATE, fps)
@@ -37,22 +39,34 @@ class ScreenEncoder(
             // Màn hình đứng yên vẫn gửi lại khung cũ, để máy tính bảng luôn có hình.
             setLong(MediaFormat.KEY_REPEAT_PREVIOUS_FRAME_AFTER, 200_000L)
             if (lowLatency) {
-                // Baseline: không có khung B nên không phải chờ sắp xếp lại khung → bớt trễ.
-                setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.AVCProfileBaseline)
-                setInteger(MediaFormat.KEY_LEVEL, MediaCodecInfo.CodecProfileLevel.AVCLevel41)
+                if (mime == MediaFormat.MIMETYPE_VIDEO_AVC) {
+                    // Baseline: không có khung B nên không phải chờ sắp xếp lại khung → bớt trễ.
+                    setInteger(MediaFormat.KEY_PROFILE, MediaCodecInfo.CodecProfileLevel.AVCProfileBaseline)
+                    setInteger(MediaFormat.KEY_LEVEL, MediaCodecInfo.CodecProfileLevel.AVCLevel41)
+                }
                 setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = thời gian thực
+                if (Build.VERSION.SDK_INT >= 30) setInteger(MediaFormat.KEY_LATENCY, 1)
                 setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_CBR)
             }
         }
 
     fun start() {
         try {
-            codec.configure(format(lowLatency = true), null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+            // Làm mới hình dần dần (intra-refresh): tránh các khung khóa lớn gây giật độ trễ
+            val withRefresh = format(lowLatency = true).apply {
+                setInteger(MediaFormat.KEY_INTRA_REFRESH_PERIOD, fps)
+            }
+            codec.configure(withRefresh, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
         } catch (e: Exception) {
+            try {
+                codec.reset()
+                codec.configure(format(lowLatency = true), null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+            } catch (e2: Exception) {
             // Một số chip không nhận các tùy chọn trên → dùng cấu hình cơ bản
-            Log.w("LeoConnect", "Bộ nén không hỗ trợ chế độ trễ thấp: ${e.message}")
+            Log.w("LeoConnect", "Bộ nén không hỗ trợ chế độ trễ thấp: ${e2.message}")
             codec.reset()
             codec.configure(format(lowLatency = false), null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+            }
         }
         inputSurface = codec.createInputSurface()
         codec.start()
@@ -96,7 +110,13 @@ class ScreenEncoder(
         }
     }
 
+    private var lastKeyRequest = 0L
+
+    /** Xin khung khóa, tối đa 1 lần mỗi giây (khung khóa nặng, xin liên tục sẽ làm nghẽn thêm). */
     fun requestKeyFrame() {
+        val now = System.currentTimeMillis()
+        if (now - lastKeyRequest < 1_000) return
+        lastKeyRequest = now
         try {
             codec.setParameters(Bundle().apply { putInt(MediaCodec.PARAMETER_KEY_REQUEST_SYNC_FRAME, 0) })
         } catch (_: Exception) {

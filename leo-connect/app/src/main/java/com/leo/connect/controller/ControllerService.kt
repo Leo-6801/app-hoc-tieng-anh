@@ -63,6 +63,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     private val decoderLock = Any()
     private var videoWidth = 0
     private var videoHeight = 0
+    private var videoCodec = Proto.CODEC_AVC
     private var codecConfig: ByteArray? = null
     private var surface: Surface? = null
     private var decoder: VideoDecoder? = null
@@ -150,6 +151,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 socket.soTimeout = 0
                 channel = ch
                 connected = true
+                val caps = if (Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = false)) Proto.CAPS_HEVC else 0
+                send(Proto.CAPS, byteArrayOf(caps.toByte()))
                 send(Proto.QUALITY, byteArrayOf(prefs.quality.toByte()))
                 ui {
                     if (phoneName.isNotBlank()) setTitle(phoneName)
@@ -196,10 +199,11 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     }
 
     private fun onVideoConfig(data: ByteArray) {
-        val (w, h) = Proto.decodeConfig(data)
+        val (w, h, codec) = Proto.decodeConfig(data)
         synchronized(decoderLock) {
             videoWidth = w
             videoHeight = h
+            videoCodec = codec
             codecConfig = null
             releaseDecoderLocked()
             createDecoderLocked()
@@ -226,7 +230,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         val s = surface ?: return
         if (decoder != null || videoWidth <= 0 || videoHeight <= 0) return
         decoder = try {
-            VideoDecoder(s, videoWidth, videoHeight, codecConfig) { send(Proto.REQUEST_KEYFRAME) }
+            VideoDecoder(s, videoWidth, videoHeight, Proto.mime(videoCodec), codecConfig) { send(Proto.REQUEST_KEYFRAME) }
         } catch (e: Exception) {
             null
         }

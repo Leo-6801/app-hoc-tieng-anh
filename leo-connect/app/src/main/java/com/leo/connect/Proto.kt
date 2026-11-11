@@ -41,6 +41,23 @@ object Proto {
     const val TOUCH = 23 // chạm trực tiếp theo ngón tay: [hành động][x][y]
     const val QUALITY = 24 // [mức chất lượng]
     const val TEXT = 25 // chữ gõ từ bàn phím (UTF-8)
+    const val CAPS = 26 // khả năng giải mã của máy tính bảng: [bit 0 = H.265]
+
+    const val CODEC_AVC = 0
+    const val CODEC_HEVC = 1
+    const val CAPS_HEVC = 1
+
+    fun mime(codec: Int): String =
+        if (codec == CODEC_HEVC) android.media.MediaFormat.MIMETYPE_VIDEO_HEVC else android.media.MediaFormat.MIMETYPE_VIDEO_AVC
+
+    /** Máy có bộ mã hóa (encoder=true) hoặc giải mã phần cứng/phần mềm cho [mime] không. */
+    fun hasCodec(mime: String, encoder: Boolean): Boolean = try {
+        android.media.MediaCodecList(android.media.MediaCodecList.REGULAR_CODECS).codecInfos.any { info ->
+            info.isEncoder == encoder && info.supportedTypes.any { it.equals(mime, ignoreCase = true) }
+        }
+    } catch (e: Exception) {
+        false
+    }
 
     // Đo độ trễ
     const val PING = 30
@@ -110,12 +127,16 @@ object Proto {
         emptyList()
     }
 
-    fun encodeConfig(width: Int, height: Int): ByteArray =
-        ByteBuffer.allocate(8).putInt(width).putInt(height).array()
+    fun encodeConfig(width: Int, height: Int, codec: Int): ByteArray =
+        ByteBuffer.allocate(12).putInt(width).putInt(height).putInt(codec).array()
 
-    fun decodeConfig(data: ByteArray): Pair<Int, Int> {
+    /** (rộng, cao, chuẩn nén). Bản cũ không gửi chuẩn nén thì coi là H.264. */
+    fun decodeConfig(data: ByteArray): Triple<Int, Int, Int> {
         val bb = ByteBuffer.wrap(data)
-        return bb.int to bb.int
+        val w = bb.int
+        val h = bb.int
+        val codec = if (data.size >= 12) bb.int else CODEC_AVC
+        return Triple(w, h, codec)
     }
 
     fun encodeFrame(flags: Int, ptsUs: Long, data: ByteArray, offset: Int, length: Int): ByteArray {

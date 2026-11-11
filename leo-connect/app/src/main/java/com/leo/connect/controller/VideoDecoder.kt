@@ -18,12 +18,13 @@ class VideoDecoder(
     surface: Surface,
     width: Int,
     height: Int,
+    mime: String,
     config: ByteArray?,
     private val onNeedKeyFrame: () -> Unit,
 ) {
     private class Item(val data: ByteArray, val codecFlags: Int, val ptsUs: Long, val key: Boolean)
 
-    private val codec = MediaCodec.createDecoderByType(MediaFormat.MIMETYPE_VIDEO_AVC)
+    private val codec = MediaCodec.createDecoderByType(mime)
     private val queue = LinkedBlockingDeque<Item>()
 
     @Volatile
@@ -35,7 +36,7 @@ class VideoDecoder(
     private val drainThread: Thread
 
     init {
-        val format = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, width, height)
+        val format = MediaFormat.createVideoFormat(mime, width, height)
         if (Build.VERSION.SDK_INT >= 30) format.setInteger(MediaFormat.KEY_LOW_LATENCY, 1)
         format.setInteger(MediaFormat.KEY_PRIORITY, 0)
         codec.configure(format, surface, null, 0)

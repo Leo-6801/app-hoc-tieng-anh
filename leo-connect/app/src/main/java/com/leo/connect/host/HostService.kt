@@ -270,6 +270,10 @@ class HostService : Service() {
         @Volatile
         private var quality = Proto.QUALITIES[Proto.DEFAULT_QUALITY]
 
+        // Mặc định H.264; chuyển sang H.265 khi máy tính bảng báo giải mã được và điện thoại nén được
+        @Volatile
+        private var codec = Proto.CODEC_AVC
+
         @Volatile
         private var closed = false
 
@@ -363,9 +367,10 @@ class HostService : Service() {
             try {
                 outbox.removeIf { it.droppable }
                 waitingForKey = false
-                outbox.add(Frame(Proto.VIDEO_CONFIG, Proto.encodeConfig(size.width, size.height), droppable = false))
+                val c = codec
+                outbox.add(Frame(Proto.VIDEO_CONFIG, Proto.encodeConfig(size.width, size.height, c), droppable = false))
                 bitrate = minOf(bitrate, q.bitrate)
-                val enc = ScreenEncoder(size.width, size.height, bitrate, q.fps) { flags, pts, data ->
+                val enc = ScreenEncoder(size.width, size.height, bitrate, q.fps, Proto.mime(c)) { flags, pts, data ->
                     if (!closed) enqueueFrame(flags, pts, data)
                 }
                 enc.start()
@@ -375,7 +380,13 @@ class HostService : Service() {
                 lastSize = size
             } catch (e: Exception) {
                 Log.w(TAG, "Không khởi động được bộ nén: ${e.message}")
-                channel.close()
+                if (codec != Proto.CODEC_AVC) {
+                    // H.265 lỗi: quay về H.264
+                    codec = Proto.CODEC_AVC
+                    video.post { restartEncoder() }
+                } else {
+                    channel.close()
+                }
             }
         }
 
@@ -399,6 +410,18 @@ class HostService : Service() {
                         ControlAccessibilityService.instance?.typeText(String(m.data, Charsets.UTF_8))
                     }
                     Proto.REQUEST_KEYFRAME -> encoder?.requestKeyFrame()
+                    Proto.CAPS -> if (m.data.isNotEmpty()) {
+                        val tabletHevc = (m.data[0].toInt() and Proto.CAPS_HEVC) != 0
+                        val wanted = if (tabletHevc && Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = true)) {
+                            Proto.CODEC_HEVC
+                        } else {
+                            Proto.CODEC_AVC
+                        }
+                        if (wanted != codec) {
+                            codec = wanted
+                            video.post { restartEncoder() }
+                        }
+                    }
                     Proto.QUALITY -> if (m.data.isNotEmpty()) {
                         val level = m.data[0].toInt().coerceIn(0, Proto.QUALITIES.size - 1)
                         val q = Proto.QUALITIES[level]
