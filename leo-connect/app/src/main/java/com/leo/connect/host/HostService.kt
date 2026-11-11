@@ -272,8 +272,6 @@ class HostService : Service() {
         private var closed = false
 
         // Hàng đợi khung hình gửi đi. Khi mạng chậm, bỏ bớt khung để hình không bị trễ dồn.
-        private class Frame(val type: Int, val payload: ByteArray, val droppable: Boolean)
-
         private val outbox = LinkedBlockingQueue<Frame>()
 
         @Volatile
@@ -419,6 +417,9 @@ class HostService : Service() {
         super.onDestroy()
     }
 }
+
+/** Một gói chờ gửi; droppable = khung video có thể bỏ khi mạng chậm. */
+private class Frame(val type: Int, val payload: ByteArray, val droppable: Boolean)
 
 /** Tiện ích kiểm tra từ giao diện. */
 fun Context.isIgnoringBatteryOptimizations(): Boolean =
