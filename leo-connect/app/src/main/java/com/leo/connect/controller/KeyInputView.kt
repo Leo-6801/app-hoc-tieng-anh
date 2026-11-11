@@ -20,6 +20,7 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
         fun onText(text: String)
         fun onBackspace()
         fun onEnter()
+        fun onNewline()
     }
 
     /** Bật bộ gõ Telex cho bàn phím rời. */
@@ -137,7 +138,12 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
                 return true
             }
             KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> {
-                enter()
+                if (event.isShiftPressed) {
+                    reset()
+                    listener.onNewline()
+                } else {
+                    enter()
+                }
                 return true
             }
             KeyEvent.KEYCODE_TAB -> {

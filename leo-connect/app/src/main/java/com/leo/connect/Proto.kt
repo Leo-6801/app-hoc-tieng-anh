@@ -90,6 +90,7 @@ object Proto {
     const val KEY_LOCK = 5
     const val KEY_BACKSPACE = 6
     const val KEY_ENTER = 7
+    const val KEY_NEWLINE = 8 // Shift+Enter: xuống dòng
 
     /** Khóa bí mật suy ra từ mã PIN ghép đôi. */
     fun keyFromPin(pin: String): ByteArray =

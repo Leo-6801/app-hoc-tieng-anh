@@ -83,6 +83,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         override fun onText(text: String) = callbacks.onText(text)
         override fun onBackspace() = callbacks.onKey(Proto.KEY_BACKSPACE)
         override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
+        override fun onNewline() = callbacks.onKey(Proto.KEY_NEWLINE)
     }).apply { telex = prefs.telex }
 
     init {

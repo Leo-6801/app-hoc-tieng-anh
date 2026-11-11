@@ -241,24 +241,73 @@ class ControlAccessibilityService : AccessibilityService() {
     private var lastCursor = 0
     private var lastWriteAt = 0L
 
+    /**
+     * Enter = bấm nút "Gửi" cạnh ô nhập, giống khi bấm tay.
+     * Không gửi lệnh Enter thô vào app: một số app (vd Zalo) bị lỗi khi nhận lệnh đó từ Trợ năng.
+     */
     private fun pressEnter() {
         applyEdits()
-        val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT)
-        if (node == null || !node.isEditable) return
-        val enterAction = if (Build.VERSION.SDK_INT >= 30) {
-            android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_IME_ENTER
-        } else {
-            null
-        }
-        // Chỉ dùng lệnh "Gửi" của ô nhập khi ô đó thật sự có; nếu không thì xuống dòng
-        if (enterAction != null && node.actionList.any { it.id == enterAction.id } &&
-            node.performAction(enterAction.id)
-        ) {
+        val input = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT)
+        val sendButton = findSendButton(input)
+        if (sendButton != null && sendButton.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK)) {
             lastWritten = null
             return
         }
+        // Không có nút Gửi: ô nhiều dòng thì xuống dòng, còn lại không làm gì
+        if (input != null && input.isEditable && input.isMultiLine) {
+            insertNewline()
+        }
+    }
+
+    private fun insertNewline() {
         pendingEdits.add(Edit.Insert("\n"))
         applyEdits()
+    }
+
+    private val sendWords = Regex(
+        "(^|[^a-z])(send|gửi|gui|sent)([^a-z]|$)|btn_?send|send_?(btn|button|icon)|chat_?send|ic_?send",
+        RegexOption.IGNORE_CASE,
+    )
+
+    /** Tìm nút Gửi bấm được, ưu tiên nút gần ô nhập nhất. */
+    private fun findSendButton(input: android.view.accessibility.AccessibilityNodeInfo?): android.view.accessibility.AccessibilityNodeInfo? {
+        val root = rootInActiveWindow ?: return null
+        val inputBounds = android.graphics.Rect()
+        input?.getBoundsInScreen(inputBounds)
+        var best: android.view.accessibility.AccessibilityNodeInfo? = null
+        var bestDistance = Int.MAX_VALUE
+        val stack = ArrayDeque<android.view.accessibility.AccessibilityNodeInfo>()
+        stack.add(root)
+        var visited = 0
+        while (stack.isNotEmpty() && visited < 800) {
+            val node = stack.removeLast()
+            visited++
+            for (i in 0 until node.childCount) node.getChild(i)?.let { stack.add(it) }
+            if (!node.isVisibleToUser || node.isEditable) continue
+            val label = listOfNotNull(
+                node.contentDescription?.toString(),
+                node.text?.toString(),
+                node.viewIdResourceName?.substringAfter(":id/"),
+            ).joinToString(" ")
+            if (label.isEmpty() || !sendWords.containsMatchIn(label)) continue
+            // Lấy chính nút hoặc vùng cha bấm được gần nhất
+            var target: android.view.accessibility.AccessibilityNodeInfo? = node
+            var depth = 0
+            while (target != null && !target.isClickable && depth < 3) {
+                target = target.parent
+                depth++
+            }
+            if (target == null || !target.isClickable || !target.isEnabled) continue
+            val b = android.graphics.Rect()
+            target.getBoundsInScreen(b)
+            val distance = if (input == null) 0 else
+                kotlin.math.abs(b.centerY() - inputBounds.centerY()) + kotlin.math.abs(b.left - inputBounds.right) / 4
+            if (distance < bestDistance) {
+                best = target
+                bestDistance = distance
+            }
+        }
+        return best
     }
 
     /** Chạy trên luồng chính. */
@@ -341,6 +390,10 @@ class ControlAccessibilityService : AccessibilityService() {
         }
         if (key == Proto.KEY_ENTER) {
             main.post { safe("Enter") { pressEnter() } }
+            return
+        }
+        if (key == Proto.KEY_NEWLINE) {
+            main.post { safe("xuống dòng") { insertNewline() } }
             return
         }
         val action = when (key) {
