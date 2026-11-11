@@ -13,6 +13,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -38,6 +39,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         fun onGesture(durationMs: Int, points: List<FloatArray>)
         fun onTouch(action: Int, x: Float, y: Float)
         fun onKey(key: Int)
+        fun onText(text: String)
         fun onQualityClick()
         fun onClose()
     }
@@ -71,6 +73,15 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     private var shown = false
     private var minimized = false
 
+    // Chế độ bàn phím: cửa sổ nhận phím (bàn phím rời hoặc bàn phím ảo) và gửi chữ sang điện thoại
+    private var keyboardMode = false
+    private lateinit var keyboardButton: TextView
+    private val keyInput = KeyInputView(context, object : KeyInputView.Listener {
+        override fun onText(text: String) = callbacks.onText(text)
+        override fun onBackspace() = callbacks.onKey(Proto.KEY_BACKSPACE)
+        override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
+    })
+
     init {
         buildWindow(title)
         buildBubble()
@@ -80,7 +91,8 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         WindowManager.LayoutParams.WRAP_CONTENT,
         WindowManager.LayoutParams.WRAP_CONTENT,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
         PixelFormat.TRANSLUCENT,
     ).apply { gravity = Gravity.TOP or Gravity.START }
 
@@ -160,6 +172,12 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             text = "Đang kết nối…"
         }
         screenBox.addView(statusView, FrameLayout.LayoutParams(-1, -1))
+        screenBox.addView(keyInput, FrameLayout.LayoutParams(1, 1))
+        // Chạm ra ngoài cửa sổ (sang app khác) thì tắt chế độ bàn phím để gõ được ở app đó
+        root.setOnTouchListener { _, e ->
+            if (e.actionMasked == MotionEvent.ACTION_OUTSIDE && keyboardMode) setKeyboard(false)
+            false
+        }
         root.addView(screenBox, screenLayoutParams())
 
         surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
@@ -185,6 +203,8 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         nav.addView(iconButton("▢") { callbacks.onKey(Proto.KEY_RECENTS) })
         nav.addView(iconButton("🔔") { callbacks.onKey(Proto.KEY_NOTIFICATIONS) })
         nav.addView(iconButton("🔒") { callbacks.onKey(Proto.KEY_LOCK) })
+        keyboardButton = iconButton("⌨") { setKeyboard(!keyboardMode) }
+        nav.addView(keyboardButton)
         val resize = iconButton("◢") {}
         attachResize(resize)
         nav.addView(resize)
@@ -431,8 +451,32 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         applyScreenSize()
     }
 
+    fun setKeyboard(on: Boolean) {
+        if (!shown || minimized && on) return
+        keyboardMode = on
+        val imm = context.getSystemService(InputMethodManager::class.java)
+        if (on) {
+            windowParams.flags = windowParams.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
+            keyboardButton.background = rounded(Color.parseColor("#0A84FF"), 10)
+        } else {
+            windowParams.flags = windowParams.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+            keyboardButton.background = null
+            keyInput.reset()
+            imm.hideSoftInputFromWindow(keyInput.windowToken, 0)
+        }
+        if (root.isAttachedToWindow) wm.updateViewLayout(root, windowParams)
+        if (on) {
+            keyInput.post {
+                keyInput.requestFocus()
+                imm.restartInput(keyInput)
+                imm.showSoftInput(keyInput, 0)
+            }
+        }
+    }
+
     fun minimize() {
         if (!shown || minimized) return
+        if (keyboardMode) setKeyboard(false)
         bubbleParams.x = tabletW - dp(76)
         bubbleParams.y = max(dp(80), windowParams.y)
         wm.removeView(root)

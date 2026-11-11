@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">Leo Connect</string>
     <string name="a11y_label">Leo Connect – điều khiển từ máy tính bảng</string>
-    <string name="a11y_desc">Cho phép máy tính bảng đã ghép đôi chạm, vuốt và bấm Back/Home trên điện thoại này khi bạn bật chế độ sẵn sàng trong Leo Connect. Không đọc nội dung màn hình.</string>
+    <string name="a11y_desc">Cho phép máy tính bảng đã ghép đôi chạm, vuốt và bấm Back/Home trên điện thoại này khi bạn bật chế độ sẵn sàng trong Leo Connect. Khi bạn gõ phím từ máy tính bảng, app chỉ đọc và sửa ô nhập chữ đang được chọn để chèn chữ; không đọc phần còn lại của màn hình.</string>
 </resources>

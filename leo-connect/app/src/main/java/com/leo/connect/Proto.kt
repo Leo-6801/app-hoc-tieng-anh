@@ -40,6 +40,7 @@ object Proto {
     const val REQUEST_KEYFRAME = 22
     const val TOUCH = 23 // chạm trực tiếp theo ngón tay: [hành động][x][y]
     const val QUALITY = 24 // [mức chất lượng]
+    const val TEXT = 25 // chữ gõ từ bàn phím (UTF-8)
 
     // Đo độ trễ
     const val PING = 30
@@ -70,6 +71,8 @@ object Proto {
     const val KEY_RECENTS = 3
     const val KEY_NOTIFICATIONS = 4
     const val KEY_LOCK = 5
+    const val KEY_BACKSPACE = 6
+    const val KEY_ENTER = 7
 
     /** Khóa bí mật suy ra từ mã PIN ghép đôi. */
     fun keyFromPin(pin: String): ByteArray =

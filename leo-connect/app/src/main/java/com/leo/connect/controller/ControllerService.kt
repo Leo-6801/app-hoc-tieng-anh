@@ -272,6 +272,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         send(Proto.KEY, byteArrayOf(key.toByte()))
     }
 
+    override fun onText(text: String) {
+        if (text.isNotEmpty()) send(Proto.TEXT, text.toByteArray(Charsets.UTF_8))
+    }
+
     /** Chạm nút chất lượng: Mượt → Cân bằng → Nét → Mượt… */
     override fun onQualityClick() {
         val next = (prefs.quality + 1) % Proto.QUALITIES.size

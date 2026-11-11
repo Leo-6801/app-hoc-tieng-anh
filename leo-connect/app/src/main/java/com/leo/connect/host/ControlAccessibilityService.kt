@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Path
 import android.hardware.display.DisplayManager
 import android.os.Build
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
@@ -196,7 +197,105 @@ class ControlAccessibilityService : AccessibilityService() {
         liveInFlight = false
     }
 
+    // ------------------------------------------------------------ gõ chữ vào ô nhập đang chọn
+    // Các thao tác gõ liên tiếp được gom lại, áp một lần lên nội dung ô nhập (tránh mất chữ khi gõ nhanh).
+
+    private sealed class Edit {
+        class Insert(val text: String) : Edit()
+        object Backspace : Edit()
+    }
+
+    private val pendingEdits = ArrayList<Edit>()
+    private val flushEdits = Runnable { applyEdits() }
+
+    fun typeText(text: String) {
+        main.post {
+            pendingEdits.add(Edit.Insert(text))
+            main.removeCallbacks(flushEdits)
+            main.postDelayed(flushEdits, 30)
+        }
+    }
+
+    private fun queueBackspace() {
+        pendingEdits.add(Edit.Backspace)
+        main.removeCallbacks(flushEdits)
+        main.postDelayed(flushEdits, 30)
+    }
+
+    private fun pressEnter() {
+        applyEdits()
+        val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return
+        val done = if (Build.VERSION.SDK_INT >= 30) {
+            node.performAction(android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_IME_ENTER.id)
+        } else {
+            false
+        }
+        if (!done) {
+            pendingEdits.add(Edit.Insert("\n"))
+            applyEdits()
+        }
+    }
+
+    /** Chạy trên luồng chính. */
+    private fun applyEdits() {
+        main.removeCallbacks(flushEdits)
+        if (pendingEdits.isEmpty()) return
+        val edits = ArrayList(pendingEdits)
+        pendingEdits.clear()
+        val node = findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT) ?: return
+        if (!node.isEditable) return
+        val current = if (node.isShowingHintText) "" else (node.text?.toString() ?: "")
+        var start = node.textSelectionStart
+        var end = node.textSelectionEnd
+        if (start < 0 || end < 0) {
+            start = current.length
+            end = current.length
+        }
+        start = start.coerceIn(0, current.length)
+        end = end.coerceIn(0, current.length)
+        if (start > end) start = end.also { end = start }
+
+        val sb = StringBuilder(current)
+        var cursor = start
+        if (end > start && edits.isNotEmpty()) {
+            // Có đoạn đang được bôi đen: thao tác đầu tiên thay thế đoạn đó
+            sb.delete(start, end)
+            if (edits.first() is Edit.Backspace) edits.removeAt(0)
+        }
+        for (e in edits) {
+            when (e) {
+                is Edit.Insert -> {
+                    sb.insert(cursor, e.text)
+                    cursor += e.text.length
+                }
+                Edit.Backspace -> if (cursor > 0) {
+                    // Xóa nguyên một ký tự (kể cả emoji 2 đơn vị)
+                    val remove = if (cursor >= 2 && Character.isSurrogatePair(sb[cursor - 2], sb[cursor - 1])) 2 else 1
+                    sb.delete(cursor - remove, cursor)
+                    cursor -= remove
+                }
+            }
+        }
+        val args = Bundle().apply {
+            putCharSequence(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, sb.toString())
+        }
+        node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_TEXT, args)
+        val sel = Bundle().apply {
+            putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, cursor)
+            putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, cursor)
+        }
+        node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_SELECTION, sel)
+    }
+
     fun performKey(key: Int) {
+        if (key == Proto.KEY_BACKSPACE) {
+            main.post { queueBackspace() }
+            return
+        }
+        if (key == Proto.KEY_ENTER) {
+            main.post { pressEnter() }
+            return
+        }
         val action = when (key) {
             Proto.KEY_BACK -> GLOBAL_ACTION_BACK
             Proto.KEY_HOME -> GLOBAL_ACTION_HOME

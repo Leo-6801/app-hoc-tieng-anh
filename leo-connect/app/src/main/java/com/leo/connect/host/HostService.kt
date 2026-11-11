@@ -370,6 +370,9 @@ class HostService : Service() {
                     Proto.KEY -> if (m.data.isNotEmpty()) {
                         ControlAccessibilityService.instance?.performKey(m.data[0].toInt())
                     }
+                    Proto.TEXT -> if (m.data.isNotEmpty()) {
+                        ControlAccessibilityService.instance?.typeText(String(m.data, Charsets.UTF_8))
+                    }
                     Proto.REQUEST_KEYFRAME -> encoder?.requestKeyFrame()
                     Proto.QUALITY -> if (m.data.isNotEmpty()) {
                         val level = m.data[0].toInt().coerceIn(0, Proto.QUALITIES.size - 1)

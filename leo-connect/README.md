@@ -11,7 +11,8 @@
 - **Chạm, vuốt, nhấn giữ** trực tiếp trên hình điện thoại. Giữ ngón tay lâu hơn 0,2 giây thì điện thoại **kéo/cuộn theo ngón tay ngay lúc đang vuốt**
 - Nút **chất lượng** trên thanh tiêu đề: **Mượt** (1024px, 2 Mbps) · **Cân bằng** (1280px, 3,5 Mbps, mặc định) · **Nét** (1600px, 6 Mbps)
 - Hiện **độ trễ** (ms) trên thanh tiêu đề. Khi mạng nghẽn, app **bỏ bớt khung hình** để hình không bị trễ dồn
-- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa**
+- Thanh dưới: **◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · 🔔 Thông báo · 🔒 Khóa · ⌨ Gõ phím**
+- **⌨ Gõ phím**: gõ bằng **bàn phím rời** (hoặc bàn phím ảo) của máy tính bảng vào ô nhập đang chọn trên điện thoại, **gõ được tiếng Việt** qua bộ gõ của máy tính bảng, có Backspace/Enter. Chạm ra ngoài cửa sổ thì tự tắt để gõ ở app khác
 - Ghép đôi bằng **mã PIN 6 số**. Sai 5 lần thì điện thoại khóa 1 phút
 - Chỉ nhận kết nối từ **mạng Tailscale** (`100.64.0.0/10`)
 - Tự **kết nối lại** khi rớt mạng
@@ -37,7 +38,8 @@
 - Sau mỗi lần **khởi động lại điện thoại** phải mở app và bấm *Bật chế độ sẵn sàng* lại (Android bắt buộc xin quyền chia sẻ màn hình).
 - **App ngân hàng, màn hình nhập mật khẩu** có thể hiện **màu đen**: Android chặn chụp các màn hình này.
 - Điện thoại **tắt màn hình** thì app cố đánh thức màn hình khi có kết nối. Nếu điện thoại có **mã khóa**, có thể phải mở khóa trên hình điện thoại.
-- Chưa có: kéo thả file, clipboard, nhập chữ bằng bàn phím máy tính bảng, âm thanh, chuyển tiếp thông báo (các giai đoạn sau).
+- Gõ phím không vào được **ô mật khẩu** ở một số app (Android không cho đọc nội dung ô mật khẩu).
+- Chưa có: kéo thả file, clipboard, âm thanh, chuyển tiếp thông báo (các giai đoạn sau).
 
 ## Kỹ thuật
 - Điện thoại: `MediaProjection` → `VirtualDisplay` → `MediaCodec` (H.264 baseline, chế độ trễ thấp, 3 mức chất lượng) → TCP cổng **47800**. Lệnh chạm thực hiện bằng `AccessibilityService.dispatchGesture` (không đọc nội dung màn hình).
