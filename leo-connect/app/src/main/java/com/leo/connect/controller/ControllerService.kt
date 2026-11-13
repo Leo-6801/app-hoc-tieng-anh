@@ -127,7 +127,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         main.post { window?.block() }
     }
 
-    private fun netLoop(host: String, key: ByteArray) {
+    private fun netLoop(initialHost: String, key: ByteArray) {
+        var host = initialHost
         while (active) {
             ui { setStatus("Đang kết nối tới $host…") }
             var socket: Socket? = null
@@ -185,6 +186,16 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                         else -> e.message ?: "Lỗi mạng"
                     }
                     ui { setStatus("Mất kết nối: $reason\nThử lại sau 3 giây…") }
+                    // Điện thoại có thể đã đổi địa chỉ (đổi Wi-Fi, bật điểm phát sóng): tìm lại trong mạng
+                    if (e is java.net.ConnectException || e is java.net.SocketTimeoutException ||
+                        e is java.net.NoRouteToHostException
+                    ) {
+                        val found = com.leo.connect.Discovery.find(1500)
+                        if (found.isNotEmpty() && found.none { it.ip == host }) {
+                            host = found[0].ip
+                            com.leo.connect.Prefs(this).targetHost = host
+                        }
+                    }
                 }
             } finally {
                 connected = false

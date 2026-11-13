@@ -220,8 +220,10 @@ class MainActivity : Activity() {
                             }
                         })
                     }
-                    // Chỉ có một máy: tự điền luôn
-                    if (found.size == 1 && hostField?.text.isNullOrBlank()) {
+                    // Địa chỉ đang điền không còn đúng (đổi Wi-Fi, chuyển sang điểm phát sóng...): tự điền
+                    // địa chỉ mới tìm thấy
+                    val typed = hostField?.text?.toString()?.trim().orEmpty()
+                    if (found.none { it.ip == typed }) {
                         hostField?.setText(found[0].ip)
                         prefs.targetName = found[0].name
                     }
