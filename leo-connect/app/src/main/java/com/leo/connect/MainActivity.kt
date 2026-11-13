@@ -95,6 +95,7 @@ class MainActivity : Activity() {
     private fun render() {
         content.removeAllViews()
         statusText = null
+        btStatusText = null
         content.addView(text("Leo Connect", 26f, textColor, bold = true))
         content.addView(text("Điều khiển điện thoại từ máy tính bảng trong cùng Wi-Fi · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
             setPadding(0, dp(2), 0, dp(16))
@@ -304,6 +305,8 @@ class MainActivity : Activity() {
         })
     }
 
+    private var btStatusText: TextView? = null
+
     private fun hasBluetoothPermission(): Boolean =
         Build.VERSION.SDK_INT < 31 ||
             checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
@@ -341,6 +344,9 @@ class MainActivity : Activity() {
                 })
                 return@apply
             }
+            val btLine = text("", 15f, textColor, bold = true)
+            btStatusText = btLine
+            addView(btLine)
             addView(text("Cách ghép lần đầu:\n1. Bấm Kết nối ở trên để mở cửa sổ điện thoại (bước này bật chế độ thiết bị nhập).\n2. Bấm nút bên dưới để điện thoại tìm thấy máy tính bảng.\n3. Trên ĐIỆN THOẠI: Cài đặt → Bluetooth → ghép đôi với máy tính bảng này. Nếu hai máy đã ghép đôi từ trước, hãy hủy ghép rồi ghép lại.\n4. Khi thấy báo \"đang điều khiển qua Bluetooth\" là được. Có thể tắt Trợ năng trên điện thoại để kiểm tra.", 13f, textColor))
             addView(smallButton("Cho điện thoại tìm thấy máy tính bảng (5 phút)") {
                 try {
@@ -374,6 +380,14 @@ class MainActivity : Activity() {
     }
 
     private fun updateStatus() {
+        btStatusText?.let { line ->
+            val s = ControllerService.btStatus
+            line.text = when {
+                s.isNotEmpty() -> "Trạng thái: $s"
+                ControllerService.running -> "Trạng thái: Bluetooth chưa bật cho phiên này. Ngắt kết nối rồi Kết nối lại."
+                else -> "Trạng thái: chưa kết nối. Bấm Kết nối ở trên trước."
+            }
+        }
         val view = statusText ?: return
         when (prefs.role) {
             "host" -> {

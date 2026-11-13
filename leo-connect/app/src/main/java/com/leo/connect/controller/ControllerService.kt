@@ -41,6 +41,11 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         @Volatile
         var connected = false
             private set
+
+        /** Trạng thái Bluetooth gần nhất, để hiện trên màn hình chính. */
+        @Volatile
+        var btStatus = ""
+            private set
     }
 
     private val main = Handler(Looper.getMainLooper())
@@ -105,7 +110,9 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         window = PhoneWindow(this, this).also { it.show() }
         val prefs = com.leo.connect.Prefs(this)
         if (prefs.btEnabled && Build.VERSION.SDK_INT >= 28) {
+            btStatus = "Bluetooth: đang khởi động…"
             bt = BluetoothHid(this, prefs.btAddress) { status ->
+                btStatus = status
                 main.post {
                     window?.showMessage(status)
                     window?.setRawKeys(viaBt)
@@ -328,6 +335,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
         bt?.stop()
         bt = null
+        btStatus = ""
         window?.dismiss()
         window = null
         sender.shutdownNow()
