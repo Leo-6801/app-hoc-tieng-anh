@@ -329,13 +329,21 @@ class HostService : Service() {
         // Gửi hình qua UDP (chấp nhận mất gói) khi máy tính bảng đã báo cổng nhận
         @Volatile
         private var udpPort = 0
+        @Volatile
         private var udpSocket: java.net.DatagramSocket? = null
         private var udpFrameId = 0
         private var udpCounter = 0L
         private val udpKeySpec = javax.crypto.spec.SecretKeySpec(udpKey, "AES")
         private val udpCipher by lazy { javax.crypto.Cipher.getInstance("AES/GCM/NoPadding") }
 
-        /** Chia khung hình thành các gói nhỏ: [mã khung: int][thứ tự: short][tổng số: short][dữ liệu]. */
+        // Giữ lại các gói của những khung vừa gửi để gửi lại khi máy tính bảng báo mất
+        private val sentLock = Any()
+        private val sentFrames = LinkedHashMap<Int, Array<ByteArray>>()
+
+        /**
+         * Chia khung hình thành các gói nhỏ: [mã khung: int][thứ tự: short][tổng số: short][dữ liệu].
+         * Gửi giãn nhịp (không dồn cả khung trong một lúc) để không làm tràn hàng đợi Wi-Fi.
+         */
         private fun sendUdp(frame: ByteArray, port: Int) {
             val sock = udpSocket ?: java.net.DatagramSocket().also {
                 it.sendBufferSize = 64 * 1024
@@ -343,15 +351,43 @@ class HostService : Service() {
             }
             val id = udpFrameId++
             val count = (frame.size + Proto.UDP_CHUNK - 1) / Proto.UDP_CHUNK
-            for (i in 0 until count) {
+            val packets = Array(count) { i ->
                 val offset = i * Proto.UDP_CHUNK
                 val length = minOf(Proto.UDP_CHUNK, frame.size - offset)
                 val plain = java.nio.ByteBuffer.allocate(8 + length)
                     .putInt(id).putShort(i.toShort()).putShort(count.toShort()).put(frame, offset, length).array()
-                val packet = Proto.sealUdp(udpCipher, udpKeySpec, udpCounter++, plain)
+                Proto.sealUdp(udpCipher, udpKeySpec, udpCounter++, plain)
+            }
+            synchronized(sentLock) {
+                sentFrames[id] = packets
+                while (sentFrames.size > 90) sentFrames.remove(sentFrames.keys.first())
+            }
+            // Tốc độ gửi tối đa: gấp 4 lần bitrate hiện tại, ít nhất 10 Mbps
+            val bytesPerMs = maxOf(bitrate * 4L, 10_000_000L) / 8000
+            val start = System.nanoTime()
+            var sent = 0L
+            for (packet in packets) {
                 sock.send(java.net.DatagramPacket(packet, packet.size, peer, port))
-                // Khung lớn: nghỉ rất ngắn sau mỗi cụm gói để không làm tràn hàng đợi Wi-Fi
-                if (i % 16 == 15) Thread.sleep(1)
+                sent += packet.size
+                val ahead = sent / bytesPerMs - (System.nanoTime() - start) / 1_000_000
+                if (ahead >= 1) Thread.sleep(ahead)
+            }
+        }
+
+        /** Gửi lại các gói bị mất theo yêu cầu ([indices] rỗng = cả khung). */
+        private fun resend(frameId: Int, indices: List<Int>) {
+            val port = udpPort
+            val sock = udpSocket ?: return
+            if (port == 0) return
+            val packets = synchronized(sentLock) { sentFrames[frameId] } ?: return
+            val list = if (indices.isEmpty()) packets.indices.toList() else indices
+            try {
+                for ((n, i) in list.withIndex()) {
+                    if (i < 0 || i >= packets.size) continue
+                    sock.send(java.net.DatagramPacket(packets[i], packets[i].size, peer, port))
+                    if (n % 8 == 7) Thread.sleep(1)
+                }
+            } catch (_: Exception) {
             }
         }
 
@@ -428,7 +464,9 @@ class HostService : Service() {
                 return
             }
             if (waitingForKey) return
-            if (outbox.count { it.droppable } >= 4) {
+            // Khung cũ nhất đã chờ gửi quá 0,15 giây: đường truyền không theo kịp
+            val oldest = outbox.firstOrNull { it.droppable }
+            if (oldest != null && System.currentTimeMillis() - oldest.at > 150) {
                 // Mạng không theo kịp: bỏ khung, hạ bitrate, xin khung khóa mới để bắt kịp.
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
@@ -523,6 +561,12 @@ class HostService : Service() {
                         udpPort = java.nio.ByteBuffer.wrap(m.data).int.coerceIn(0, 65535)
                     }
                     Proto.UDP_OFF -> udpPort = 0
+                    Proto.NACK -> if (m.data.size >= 6) {
+                        val bb = java.nio.ByteBuffer.wrap(m.data)
+                        val frameId = bb.int
+                        val n = (bb.short.toInt() and 0xFFFF).coerceAtMost((m.data.size - 6) / 2)
+                        resend(frameId, List(n) { bb.short.toInt() and 0xFFFF })
+                    }
                     Proto.CAPS -> if (m.data.isNotEmpty()) {
                         val tabletHevc = (m.data[0].toInt() and Proto.CAPS_HEVC) != 0
                         val wanted = if (tabletHevc && Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = true)) {
@@ -611,7 +655,9 @@ class HostService : Service() {
 }
 
 /** Một gói chờ gửi; droppable = khung video có thể bỏ khi mạng chậm. */
-private class Frame(val type: Int, val payload: ByteArray, val droppable: Boolean)
+private class Frame(val type: Int, val payload: ByteArray, val droppable: Boolean) {
+    val at = System.currentTimeMillis()
+}
 
 /** Tiện ích kiểm tra từ giao diện. */
 fun Context.isIgnoringBatteryOptimizations(): Boolean =

@@ -70,6 +70,7 @@ object Proto {
     const val PONG = 31
     const val P2P_INFO = 33 // điện thoại gửi tên + mật khẩu nhóm Wi-Fi Direct: "tên\nmật khẩu"
     const val UDP_HELLO = 34 // máy tính bảng báo cổng UDP nhận hình: [cổng: int]
+    const val NACK = 36 // máy tính bảng xin gửi lại gói hình bị mất: [mã khung: int][số gói: short][thứ tự gói: short...]; 0 gói = cả khung
     const val UDP_OFF = 35 // UDP không tới được: quay về gửi hình qua TCP
     const val CONGESTION = 32 // máy tính bảng báo hình đang trễ: điện thoại hạ bitrate ngay
 

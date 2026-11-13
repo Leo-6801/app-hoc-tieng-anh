@@ -109,71 +109,124 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
     }
 
-    /** Ghép các gói UDP thành khung hình. Khung thiếu gói thì bỏ và chờ khung khóa kế tiếp. */
+    private class Partial(count: Int, val since: Long) {
+        val chunks = arrayOfNulls<ByteArray>(count)
+        var got = 0
+    }
+
+    /** Xin điện thoại gửi lại các gói còn thiếu của một khung hình (cả khung nếu chưa nhận được gói nào). */
+    private fun sendNack(frameId: Int, partial: Partial?) {
+        val missing = ArrayList<Int>()
+        if (partial != null) {
+            for (i in partial.chunks.indices) if (partial.chunks[i] == null && missing.size < 300) missing.add(i)
+        }
+        val bb = ByteBuffer.allocate(6 + missing.size * 2).putInt(frameId).putShort(missing.size.toShort())
+        for (i in missing) bb.putShort(i.toShort())
+        send(Proto.NACK, bb.array())
+    }
+
+    /**
+     * Ghép các gói UDP thành khung hình và đưa cho bộ giải mã theo đúng thứ tự.
+     * Thiếu gói thì xin gửi lại và chờ tối đa 0,16 giây; quá hạn mới bỏ khung và chờ khung khóa.
+     */
     private fun udpLoop(sock: java.net.DatagramSocket, key: ByteArray) {
         val cipher = javax.crypto.Cipher.getInstance("AES/GCM/NoPadding")
         val spec = javax.crypto.spec.SecretKeySpec(key, "AES")
         val buf = ByteArray(2048)
-        var currentId = -1
-        var chunks: Array<ByteArray?>? = null
-        var got = 0
+        val frames = HashMap<Int, Partial>()
         var started = false
-        var lastComplete = -1
+        var nextId = 0 // khung kế tiếp cần đưa cho bộ giải mã
+        var newestId = 0 // khung mới nhất đã thấy gói
+        var waitSince = 0L
+        var nackAt = 0L
+        try {
+            sock.soTimeout = 10
+        } catch (_: Exception) {
+        }
         while (!sock.isClosed) {
             val packet = java.net.DatagramPacket(buf, buf.size)
+            var received = true
             try {
                 sock.receive(packet)
+            } catch (e: java.net.SocketTimeoutException) {
+                received = false
             } catch (e: Exception) {
                 break
             }
-            val plain = Proto.openUdp(cipher, spec, buf, packet.length) ?: continue
-            if (plain.size < 8) continue
-            udpPackets++
-            val bb = ByteBuffer.wrap(plain)
-            val id = bb.int
-            val index = bb.short.toInt() and 0xFFFF
-            val count = bb.short.toInt() and 0xFFFF
-            if (count == 0 || index >= count) continue
-            if (id != currentId) {
-                if (currentId != -1 && id - currentId < 0) continue // gói đến muộn của khung cũ
-                currentId = id
-                chunks = arrayOfNulls(count)
-                got = 0
+            val now = android.os.SystemClock.elapsedRealtime()
+            if (received) {
+                val plain = Proto.openUdp(cipher, spec, buf, packet.length)
+                if (plain != null && plain.size >= 8) {
+                    udpPackets++
+                    val bb = ByteBuffer.wrap(plain)
+                    val id = bb.int
+                    val index = bb.short.toInt() and 0xFFFF
+                    val count = bb.short.toInt() and 0xFFFF
+                    if (!started) {
+                        started = true
+                        nextId = id
+                        newestId = id
+                    }
+                    if (count > 0 && index < count && id - nextId >= 0 && id - nextId < 600) {
+                        if (id - newestId > 0) newestId = id
+                        val partial = frames.getOrPut(id) { Partial(count, now) }
+                        if (partial.chunks.size == count && partial.chunks[index] == null) {
+                            partial.chunks[index] = plain.copyOfRange(8, plain.size)
+                            partial.got++
+                        }
+                    }
+                }
             }
-            val c = chunks ?: continue
-            if (c.size != count || c[index] != null) continue
-            c[index] = plain.copyOfRange(8, plain.size)
-            got++
-            if (got < count) continue
+            if (!started) continue
 
-            var total = 0
-            for (part in c) total += part?.size ?: 0
-            val frame = ByteArray(total)
-            var offset = 0
-            for (part in c) {
-                val b = part ?: continue
-                System.arraycopy(b, 0, frame, offset, b.size)
-                offset += b.size
+            // Đưa các khung đã đủ gói cho bộ giải mã, theo đúng thứ tự
+            while (true) {
+                val partial = frames[nextId] ?: break
+                if (partial.got < partial.chunks.size) break
+                frames.remove(nextId)
+                nextId++
+                waitSince = 0L
+                nackAt = 0L
+                var total = 0
+                for (part in partial.chunks) total += part?.size ?: 0
+                val frame = ByteArray(total)
+                var offset = 0
+                for (part in partial.chunks) {
+                    val b = part ?: continue
+                    System.arraycopy(b, 0, frame, offset, b.size)
+                    offset += b.size
+                }
+                val isKey = frame.isNotEmpty() && (frame[0].toInt() and Proto.FLAG_KEY) != 0
+                if (udpNeedKey && !isKey) continue // đang chờ khung khóa: bỏ khung thường
+                if (isKey) udpNeedKey = false
+                onVideoFrame(frame)
             }
-            chunks = null
-            val gap = started && id != lastComplete + 1
-            started = true
-            lastComplete = id
-            val isKey = frame.isNotEmpty() && (frame[0].toInt() and Proto.FLAG_KEY) != 0
-            if ((gap || udpNeedKey) && !isKey) {
-                // Thiếu khung trước đó: các khung sau sẽ vỡ hình, nên bỏ cho tới khung khóa
+
+            // Khung kế tiếp còn thiếu gói trong khi đã có khung mới hơn (hoặc chờ quá lâu): xin gửi lại
+            if (newestId - nextId < 0) continue
+            val waiting = frames[nextId]
+            val behind = newestId - nextId > 0 || (waiting != null && now - waiting.since > 120)
+            if (!behind) continue
+            if (waitSince == 0L) waitSince = now
+            if (now - waitSince > 160) {
+                // Gửi lại cũng không kịp: bỏ khung này, chờ khung khóa mới
+                frames.remove(nextId)
+                nextId++
+                waitSince = 0L
+                nackAt = 0L
                 udpNeedKey = true
                 onUdpLoss()
-                continue
+                if (newestId - nextId > 30) {
+                    // Tụt lại quá xa: bỏ hết, bắt đầu lại từ khung mới nhất
+                    frames.clear()
+                    nextId = newestId
+                }
+            } else if (now - nackAt > 35) {
+                nackAt = now
+                sendNack(nextId, waiting)
             }
-            if (isKey) udpNeedKey = false
-            onVideoFrame(frame)
         }
     }
-
-    // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
-    private var bt: BluetoothHid? = null
-    private val viaBt get() = bt?.connected == true
 
     // Trạng thái video (truy cập trong khóa decoderLock)
     private val decoderLock = Any()
