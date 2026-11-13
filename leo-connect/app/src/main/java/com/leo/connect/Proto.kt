@@ -78,7 +78,8 @@ object Proto {
 
     val QUALITIES = listOf(
         Quality("Mượt", 1024, 2_000_000, 30),
-        Quality("Cân bằng", 1280, 3_500_000, 30),
+        // Dùng khi điều khiển qua Bluetooth: Bluetooth chiếm bớt sóng Wi-Fi nên cần luồng hình nhẹ hơn
+        Quality("Cân bằng", 1600, 5_000_000, 60),
         // Wi-Fi nội bộ: độ phân giải gốc của điện thoại, 60 khung hình/giây
         Quality("Nét", 2560, 12_000_000, 60),
     )

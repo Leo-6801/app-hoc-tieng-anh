@@ -404,13 +404,22 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
                     liveMode = false
                     navDone = false
                     edgeStartX = e.x; edgeStartY = e.y
-                    edge = when {
-                        e.y > v.height - dp(18) -> 2
-                        e.x < dp(14) || e.x > v.width - dp(14) -> 1
-                        else -> 0
+                    if (directTouch) {
+                        // Bluetooth: điện thoại coi đây là màn hình cảm ứng thật, nên gửi nguyên ngón tay
+                        // ngay lập tức. Vuốt mép, vuốt lên rồi giữ... do chính điện thoại xử lý như cầm máy.
+                        edge = 0
+                        liveMode = true
+                        callbacks.onTouch(Proto.TOUCH_DOWN, nx, ny)
+                        lastLiveSend = System.currentTimeMillis()
+                    } else {
+                        edge = when {
+                            e.y > v.height - dp(18) -> 2
+                            e.x < dp(14) || e.x > v.width - dp(14) -> 1
+                            else -> 0
+                        }
+                        // Bắt đầu từ mép: chờ xem có phải cử chỉ điều hướng không, chưa gửi chạm trực tiếp
+                        if (edge == 0) surfaceView.postDelayed(goLive, 200)
                     }
-                    // Bắt đầu từ mép: chờ xem có phải cử chỉ điều hướng không, chưa gửi chạm trực tiếp
-                    if (edge == 0) surfaceView.postDelayed(goLive, 200)
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (hypot(e.x - lastX, e.y - lastY) > dp(2)) {
@@ -422,7 +431,7 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
                         }
                         if (liveMode) {
                             val now = System.currentTimeMillis()
-                            if (now - lastLiveSend >= 16) {
+                            if (now - lastLiveSend >= (if (directTouch) 11 else 16)) {
                                 callbacks.onTouch(Proto.TOUCH_MOVE, nx, ny)
                                 lastLiveSend = now
                             }
@@ -530,8 +539,12 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
         }
     }
 
-    /** Bật khi điều khiển qua Bluetooth: bàn phím rời gửi phím thô sang điện thoại. */
+    // Đang điều khiển qua Bluetooth: gửi chạm trực tiếp, không tự bắt cử chỉ vuốt mép
+    private var directTouch = false
+
+    /** Bật khi điều khiển qua Bluetooth: chạm trực tiếp và bàn phím rời gửi phím thô sang điện thoại. */
     fun setRawKeys(on: Boolean) {
+        directTouch = on
         if (keyInput.rawMode == on) return
         keyInput.rawMode = on
         keyInput.reset()

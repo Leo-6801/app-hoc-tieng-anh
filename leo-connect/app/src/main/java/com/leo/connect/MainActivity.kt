@@ -153,7 +153,7 @@ class MainActivity : Activity() {
 
         content.addView(card().apply {
             addView(text("Chuẩn bị (làm một lần)", 16f, textColor, bold = true))
-            addView(check("Quyền Trợ năng (để chạm/vuốt từ xa)", ControlAccessibilityService.isEnabled(this@MainActivity), "Mở cài đặt") {
+            addView(check("Quyền Trợ năng (không cần nếu điều khiển qua Bluetooth)", ControlAccessibilityService.isEnabled(this@MainActivity), "Mở cài đặt") {
                 toast("Chọn \"Leo Connect\" trong danh sách và bật lên")
                 startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
             })
@@ -371,7 +371,7 @@ class MainActivity : Activity() {
                     })
                 }
             }
-            addView(text("Lưu ý: chỉ chạm 1 ngón (không thu phóng 2 ngón trong app của điện thoại). Gõ tiếng Việt do bàn phím của điện thoại xử lý: bật Telex cho bàn phím thật trong cài đặt bàn phím của điện thoại. Thay đổi ở đây có hiệu lực từ lần Kết nối sau.", 12f, mutedColor))
+            addView(text("Khi điều khiển qua Bluetooth, vuốt trên cửa sổ như đang cầm điện thoại: quay lại, về màn hình chính, mở đa nhiệm đều theo đúng kiểu điều hướng của điện thoại (cử chỉ hoặc 3 nút). Lưu ý: chỉ chạm 1 ngón (không thu phóng 2 ngón trong app của điện thoại). Gõ tiếng Việt do bàn phím của điện thoại xử lý: bật Telex cho bàn phím thật trong cài đặt bàn phím của điện thoại. Thay đổi ở đây có hiệu lực từ lần Kết nối sau.", 12f, mutedColor))
             addView(smallButton("Tắt điều khiển qua Bluetooth") {
                 prefs.btEnabled = false
                 render()
@@ -416,7 +416,7 @@ class MainActivity : Activity() {
 
     private fun requestProjection() {
         if (!ControlAccessibilityService.isEnabled(this)) {
-            toast("Nên bật quyền Trợ năng trước, nếu không máy tính bảng chỉ xem được, không điều khiển được")
+            toast("Trợ năng đang tắt: máy tính bảng chỉ điều khiển được qua Bluetooth")
         }
         val mpm = getSystemService(MediaProjectionManager::class.java)
         val intent = if (Build.VERSION.SDK_INT >= 34) {

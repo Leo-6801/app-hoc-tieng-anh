@@ -329,7 +329,7 @@ class HostService : Service() {
                 if (closed) return
                 val max = quality.bitrate
                 if (System.currentTimeMillis() - lastDropAt > 4_000 && bitrate < max) {
-                    bitrate = minOf(max, (bitrate * 1.15f).toInt())
+                    bitrate = minOf(max, (bitrate * 1.2f).toInt())
                     encoder?.setBitrate(bitrate)
                 }
                 video.postDelayed(this, 2_000)
@@ -470,7 +470,8 @@ class HostService : Service() {
                         val q = Proto.QUALITIES[level]
                         if (q !== quality) {
                             quality = q
-                            bitrate = q.bitrate
+                            // Bắt đầu ở nửa mức tối đa rồi tăng dần nếu mạng theo kịp, tránh nghẽn ngay từ đầu
+                            bitrate = q.bitrate / 2
                             video.post { restartEncoder() }
                         }
                     }
