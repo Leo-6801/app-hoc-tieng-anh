@@ -80,6 +80,11 @@ class Prefs(context: Context) {
         get() = p.getBoolean("telex", true)
         set(value) = p.edit().putBoolean("telex", value).apply()
 
+    /** Máy tính bảng: phát tiếng của điện thoại. */
+    var audio: Boolean
+        get() = p.getBoolean("audio", true)
+        set(value) = p.edit().putBoolean("audio", value).apply()
+
     /** Mức chất lượng hình (chỉ số trong Proto.QUALITIES). */
     var quality: Int
         get() = p.getInt("quality", Proto.DEFAULT_QUALITY).coerceIn(0, Proto.QUALITIES.size - 1)

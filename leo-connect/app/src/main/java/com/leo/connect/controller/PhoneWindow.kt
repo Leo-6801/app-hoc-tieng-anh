@@ -43,6 +43,9 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
         fun onReplace(deleteCount: Int, text: String)
         fun onRawKey(usage: Int, modifiers: Int)
         fun onClose()
+        fun onSendFiles()
+        fun onDropFiles(uris: List<android.net.Uri>)
+        fun onToggleAudio()
     }
 
     private val wm = context.getSystemService(WindowManager::class.java)
@@ -153,11 +156,38 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
             elevation = dp(8).toFloat()
             addView(menuItem("—  Thu nhỏ thành bong bóng") { minimize() })
             addView(menuItem("⌨  Bàn phím ảo") { setKeyboard(true, showSoftKeyboard = true) })
+            addView(menuItem("📎  Gửi file sang điện thoại") { callbacks.onSendFiles() })
+            addView(menuItem("🔊  Bật / tắt tiếng điện thoại") { callbacks.onToggleAudio() })
             addView(menuItem("✕  Tắt cửa sổ") { callbacks.onClose() })
         }
         screenBox.addView(menu, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply {
             topMargin = dp(6)
         })
+
+        // Kéo file từ app khác (ví dụ Quản lý file đang mở cạnh bên) thả vào cửa sổ để gửi sang điện thoại
+        root.setOnDragListener { _, e ->
+            when (e.action) {
+                android.view.DragEvent.ACTION_DRAG_STARTED -> true
+                android.view.DragEvent.ACTION_DROP -> {
+                    val uris = ArrayList<android.net.Uri>()
+                    val clip = e.clipData
+                    if (clip != null) {
+                        for (i in 0 until clip.itemCount) clip.getItemAt(i).uri?.let { uris.add(it) }
+                    }
+                    // Cửa sổ nổi không có cách chính thức để xin quyền đọc file được thả; thử cách nội bộ
+                    // của Android, không được thì phần gửi file sẽ báo người dùng thả vào màn hình app.
+                    try {
+                        val cls = Class.forName("android.view.DragAndDropPermissions")
+                        val perms = cls.getMethod("obtain", android.view.DragEvent::class.java).invoke(null, e)
+                        if (perms != null) cls.getMethod("takeTransient").invoke(perms)
+                    } catch (_: Throwable) {
+                    }
+                    if (uris.isNotEmpty()) callbacks.onDropFiles(uris)
+                    uris.isNotEmpty()
+                }
+                else -> true
+            }
+        }
 
         // Chạm ra ngoài cửa sổ (sang app khác): trả bàn phím cho app đó, ẩn menu
         root.setOnTouchListener { _, e ->

@@ -97,6 +97,11 @@ class HostService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    // Sao chép trên điện thoại → gửi sang máy tính bảng (Android chỉ cho đọc khi app đang được phép)
+    private val clipListener = android.content.ClipboardManager.OnPrimaryClipChangedListener {
+        com.leo.connect.Link.pushClipboard(this)
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_STOP -> stopSelf()
@@ -485,7 +490,35 @@ class HostService : Service() {
             outbox.add(Frame(Proto.VIDEO_FRAME, payload, droppable = true))
         }
 
+        // Truyền tiếng đang phát trên điện thoại sang máy tính bảng
+        private var audio: com.leo.connect.AudioCapture? = null
+
+        private fun setAudio(on: Boolean) {
+            audio?.stop()
+            audio = null
+            if (!on || Build.VERSION.SDK_INT < 29) return
+            if (checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) !=
+                android.content.pm.PackageManager.PERMISSION_GRANTED
+            ) return
+            val mp = projection ?: return
+            val capture = com.leo.connect.AudioCapture(mp) { pcm ->
+                try {
+                    channel.send(Proto.AUDIO, pcm)
+                } catch (_: Exception) {
+                }
+            }
+            if (capture.start()) audio = capture
+        }
+
         fun start() {
+            com.leo.connect.Link.attach { type, payload -> channel.send(type, payload) }
+            main.post {
+                try {
+                    getSystemService(android.content.ClipboardManager::class.java)
+                        .addPrimaryClipChangedListener(clipListener)
+                } catch (_: Exception) {
+                }
+            }
             // Đường nối thẳng 5 GHz đã mở: gửi tên + mật khẩu để máy tính bảng chuyển sang đường đó
             wifiDirect?.let { wd ->
                 if (wd.ready) {
@@ -541,7 +574,9 @@ class HostService : Service() {
         fun readLoop() {
             while (!closed) {
                 val m = channel.receive()
+                if (com.leo.connect.Link.onMessage(this@HostService, m.type, m.data)) continue
                 when (m.type) {
+                    Proto.AUDIO_CTL -> setAudio(m.data.isNotEmpty() && m.data[0].toInt() == 1)
                     Proto.GESTURE -> {
                         val (duration, points) = Proto.decodeGesture(m.data)
                         ControlAccessibilityService.instance?.performGesture(duration, points)
@@ -611,6 +646,16 @@ class HostService : Service() {
 
         fun stop() {
             closed = true
+            com.leo.connect.Link.detach(this@HostService)
+            main.post {
+                try {
+                    getSystemService(android.content.ClipboardManager::class.java)
+                        .removePrimaryClipChangedListener(clipListener)
+                } catch (_: Exception) {
+                }
+            }
+            audio?.stop()
+            audio = null
             senderThread.interrupt()
             try {
                 udpSocket?.close()

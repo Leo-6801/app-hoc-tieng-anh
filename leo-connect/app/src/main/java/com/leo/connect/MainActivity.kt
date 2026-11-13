@@ -73,6 +73,40 @@ class MainActivity : Activity() {
         }
         setContentView(ScrollView(this).apply { addView(content) })
         Notif.ensureChannels(this)
+        // Thả file vào màn hình app để gửi sang máy kia
+        content.setOnDragListener { _, e ->
+            when (e.action) {
+                android.view.DragEvent.ACTION_DRAG_STARTED -> true
+                android.view.DragEvent.ACTION_DROP -> {
+                    val uris = ArrayList<Uri>()
+                    val clip = e.clipData
+                    if (clip != null) {
+                        for (i in 0 until clip.itemCount) clip.getItemAt(i).uri?.let { uris.add(it) }
+                    }
+                    if (uris.isNotEmpty()) {
+                        val perms = requestDragAndDropPermissions(e)
+                        if (perms != null) dropPermissions.add(perms)
+                        Link.sendFiles(this, uris) {
+                            if (perms != null) {
+                                perms.release()
+                                dropPermissions.remove(perms)
+                            }
+                        }
+                    }
+                    uris.isNotEmpty()
+                }
+                else -> true
+            }
+        }
+        if (!updateChecked) {
+            updateChecked = true
+            kotlin.concurrent.thread(name = "leo-update-check") {
+                try {
+                    Updater.check()
+                } catch (_: Exception) {
+                }
+            }
+        }
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
         ) {
@@ -98,10 +132,18 @@ class MainActivity : Activity() {
         statusText = null
         btStatusText = null
         p2pStatusText = null
+        fileText = null
         content.addView(text("Leo Connect", 26f, textColor, bold = true))
         content.addView(text("Điều khiển điện thoại từ máy tính bảng trong cùng Wi-Fi · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
-            setPadding(0, dp(2), 0, dp(16))
+            setPadding(0, dp(2), 0, dp(4))
         })
+        val updateLine = text("", 13f, mutedColor)
+        updateText = updateLine
+        content.addView(updateLine)
+        content.addView(smallButton(if (Updater.hasUpdate(this)) "⬇ Cập nhật lên bản ${Updater.latest?.version}" else "Kiểm tra cập nhật") {
+            runUpdate()
+        }.apply { gravity = Gravity.START or Gravity.CENTER_VERTICAL })
+        content.addView(View(this), LinearLayout.LayoutParams(1, dp(8)))
 
         val roles = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
         roles.addView(roleButton("📱 Điện thoại\n(được điều khiển)", "host"), LinearLayout.LayoutParams(0, -2, 1f))
@@ -138,6 +180,21 @@ class MainActivity : Activity() {
         updateStatus()
     }
 
+    private var fileText: TextView? = null
+
+    /** Thẻ gửi file + giải thích bộ nhớ tạm, dùng cho cả hai máy. */
+    private fun shareCard(other: String) = card().apply {
+        addView(text("Gửi file và bộ nhớ tạm", 16f, textColor, bold = true))
+        val line = text("", 13f, okColor)
+        fileText = line
+        addView(line)
+        addView(smallButton("📎 Chọn file gửi sang $other") {
+            startActivity(Intent(this@MainActivity, SendActivity::class.java).setAction(SendActivity.ACTION_PICK))
+        })
+        addView(text("Cách khác: trong app bất kỳ bấm Chia sẻ → Leo Connect, hoặc kéo file thả vào màn hình này. File nhận được nằm ở Tải xuống/LeoConnect. Chỉ gửi được khi hai máy đang kết nối.", 12f, mutedColor))
+        addView(text("Bộ nhớ tạm: sao chép chữ trên máy tính bảng rồi chạm vào cửa sổ điện thoại là dán được bên điện thoại. Chiều ngược lại (sao chép trên điện thoại) Android chỉ cho đọc khi app Leo Connect đang mở trên điện thoại, nên có thể không tự sang.", 12f, mutedColor))
+    }
+
     private fun renderHost() {
         val ips = Proto.localIps()
         content.addView(card().apply {
@@ -168,6 +225,10 @@ class MainActivity : Activity() {
             })
             addView(nearbyCheck())
             addView(bleCheck())
+            addView(check("Quyền Ghi âm (để truyền tiếng nhạc, video sang máy tính bảng; không thu micro)",
+                checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED, "Cho phép") {
+                requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQ_NOTIFICATIONS)
+            })
             addView(text("Cấp hai quyền này TRƯỚC khi bấm \"Bật chế độ sẵn sàng\". Nếu đang bật thì tắt rồi bật lại.", 12f, mutedColor))
             val p2pLine = text("", 13f, mutedColor)
             p2pStatusText = p2pLine
@@ -188,6 +249,7 @@ class MainActivity : Activity() {
                 })
             }
         })
+        content.addView(shareCard("máy tính bảng"))
     }
 
     // Máy tính bảng: tự tìm điện thoại trong mạng Wi-Fi
@@ -332,6 +394,7 @@ class MainActivity : Activity() {
             }
         })
         if (!ControllerService.running) searchDevices()
+        content.addView(shareCard("điện thoại"))
         renderBluetoothCard()
 
         content.addView(card().apply {
@@ -442,7 +505,51 @@ class MainActivity : Activity() {
         })
     }
 
+    private var updateText: TextView? = null
+    private var updateChecked = false
+    private var shownUpdate = false
+    private val dropPermissions = ArrayList<android.view.DragAndDropPermissions>()
+
+    /** Kiểm tra bản mới; có thì tải và đưa cho Android cài. */
+    private fun runUpdate() {
+        if (Updater.busy) return
+        Updater.status = "Đang kiểm tra bản mới…"
+        updateStatus()
+        val current = Updater.currentNumber(this)
+        kotlin.concurrent.thread(name = "leo-update") {
+            try {
+                val info = Updater.check()
+                if (info == null || info.number <= current) {
+                    Updater.status = "Đang dùng bản mới nhất."
+                } else {
+                    Updater.downloadAndInstall(this, info)
+                }
+            } catch (e: Exception) {
+                Updater.status = "Không kiểm tra được bản mới (cần Internet): ${e.message ?: e.javaClass.simpleName}"
+            }
+        }
+    }
+
     private fun updateStatus() {
+        updateText?.let { line ->
+            val s = Updater.status
+            line.text = when {
+                s.isNotEmpty() -> s
+                Updater.hasUpdate(this) -> "Có bản mới ${Updater.latest?.version}."
+                else -> ""
+            }
+            line.visibility = if (line.text.isEmpty()) View.GONE else View.VISIBLE
+        }
+        if (Updater.hasUpdate(this) && !shownUpdate) {
+            shownUpdate = true
+            render()
+            return
+        }
+        fileText?.let { line ->
+            val p = Link.progress
+            line.text = p
+            line.visibility = if (p.isEmpty()) View.GONE else View.VISIBLE
+        }
         p2pStatusText?.text = HostService.p2pStatus
         btStatusText?.let { line ->
             val s = ControllerService.btStatus

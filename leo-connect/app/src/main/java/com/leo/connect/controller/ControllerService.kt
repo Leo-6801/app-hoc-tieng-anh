@@ -326,6 +326,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
         running = true
         active = true
+        audioOn = com.leo.connect.Prefs(this).audio
         window = PhoneWindow(this, this).also { it.show() }
         val prefs = com.leo.connect.Prefs(this)
         if (Build.VERSION.SDK_INT >= 29) {
@@ -465,10 +466,14 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 // Đường nối thẳng 5 GHz không tranh sóng với Bluetooth nên dùng được mức nét nhất
                 val level = if (bt != null && direct == null) 1 else Proto.QUALITIES.size - 1
                 send(Proto.QUALITY, byteArrayOf(level.toByte()))
+                com.leo.connect.Link.attach { type, payload -> ch.send(type, payload) }
+                send(Proto.AUDIO_CTL, byteArrayOf(if (com.leo.connect.Prefs(this).audio) 1 else 0))
                 ui { setStatus("Đang chờ hình ảnh…") }
                 while (active) {
                     val m = ch.receive()
+                    if (com.leo.connect.Link.onMessage(this, m.type, m.data)) continue
                     when (m.type) {
+                        Proto.AUDIO -> if (audioOn) audioPlayer.write(m.data)
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
                         Proto.VIDEO_FRAME -> {
                             if (!udpOn) statFrames++
@@ -517,6 +522,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     }
                 }
             } finally {
+                com.leo.connect.Link.detach(this)
+                audioPlayer.release()
                 connected = false
                 channel = null
                 udpOn = false
@@ -585,6 +592,51 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         decoder = null
     }
 
+    private val audioPlayer = com.leo.connect.AudioPlayer()
+
+    @Volatile
+    private var audioOn = true
+    private var lastClipCheck = 0L
+
+    /** Vừa chạm/gõ vào cửa sổ: nếu trên máy tính bảng có nội dung mới sao chép thì gửi sang điện thoại. */
+    private fun syncClipboard() {
+        val now = System.currentTimeMillis()
+        if (now - lastClipCheck < 700) return
+        lastClipCheck = now
+        com.leo.connect.Link.pushClipboard(this)
+    }
+
+    override fun onSendFiles() {
+        try {
+            startActivity(
+                Intent(this, com.leo.connect.SendActivity::class.java)
+                    .setAction(com.leo.connect.SendActivity.ACTION_PICK)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        } catch (e: Exception) {
+            ui { showMessage("Không mở được trình chọn file") }
+        }
+    }
+
+    override fun onDropFiles(uris: List<android.net.Uri>) {
+        com.leo.connect.Link.sendFiles(this, uris)
+    }
+
+    override fun onToggleAudio() {
+        val prefs = com.leo.connect.Prefs(this)
+        val on = !prefs.audio
+        prefs.audio = on
+        audioOn = on
+        send(Proto.AUDIO_CTL, byteArrayOf(if (on) 1 else 0))
+        if (!on) audioPlayer.release()
+        ui {
+            showMessage(
+                if (on) "Đã bật tiếng. Điện thoại cần cấp quyền Ghi âm cho Leo Connect; muốn chỉ nghe ở máy tính bảng thì giảm âm lượng điện thoại."
+                else "Đã tắt tiếng từ điện thoại"
+            )
+        }
+    }
+
     private fun send(type: Int, payload: ByteArray = ByteArray(0)) {
         val ch = channel ?: return
         sender.execute {
@@ -624,6 +676,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     }
 
     override fun onTouch(action: Int, x: Float, y: Float) {
+        if (action == Proto.TOUCH_DOWN) syncClipboard()
         val b = bt
         if (b != null && b.connected) {
             val p = btPoint(x, y)
@@ -650,10 +703,12 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     }
 
     override fun onReplace(deleteCount: Int, text: String) {
+        syncClipboard()
         send(Proto.REPLACE, Proto.encodeReplace(deleteCount, text))
     }
 
     override fun onRawKey(usage: Int, modifiers: Int) {
+        syncClipboard()
         bt?.key(usage, modifiers)
     }
 

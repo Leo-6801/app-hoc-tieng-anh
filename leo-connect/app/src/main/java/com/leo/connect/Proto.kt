@@ -74,6 +74,14 @@ object Proto {
     const val UDP_OFF = 35 // UDP không tới được: quay về gửi hình qua TCP
     const val CONGESTION = 32 // máy tính bảng báo hình đang trễ: điện thoại hạ bitrate ngay
 
+    // Chuyển file, bộ nhớ tạm, âm thanh (cả hai chiều trừ âm thanh)
+    const val FILE_BEGIN = 40 // [mã: int][kích thước: long, -1 = không rõ][tên file UTF-8]
+    const val FILE_DATA = 41 // [mã: int][dữ liệu]
+    const val FILE_END = 42 // [mã: int][1 = xong, 0 = hủy]
+    const val CLIPBOARD = 43 // chữ vừa sao chép (UTF-8)
+    const val AUDIO = 44 // điện thoại gửi tiếng: PCM 16 bit, 48 kHz, 2 kênh
+    const val AUDIO_CTL = 45 // máy tính bảng bật/tắt truyền tiếng: [1 = bật]
+
     const val TOUCH_DOWN = 0
     const val TOUCH_MOVE = 1
     const val TOUCH_UP = 2
