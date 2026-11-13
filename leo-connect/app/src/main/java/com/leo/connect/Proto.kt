@@ -68,6 +68,7 @@ object Proto {
     // Đo độ trễ
     const val PING = 30
     const val PONG = 31
+    const val P2P_INFO = 33 // điện thoại gửi tên + mật khẩu nhóm Wi-Fi Direct: "tên\nmật khẩu"
     const val CONGESTION = 32 // máy tính bảng báo hình đang trễ: điện thoại hạ bitrate ngay
 
     const val TOUCH_DOWN = 0
@@ -80,7 +81,7 @@ object Proto {
     val QUALITIES = listOf(
         Quality("Mượt", 1024, 2_000_000, 30),
         // Dùng khi điều khiển qua Bluetooth: Bluetooth chiếm bớt sóng Wi-Fi nên cần luồng hình nhẹ hơn
-        Quality("Cân bằng", 1280, 2_000_000, 30),
+        Quality("Cân bằng", 1600, 4_000_000, 30),
         // Wi-Fi nội bộ: độ phân giải gốc của điện thoại, 60 khung hình/giây
         Quality("Nét", 2560, 12_000_000, 60),
     )

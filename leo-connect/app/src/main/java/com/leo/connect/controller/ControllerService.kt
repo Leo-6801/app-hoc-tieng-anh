@@ -63,6 +63,15 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     private var pinger: java.util.concurrent.ScheduledExecutorService? = null
     private var lastCongestionAt = 0L
 
+    // Wi-Fi Direct 5 GHz: địa chỉ điện thoại trên đường nối thẳng (null = chưa nối, dùng Wi-Fi thường)
+    private var p2p: com.leo.connect.WifiDirectClient? = null
+
+    @Volatile
+    private var p2pHost: String? = null
+
+    @Volatile
+    private var viaP2p = false
+
     // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
     private var bt: BluetoothHid? = null
     private val viaBt get() = bt?.connected == true
@@ -113,6 +122,27 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         active = true
         window = PhoneWindow(this, this).also { it.show() }
         val prefs = com.leo.connect.Prefs(this)
+        if (Build.VERSION.SDK_INT >= 29) {
+            p2p = com.leo.connect.WifiDirectClient(
+                this,
+                onConnected = { address ->
+                    p2pHost = address
+                    main.post { window?.showMessage("Đã nối thẳng Wi-Fi Direct, chuyển sang đường 5 GHz") }
+                    // Đang đi qua Wi-Fi thường: ngắt để kết nối lại qua đường nối thẳng
+                    if (!viaP2p) {
+                        try {
+                            sender.execute { channel?.close() }
+                        } catch (_: Exception) {
+                        }
+                    }
+                },
+                onLost = { p2pHost = null },
+                onStatus = { status -> main.post { window?.showMessage(status) } },
+            ).also {
+                // Đã ghép từ trước: vào thẳng nhóm Wi-Fi Direct, không cần router
+                if (prefs.peerP2pSsid.isNotEmpty()) it.join(prefs.peerP2pSsid, prefs.peerP2pPassphrase)
+            }
+        }
         if (prefs.btEnabled && Build.VERSION.SDK_INT >= 28) {
             btStatus = "Bluetooth: đang khởi động…"
             bt = BluetoothHid(this, prefs.btAddress) { status ->
@@ -138,14 +168,19 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
 
     private fun netLoop(initialHost: String, key: ByteArray) {
         var host = initialHost
+        var p2pFailures = 0
         while (active) {
-            ui { setStatus("Đang kết nối tới $host…") }
+            // Ưu tiên đường nối thẳng 5 GHz; nếu vừa thất bại thì lần này thử Wi-Fi thường
+            val direct = p2pHost?.takeIf { p2pFailures % 2 == 0 }
+            val target = direct ?: host
+            viaP2p = direct != null
+            ui { setStatus(if (direct != null) "Đang kết nối qua Wi-Fi Direct…" else "Đang kết nối tới $target…") }
             var socket: Socket? = null
             try {
                 socket = Socket()
                 // Bộ đệm nhận nhỏ: hình không nằm chờ trong hệ thống, độ trễ không cộng dồn
                 socket.receiveBufferSize = 64 * 1024
-                socket.connect(InetSocketAddress(host, Proto.PORT), 8_000)
+                socket.connect(InetSocketAddress(target, Proto.PORT), if (direct != null) 4_000 else 8_000)
                 socket.tcpNoDelay = true
                 socket.soTimeout = 15_000
                 val ch = Channel(socket)
@@ -179,7 +214,9 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 val caps = if (Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = false)) Proto.CAPS_HEVC else 0
                 send(Proto.CAPS, byteArrayOf(caps.toByte()))
                 // Luôn xin mức Nét; điện thoại tự hạ bitrate khi mạng yếu và tăng lại khi mạng tốt
-                val level = if (bt != null) 1 else Proto.QUALITIES.size - 1
+                p2pFailures = 0
+                // Đường nối thẳng 5 GHz không tranh sóng với Bluetooth nên dùng được mức nét nhất
+                val level = if (bt != null && direct == null) 1 else Proto.QUALITIES.size - 1
                 send(Proto.QUALITY, byteArrayOf(level.toByte()))
                 ui { setStatus("Đang chờ hình ảnh…") }
                 while (active) {
@@ -187,12 +224,21 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     when (m.type) {
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
                         Proto.VIDEO_FRAME -> onVideoFrame(m.data)
+                        Proto.P2P_INFO -> {
+                            val parts = String(m.data, Charsets.UTF_8).split("\n")
+                            if (parts.size == 2 && direct == null) {
+                                val prefs = com.leo.connect.Prefs(this)
+                                prefs.peerP2pSsid = parts[0]
+                                prefs.peerP2pPassphrase = parts[1]
+                                main.post { p2p?.join(parts[0], parts[1]) }
+                            }
+                        }
                         Proto.PONG -> if (m.data.size >= 8) {
                             // Câu trả lời phải xếp hàng sau các khung hình đang gửi, nên thời gian đi-về
                             // phản ánh đúng độ trễ của hình
                             val rttMs = (System.nanoTime() - ByteBuffer.wrap(m.data).long) / 1_000_000
                             val now = System.currentTimeMillis()
-                            if (rttMs > 150 && now - lastCongestionAt > 1_000) {
+                            if (rttMs > 200 && now - lastCongestionAt > 1_000) {
                                 lastCongestionAt = now
                                 send(Proto.CONGESTION)
                             }
@@ -200,13 +246,14 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     }
                 }
             } catch (e: Exception) {
+                if (direct != null) p2pFailures++
                 if (active) {
                     val reason = when {
                         e is java.net.SocketTimeoutException -> "Không phản hồi"
                         e is java.net.ConnectException -> "Điện thoại chưa bật chế độ sẵn sàng, hoặc hai máy không cùng Wi-Fi"
                         else -> e.message ?: "Lỗi mạng"
                     }
-                    ui { setStatus("Mất kết nối: $reason\nThử lại sau 3 giây…") }
+                    ui { setStatus("Mất kết nối: $reason\nĐang thử lại…") }
                     // Điện thoại có thể đã đổi địa chỉ (đổi Wi-Fi, bật điểm phát sóng): tìm lại trong mạng
                     if (e is java.net.ConnectException || e is java.net.SocketTimeoutException ||
                         e is java.net.NoRouteToHostException
@@ -229,7 +276,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             }
             if (!active) break
             try {
-                Thread.sleep(3_000)
+                Thread.sleep(1_500)
             } catch (_: InterruptedException) {
                 break
             }
@@ -367,6 +414,9 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             surface = null
         }
         pinger?.shutdownNow()
+        p2p?.stop()
+        p2p = null
+        p2pHost = null
         bt?.stop()
         bt = null
         btStatus = ""

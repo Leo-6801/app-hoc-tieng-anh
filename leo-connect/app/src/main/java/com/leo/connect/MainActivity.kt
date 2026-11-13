@@ -39,6 +39,7 @@ class MainActivity : Activity() {
         private const val REQ_PROJECTION = 10
         private const val REQ_NOTIFICATIONS = 11
         private const val REQ_BLUETOOTH = 12
+        private const val REQ_NEARBY = 13
     }
 
     private lateinit var prefs: Prefs
@@ -96,6 +97,7 @@ class MainActivity : Activity() {
         content.removeAllViews()
         statusText = null
         btStatusText = null
+        p2pStatusText = null
         content.addView(text("Leo Connect", 26f, textColor, bold = true))
         content.addView(text("Điều khiển điện thoại từ máy tính bảng trong cùng Wi-Fi · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
             setPadding(0, dp(2), 0, dp(16))
@@ -164,6 +166,11 @@ class MainActivity : Activity() {
             addView(check("Đã kết nối Wi-Fi (cùng mạng với máy tính bảng)", ips.isNotEmpty(), "Mở Wi-Fi") {
                 startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
+            addView(nearbyCheck())
+            addView(text("Cấp quyền này TRƯỚC khi bấm \"Bật chế độ sẵn sàng\". Nếu đang bật thì tắt rồi bật lại.", 12f, mutedColor))
+            val p2pLine = text("", 13f, mutedColor)
+            p2pStatusText = p2pLine
+            addView(p2pLine)
         })
 
         content.addView(card().apply {
@@ -241,6 +248,7 @@ class MainActivity : Activity() {
             addView(check("Đã kết nối Wi-Fi (cùng mạng với điện thoại)", Proto.localIps().isNotEmpty(), "Mở Wi-Fi") {
                 startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
+            addView(nearbyCheck())
         })
 
         val hostInput = input("Địa chỉ Wi-Fi của điện thoại (tự điền khi chọn ở trên)", prefs.targetHost,
@@ -308,6 +316,20 @@ class MainActivity : Activity() {
     }
 
     private var btStatusText: TextView? = null
+    private var p2pStatusText: TextView? = null
+
+    private val nearbyPermission: String
+        get() = if (Build.VERSION.SDK_INT >= 33) Manifest.permission.NEARBY_WIFI_DEVICES
+        else Manifest.permission.ACCESS_FINE_LOCATION
+
+    private fun hasNearbyPermission(): Boolean =
+        checkSelfPermission(nearbyPermission) == PackageManager.PERMISSION_GRANTED
+
+    /** Dòng kiểm tra quyền cho Wi-Fi Direct, dùng ở cả hai vai trò. */
+    private fun nearbyCheck(): View =
+        check("Quyền \"Thiết bị ở gần\" (để hai máy nối thẳng Wi-Fi 5 GHz, không qua router)", hasNearbyPermission(), "Cho phép") {
+            requestPermissions(arrayOf(nearbyPermission), REQ_NEARBY)
+        }
 
     private fun hasBluetoothPermission(): Boolean =
         Build.VERSION.SDK_INT < 31 ||
@@ -382,6 +404,7 @@ class MainActivity : Activity() {
     }
 
     private fun updateStatus() {
+        p2pStatusText?.text = HostService.p2pStatus
         btStatusText?.let { line ->
             val s = ControllerService.btStatus
             line.text = when {

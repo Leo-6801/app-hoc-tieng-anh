@@ -53,6 +53,11 @@ class HostService : Service() {
         @Volatile
         var connectedFrom: String? = null
             private set
+
+        /** Trạng thái Wi-Fi Direct, để hiện trên màn hình chính. */
+        @Volatile
+        var p2pStatus = ""
+            private set
     }
 
     private val main = Handler(Looper.getMainLooper())
@@ -63,6 +68,7 @@ class HostService : Service() {
     private var virtualDisplay: VirtualDisplay? = null
     private var serverSocket: ServerSocket? = null
     private var discoverySocket: java.net.DatagramSocket? = null
+    private var wifiDirect: com.leo.connect.WifiDirectHost? = null
     private var multicastLock: android.net.wifi.WifiManager.MulticastLock? = null
     private var wakeLock: PowerManager.WakeLock? = null
 
@@ -138,6 +144,9 @@ class HostService : Service() {
         running = true
         thread(name = "leo-server") { serve() }
         startDiscovery()
+        val prefs = Prefs(this)
+        wifiDirect = com.leo.connect.WifiDirectHost(this, prefs.p2pSsid, prefs.p2pPassphrase) { p2pStatus = it }
+            .also { it.start() }
     }
 
     private data class CaptureSize(val width: Int, val height: Int, val dpi: Int)
@@ -373,7 +382,7 @@ class HostService : Service() {
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
                 lastDropAt = System.currentTimeMillis()
-                bitrate = maxOf(300_000, (bitrate * 0.7f).toInt())
+                bitrate = maxOf(quality.bitrate / 3, (bitrate * 0.8f).toInt())
                 encoder?.setBitrate(bitrate)
                 encoder?.requestKeyFrame()
                 return
@@ -382,6 +391,12 @@ class HostService : Service() {
         }
 
         fun start() {
+            // Đường nối thẳng 5 GHz đã mở: gửi tên + mật khẩu để máy tính bảng chuyển sang đường đó
+            wifiDirect?.let { wd ->
+                if (wd.ready) {
+                    outbox.add(Frame(Proto.P2P_INFO, "${wd.ssid}\n${wd.passphrase}".toByteArray(), droppable = false))
+                }
+            }
             video.post { restartEncoder() }
             video.postDelayed(adjustBitrate, 2_000)
         }
@@ -471,14 +486,14 @@ class HostService : Service() {
                         if (q !== quality) {
                             quality = q
                             // Bắt đầu ở nửa mức tối đa rồi tăng dần nếu mạng theo kịp, tránh nghẽn ngay từ đầu
-                            bitrate = q.bitrate / 2
+                            bitrate = q.bitrate * 2 / 3
                             video.post { restartEncoder() }
                         }
                     }
                     // Máy tính bảng đo thấy hình đang trễ: hạ bitrate ngay, chưa tăng lại trong vài giây tới
                     Proto.CONGESTION -> {
                         lastDropAt = System.currentTimeMillis()
-                        bitrate = maxOf(300_000, (bitrate * 0.7f).toInt())
+                        bitrate = maxOf(quality.bitrate / 3, (bitrate * 0.8f).toInt())
                         encoder?.setBitrate(bitrate)
                     }
                     // Trả lời đo độ trễ: chen lên đầu hàng đợi
@@ -505,6 +520,9 @@ class HostService : Service() {
             serverSocket?.close()
         } catch (_: Exception) {
         }
+        wifiDirect?.stop()
+        wifiDirect = null
+        p2pStatus = ""
         try {
             discoverySocket?.close()
         } catch (_: Exception) {

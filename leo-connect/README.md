@@ -4,6 +4,7 @@
 
 ## Tính năng
 - **Tự tìm điện thoại** trong mạng Wi-Fi, ghép đôi bằng **mã PIN 6 số**
+- **Wi-Fi Direct 5 GHz:** sau khi ghép, hai máy tự mở đường nối thẳng với nhau ở 5 GHz (không qua router) và chuyển luồng hình sang đường đó. Lần sau máy tính bảng vào thẳng đường này, kể cả khi không có Wi-Fi chung. Cần quyền *Thiết bị ở gần* trên cả hai máy; nếu máy không mở được 5 GHz thì dùng Wi-Fi thường
 - Đường truyền **mã hóa trong app** (trao đổi khóa ECDH + AES-256-GCM), chỉ nhận kết nối từ mạng nội bộ
 - Hình **độ phân giải gốc, 60 khung hình/giây**, tự hạ chất lượng khi Wi-Fi yếu; dùng **H.265** khi hai máy hỗ trợ
 - Cửa sổ nổi không khung, không hàng nút:

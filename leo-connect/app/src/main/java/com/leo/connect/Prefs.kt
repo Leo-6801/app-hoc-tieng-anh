@@ -39,6 +39,32 @@ class Prefs(context: Context) {
         get() = p.getString("target_name", "") ?: ""
         set(value) = p.edit().putString("target_name", value).apply()
 
+    private fun randomText(length: Int): String {
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"
+        val rnd = SecureRandom()
+        return (1..length).map { chars[rnd.nextInt(chars.length)] }.joinToString("")
+    }
+
+    /** Điện thoại: tên và mật khẩu nhóm Wi-Fi Direct (tạo một lần, giữ nguyên để máy tính bảng nhớ). */
+    val p2pSsid: String
+        get() = p.getString("p2p_ssid", null) ?: ("DIRECT-LC-" + randomText(6)).also {
+            p.edit().putString("p2p_ssid", it).apply()
+        }
+
+    val p2pPassphrase: String
+        get() = p.getString("p2p_pass", null) ?: randomText(20).also {
+            p.edit().putString("p2p_pass", it).apply()
+        }
+
+    /** Máy tính bảng: nhóm Wi-Fi Direct của điện thoại đã ghép (nhận qua kết nối đã mã hóa). */
+    var peerP2pSsid: String
+        get() = p.getString("peer_p2p_ssid", "") ?: ""
+        set(value) = p.edit().putString("peer_p2p_ssid", value).apply()
+
+    var peerP2pPassphrase: String
+        get() = p.getString("peer_p2p_pass", "") ?: ""
+        set(value) = p.edit().putString("peer_p2p_pass", value).apply()
+
     /** Thử nghiệm: điều khiển qua Bluetooth thay cho Trợ năng. */
     var btEnabled: Boolean
         get() = p.getBoolean("bt_enabled", false)
