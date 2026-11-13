@@ -228,6 +228,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
     }
 
+    // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
+    private var bt: BluetoothHid? = null
+    private val viaBt get() = bt?.connected == true
+
     // Trạng thái video (truy cập trong khóa decoderLock)
     private val decoderLock = Any()
     private var videoWidth = 0
