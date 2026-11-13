@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.leo.connect.Prefs
 import com.leo.connect.Proto
 import kotlin.math.abs
 import kotlin.math.hypot
@@ -26,22 +25,22 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 /**
- * Cửa sổ nổi hình điện thoại trên máy tính bảng:
- * - kéo thanh tiêu đề để di chuyển, kéo góc ◢ để đổi cỡ
- * - nút — thu nhỏ thành bong bóng, chạm bong bóng để mở lại
+ * Cửa sổ nổi hình điện thoại trên máy tính bảng (không khung, không hàng nút):
+ * - tay nắm ••• phía trên, nằm ngoài màn hình: kéo để di chuyển, nhấn giữ để mở menu (thu nhỏ / tắt)
+ * - chụm/mở 2 ngón tay trên màn hình để thu phóng
  * - chạm/vuốt/nhấn giữ trên màn hình được gửi sang điện thoại
- * - thanh dưới: Back, Home, Đa nhiệm, Thông báo, Khóa
+ * - vuốt từ mép trái/phải vào = Quay lại; vuốt từ đáy lên = Màn hình chính; vuốt lên rồi giữ = Đa nhiệm
+ * - chạm vào cửa sổ là bàn phím rời gõ vào điện thoại; chạm ra ngoài thì trả bàn phím cho app khác
  */
 @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
-class PhoneWindow(private val context: Context, title: String, private val callbacks: Callbacks) {
+class PhoneWindow(private val context: Context, private val callbacks: Callbacks) {
 
     interface Callbacks {
         fun onSurface(surface: Surface?)
         fun onGesture(durationMs: Int, points: List<FloatArray>)
         fun onTouch(action: Int, x: Float, y: Float)
         fun onKey(key: Int)
-        fun onText(text: String)
-        fun onQualityClick()
+        fun onReplace(deleteCount: Int, text: String)
         fun onClose()
     }
 
@@ -62,31 +61,27 @@ class PhoneWindow(private val context: Context, title: String, private val callb
     }
     private val bubbleParams = overlayParams()
 
-    private val titleView = TextView(context)
-    private val latencyView = TextView(context)
-    private val qualityView = TextView(context)
     private val statusView = TextView(context)
     private val surfaceView = SurfaceView(context)
     private val screenBox = FrameLayout(context)
     private val root = LinearLayout(context)
     private val bubble = TextView(context)
+    private val handle = TextView(context)
+    private val menu = LinearLayout(context)
 
     private var shown = false
     private var minimized = false
 
-    // Chế độ bàn phím: cửa sổ nhận phím (bàn phím rời hoặc bàn phím ảo) và gửi chữ sang điện thoại
+    // Cửa sổ đang giữ bàn phím (bàn phím rời gõ vào điện thoại)
     private var keyboardMode = false
-    private lateinit var keyboardButton: TextView
-    private val prefs = Prefs(context)
     private val keyInput = KeyInputView(context, object : KeyInputView.Listener {
-        override fun onText(text: String) = callbacks.onText(text)
-        override fun onBackspace() = callbacks.onKey(Proto.KEY_BACKSPACE)
+        override fun onReplace(deleteCount: Int, text: String) = callbacks.onReplace(deleteCount, text)
         override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
         override fun onNewline() = callbacks.onKey(Proto.KEY_NEWLINE)
-    }).apply { telex = true } // luôn gõ tiếng Việt (Telex)
+    })
 
     init {
-        buildWindow(title)
+        buildWindow()
         buildBubble()
     }
 
@@ -104,20 +99,34 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         cornerRadius = dp(radiusDp).toFloat()
     }
 
-    private fun iconButton(label: String, onClick: () -> Unit) = TextView(context).apply {
+    private fun menuItem(label: String, onClick: () -> Unit) = TextView(context).apply {
         text = label
-        textSize = 18f
+        textSize = 15f
         setTextColor(Color.WHITE)
-        gravity = Gravity.CENTER
-        setPadding(dp(10), dp(4), dp(10), dp(4))
-        setOnClickListener { onClick() }
+        gravity = Gravity.CENTER_VERTICAL
+        setPadding(dp(16), dp(10), dp(16), dp(10))
+        setOnClickListener {
+            hideMenu()
+            onClick()
+        }
     }
 
-    private fun buildWindow(title: String) {
-        // Không khung nền, không thanh tiêu đề: chỉ có màn hình điện thoại và 1 thanh nút nhỏ bên dưới.
+    private fun buildWindow() {
         root.orientation = LinearLayout.VERTICAL
         root.gravity = Gravity.CENTER_HORIZONTAL
-        titleView.text = title
+
+        // Tay nắm ••• nằm phía trên, ngoài màn hình điện thoại nên không che nội dung
+        handle.apply {
+            text = "•••"
+            textSize = 16f
+            letterSpacing = 0.2f
+            setTextColor(Color.WHITE)
+            gravity = Gravity.CENTER
+            setPadding(dp(22), dp(1), dp(22), dp(3))
+            background = rounded(Color.parseColor("#B3181A1F"), 12)
+        }
+        attachHandle()
+        root.addView(handle, LinearLayout.LayoutParams(-2, -2).apply { bottomMargin = dp(4) })
 
         // Màn hình điện thoại
         screenBox.background = rounded(Color.BLACK, 18)
@@ -134,16 +143,26 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         screenBox.addView(statusView, FrameLayout.LayoutParams(-1, -1))
         screenBox.addView(keyInput, FrameLayout.LayoutParams(1, 1))
 
-        // 4 góc: nắm và kéo để di chuyển cửa sổ (chạm 2 lần để phóng to tối đa / trở lại)
-        val corners = listOf(
-            Gravity.TOP or Gravity.START, Gravity.TOP or Gravity.END,
-            Gravity.BOTTOM or Gravity.START, Gravity.BOTTOM or Gravity.END,
-        )
-        for (g in corners) screenBox.addView(cornerGrip(), FrameLayout.LayoutParams(dp(34), dp(34), g))
+        // Menu khi nhấn giữ •••: chỉ hiện tạm thời, tự ẩn
+        menu.apply {
+            orientation = LinearLayout.VERTICAL
+            background = rounded(Color.parseColor("#F2181A1F"), 14)
+            visibility = View.GONE
+            elevation = dp(8).toFloat()
+            addView(menuItem("—  Thu nhỏ thành bong bóng") { minimize() })
+            addView(menuItem("⌨  Bàn phím ảo") { setKeyboard(true, showSoftKeyboard = true) })
+            addView(menuItem("✕  Tắt cửa sổ") { callbacks.onClose() })
+        }
+        screenBox.addView(menu, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply {
+            topMargin = dp(6)
+        })
 
-        // Chạm ra ngoài cửa sổ (sang app khác) thì tắt chế độ bàn phím để gõ được ở app đó
+        // Chạm ra ngoài cửa sổ (sang app khác): trả bàn phím cho app đó, ẩn menu
         root.setOnTouchListener { _, e ->
-            if (e.actionMasked == MotionEvent.ACTION_OUTSIDE && keyboardMode) setKeyboard(false)
+            if (e.actionMasked == MotionEvent.ACTION_OUTSIDE) {
+                hideMenu()
+                if (keyboardMode) setKeyboard(false)
+            }
             false
         }
         root.addView(screenBox, screenLayoutParams())
@@ -158,41 +177,75 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             }
         })
         attachTouchForwarding()
-
-        // Thanh nút: ◁ ○ ▢ ⌨ — ✕
-        val nav = LinearLayout(context).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
-            setPadding(dp(4), dp(1), dp(4), dp(1))
-            background = rounded(Color.parseColor("#B3181A1F"), 14)
-        }
-        nav.addView(iconButton("◁") { callbacks.onKey(Proto.KEY_BACK) })
-        nav.addView(iconButton("○") { callbacks.onKey(Proto.KEY_HOME) })
-        nav.addView(iconButton("▢") { callbacks.onKey(Proto.KEY_RECENTS) })
-        keyboardButton = iconButton("⌨") { setKeyboard(!keyboardMode) }
-        nav.addView(keyboardButton)
-        nav.addView(iconButton("—") { minimize() })
-        nav.addView(iconButton("✕") { callbacks.onClose() })
-        root.addView(nav, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-            topMargin = dp(4)
-        })
     }
 
-    /** Vùng nắm ở góc màn hình: có chấm mờ để dễ thấy, kéo để di chuyển cửa sổ. */
-    private fun cornerGrip(): View = FrameLayout(context).apply {
-        addView(View(context).apply {
-            background = rounded(Color.parseColor("#66FFFFFF"), 6)
-        }, FrameLayout.LayoutParams(dp(12), dp(12), Gravity.CENTER))
+    private val autoHideMenu = Runnable { hideMenu() }
+
+    private fun showMenu() {
+        menu.visibility = View.VISIBLE
+        menu.removeCallbacks(autoHideMenu)
+        menu.postDelayed(autoHideMenu, 5_000)
+    }
+
+    private fun hideMenu() {
+        menu.removeCallbacks(autoHideMenu)
+        menu.visibility = View.GONE
+    }
+
+    /** Tay nắm •••: kéo để di chuyển, nhấn giữ mở menu, chạm 2 lần phóng to tối đa / trở lại. */
+    private fun attachHandle() {
+        var startX = 0f
+        var startY = 0f
+        var originX = 0
+        var originY = 0
+        var moved = false
+        var longPressed = false
         var lastTap = 0L
-        attachDrag(this, root, windowParams, onTap = {
-            val now = System.currentTimeMillis()
-            if (now - lastTap < 350) {
-                toggleMaximize()
-                lastTap = 0L
-            } else {
-                lastTap = now
+        val longPress = Runnable {
+            if (!moved) {
+                longPressed = true
+                handle.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+                showMenu()
             }
-        })
+        }
+        handle.setOnTouchListener { _, e ->
+            when (e.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    startX = e.rawX; startY = e.rawY
+                    originX = windowParams.x; originY = windowParams.y
+                    moved = false
+                    longPressed = false
+                    handle.postDelayed(longPress, 450)
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val dx = e.rawX - startX
+                    val dy = e.rawY - startY
+                    if (!moved && !longPressed && (abs(dx) > dp(6) || abs(dy) > dp(6))) {
+                        moved = true
+                        handle.removeCallbacks(longPress)
+                        hideMenu()
+                    }
+                    if (moved) {
+                        windowParams.x = (originX + dx).roundToInt().coerceIn(-dp(40), tabletW - dp(60))
+                        windowParams.y = (originY + dy).roundToInt().coerceIn(0, tabletH - dp(40))
+                        if (root.isAttachedToWindow) wm.updateViewLayout(root, windowParams)
+                    }
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    handle.removeCallbacks(longPress)
+                    if (e.actionMasked == MotionEvent.ACTION_UP && !moved && !longPressed) {
+                        val now = System.currentTimeMillis()
+                        if (now - lastTap < 350) {
+                            toggleMaximize()
+                            lastTap = 0L
+                        } else {
+                            lastTap = now
+                        }
+                    }
+                }
+            }
+            true
+        }
     }
 
     private fun buildBubble() {
@@ -250,33 +303,9 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         }
     }
 
-    /** Kéo góc ◢ để phóng to/thu nhỏ (giữ đúng tỉ lệ màn hình điện thoại). */
-    private fun attachResize(handle: View) {
-        var startY = 0f
-        var startX = 0f
-        var originH = 0
-        handle.setOnTouchListener { _, e ->
-            when (e.actionMasked) {
-                MotionEvent.ACTION_DOWN -> {
-                    startX = e.rawX; startY = e.rawY; originH = screenHeight
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    val byY = e.rawY - startY
-                    val byX = (e.rawX - startX) / aspect
-                    val delta = if (abs(byY) > abs(byX)) byY else byX
-                    screenHeight = (originH + delta).roundToInt().coerceIn(dp(240), (tabletH * 0.95f).roundToInt())
-                    // Không để cửa sổ rộng hơn màn hình máy tính bảng
-                    screenHeight = min(screenHeight, ((tabletW * 0.95f) / aspect).roundToInt())
-                    applyScreenSize()
-                }
-            }
-            true
-        }
-    }
-
     /** Chiều cao màn hình lớn nhất vừa với máy tính bảng (chừa chỗ cho 2 thanh). */
     private fun maxScreenHeight(): Int =
-        min((tabletH * 0.95f).roundToInt() - dp(90), ((tabletW * 0.95f) / aspect).roundToInt())
+        min((tabletH * 0.97f).roundToInt() - dp(40), ((tabletW * 0.97f) / aspect).roundToInt())
 
     private var heightBeforeMax = 0
 
@@ -286,7 +315,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             heightBeforeMax = screenHeight
             screenHeight = maxH
             windowParams.x = ((tabletW - screenHeight * aspect) / 2).roundToInt().coerceAtLeast(0)
-            windowParams.y = dp(8)
+            windowParams.y = 0
         } else {
             screenHeight = heightBeforeMax
             heightBeforeMax = 0
@@ -323,6 +352,19 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         lastLiveSend = System.currentTimeMillis()
     }
 
+    // Vuốt từ mép như dùng máy thật: 1 = mép trái/phải (Quay lại), 2 = đáy (Màn hình chính / Đa nhiệm)
+    private var edge = 0
+    private var edgeStartX = 0f
+    private var edgeStartY = 0f
+    private var navDone = false
+    private val recentsHold = Runnable {
+        if (edge == 2 && !navDone && touching) {
+            navDone = true
+            surfaceView.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+            callbacks.onKey(Proto.KEY_RECENTS)
+        }
+    }
+
     private fun attachTouchForwarding() {
         surfaceView.setOnTouchListener { v, e ->
             if (v.width == 0 || v.height == 0) return@setOnTouchListener true
@@ -330,6 +372,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             if (e.actionMasked == MotionEvent.ACTION_POINTER_DOWN) {
                 // Ngón thứ 2 chạm vào: hủy thao tác đang gửi, chuyển sang thu phóng
                 surfaceView.removeCallbacks(goLive)
+                surfaceView.removeCallbacks(recentsHold)
                 if (liveMode) {
                     val first = points.firstOrNull() ?: floatArrayOf(0.5f, 0.5f)
                     callbacks.onTouch(Proto.TOUCH_UP, first[0], first[1])
@@ -337,6 +380,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
                 }
                 points.clear()
                 touching = false
+                edge = 0
                 pinching = true
                 return@setOnTouchListener true
             }
@@ -348,6 +392,7 @@ class PhoneWindow(private val context: Context, title: String, private val callb
             val ny = (e.y / v.height).coerceIn(0f, 1f)
             when (e.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
+                    hideMenu()
                     keyInput.reset() // chạm màn hình có thể làm đổi chỗ con trỏ trên điện thoại
                     points.clear()
                     points.add(floatArrayOf(nx, ny))
@@ -355,11 +400,24 @@ class PhoneWindow(private val context: Context, title: String, private val callb
                     downTime = e.eventTime
                     touching = true
                     liveMode = false
-                    surfaceView.postDelayed(goLive, 200)
+                    navDone = false
+                    edgeStartX = e.x; edgeStartY = e.y
+                    edge = when {
+                        e.y > v.height - dp(18) -> 2
+                        e.x < dp(14) || e.x > v.width - dp(14) -> 1
+                        else -> 0
+                    }
+                    // Bắt đầu từ mép: chờ xem có phải cử chỉ điều hướng không, chưa gửi chạm trực tiếp
+                    if (edge == 0) surfaceView.postDelayed(goLive, 200)
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (hypot(e.x - lastX, e.y - lastY) > dp(2)) {
                         lastX = e.x; lastY = e.y
+                        if (edge == 2) {
+                            // Đang vuốt lên từ đáy: dừng tay 0,35 giây thì mở Đa nhiệm
+                            surfaceView.removeCallbacks(recentsHold)
+                            if (!navDone && edgeStartY - e.y > dp(48)) surfaceView.postDelayed(recentsHold, 350)
+                        }
                         if (liveMode) {
                             val now = System.currentTimeMillis()
                             if (now - lastLiveSend >= 16) {
@@ -373,11 +431,26 @@ class PhoneWindow(private val context: Context, title: String, private val callb
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     surfaceView.removeCallbacks(goLive)
+                    surfaceView.removeCallbacks(recentsHold)
                     touching = false
+                    val up = e.actionMasked == MotionEvent.ACTION_UP
+                    var handled = navDone
+                    if (up && !handled && edge == 1 && abs(e.x - edgeStartX) > dp(40) &&
+                        abs(e.x - edgeStartX) > abs(e.y - edgeStartY)
+                    ) {
+                        callbacks.onKey(Proto.KEY_BACK)
+                        handled = true
+                    }
+                    if (up && !handled && edge == 2 && edgeStartY - e.y > dp(48)) {
+                        callbacks.onKey(Proto.KEY_HOME)
+                        handled = true
+                    }
+                    edge = 0
                     if (liveMode) {
                         callbacks.onTouch(Proto.TOUCH_UP, nx, ny)
                         liveMode = false
-                    } else if (e.actionMasked == MotionEvent.ACTION_UP) {
+                    } else if (up && !handled) {
+                        // Không phải cử chỉ điều hướng: gửi như chạm/vuốt bình thường
                         points.add(floatArrayOf(nx, ny))
                         val duration = (e.eventTime - downTime).toInt().coerceIn(1, 60_000)
                         val first = points.first()
@@ -386,6 +459,8 @@ class PhoneWindow(private val context: Context, title: String, private val callb
                         callbacks.onGesture(duration, gesture)
                     }
                     points.clear()
+                    // Vừa chạm vào cửa sổ: nhận bàn phím rời (đổi sau khi nhấc tay để không ngắt thao tác chạm)
+                    if (!keyboardMode) surfaceView.post { setKeyboard(true) }
                 }
             }
             true
@@ -406,18 +481,6 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         shown = true
     }
 
-    fun setTitle(title: String) {
-        titleView.text = title
-    }
-
-    fun setLatency(text: String) {
-        latencyView.text = text
-    }
-
-    fun setQualityLabel(text: String) {
-        qualityView.text = text
-    }
-
     /** null = ẩn lớp thông báo, hiện hình điện thoại. */
     fun setStatus(text: String?) {
         statusView.visibility = if (text == null) View.GONE else View.VISIBLE
@@ -434,31 +497,40 @@ class PhoneWindow(private val context: Context, title: String, private val callb
         applyScreenSize()
     }
 
-    fun setKeyboard(on: Boolean) {
-        if (!shown || minimized && on) return
-        keyboardMode = on
+    /**
+     * Bật: cửa sổ nhận phím từ bàn phím rời và gõ vào điện thoại. Bàn phím ảo chỉ hiện khi
+     * chọn trong menu ••• ([showSoftKeyboard]). Tắt: trả bàn phím cho app khác của máy tính bảng.
+     */
+    fun setKeyboard(on: Boolean, showSoftKeyboard: Boolean = false) {
+        if (!shown || minimized) return
         val imm = context.getSystemService(InputMethodManager::class.java)
-        if (on) {
-            windowParams.flags = windowParams.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
-            keyboardButton.background = rounded(Color.parseColor("#0A84FF"), 10)
-        } else {
-            windowParams.flags = windowParams.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-            keyboardButton.background = null
-            keyInput.reset()
-            imm.hideSoftInputFromWindow(keyInput.windowToken, 0)
+        if (on != keyboardMode) {
+            keyboardMode = on
+            windowParams.flags = if (on) {
+                windowParams.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
+            } else {
+                windowParams.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+            }
+            if (!on) {
+                keyInput.reset()
+                imm.hideSoftInputFromWindow(keyInput.windowToken, 0)
+            }
+            if (root.isAttachedToWindow) wm.updateViewLayout(root, windowParams)
         }
-        if (root.isAttachedToWindow) wm.updateViewLayout(root, windowParams)
         if (on) {
             keyInput.post {
                 keyInput.requestFocus()
-                imm.restartInput(keyInput)
-                imm.showSoftInput(keyInput, 0)
+                if (showSoftKeyboard) {
+                    imm.restartInput(keyInput)
+                    imm.showSoftInput(keyInput, 0)
+                }
             }
         }
     }
 
     fun minimize() {
         if (!shown || minimized) return
+        hideMenu()
         if (keyboardMode) setKeyboard(false)
         bubbleParams.x = tabletW - dp(76)
         bubbleParams.y = max(dp(80), windowParams.y)

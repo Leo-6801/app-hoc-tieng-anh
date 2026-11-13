@@ -95,7 +95,7 @@ class MainActivity : Activity() {
         content.removeAllViews()
         statusText = null
         content.addView(text("Leo Connect", 26f, textColor, bold = true))
-        content.addView(text("Điều khiển điện thoại từ máy tính bảng qua Tailscale · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
+        content.addView(text("Điều khiển điện thoại từ máy tính bảng trong cùng Wi-Fi · phiên bản ${BuildConfigInfo.version(this)}", 14f, mutedColor).apply {
             setPadding(0, dp(2), 0, dp(16))
         })
 
@@ -127,7 +127,7 @@ class MainActivity : Activity() {
             "host" -> renderHost()
             "controller" -> renderController()
             else -> content.addView(card().apply {
-                addView(text("Chọn vai trò của máy này ở trên.\n\n• Cài Leo Connect và Tailscale trên CẢ HAI máy, đăng nhập Tailscale cùng một tài khoản.\n• Trên điện thoại chọn \"Điện thoại\", trên máy tính bảng chọn \"Máy tính bảng\".", 15f, textColor))
+                addView(text("Chọn vai trò của máy này ở trên.\n\n• Cài Leo Connect trên CẢ HAI máy và cho hai máy bắt cùng một mạng Wi-Fi (không cần Tailscale).\n• Trên điện thoại chọn \"Điện thoại\", trên máy tính bảng chọn \"Máy tính bảng\".", 15f, textColor))
             })
         }
         setRenderedState()
@@ -135,12 +135,13 @@ class MainActivity : Activity() {
     }
 
     private fun renderHost() {
-        val ips = Proto.localTailscaleIps()
+        val ips = Proto.localIps()
         content.addView(card().apply {
             addView(text("Thông tin để nhập trên máy tính bảng", 16f, textColor, bold = true))
-            addView(row("Địa chỉ Tailscale", if (ips.isEmpty()) "Chưa thấy – hãy bật Tailscale" else ips.joinToString(", "),
-                if (ips.isEmpty()) warnColor else textColor))
             addView(row("Mã ghép đôi (PIN)", prefs.pin, textColor, big = true))
+            addView(row("Địa chỉ Wi-Fi (chỉ cần khi máy tính bảng không tự tìm thấy)",
+                if (ips.isEmpty()) "Chưa kết nối Wi-Fi" else ips.joinToString(", "),
+                if (ips.isEmpty()) warnColor else textColor))
             addView(smallButton("Đổi mã PIN") {
                 prefs.regeneratePin()
                 toast("Đã đổi mã. Nhập mã mới trên máy tính bảng.")
@@ -158,9 +159,8 @@ class MainActivity : Activity() {
             addView(check("Không tối ưu pin (để luôn sẵn sàng)", isIgnoringBatteryOptimizations(), "Cho phép") {
                 startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))
             })
-            addView(check("Tailscale đã kết nối", ips.isNotEmpty(), "Mở Tailscale") {
-                val launch = packageManager.getLaunchIntentForPackage("com.tailscale.ipn")
-                if (launch != null) startActivity(launch) else toast("Chưa cài Tailscale")
+            addView(check("Đã kết nối Wi-Fi (cùng mạng với máy tính bảng)", ips.isNotEmpty(), "Mở Wi-Fi") {
+                startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
         })
 
@@ -180,29 +180,81 @@ class MainActivity : Activity() {
         })
     }
 
+    // Máy tính bảng: tự tìm điện thoại trong mạng Wi-Fi
+    private var deviceList: LinearLayout? = null
+    private var hostField: EditText? = null
+    private var searching = false
+
+    private fun searchDevices() {
+        val list = deviceList ?: return
+        if (searching) return
+        searching = true
+        list.removeAllViews()
+        list.addView(text("Đang tìm điện thoại trong mạng Wi-Fi…", 14f, mutedColor))
+        Thread {
+            val found = Discovery.find(2000)
+            runOnUiThread {
+                searching = false
+                val current = deviceList ?: return@runOnUiThread
+                current.removeAllViews()
+                if (found.isEmpty()) {
+                    current.addView(text("Không thấy điện thoại nào. Kiểm tra: điện thoại đã bấm \"Bật chế độ sẵn sàng\", hai máy cùng một Wi-Fi, và Wi-Fi không bật chế độ cách ly thiết bị (mạng khách). Có thể nhập địa chỉ Wi-Fi của điện thoại vào ô bên dưới.", 13f, warnColor))
+                } else {
+                    for (d in found) {
+                        current.addView(Button(this).apply {
+                            text = "📱 ${d.name}  ·  ${d.ip}"
+                            isAllCaps = false
+                            textSize = 15f
+                            setTextColor(textColor)
+                            background = GradientDrawable().apply {
+                                setColor(if (night) Color.parseColor("#2A2F37") else Color.parseColor("#EEF1F5"))
+                                cornerRadius = dp(12).toFloat()
+                            }
+                            layoutParams = LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(6) }
+                            setOnClickListener {
+                                hostField?.setText(d.ip)
+                                prefs.targetName = d.name
+                                toast("Đã chọn ${d.name}. Nhập mã PIN rồi bấm Kết nối.")
+                            }
+                        })
+                    }
+                    // Chỉ có một máy: tự điền luôn
+                    if (found.size == 1 && hostField?.text.isNullOrBlank()) {
+                        hostField?.setText(found[0].ip)
+                        prefs.targetName = found[0].name
+                    }
+                }
+            }
+        }.start()
+    }
+
     private fun renderController() {
         content.addView(card().apply {
             addView(text("Chuẩn bị (làm một lần)", 16f, textColor, bold = true))
             addView(check("Quyền hiển thị trên ứng dụng khác (cửa sổ nổi)", Settings.canDrawOverlays(this@MainActivity), "Cho phép") {
                 startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
             })
-            addView(check("Tailscale đã kết nối", Proto.localTailscaleIps().isNotEmpty(), "Mở Tailscale") {
-                val launch = packageManager.getLaunchIntentForPackage("com.tailscale.ipn")
-                if (launch != null) startActivity(launch) else toast("Chưa cài Tailscale")
+            addView(check("Đã kết nối Wi-Fi (cùng mạng với điện thoại)", Proto.localIps().isNotEmpty(), "Mở Wi-Fi") {
+                startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
         })
 
-        val nameInput = input("Tên hiển thị (vd: Điện thoại của Leo)", prefs.targetName, InputType.TYPE_CLASS_TEXT)
-        val hostInput = input("Địa chỉ Tailscale của điện thoại (100.x.x.x)", prefs.targetHost,
+        val hostInput = input("Địa chỉ Wi-Fi của điện thoại (tự điền khi chọn ở trên)", prefs.targetHost,
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI)
         val pinInput = input("Mã ghép đôi 6 số", prefs.targetPin,
             InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
+        hostField = hostInput
 
         content.addView(card().apply {
             addView(text("Điện thoại cần điều khiển", 16f, textColor, bold = true))
-            addView(nameInput)
-            addView(hostInput)
-            addView(pinInput)
+            if (!ControllerService.running) {
+                val list = LinearLayout(this@MainActivity).apply { orientation = LinearLayout.VERTICAL }
+                deviceList = list
+                addView(list)
+                addView(smallButton("Tìm lại") { searchDevices() })
+                addView(hostInput)
+                addView(pinInput)
+            }
             val status = text("", 15f, textColor, bold = true)
             statusText = status
             addView(status)
@@ -211,14 +263,13 @@ class MainActivity : Activity() {
                     val host = hostInput.text.toString().trim()
                     val pin = pinInput.text.toString().trim()
                     if (host.isEmpty() || pin.length != 6) {
-                        toast("Nhập địa chỉ Tailscale và mã PIN 6 số")
+                        toast("Chọn điện thoại (hoặc nhập địa chỉ) và nhập mã PIN 6 số")
                         return@bigButton
                     }
                     if (!Settings.canDrawOverlays(this@MainActivity)) {
                         toast("Cần cho phép hiển thị trên ứng dụng khác trước")
                         return@bigButton
                     }
-                    prefs.targetName = nameInput.text.toString().trim()
                     prefs.targetHost = host
                     prefs.targetPin = pin
                     startForegroundService(
@@ -226,11 +277,11 @@ class MainActivity : Activity() {
                             .setAction(ControllerService.ACTION_CONNECT)
                             .putExtra(ControllerService.EXTRA_HOST, host)
                             .putExtra(ControllerService.EXTRA_PIN, pin)
-                            .putExtra(ControllerService.EXTRA_NAME, prefs.targetName)
                     )
                     moveTaskToBack(true)
                 })
             } else {
+                deviceList = null
                 addView(bigButton("Mở lại cửa sổ điện thoại") {
                     startForegroundService(
                         Intent(this@MainActivity, ControllerService::class.java).setAction(ControllerService.ACTION_CONNECT)
@@ -243,10 +294,11 @@ class MainActivity : Activity() {
                 })
             }
         })
+        if (!ControllerService.running) searchDevices()
 
         content.addView(card().apply {
-            addView(text("Mẹo dùng cửa sổ điện thoại", 15f, textColor, bold = true))
-            addView(text("• Nắm một trong 4 góc màn hình điện thoại (chấm mờ) và kéo để di chuyển cửa sổ; chạm 2 lần vào góc để phóng to tối đa.\n• Chụm/mở 2 ngón tay trên màn hình để thu phóng.\n• Chạm, vuốt, nhấn giữ trực tiếp trên màn hình điện thoại.\n• Thanh dưới: ◁ Quay lại · ○ Màn hình chính · ▢ Đa nhiệm · ⌨ Gõ phím · — Thu nhỏ · ✕ Đóng.\n• Bật ⌨ rồi chạm vào ô nhập trên điện thoại để gõ bằng bàn phím rời (Telex). Enter = bấm nút Gửi, Shift+Enter = xuống dòng.", 13f, mutedColor))
+            addView(text("Cách dùng cửa sổ điện thoại", 15f, textColor, bold = true))
+            addView(text("• Kéo tay nắm ••• phía trên để di chuyển cửa sổ. Nhấn giữ ••• để mở menu: thu nhỏ thành bong bóng, bàn phím ảo, tắt cửa sổ.\n• Chụm/mở 2 ngón tay trên màn hình để thu phóng.\n• Chạm, vuốt, nhấn giữ trực tiếp như cầm điện thoại.\n• Vuốt từ mép trái hoặc phải vào = Quay lại. Vuốt từ đáy lên = Màn hình chính. Vuốt từ đáy lên rồi giữ = Đa nhiệm.\n• Chạm vào cửa sổ rồi gõ bằng bàn phím rời (tiếng Việt Telex). Enter = bấm nút Gửi, Shift+Enter = xuống dòng. Chạm ra ngoài cửa sổ để gõ ở app khác.", 13f, mutedColor))
         })
     }
 

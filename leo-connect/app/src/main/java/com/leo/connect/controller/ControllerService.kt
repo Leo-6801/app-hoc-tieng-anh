@@ -11,7 +11,6 @@ import android.provider.Settings
 import android.view.Surface
 import com.leo.connect.Channel
 import com.leo.connect.Notif
-import com.leo.connect.Prefs
 import com.leo.connect.Proto
 import java.io.IOException
 import java.net.InetSocketAddress
@@ -19,12 +18,10 @@ import java.net.Socket
 import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
 /**
- * Máy tính bảng: kết nối tới điện thoại qua Tailscale, hiển thị màn hình điện thoại
+ * Máy tính bảng: kết nối tới điện thoại trong cùng mạng Wi-Fi, hiển thị màn hình điện thoại
  * trong cửa sổ nổi và gửi thao tác chạm/phím. Tự kết nối lại khi rớt mạng.
  */
 class ControllerService : Service(), PhoneWindow.Callbacks {
@@ -56,8 +53,6 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     @Volatile
     private var channel: Channel? = null
     private var netThread: Thread? = null
-    private var pinger: ScheduledExecutorService? = null
-    private lateinit var prefs: Prefs
 
     // Trạng thái video (truy cập trong khóa decoderLock)
     private val decoderLock = Any()
@@ -97,24 +92,13 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
         val host = intent.getStringExtra(EXTRA_HOST)?.trim().orEmpty()
         val pin = intent.getStringExtra(EXTRA_PIN)?.trim().orEmpty()
-        val name = intent.getStringExtra(EXTRA_NAME)?.takeIf { it.isNotBlank() } ?: host
         if (host.isEmpty() || pin.isEmpty()) {
             stopSelf()
             return
         }
         running = true
         active = true
-        prefs = Prefs(this)
-        window = PhoneWindow(this, name, this).also {
-            it.show()
-            it.setQualityLabel(Proto.QUALITIES[prefs.quality].label)
-        }
-        // Đo độ trễ mỗi 2 giây
-        pinger = Executors.newSingleThreadScheduledExecutor().also {
-            it.scheduleWithFixedDelay({
-                if (connected) send(Proto.PING, java.nio.ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
-            }, 2, 2, TimeUnit.SECONDS)
-        }
+        window = PhoneWindow(this, this).also { it.show() }
         val key = Proto.keyFromPin(pin)
         netThread = thread(name = "leo-net") { netLoop(host, key) }
     }
@@ -133,9 +117,16 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 socket.tcpNoDelay = true
                 socket.soTimeout = 15_000
                 val ch = Channel(socket)
+                // Bắt tay: trao đổi khóa ECDH + chứng minh biết mã PIN (hai chiều)
                 val challenge = ch.receive()
-                if (challenge.type != Proto.CHALLENGE) throw IOException("Điện thoại trả lời không đúng giao thức")
-                ch.send(Proto.AUTH, Proto.proof(key, challenge.data, "controller"))
+                if (challenge.type != Proto.CHALLENGE || challenge.data.size <= 16) {
+                    throw IOException("Điện thoại đang dùng phiên bản Leo Connect khác. Hãy cập nhật cả hai máy.")
+                }
+                val keyPair = Proto.newKeyPair()
+                val clientPub = keyPair.public.encoded
+                val hostPub = challenge.data.copyOfRange(16, challenge.data.size)
+                val transcript = challenge.data + clientPub
+                ch.send(Proto.AUTH, Proto.proof(key, transcript, "controller") + clientPub)
                 val reply = ch.receive()
                 if (reply.type == Proto.AUTH_FAIL) {
                     ui { setStatus("Sai mã ghép đôi (PIN).\nKiểm tra lại mã trên điện thoại rồi kết nối lại.") }
@@ -143,11 +134,13 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     ch.close()
                     break
                 }
-                val expected = Proto.proof(key, challenge.data, "host")
+                val expected = Proto.proof(key, transcript, "host")
                 if (reply.type != Proto.AUTH_OK || reply.data.size < 32 ||
                     !MessageDigest.isEqual(reply.data.copyOfRange(0, 32), expected)
                 ) throw IOException("Không xác thực được điện thoại")
-                val phoneName = String(reply.data, 32, reply.data.size - 32)
+                val shared = Proto.sharedSecret(keyPair.private, hostPub)
+                val (c2h, h2c) = Proto.sessionKeys(shared, key, transcript)
+                ch.enableEncryption(send = c2h, recv = h2c)
                 socket.soTimeout = 0
                 channel = ch
                 connected = true
@@ -155,27 +148,19 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 send(Proto.CAPS, byteArrayOf(caps.toByte()))
                 // Luôn xin mức Nét; điện thoại tự hạ bitrate khi mạng yếu và tăng lại khi mạng tốt
                 send(Proto.QUALITY, byteArrayOf((Proto.QUALITIES.size - 1).toByte()))
-                ui {
-                    if (phoneName.isNotBlank()) setTitle(phoneName)
-                    setStatus("Đang chờ hình ảnh…")
-                }
+                ui { setStatus("Đang chờ hình ảnh…") }
                 while (active) {
                     val m = ch.receive()
                     when (m.type) {
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
                         Proto.VIDEO_FRAME -> onVideoFrame(m.data)
-                        Proto.PONG -> if (m.data.size >= 8) {
-                            val sent = java.nio.ByteBuffer.wrap(m.data).long
-                            val ms = (System.nanoTime() - sent) / 1_000_000
-                            ui { setLatency("$ms ms") }
-                        }
                     }
                 }
             } catch (e: Exception) {
                 if (active) {
                     val reason = when {
                         e is java.net.SocketTimeoutException -> "Không phản hồi"
-                        e is java.net.ConnectException -> "Điện thoại chưa bật chế độ sẵn sàng hoặc Tailscale chưa kết nối"
+                        e is java.net.ConnectException -> "Điện thoại chưa bật chế độ sẵn sàng, hoặc hai máy không cùng Wi-Fi"
                         else -> e.message ?: "Lỗi mạng"
                     }
                     ui { setStatus("Mất kết nối: $reason\nThử lại sau 3 giây…") }
@@ -183,7 +168,6 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             } finally {
                 connected = false
                 channel = null
-                ui { setLatency("") }
                 try {
                     socket?.close()
                 } catch (_: Exception) {
@@ -277,16 +261,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         send(Proto.KEY, byteArrayOf(key.toByte()))
     }
 
-    override fun onText(text: String) {
-        if (text.isNotEmpty()) send(Proto.TEXT, text.toByteArray(Charsets.UTF_8))
-    }
-
-    /** Chạm nút chất lượng: Mượt → Cân bằng → Nét → Mượt… */
-    override fun onQualityClick() {
-        val next = (prefs.quality + 1) % Proto.QUALITIES.size
-        prefs.quality = next
-        window?.setQualityLabel(Proto.QUALITIES[next].label)
-        send(Proto.QUALITY, byteArrayOf(next.toByte()))
+    override fun onReplace(deleteCount: Int, text: String) {
+        send(Proto.REPLACE, Proto.encodeReplace(deleteCount, text))
     }
 
     override fun onClose() {
@@ -306,7 +282,6 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         window?.dismiss()
         window = null
         sender.shutdownNow()
-        pinger?.shutdownNow()
         super.onDestroy()
     }
 }

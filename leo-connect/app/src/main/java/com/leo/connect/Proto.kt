@@ -7,7 +7,6 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException
 import java.net.Inet4Address
-import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.Socket
@@ -17,11 +16,12 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Giao thức Leo Connect (qua TCP, đi trong mạng Tailscale đã mã hóa).
- * Mỗi gói: [loại: 1 byte][độ dài: 4 byte][dữ liệu].
+ * Giao thức Leo Connect (qua TCP trong mạng Wi-Fi nội bộ).
+ * Mỗi gói: [loại: 1 byte][độ dài: 4 byte][dữ liệu]. Sau bước bắt tay, dữ liệu được mã hóa AES-GCM.
  */
 object Proto {
     const val PORT = 47800
+    const val DISCOVERY_PORT = 47801
     const val MAX_PAYLOAD = 8 * 1024 * 1024
 
     // Bắt tay xác thực
@@ -42,6 +42,12 @@ object Proto {
     const val QUALITY = 24 // [mức chất lượng]
     const val TEXT = 25 // chữ gõ từ bàn phím (UTF-8)
     const val CAPS = 26 // khả năng giải mã của máy tính bảng: [bit 0 = H.265]
+    const val REPLACE = 27 // thay chữ trước con trỏ: [số ký tự xóa: int][chữ chèn UTF-8]
+
+    fun encodeReplace(deleteCount: Int, text: String): ByteArray {
+        val bytes = text.toByteArray(Charsets.UTF_8)
+        return ByteBuffer.allocate(4 + bytes.size).putInt(deleteCount).put(bytes).array()
+    }
 
     const val CODEC_AVC = 0
     const val CODEC_HEVC = 1
@@ -73,7 +79,8 @@ object Proto {
     val QUALITIES = listOf(
         Quality("Mượt", 1024, 2_000_000, 30),
         Quality("Cân bằng", 1280, 3_500_000, 30),
-        Quality("Nét", 1600, 6_000_000, 30),
+        // Wi-Fi nội bộ: độ phân giải gốc của điện thoại, 60 khung hình/giây
+        Quality("Nét", 2560, 12_000_000, 60),
     )
     const val DEFAULT_QUALITY = 1
 
@@ -94,35 +101,55 @@ object Proto {
 
     /** Khóa bí mật suy ra từ mã PIN ghép đôi. */
     fun keyFromPin(pin: String): ByteArray =
-        MessageDigest.getInstance("SHA-256").digest("leo-connect/v1/$pin".toByteArray())
+        MessageDigest.getInstance("SHA-256").digest("leo-connect/v2/$pin".toByteArray())
 
-    /** Bằng chứng biết mã PIN, gắn với nonce và vai trò để không dùng lại được. */
-    fun proof(key: ByteArray, nonce: ByteArray, role: String): ByteArray {
+    fun hmac(key: ByteArray, vararg parts: ByteArray): ByteArray {
         val mac = Mac.getInstance("HmacSHA256")
         mac.init(SecretKeySpec(key, "HmacSHA256"))
-        mac.update(nonce)
-        mac.update(role.toByteArray())
+        for (p in parts) mac.update(p)
         return mac.doFinal()
     }
 
-    /** Địa chỉ thuộc mạng Tailscale: 100.64.0.0/10 hoặc fd7a:115c:a1e0::/48. */
-    fun isTailscale(addr: InetAddress): Boolean {
-        val b = addr.address
-        return when (addr) {
-            is Inet4Address -> (b[0].toInt() and 0xFF) == 100 && (b[1].toInt() and 0xC0) == 64
-            is Inet6Address -> b.size == 16 &&
-                (b[0].toInt() and 0xFF) == 0xFD && (b[1].toInt() and 0xFF) == 0x7A &&
-                (b[2].toInt() and 0xFF) == 0x11 && (b[3].toInt() and 0xFF) == 0x5C &&
-                (b[4].toInt() and 0xFF) == 0xA1 && (b[5].toInt() and 0xFF) == 0xE0
-            else -> false
-        }
+    /**
+     * Bằng chứng biết mã PIN, gắn với toàn bộ nội dung bắt tay (nonce + 2 khóa công khai) và vai trò,
+     * nên không dùng lại được và kẻ đứng giữa không thay khóa được nếu không biết PIN.
+     */
+    fun proof(pinKey: ByteArray, transcript: ByteArray, role: String): ByteArray =
+        hmac(pinKey, transcript, role.toByteArray())
+
+    // --- Trao đổi khóa ECDH: người nghe lén trong Wi-Fi không tính được khóa phiên
+
+    fun newKeyPair(): java.security.KeyPair {
+        val gen = java.security.KeyPairGenerator.getInstance("EC")
+        gen.initialize(java.security.spec.ECGenParameterSpec("secp256r1"))
+        return gen.generateKeyPair()
     }
 
-    /** Các địa chỉ Tailscale (IPv4) của máy này. */
-    fun localTailscaleIps(): List<String> = try {
+    fun sharedSecret(privateKey: java.security.PrivateKey, peerPublic: ByteArray): ByteArray {
+        val pub = java.security.KeyFactory.getInstance("EC")
+            .generatePublic(java.security.spec.X509EncodedKeySpec(peerPublic))
+        val ka = javax.crypto.KeyAgreement.getInstance("ECDH")
+        ka.init(privateKey)
+        ka.doPhase(pub, true)
+        return ka.generateSecret()
+    }
+
+    /** Khóa phiên cho từng chiều: (máy tính bảng → điện thoại, điện thoại → máy tính bảng). */
+    fun sessionKeys(shared: ByteArray, pinKey: ByteArray, transcript: ByteArray): Pair<ByteArray, ByteArray> {
+        val master = hmac(shared, pinKey, transcript)
+        return hmac(master, "c2h".toByteArray()) to hmac(master, "h2c".toByteArray())
+    }
+
+    /** Địa chỉ trong mạng nội bộ (Wi-Fi nhà, điểm phát sóng): 10.x, 172.16–31.x, 192.168.x, 169.254.x. */
+    fun isLocalNetwork(addr: InetAddress): Boolean =
+        addr is Inet4Address && (addr.isSiteLocalAddress || addr.isLinkLocalAddress || addr.isLoopbackAddress)
+
+    /** Các địa chỉ IPv4 của máy này trong mạng nội bộ. */
+    fun localIps(): List<String> = try {
         NetworkInterface.getNetworkInterfaces().toList()
+            .filter { it.isUp && !it.isLoopback }
             .flatMap { it.inetAddresses.toList() }
-            .filter { it is Inet4Address && isTailscale(it) }
+            .filter { it is Inet4Address && it.isSiteLocalAddress }
             .mapNotNull { it.hostAddress }
     } catch (e: Exception) {
         emptyList()
@@ -179,11 +206,34 @@ class Channel(private val socket: Socket) : Closeable {
     private val output = DataOutputStream(BufferedOutputStream(socket.getOutputStream(), 64 * 1024))
     private val writeLock = Any()
 
+    // Mã hóa AES-256-GCM, mỗi chiều một khóa và một bộ đếm gói (dùng làm nonce)
+    private var sendKey: SecretKeySpec? = null
+    private var recvKey: SecretKeySpec? = null
+    private var sendCounter = 0L
+    private var recvCounter = 0L
+    private val sendCipher by lazy { javax.crypto.Cipher.getInstance("AES/GCM/NoPadding") }
+    private val recvCipher by lazy { javax.crypto.Cipher.getInstance("AES/GCM/NoPadding") }
+
+    /** Bật mã hóa cho mọi gói từ đây về sau. Gọi sau bước bắt tay, trên luồng đang đọc. */
+    fun enableEncryption(send: ByteArray, recv: ByteArray) {
+        synchronized(writeLock) { sendKey = SecretKeySpec(send, "AES") }
+        recvKey = SecretKeySpec(recv, "AES")
+    }
+
+    private fun nonce(counter: Long): javax.crypto.spec.GCMParameterSpec =
+        javax.crypto.spec.GCMParameterSpec(128, ByteBuffer.allocate(12).putInt(0).putLong(counter).array())
+
     fun send(type: Int, payload: ByteArray = ByteArray(0)) {
         synchronized(writeLock) {
+            val key = sendKey
+            val body = if (key == null) payload else {
+                sendCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, key, nonce(sendCounter++))
+                sendCipher.updateAAD(byteArrayOf(type.toByte()))
+                sendCipher.doFinal(payload)
+            }
             output.writeByte(type)
-            output.writeInt(payload.size)
-            output.write(payload)
+            output.writeInt(body.size)
+            output.write(body)
             output.flush()
         }
     }
@@ -194,7 +244,14 @@ class Channel(private val socket: Socket) : Closeable {
         if (length < 0 || length > Proto.MAX_PAYLOAD) throw IOException("Độ dài gói không hợp lệ: $length")
         val data = ByteArray(length)
         input.readFully(data)
-        return Message(type, data)
+        val key = recvKey ?: return Message(type, data)
+        try {
+            recvCipher.init(javax.crypto.Cipher.DECRYPT_MODE, key, nonce(recvCounter++))
+            recvCipher.updateAAD(byteArrayOf(type.toByte()))
+            return Message(type, recvCipher.doFinal(data))
+        } catch (e: java.security.GeneralSecurityException) {
+            throw IOException("Gói dữ liệu không hợp lệ (sai khóa hoặc bị sửa)")
+        }
     }
 
     override fun close() {

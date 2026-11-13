@@ -33,7 +33,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * Điện thoại: giữ quyền chụp màn hình, chờ máy tính bảng kết nối qua Tailscale,
+ * Điện thoại: giữ quyền chụp màn hình, chờ máy tính bảng kết nối trong cùng mạng Wi-Fi,
  * xác thực bằng mã PIN, gửi video màn hình và nhận lệnh điều khiển.
  */
 class HostService : Service() {
@@ -62,6 +62,8 @@ class HostService : Service() {
     private var projection: MediaProjection? = null
     private var virtualDisplay: VirtualDisplay? = null
     private var serverSocket: ServerSocket? = null
+    private var discoverySocket: java.net.DatagramSocket? = null
+    private var multicastLock: android.net.wifi.WifiManager.MulticastLock? = null
     private var wakeLock: PowerManager.WakeLock? = null
 
     @Volatile
@@ -94,7 +96,7 @@ class HostService : Service() {
 
     private fun start(intent: Intent) {
         Notif.ensureChannels(this)
-        val n = notification("Leo Connect đang sẵn sàng", "Máy tính bảng có thể kết nối qua Tailscale")
+        val n = notification("Leo Connect đang sẵn sàng", "Máy tính bảng cùng Wi-Fi có thể kết nối")
         if (Build.VERSION.SDK_INT >= 29) {
             startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION)
         } else {
@@ -135,6 +137,7 @@ class HostService : Service() {
         getSystemService(DisplayManager::class.java).registerDisplayListener(displayListener, video)
         running = true
         thread(name = "leo-server") { serve() }
+        startDiscovery()
     }
 
     private data class CaptureSize(val width: Int, val height: Int, val dpi: Int)
@@ -151,6 +154,29 @@ class HostService : Service() {
         val sw = max(16, ((w * scale).toInt() / 16) * 16)
         val sh = max(16, ((h * scale).toInt() / 16) * 16)
         return CaptureSize(sw, sh, max(120, (metrics.densityDpi * scale).toInt()))
+    }
+
+    /** Trả lời khi máy tính bảng tìm thiết bị trong mạng Wi-Fi. */
+    private fun startDiscovery() {
+        try {
+            // Một số máy lọc gói phát rộng khi không giữ khóa này
+            val wifi = applicationContext.getSystemService(android.net.wifi.WifiManager::class.java)
+            multicastLock = wifi?.createMulticastLock("LeoConnect")?.apply {
+                setReferenceCounted(false)
+                acquire()
+            }
+        } catch (_: Exception) {
+        }
+        thread(name = "leo-discovery") {
+            try {
+                val socket = com.leo.connect.Discovery.openResponderSocket()
+                discoverySocket = socket
+                if (!running) socket.close()
+                com.leo.connect.Discovery.respond(socket, (Build.MANUFACTURER + " " + Build.MODEL).trim())
+            } catch (e: Exception) {
+                Log.w(TAG, "Không mở được cổng tìm thiết bị: ${e.message}")
+            }
+        }
     }
 
     private fun serve() {
@@ -170,8 +196,8 @@ class HostService : Service() {
 
     private fun handleClient(socket: Socket) {
         val remote = socket.inetAddress
-        // Chỉ nhận kết nối từ mạng Tailscale (đã mã hóa, chỉ thiết bị của bạn).
-        if (!(Proto.isTailscale(remote) || remote.isLoopbackAddress) ||
+        // Chỉ nhận kết nối từ mạng nội bộ (cùng Wi-Fi), không nhận từ Internet.
+        if (!Proto.isLocalNetwork(remote) ||
             System.currentTimeMillis() < lockedUntil || session != null
         ) {
             try {
@@ -185,14 +211,23 @@ class HostService : Service() {
         try {
             socket.tcpNoDelay = true
             // Bộ đệm gửi nhỏ: khung hình không nằm chờ lâu trong hệ thống, việc bỏ khung có tác dụng ngay
-            socket.sendBufferSize = 64 * 1024
+            socket.sendBufferSize = 128 * 1024
             socket.soTimeout = 15_000
+            // Bắt tay: trao đổi khóa ECDH + chứng minh biết mã PIN (hai chiều)
             val nonce = ByteArray(16).also { SecureRandom().nextBytes(it) }
-            channel.send(Proto.CHALLENGE, nonce)
+            val keyPair = Proto.newKeyPair()
+            val hostPub = keyPair.public.encoded
+            channel.send(Proto.CHALLENGE, nonce + hostPub)
             val auth = channel.receive()
-            val key = Proto.keyFromPin(Prefs(this).pin)
-            val ok = auth.type == Proto.AUTH &&
-                MessageDigest.isEqual(auth.data, Proto.proof(key, nonce, "controller"))
+            val pinKey = Proto.keyFromPin(Prefs(this).pin)
+            var transcript = ByteArray(0)
+            var clientPub = ByteArray(0)
+            var ok = auth.type == Proto.AUTH && auth.data.size > 32
+            if (ok) {
+                clientPub = auth.data.copyOfRange(32, auth.data.size)
+                transcript = nonce + hostPub + clientPub
+                ok = MessageDigest.isEqual(auth.data.copyOfRange(0, 32), Proto.proof(pinKey, transcript, "controller"))
+            }
             if (!ok) {
                 synchronized(this) {
                     failures++
@@ -205,8 +240,11 @@ class HostService : Service() {
                 return
             }
             failures = 0
+            val shared = Proto.sharedSecret(keyPair.private, clientPub)
+            val (c2h, h2c) = Proto.sessionKeys(shared, pinKey, transcript)
             val name = (Build.MANUFACTURER + " " + Build.MODEL).trim().toByteArray()
-            channel.send(Proto.AUTH_OK, Proto.proof(key, nonce, "host") + name)
+            channel.send(Proto.AUTH_OK, Proto.proof(pinKey, transcript, "host") + name)
+            channel.enableEncryption(send = h2c, recv = c2h)
             socket.soTimeout = 0
 
             val s = Session(channel)
@@ -252,7 +290,7 @@ class HostService : Service() {
 
     private fun onSessionEnd() {
         if (running) {
-            Notif.update(this, NOTIF_ID, notification("Leo Connect đang sẵn sàng", "Máy tính bảng có thể kết nối qua Tailscale"))
+            Notif.update(this, NOTIF_ID, notification("Leo Connect đang sẵn sàng", "Máy tính bảng cùng Wi-Fi có thể kết nối"))
         }
         try {
             wakeLock?.let { if (it.isHeld) it.release() }
@@ -330,12 +368,12 @@ class HostService : Service() {
                 return
             }
             if (waitingForKey) return
-            if (outbox.count { it.droppable } >= 2) {
+            if (outbox.count { it.droppable } >= 4) {
                 // Mạng không theo kịp: bỏ khung, hạ bitrate, xin khung khóa mới để bắt kịp.
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
                 lastDropAt = System.currentTimeMillis()
-                bitrate = maxOf(400_000, (bitrate * 0.7f).toInt())
+                bitrate = maxOf(600_000, (bitrate * 0.7f).toInt())
                 encoder?.setBitrate(bitrate)
                 encoder?.requestKeyFrame()
                 return
@@ -406,6 +444,11 @@ class HostService : Service() {
                     Proto.KEY -> if (m.data.isNotEmpty()) {
                         ControlAccessibilityService.instance?.performKey(m.data[0].toInt())
                     }
+                    Proto.REPLACE -> if (m.data.size >= 4) {
+                        val delete = java.nio.ByteBuffer.wrap(m.data).int.coerceIn(0, 200)
+                        val text = String(m.data, 4, m.data.size - 4, Charsets.UTF_8)
+                        ControlAccessibilityService.instance?.replaceText(delete, text)
+                    }
                     Proto.TEXT -> if (m.data.isNotEmpty()) {
                         ControlAccessibilityService.instance?.typeText(String(m.data, Charsets.UTF_8))
                     }
@@ -453,6 +496,14 @@ class HostService : Service() {
         running = false
         try {
             serverSocket?.close()
+        } catch (_: Exception) {
+        }
+        try {
+            discoverySocket?.close()
+        } catch (_: Exception) {
+        }
+        try {
+            multicastLock?.release()
         } catch (_: Exception) {
         }
         session?.channel?.close()

@@ -227,6 +227,18 @@ class ControlAccessibilityService : AccessibilityService() {
         }
     }
 
+    /** Thay chữ ngay trước con trỏ: xóa [deleteCount] ký tự rồi chèn [text], trong cùng một lần sửa. */
+    fun replaceText(deleteCount: Int, text: String) {
+        main.post {
+            safe("thay chữ") {
+                repeat(deleteCount) { pendingEdits.add(Edit.Backspace) }
+                if (text.isNotEmpty()) pendingEdits.add(Edit.Insert(text))
+                main.removeCallbacks(flushEdits)
+                main.postDelayed(flushEdits, 15)
+            }
+        }
+    }
+
     private fun queueBackspace() {
         pendingEdits.add(Edit.Backspace)
         main.removeCallbacks(flushEdits)
@@ -237,7 +249,9 @@ class ControlAccessibilityService : AccessibilityService() {
     // nên nếu đọc ra nội dung cũ thì dùng bản app tự nhớ thay vì nội dung cũ.
     private var lastNode: android.view.accessibility.AccessibilityNodeInfo? = null
     private var lastWritten: String? = null
-    private var lastBefore: String? = null
+    // Các nội dung ô nhập đã thấy gần đây (trước mỗi lần ghi). Đọc ra một trong số này nghĩa là
+    // app đích còn chậm vài nhịp, không phải người dùng vừa sửa tay.
+    private val recentBefore = ArrayDeque<String>()
     private var lastCursor = 0
     private var lastWriteAt = 0L
 
@@ -324,7 +338,7 @@ class ControlAccessibilityService : AccessibilityService() {
 
         val remembered = lastWritten
         val recent = System.currentTimeMillis() - lastWriteAt < 3_000
-        if (remembered != null && recent && node == lastNode && current != remembered && current == lastBefore) {
+        if (remembered != null && recent && node == lastNode && current != remembered && current in recentBefore) {
             // App chưa cập nhật: dùng nội dung vừa ghi
             current = remembered
             start = lastCursor
@@ -377,7 +391,9 @@ class ControlAccessibilityService : AccessibilityService() {
         }
         node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_SELECTION, sel)
         lastNode = node
-        lastBefore = current
+        if (!recent || node != lastNode) recentBefore.clear()
+        recentBefore.addLast(current)
+        while (recentBefore.size > 12) recentBefore.removeFirst()
         lastWritten = result
         lastCursor = cursor
         lastWriteAt = System.currentTimeMillis()

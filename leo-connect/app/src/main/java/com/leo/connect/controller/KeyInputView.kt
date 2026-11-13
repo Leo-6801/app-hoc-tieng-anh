@@ -9,28 +9,28 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 
 /**
- * Ô nhận phím vô hình trong cửa sổ điện thoại.
- * - Bàn phím rời: tự gõ Telex (khi bật VI) rồi gửi chữ đã có dấu sang điện thoại.
- * - Bàn phím ảo / bộ gõ có xử lý tiếng Việt: lấy chữ đang gõ dở từ bộ gõ.
- * Điện thoại nhận "chèn chữ" / "xóa lùi" / "Enter"; khi chữ đổi (thêm dấu) thì gửi phần chênh lệch.
+ * Ô nhận phím vô hình trong cửa sổ điện thoại. Luôn gõ tiếng Việt kiểu Telex.
+ *
+ * Phím có thể tới theo 2 đường, cả hai đều đi qua bộ gõ Telex của app:
+ * - Phím thẳng từ bàn phím rời (onKeyDown / commitText từng ký tự): app tự giữ "từ đang gõ".
+ * - Bộ gõ của máy tính bảng gom chữ đang gõ dở (setComposingText "tieesng"): app chạy Telex
+ *   trên cả chuỗi đó.
+ * Mỗi lần từ đang gõ đổi, gửi MỘT lệnh "xóa n ký tự rồi chèn chữ mới" sang điện thoại.
  */
 class KeyInputView(context: Context, private val listener: Listener) : View(context) {
 
     interface Listener {
-        fun onText(text: String)
-        fun onBackspace()
+        /** Xóa [deleteCount] ký tự trước con trỏ rồi chèn [text]. */
+        fun onReplace(deleteCount: Int, text: String)
         fun onEnter()
         fun onNewline()
     }
 
-    /** Bật bộ gõ Telex cho bàn phím rời. */
-    var telex = true
-
-    // Chữ đang gõ dở do bộ gõ của máy tính bảng quản lý
-    private var composing = ""
-
-    // Từ hiện tại do bộ gõ Telex của app quản lý (đã gửi sang điện thoại)
+    // Từ đang gõ theo đường phím thẳng: đúng như đang hiện trên điện thoại
     private var word = ""
+
+    // Chữ đang gõ dở theo đường bộ gõ: [composingShown] là phần đã gửi sang điện thoại
+    private var composingShown = ""
 
     init {
         isFocusable = true
@@ -41,76 +41,81 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
 
     /** Gọi khi con trỏ trên điện thoại có thể đã đổi chỗ (chạm vào màn hình...). */
     fun reset() {
-        composing = ""
         word = ""
+        composingShown = ""
     }
 
-    /** Thay [old] (đã gửi) bằng [next]: xóa phần khác nhau rồi gửi phần mới. */
-    private fun replace(old: String, next: String) {
+    /** Đổi [old] (đang hiện trên điện thoại) thành [next] bằng một lệnh. */
+    private fun change(old: String, next: String) {
         var common = 0
         while (common < old.length && common < next.length && old[common] == next[common]) common++
-        repeat(old.length - common) { listener.onBackspace() }
-        if (next.length > common) listener.onText(next.substring(common))
+        val delete = old.length - common
+        val insert = next.substring(common)
+        if (delete > 0 || insert.isNotEmpty()) listener.onReplace(delete, insert)
     }
 
     private fun typeChar(ch: Char) {
-        if (telex && ch.isLetter() && ch.code < 128) {
+        if (ch.isLetter()) {
             val next = Telex.process(word, ch)
-            replace(word, next)
+            change(word, next)
             word = next
         } else {
-            listener.onText(ch.toString())
-            word = if (ch.isLetter()) word + ch else ""
+            listener.onReplace(0, ch.toString())
+            word = ""
         }
     }
 
     private fun backspace() {
-        composing = ""
-        listener.onBackspace()
+        if (composingShown.isNotEmpty()) composingShown = composingShown.dropLast(1)
         word = word.dropLast(1)
+        listener.onReplace(1, "")
     }
 
-    private fun enter() {
+    private fun enter(newline: Boolean) {
         reset()
-        listener.onEnter()
+        if (newline) listener.onNewline() else listener.onEnter()
     }
 
     override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection {
-        outAttrs.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+        // Tắt gợi ý/tự sửa để bộ gõ chuyển phím thẳng, không tự gom và sửa chữ
+        outAttrs.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or
+            InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_FULLSCREEN or EditorInfo.IME_FLAG_NO_EXTRACT_UI or
             EditorInfo.IME_ACTION_NONE
         return object : BaseInputConnection(this, false) {
             override fun setComposingText(text: CharSequence?, newCursorPosition: Int): Boolean {
-                val next = text?.toString() ?: ""
-                replace(composing, next)
-                composing = next
+                val shown = Telex.type(text?.toString() ?: "")
+                change(composingShown, shown)
+                composingShown = shown
                 word = ""
                 return true
             }
 
             override fun commitText(text: CharSequence?, newCursorPosition: Int): Boolean {
                 val t = text?.toString() ?: ""
-                if (composing.isEmpty() && t.length == 1) {
-                    // Bộ gõ chỉ chuyển nguyên phím (thường gặp với bàn phím rời)
-                    when (t[0]) {
-                        '\n' -> enter()
-                        else -> typeChar(t[0])
-                    }
+                if (composingShown.isEmpty() && t.length == 1) {
+                    // Bộ gõ chuyển nguyên từng phím (thường gặp với bàn phím rời)
+                    if (t[0] == '\n') enter(newline = false) else typeChar(t[0])
                     return true
                 }
-                replace(composing, t)
-                composing = ""
+                change(composingShown, Telex.type(t))
+                composingShown = ""
                 word = ""
                 return true
             }
 
             override fun finishComposingText(): Boolean {
-                composing = ""
+                composingShown = ""
                 return true
             }
 
             override fun deleteSurroundingText(beforeLength: Int, afterLength: Int): Boolean {
-                repeat(beforeLength.coerceAtMost(200)) { backspace() }
+                val n = beforeLength.coerceIn(0, 200)
+                if (n > 0) {
+                    composingShown = composingShown.dropLast(n)
+                    word = word.dropLast(n)
+                    listener.onReplace(n, "")
+                }
                 return true
             }
 
@@ -120,7 +125,7 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
             }
 
             override fun performEditorAction(actionCode: Int): Boolean {
-                enter()
+                enter(newline = false)
                 return true
             }
         }
@@ -138,23 +143,18 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
                 return true
             }
             KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER -> {
-                if (event.isShiftPressed) {
-                    reset()
-                    listener.onNewline()
-                } else {
-                    enter()
-                }
+                enter(newline = event.isShiftPressed)
                 return true
             }
             KeyEvent.KEYCODE_TAB -> {
                 reset()
-                listener.onText("\t")
+                listener.onReplace(0, "\t")
                 return true
             }
         }
         val ch = event.unicodeChar
         if (ch != 0 && !event.isCtrlPressed && !event.isAltPressed && ch < 0x10000) {
-            composing = ""
+            composingShown = ""
             typeChar(ch.toChar())
             return true
         }
