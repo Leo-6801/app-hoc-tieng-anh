@@ -362,8 +362,8 @@ class HostService : Service() {
                 sentFrames[id] = packets
                 while (sentFrames.size > 90) sentFrames.remove(sentFrames.keys.first())
             }
-            // Tốc độ gửi tối đa: gấp 4 lần bitrate hiện tại, ít nhất 10 Mbps
-            val bytesPerMs = maxOf(bitrate * 4L, 10_000_000L) / 8000
+            // Tốc độ gửi tối đa: gấp 6 lần bitrate hiện tại, ít nhất 24 Mbps (khung khóa lớn phải đi nhanh)
+            val bytesPerMs = maxOf(bitrate * 6L, 24_000_000L) / 8000
             val start = System.nanoTime()
             var sent = 0L
             for (packet in packets) {
@@ -428,6 +428,9 @@ class HostService : Service() {
 
         @Volatile
         private var waitingForKey = false
+
+        @Volatile
+        private var lastKeyAt = 0L
         private val senderThread = thread(name = "leo-send") { sendLoop() }
 
         private fun sendLoop() {
@@ -460,13 +463,16 @@ class HostService : Service() {
                 // Khung khóa: bỏ các khung cũ còn đang chờ, hình nhảy ngay tới hiện tại.
                 outbox.removeIf { it.droppable }
                 waitingForKey = false
+                lastKeyAt = System.currentTimeMillis()
                 outbox.add(Frame(Proto.VIDEO_FRAME, payload, droppable = true))
                 return
             }
             if (waitingForKey) return
-            // Khung cũ nhất đã chờ gửi quá 0,15 giây: đường truyền không theo kịp
+            // Khung cũ nhất đã chờ gửi quá 0,3 giây: đường truyền không theo kịp.
+            // Ngay sau một khung khóa thì không xét (khung khóa lớn, các khung sau chờ nó là bình thường).
             val oldest = outbox.firstOrNull { it.droppable }
-            if (oldest != null && System.currentTimeMillis() - oldest.at > 150) {
+            val nowMs = System.currentTimeMillis()
+            if (oldest != null && nowMs - oldest.at > 300 && nowMs - lastKeyAt > 1_000) {
                 // Mạng không theo kịp: bỏ khung, hạ bitrate, xin khung khóa mới để bắt kịp.
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
@@ -596,7 +602,9 @@ class HostService : Service() {
                         encoder?.setBitrate(bitrate)
                     }
                     // Trả lời đo độ trễ: chen lên đầu hàng đợi
-                    Proto.PING -> outbox.addFirst(Frame(Proto.PONG, m.data, droppable = false))
+                    // Hình đi UDP thì trả lời ngay (không xếp sau khung đang gửi giãn nhịp, kẻo đo trễ sai)
+                    Proto.PING -> if (udpPort != 0) channel.send(Proto.PONG, m.data)
+                    else outbox.addFirst(Frame(Proto.PONG, m.data, droppable = false))
                 }
             }
         }

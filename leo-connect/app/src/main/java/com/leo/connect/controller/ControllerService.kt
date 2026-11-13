@@ -45,6 +45,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         /** Trạng thái Bluetooth gần nhất, để hiện trên màn hình chính. */
         @Volatile
         var btStatus = ""
+
+        /** Dòng chẩn đoán đường truyền hình, cập nhật mỗi giây khi đang kết nối. */
+        @Volatile
+        var netStats = ""
             private set
     }
 
@@ -93,6 +97,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         val now = System.currentTimeMillis()
         if (now - lastKeyRequestAt < 300) return
         lastKeyRequestAt = now
+        statKeyReq++
         send(Proto.REQUEST_KEYFRAME)
     }
 
@@ -109,9 +114,33 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
     }
 
-    private class Partial(count: Int, val since: Long) {
+    // Số liệu chẩn đoán (hiện ở màn hình chính của app trên máy tính bảng)
+    @Volatile
+    private var statFrames = 0
+
+    @Volatile
+    private var statLost = 0
+
+    @Volatile
+    private var statNacks = 0
+
+    @Volatile
+    private var statRtt = 0L
+
+    @Volatile
+    private var statKeyReq = 0
+    private var statTick = 0
+
+    private class Partial(count: Int, var lastAt: Long) {
         val chunks = arrayOfNulls<ByteArray>(count)
         var got = 0
+
+        /** Khung khóa (biết được khi đã có gói đầu tiên; byte đầu là cờ của khung). */
+        val isKey: Boolean
+            get() {
+                val first = chunks[0] ?: return false
+                return first.isNotEmpty() && (first[0].toInt() and Proto.FLAG_KEY) != 0
+            }
     }
 
     /** Xin điện thoại gửi lại các gói còn thiếu của một khung hình (cả khung nếu chưa nhận được gói nào). */
@@ -127,7 +156,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
 
     /**
      * Ghép các gói UDP thành khung hình và đưa cho bộ giải mã theo đúng thứ tự.
-     * Thiếu gói thì xin gửi lại và chờ tối đa 0,16 giây; quá hạn mới bỏ khung và chờ khung khóa.
+     * Thiếu gói thì xin gửi lại; chỉ bỏ khung khi suốt 0,25 giây không nhận thêm được gói nào của nó
+     * (khung lớn đang gửi dở vẫn được chờ). Khi đang chờ khung khóa thì nhảy thẳng tới khung khóa.
      */
     private fun udpLoop(sock: java.net.DatagramSocket, key: ByteArray) {
         val cipher = javax.crypto.Cipher.getInstance("AES/GCM/NoPadding")
@@ -173,6 +203,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                         if (partial.chunks.size == count && partial.chunks[index] == null) {
                             partial.chunks[index] = plain.copyOfRange(8, plain.size)
                             partial.got++
+                            partial.lastAt = now
+                            if (id == nextId) waitSince = 0L
                         }
                     }
                 }
@@ -199,22 +231,35 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 val isKey = frame.isNotEmpty() && (frame[0].toInt() and Proto.FLAG_KEY) != 0
                 if (udpNeedKey && !isKey) continue // đang chờ khung khóa: bỏ khung thường
                 if (isKey) udpNeedKey = false
+                statFrames++
                 onVideoFrame(frame)
+            }
+
+            // Đang chờ khung khóa: bỏ qua mọi khung thường, không chờ từng khung một
+            if (udpNeedKey) {
+                while (newestId - nextId > 0 && frames[nextId]?.isKey != true) {
+                    frames.remove(nextId)
+                    nextId++
+                    waitSince = 0L
+                    nackAt = 0L
+                }
             }
 
             // Khung kế tiếp còn thiếu gói trong khi đã có khung mới hơn (hoặc chờ quá lâu): xin gửi lại
             if (newestId - nextId < 0) continue
             val waiting = frames[nextId]
-            val behind = newestId - nextId > 0 || (waiting != null && now - waiting.since > 120)
+            // Đã có khung mới hơn (khung này gửi xong rồi mà còn thiếu), hoặc khung đang nhận bỗng ngừng 40 ms
+            val behind = newestId - nextId > 0 || (waiting != null && now - waiting.lastAt > 40)
             if (!behind) continue
             if (waitSince == 0L) waitSince = now
-            if (now - waitSince > 160) {
+            if (now - waitSince > 250) {
                 // Gửi lại cũng không kịp: bỏ khung này, chờ khung khóa mới
                 frames.remove(nextId)
                 nextId++
                 waitSince = 0L
                 nackAt = 0L
                 udpNeedKey = true
+                statLost++
                 onUdpLoss()
                 if (newestId - nextId > 30) {
                     // Tụt lại quá xa: bỏ hết, bắt đầu lại từ khung mới nhất
@@ -223,6 +268,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 }
             } else if (now - nackAt > 35) {
                 nackAt = now
+                statNacks++
                 sendNack(nextId, waiting)
             }
         }
@@ -313,6 +359,14 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             it.scheduleWithFixedDelay({
                 if (connected) {
                     send(Proto.PING, ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
+                    statTick++
+                    if (statTick % 2 == 0) {
+                        val path = if (viaP2p) "nối thẳng 5 GHz" else "Wi-Fi thường"
+                        val mode = if (udpOn) "UDP" else "TCP"
+                        netStats = "$path · $mode · ${statFrames} hình/giây · trễ ${statRtt} ms · " +
+                            "bỏ $statLost · xin lại $statNacks · khung khóa $statKeyReq"
+                        statFrames = 0
+                    }
                     if (udpOn) {
                         // Đang chờ khung khóa mà chưa thấy: xin lại
                         if (udpNeedKey) requestKeyFrame()
@@ -406,7 +460,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     val m = ch.receive()
                     when (m.type) {
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
-                        Proto.VIDEO_FRAME -> onVideoFrame(m.data)
+                        Proto.VIDEO_FRAME -> {
+                            if (!udpOn) statFrames++
+                            onVideoFrame(m.data)
+                        }
                         Proto.P2P_INFO -> {
                             val parts = String(m.data, Charsets.UTF_8).split("\n")
                             if (parts.size == 2 && direct == null) {
@@ -421,6 +478,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                             // phản ánh đúng độ trễ của hình
                             val rttMs = (System.nanoTime() - ByteBuffer.wrap(m.data).long) / 1_000_000
                             val now = System.currentTimeMillis()
+                            statRtt = rttMs
                             if (rttMs > 200 && now - lastCongestionAt > 1_000) {
                                 lastCongestionAt = now
                                 send(Proto.CONGESTION)
@@ -610,6 +668,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         bt?.stop()
         bt = null
         btStatus = ""
+        netStats = ""
         window?.dismiss()
         window = null
         sender.shutdownNow()

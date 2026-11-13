@@ -465,7 +465,11 @@ class MainActivity : Activity() {
             }
             "controller" -> {
                 when {
-                    ControllerService.connected -> { view.text = "🟢 Đã kết nối"; view.setTextColor(okColor) }
+                    ControllerService.connected -> {
+                        val stats = ControllerService.netStats
+                        view.text = if (stats.isEmpty()) "🟢 Đã kết nối" else "🟢 Đã kết nối\n$stats"
+                        view.setTextColor(okColor)
+                    }
                     ControllerService.running -> { view.text = "🟡 Đang kết nối…"; view.setTextColor(mutedColor) }
                     else -> { view.text = "⚪ Chưa kết nối"; view.setTextColor(mutedColor) }
                 }

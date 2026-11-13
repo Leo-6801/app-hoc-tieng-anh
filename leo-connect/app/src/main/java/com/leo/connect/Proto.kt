@@ -86,7 +86,7 @@ object Proto {
         // Dùng khi điều khiển qua Bluetooth: Bluetooth chiếm bớt sóng Wi-Fi nên cần luồng hình nhẹ hơn
         Quality("Cân bằng", 1600, 4_000_000, 30),
         // Wi-Fi nội bộ: độ phân giải gốc của điện thoại, 60 khung hình/giây
-        Quality("Nét", 2560, 12_000_000, 60),
+        Quality("Nét", 1920, 8_000_000, 60),
     )
     const val DEFAULT_QUALITY = 1
 
