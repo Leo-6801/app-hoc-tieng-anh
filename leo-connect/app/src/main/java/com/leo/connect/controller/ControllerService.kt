@@ -72,6 +72,105 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     @Volatile
     private var viaP2p = false
 
+    // Nhận hình qua UDP (chấp nhận mất gói)
+    private var udpSocket: java.net.DatagramSocket? = null
+
+    @Volatile
+    private var udpOn = false
+
+    @Volatile
+    private var udpPackets = 0L
+
+    @Volatile
+    private var udpStartedAt = 0L
+
+    @Volatile
+    private var udpNeedKey = true
+    private var lastKeyRequestAt = 0L
+    private val lossTimes = ArrayDeque<Long>()
+
+    private fun requestKeyFrame() {
+        val now = System.currentTimeMillis()
+        if (now - lastKeyRequestAt < 300) return
+        lastKeyRequestAt = now
+        send(Proto.REQUEST_KEYFRAME)
+    }
+
+    /** Một khung hình bị mất: xin khung khóa mới; mất nhiều liên tiếp thì báo điện thoại hạ chất lượng. */
+    private fun onUdpLoss() {
+        requestKeyFrame()
+        val now = System.currentTimeMillis()
+        lossTimes.addLast(now)
+        while (lossTimes.isNotEmpty() && now - lossTimes.first() > 3_000) lossTimes.removeFirst()
+        if (lossTimes.size >= 4 && now - lastCongestionAt > 1_000) {
+            lastCongestionAt = now
+            lossTimes.clear()
+            send(Proto.CONGESTION)
+        }
+    }
+
+    /** Ghép các gói UDP thành khung hình. Khung thiếu gói thì bỏ và chờ khung khóa kế tiếp. */
+    private fun udpLoop(sock: java.net.DatagramSocket, key: ByteArray) {
+        val cipher = javax.crypto.Cipher.getInstance("AES/GCM/NoPadding")
+        val spec = javax.crypto.spec.SecretKeySpec(key, "AES")
+        val buf = ByteArray(2048)
+        var currentId = -1
+        var chunks: Array<ByteArray?>? = null
+        var got = 0
+        var started = false
+        var lastComplete = -1
+        while (!sock.isClosed) {
+            val packet = java.net.DatagramPacket(buf, buf.size)
+            try {
+                sock.receive(packet)
+            } catch (e: Exception) {
+                break
+            }
+            val plain = Proto.openUdp(cipher, spec, buf, packet.length) ?: continue
+            if (plain.size < 8) continue
+            udpPackets++
+            val bb = ByteBuffer.wrap(plain)
+            val id = bb.int
+            val index = bb.short.toInt() and 0xFFFF
+            val count = bb.short.toInt() and 0xFFFF
+            if (count == 0 || index >= count) continue
+            if (id != currentId) {
+                if (currentId != -1 && id - currentId < 0) continue // gói đến muộn của khung cũ
+                currentId = id
+                chunks = arrayOfNulls(count)
+                got = 0
+            }
+            val c = chunks ?: continue
+            if (c.size != count || c[index] != null) continue
+            c[index] = plain.copyOfRange(8, plain.size)
+            got++
+            if (got < count) continue
+
+            var total = 0
+            for (part in c) total += part?.size ?: 0
+            val frame = ByteArray(total)
+            var offset = 0
+            for (part in c) {
+                val b = part ?: continue
+                System.arraycopy(b, 0, frame, offset, b.size)
+                offset += b.size
+            }
+            chunks = null
+            val gap = started && id != lastComplete + 1
+            started = true
+            lastComplete = id
+            val isKey = frame.isNotEmpty() && (frame[0].toInt() and Proto.FLAG_KEY) != 0
+            if ((gap || udpNeedKey) && !isKey) {
+                // Thiếu khung trước đó: các khung sau sẽ vỡ hình, nên bỏ cho tới khung khóa
+                udpNeedKey = true
+                onUdpLoss()
+                continue
+            }
+            if (isKey) udpNeedKey = false
+            onVideoFrame(frame)
+        }
+    }
+
     // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
     private var bt: BluetoothHid? = null
     private val viaBt get() = bt?.connected == true
@@ -155,7 +254,19 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
         pinger = Executors.newSingleThreadScheduledExecutor().also {
             it.scheduleWithFixedDelay({
-                if (connected) send(Proto.PING, ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
+                if (connected) {
+                    send(Proto.PING, ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
+                    if (udpOn) {
+                        // Đang chờ khung khóa mà chưa thấy: xin lại
+                        if (udpNeedKey) requestKeyFrame()
+                        // UDP không tới được (mạng chặn): quay về gửi hình qua TCP
+                        if (udpPackets == 0L && System.currentTimeMillis() - udpStartedAt > 4_000) {
+                            udpOn = false
+                            send(Proto.UDP_OFF)
+                            requestKeyFrame()
+                        }
+                    }
+                }
             }, 1000, 500, java.util.concurrent.TimeUnit.MILLISECONDS)
         }
         val key = Proto.keyFromPin(pin)
@@ -208,6 +319,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 val shared = Proto.sharedSecret(keyPair.private, hostPub)
                 val (c2h, h2c) = Proto.sessionKeys(shared, key, transcript)
                 ch.enableEncryption(send = c2h, recv = h2c)
+                val udpKey = Proto.hmac(h2c, "udp".toByteArray())
                 socket.soTimeout = 0
                 channel = ch
                 connected = true
@@ -215,6 +327,20 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 send(Proto.CAPS, byteArrayOf(caps.toByte()))
                 // Luôn xin mức Nét; điện thoại tự hạ bitrate khi mạng yếu và tăng lại khi mạng tốt
                 p2pFailures = 0
+                // Mở cổng UDP nhận hình rồi báo cho điện thoại
+                try {
+                    val us = java.net.DatagramSocket()
+                    us.receiveBufferSize = 1024 * 1024
+                    udpSocket = us
+                    udpPackets = 0
+                    udpNeedKey = true
+                    udpStartedAt = System.currentTimeMillis()
+                    udpOn = true
+                    thread(name = "leo-udp") { udpLoop(us, udpKey) }
+                    send(Proto.UDP_HELLO, ByteBuffer.allocate(4).putInt(us.localPort).array())
+                } catch (e: Exception) {
+                    udpOn = false
+                }
                 // Đường nối thẳng 5 GHz không tranh sóng với Bluetooth nên dùng được mức nét nhất
                 val level = if (bt != null && direct == null) 1 else Proto.QUALITIES.size - 1
                 send(Proto.QUALITY, byteArrayOf(level.toByte()))
@@ -268,6 +394,12 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             } finally {
                 connected = false
                 channel = null
+                udpOn = false
+                try {
+                    udpSocket?.close()
+                } catch (_: Exception) {
+                }
+                udpSocket = null
                 try {
                     socket?.close()
                 } catch (_: Exception) {
@@ -284,6 +416,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     }
 
     private fun onVideoConfig(data: ByteArray) {
+        udpNeedKey = true
         val (w, h, codec) = Proto.decodeConfig(data)
         synchronized(decoderLock) {
             videoWidth = w

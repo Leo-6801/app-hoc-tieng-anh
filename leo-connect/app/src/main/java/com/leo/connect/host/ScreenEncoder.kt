@@ -112,10 +112,10 @@ class ScreenEncoder(
 
     private var lastKeyRequest = 0L
 
-    /** Xin khung khóa, tối đa 1 lần mỗi giây (khung khóa nặng, xin liên tục sẽ làm nghẽn thêm). */
+    /** Xin khung khóa, tối đa 1 lần mỗi 0,4 giây (khung khóa nặng, xin liên tục sẽ làm nghẽn thêm). */
     fun requestKeyFrame() {
         val now = System.currentTimeMillis()
-        if (now - lastKeyRequest < 1_000) return
+        if (now - lastKeyRequest < 400) return
         lastKeyRequest = now
         try {
             codec.setParameters(Bundle().apply { putInt(MediaCodec.PARAMETER_KEY_REQUEST_SYNC_FRAME, 0) })

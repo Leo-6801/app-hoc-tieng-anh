@@ -69,6 +69,16 @@ class HostService : Service() {
     private var serverSocket: ServerSocket? = null
     private var discoverySocket: java.net.DatagramSocket? = null
     private var wifiDirect: com.leo.connect.WifiDirectHost? = null
+
+    // Phát tín hiệu Bluetooth để máy tính bảng thấy điện thoại ở gần; phát lại khi địa chỉ Wi-Fi đổi
+    private var beacon: com.leo.connect.BleBeacon.Advertiser? = null
+    private val refreshBeacon = object : Runnable {
+        override fun run() {
+            if (!running) return
+            beacon?.start(Proto.localIps().firstOrNull() ?: "")
+            main.postDelayed(this, 10_000)
+        }
+    }
     private var multicastLock: android.net.wifi.WifiManager.MulticastLock? = null
     private var wakeLock: PowerManager.WakeLock? = null
 
@@ -144,6 +154,8 @@ class HostService : Service() {
         running = true
         thread(name = "leo-server") { serve() }
         startDiscovery()
+        beacon = com.leo.connect.BleBeacon.Advertiser(this)
+        main.post(refreshBeacon)
         val prefs = Prefs(this)
         wifiDirect = com.leo.connect.WifiDirectHost(this, prefs.p2pSsid, prefs.p2pPassphrase) { p2pStatus = it }
             .also { it.start() }
@@ -256,7 +268,7 @@ class HostService : Service() {
             channel.enableEncryption(send = h2c, recv = c2h)
             socket.soTimeout = 0
 
-            val s = Session(channel)
+            val s = Session(channel, Proto.hmac(h2c, "udp".toByteArray()), remote)
             synchronized(this) {
                 if (session != null) return
                 session = s
@@ -309,7 +321,40 @@ class HostService : Service() {
     }
 
     /** Một phiên điều khiển với một máy tính bảng. */
-    private inner class Session(val channel: Channel) {
+    private inner class Session(
+        val channel: Channel,
+        udpKey: ByteArray,
+        private val peer: java.net.InetAddress,
+    ) {
+        // Gửi hình qua UDP (chấp nhận mất gói) khi máy tính bảng đã báo cổng nhận
+        @Volatile
+        private var udpPort = 0
+        private var udpSocket: java.net.DatagramSocket? = null
+        private var udpFrameId = 0
+        private var udpCounter = 0L
+        private val udpKeySpec = javax.crypto.spec.SecretKeySpec(udpKey, "AES")
+        private val udpCipher by lazy { javax.crypto.Cipher.getInstance("AES/GCM/NoPadding") }
+
+        /** Chia khung hình thành các gói nhỏ: [mã khung: int][thứ tự: short][tổng số: short][dữ liệu]. */
+        private fun sendUdp(frame: ByteArray, port: Int) {
+            val sock = udpSocket ?: java.net.DatagramSocket().also {
+                it.sendBufferSize = 64 * 1024
+                udpSocket = it
+            }
+            val id = udpFrameId++
+            val count = (frame.size + Proto.UDP_CHUNK - 1) / Proto.UDP_CHUNK
+            for (i in 0 until count) {
+                val offset = i * Proto.UDP_CHUNK
+                val length = minOf(Proto.UDP_CHUNK, frame.size - offset)
+                val plain = java.nio.ByteBuffer.allocate(8 + length)
+                    .putInt(id).putShort(i.toShort()).putShort(count.toShort()).put(frame, offset, length).array()
+                val packet = Proto.sealUdp(udpCipher, udpKeySpec, udpCounter++, plain)
+                sock.send(java.net.DatagramPacket(packet, packet.size, peer, port))
+                // Khung lớn: nghỉ rất ngắn sau mỗi cụm gói để không làm tràn hàng đợi Wi-Fi
+                if (i % 16 == 15) Thread.sleep(1)
+            }
+        }
+
         @Volatile
         private var encoder: ScreenEncoder? = null
         private var lastSize: CaptureSize? = null
@@ -353,7 +398,13 @@ class HostService : Service() {
             try {
                 while (!closed) {
                     val f = outbox.poll(500, TimeUnit.MILLISECONDS) ?: continue
-                    channel.send(f.type, f.payload)
+                    val port = udpPort
+                    // Khung hình thường đi UDP; cấu hình bộ giải mã và mọi gói khác đi TCP (không được mất)
+                    if (port != 0 && f.type == Proto.VIDEO_FRAME && f.droppable) {
+                        sendUdp(f.payload, port)
+                    } else {
+                        channel.send(f.type, f.payload)
+                    }
                 }
             } catch (e: Exception) {
                 closed = true
@@ -468,6 +519,10 @@ class HostService : Service() {
                         ControlAccessibilityService.instance?.typeText(String(m.data, Charsets.UTF_8))
                     }
                     Proto.REQUEST_KEYFRAME -> encoder?.requestKeyFrame()
+                    Proto.UDP_HELLO -> if (m.data.size >= 4) {
+                        udpPort = java.nio.ByteBuffer.wrap(m.data).int.coerceIn(0, 65535)
+                    }
+                    Proto.UDP_OFF -> udpPort = 0
                     Proto.CAPS -> if (m.data.isNotEmpty()) {
                         val tabletHevc = (m.data[0].toInt() and Proto.CAPS_HEVC) != 0
                         val wanted = if (tabletHevc && Proto.hasCodec(Proto.mime(Proto.CODEC_HEVC), encoder = true)) {
@@ -505,6 +560,10 @@ class HostService : Service() {
         fun stop() {
             closed = true
             senderThread.interrupt()
+            try {
+                udpSocket?.close()
+            } catch (_: Exception) {
+            }
             video.removeCallbacks(adjustBitrate)
             video.post {
                 virtualDisplay?.surface = null
@@ -520,6 +579,9 @@ class HostService : Service() {
             serverSocket?.close()
         } catch (_: Exception) {
         }
+        main.removeCallbacks(refreshBeacon)
+        beacon?.stop()
+        beacon = null
         wifiDirect?.stop()
         wifiDirect = null
         p2pStatus = ""

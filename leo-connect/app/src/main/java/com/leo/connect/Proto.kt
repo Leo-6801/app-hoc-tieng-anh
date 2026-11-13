@@ -69,6 +69,8 @@ object Proto {
     const val PING = 30
     const val PONG = 31
     const val P2P_INFO = 33 // điện thoại gửi tên + mật khẩu nhóm Wi-Fi Direct: "tên\nmật khẩu"
+    const val UDP_HELLO = 34 // máy tính bảng báo cổng UDP nhận hình: [cổng: int]
+    const val UDP_OFF = 35 // UDP không tới được: quay về gửi hình qua TCP
     const val CONGESTION = 32 // máy tính bảng báo hình đang trễ: điện thoại hạ bitrate ngay
 
     const val TOUCH_DOWN = 0
@@ -141,6 +143,32 @@ object Proto {
     fun sessionKeys(shared: ByteArray, pinKey: ByteArray, transcript: ByteArray): Pair<ByteArray, ByteArray> {
         val master = hmac(shared, pinKey, transcript)
         return hmac(master, "c2h".toByteArray()) to hmac(master, "h2c".toByteArray())
+    }
+
+    // --- Gửi hình qua UDP: mỗi khung hình chia thành nhiều gói nhỏ, mất gói thì bỏ khung đó,
+    // không bắt cả luồng phải chờ như TCP. Mỗi gói mã hóa riêng bằng AES-GCM.
+    const val UDP_CHUNK = 1200
+
+    private fun udpNonce(counter: Long) = javax.crypto.spec.GCMParameterSpec(
+        128, ByteBuffer.allocate(12).put(byteArrayOf(0x55, 0x44, 0x50, 0)).putLong(counter).array(),
+    )
+
+    /** Gói UDP = [bộ đếm: 8 byte][dữ liệu đã mã hóa]. */
+    fun sealUdp(cipher: javax.crypto.Cipher, key: SecretKeySpec, counter: Long, plain: ByteArray): ByteArray {
+        cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, key, udpNonce(counter))
+        val body = cipher.doFinal(plain)
+        return ByteBuffer.allocate(8 + body.size).putLong(counter).put(body).array()
+    }
+
+    /** Trả về null nếu gói sai khóa hoặc bị sửa. */
+    fun openUdp(cipher: javax.crypto.Cipher, key: SecretKeySpec, packet: ByteArray, length: Int): ByteArray? {
+        if (length < 8 + 16) return null
+        return try {
+            cipher.init(javax.crypto.Cipher.DECRYPT_MODE, key, udpNonce(ByteBuffer.wrap(packet, 0, 8).long))
+            cipher.doFinal(packet, 8, length - 8)
+        } catch (e: java.security.GeneralSecurityException) {
+            null
+        }
     }
 
     /** Địa chỉ trong mạng nội bộ (Wi-Fi nhà, điểm phát sóng): 10.x, 172.16–31.x, 192.168.x, 169.254.x. */

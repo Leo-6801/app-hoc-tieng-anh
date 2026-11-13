@@ -167,7 +167,8 @@ class MainActivity : Activity() {
                 startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
             addView(nearbyCheck())
-            addView(text("Cấp quyền này TRƯỚC khi bấm \"Bật chế độ sẵn sàng\". Nếu đang bật thì tắt rồi bật lại.", 12f, mutedColor))
+            addView(bleCheck())
+            addView(text("Cấp hai quyền này TRƯỚC khi bấm \"Bật chế độ sẵn sàng\". Nếu đang bật thì tắt rồi bật lại.", 12f, mutedColor))
             val p2pLine = text("", 13f, mutedColor)
             p2pStatusText = p2pLine
             addView(p2pLine)
@@ -201,12 +202,35 @@ class MainActivity : Activity() {
         list.removeAllViews()
         list.addView(text("Đang tìm điện thoại trong mạng Wi-Fi…", 14f, mutedColor))
         Thread {
-            val found = Discovery.find(2000)
+            // Tìm song song qua Wi-Fi và qua Bluetooth
+            var nearby: List<Discovery.Found> = emptyList()
+            val bleThread = Thread { nearby = BleBeacon.scan(this, 2000) }
+            if (hasBlePermission()) bleThread.start()
+            val viaWifi = Discovery.find(2000)
+            try {
+                bleThread.join(3000)
+            } catch (_: InterruptedException) {
+            }
+            val savedDirect = prefs.peerP2pSsid.isNotEmpty()
+            val found = ArrayList(viaWifi)
+            var seenNearbyWithoutWifi = false
+            for (d in nearby) {
+                when {
+                    d.ip.isNotEmpty() && found.none { it.ip == d.ip } ->
+                        found.add(Discovery.Found(d.name + " (thấy qua Bluetooth)", d.ip))
+                    d.ip.isEmpty() && viaWifi.isEmpty() && savedDirect ->
+                        // Không chung Wi-Fi nhưng đã ghép từ trước: vào thẳng đường Wi-Fi Direct
+                        found.add(Discovery.Found(d.name + " (ở gần, nối thẳng)", "192.168.49.1"))
+                    d.ip.isEmpty() && viaWifi.isEmpty() -> seenNearbyWithoutWifi = true
+                }
+            }
             runOnUiThread {
                 searching = false
                 val current = deviceList ?: return@runOnUiThread
                 current.removeAllViews()
-                if (found.isEmpty()) {
+                if (found.isEmpty() && seenNearbyWithoutWifi) {
+                    current.addView(text("Thấy điện thoại ở gần qua Bluetooth, nhưng hai máy chưa cùng mạng Wi-Fi. Lần ghép đầu tiên cần cùng Wi-Fi (hoặc máy tính bảng bắt điểm phát sóng của điện thoại); từ lần sau hai máy tự nối thẳng.", 13f, warnColor))
+                } else if (found.isEmpty()) {
                     current.addView(text("Không thấy điện thoại nào. Kiểm tra: điện thoại đã bấm \"Bật chế độ sẵn sàng\", hai máy cùng một Wi-Fi, và Wi-Fi không bật chế độ cách ly thiết bị (mạng khách). Có thể nhập địa chỉ Wi-Fi của điện thoại vào ô bên dưới.", 13f, warnColor))
                 } else {
                     for (d in found) {
@@ -249,6 +273,7 @@ class MainActivity : Activity() {
                 startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             })
             addView(nearbyCheck())
+            addView(bleCheck())
         })
 
         val hostInput = input("Địa chỉ Wi-Fi của điện thoại (tự điền khi chọn ở trên)", prefs.targetHost,
@@ -317,6 +342,20 @@ class MainActivity : Activity() {
 
     private var btStatusText: TextView? = null
     private var p2pStatusText: TextView? = null
+
+    private val blePermissions: Array<String>
+        get() = if (Build.VERSION.SDK_INT >= 31) arrayOf(
+            Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+        ) else emptyArray()
+
+    private fun hasBlePermission(): Boolean =
+        blePermissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
+
+    private fun bleCheck(): View =
+        check("Quyền Bluetooth (để hai máy thấy nhau khi ở gần)", hasBlePermission(), "Cho phép") {
+            requestPermissions(blePermissions, REQ_NEARBY)
+        }
 
     private val nearbyPermission: String
         get() = if (Build.VERSION.SDK_INT >= 33) Manifest.permission.NEARBY_WIFI_DEVICES

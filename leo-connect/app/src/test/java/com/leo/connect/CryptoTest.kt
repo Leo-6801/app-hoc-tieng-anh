@@ -50,6 +50,18 @@ class CryptoTest {
         }
     }
 
+    @Test fun goiUdpMaHoaVaChongSua() {
+        val cipher = javax.crypto.Cipher.getInstance("AES/GCM/NoPadding")
+        val key = javax.crypto.spec.SecretKeySpec(ByteArray(32) { 7 }, "AES")
+        val plain = ByteArray(Proto.UDP_CHUNK + 8) { it.toByte() }
+        val packet = Proto.sealUdp(cipher, key, 42L, plain)
+        assertArrayEquals(plain, Proto.openUdp(cipher, key, packet, packet.size))
+        packet[20] = (packet[20] + 1).toByte()
+        assertEquals(null, Proto.openUdp(cipher, key, packet, packet.size))
+        val other = javax.crypto.spec.SecretKeySpec(ByteArray(32) { 8 }, "AES")
+        assertEquals(null, Proto.openUdp(cipher, other, Proto.sealUdp(cipher, key, 43L, plain), packet.size))
+    }
+
     @Test fun saiKhoaThiTuChoi() {
         ServerSocket(0, 1, InetAddress.getLoopbackAddress()).use { server ->
             val client = Socket(InetAddress.getLoopbackAddress(), server.localPort)
