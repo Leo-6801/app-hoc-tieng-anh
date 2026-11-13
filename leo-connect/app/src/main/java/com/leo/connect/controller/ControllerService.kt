@@ -130,6 +130,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     @Volatile
     private var statKeyReq = 0
     private var statTick = 0
+    private var statPeak = 0
+    private var statPeakAge = 0
 
     private class Partial(count: Int, var lastAt: Long) {
         val chunks = arrayOfNulls<ByteArray>(count)
@@ -170,7 +172,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         var waitSince = 0L
         var nackAt = 0L
         try {
-            sock.soTimeout = 10
+            sock.soTimeout = 4
+            sock.receiveBufferSize = 2 * 1024 * 1024
         } catch (_: Exception) {
         }
         while (!sock.isClosed) {
@@ -248,8 +251,9 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             // Khung kế tiếp còn thiếu gói trong khi đã có khung mới hơn (hoặc chờ quá lâu): xin gửi lại
             if (newestId - nextId < 0) continue
             val waiting = frames[nextId]
-            // Đã có khung mới hơn (khung này gửi xong rồi mà còn thiếu), hoặc khung đang nhận bỗng ngừng 40 ms
-            val behind = newestId - nextId > 0 || (waiting != null && now - waiting.lastAt > 40)
+            // Đã có khung mới hơn (khung này gửi xong rồi mà còn thiếu), hoặc khung đang nhận bỗng ngừng 12 ms
+            // (các gói của một khung cách nhau dưới 1 ms, ngừng lâu hơn là đã mất gói)
+            val behind = newestId - nextId > 0 || (waiting != null && now - waiting.lastAt > 12)
             if (!behind) continue
             if (waitSince == 0L) waitSince = now
             if (now - waitSince > 250) {
@@ -266,7 +270,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     frames.clear()
                     nextId = newestId
                 }
-            } else if (now - nackAt > 35) {
+            } else if (now - nackAt > 20) {
                 nackAt = now
                 statNacks++
                 sendNack(nextId, waiting)
@@ -363,9 +367,15 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     if (statTick % 2 == 0) {
                         val path = if (viaP2p) "nối thẳng 5 GHz" else "Wi-Fi thường"
                         val mode = if (udpOn) "UDP" else "TCP"
-                        netStats = "$path · $mode · ${statFrames} hình/giây · trễ ${statRtt} ms · " +
+                        if (statFrames > statPeak) statPeak = statFrames
+                        statPeakAge++
+                        netStats = "$path · $mode · ${statFrames} hình/giây (cao nhất $statPeak) · trễ ${statRtt} ms · " +
                             "bỏ $statLost · xin lại $statNacks · khung khóa $statKeyReq"
                         statFrames = 0
+                        if (statPeakAge >= 15) {
+                            statPeakAge = 0
+                            statPeak = 0
+                        }
                     }
                     if (udpOn) {
                         // Đang chờ khung khóa mà chưa thấy: xin lại
