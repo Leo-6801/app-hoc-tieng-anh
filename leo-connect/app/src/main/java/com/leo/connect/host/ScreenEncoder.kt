@@ -35,7 +35,9 @@ class ScreenEncoder(
             setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
             setInteger(MediaFormat.KEY_BIT_RATE, bitrate)
             setInteger(MediaFormat.KEY_FRAME_RATE, fps)
-            setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 2)
+            // Khung khóa rất nặng, mỗi lần gửi là hình khựng một nhịp: chỉ gửi khi máy tính bảng xin
+            // (lúc mới kết nối hoặc mất gói), không gửi định kỳ mỗi 2 giây như trước.
+            setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 30)
             // Màn hình đứng yên vẫn gửi lại khung cũ, để máy tính bảng luôn có hình.
             setLong(MediaFormat.KEY_REPEAT_PREVIOUS_FRAME_AFTER, 200_000L)
             if (lowLatency) {
