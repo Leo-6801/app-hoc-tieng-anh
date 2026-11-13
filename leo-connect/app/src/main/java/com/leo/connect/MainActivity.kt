@@ -38,6 +38,7 @@ class MainActivity : Activity() {
     companion object {
         private const val REQ_PROJECTION = 10
         private const val REQ_NOTIFICATIONS = 11
+        private const val REQ_BLUETOOTH = 12
     }
 
     private lateinit var prefs: Prefs
@@ -295,10 +296,80 @@ class MainActivity : Activity() {
             }
         })
         if (!ControllerService.running) searchDevices()
+        renderBluetoothCard()
 
         content.addView(card().apply {
             addView(text("Cách dùng cửa sổ điện thoại", 15f, textColor, bold = true))
             addView(text("• Kéo tay nắm ••• phía trên để di chuyển cửa sổ. Nhấn giữ ••• để mở menu: thu nhỏ thành bong bóng, bàn phím ảo, tắt cửa sổ.\n• Chụm/mở 2 ngón tay trên màn hình để thu phóng.\n• Chạm, vuốt, nhấn giữ trực tiếp như cầm điện thoại.\n• Vuốt từ mép trái hoặc phải vào = Quay lại. Vuốt từ đáy lên = Màn hình chính. Vuốt từ đáy lên rồi giữ = Đa nhiệm.\n• Chạm vào cửa sổ rồi gõ bằng bàn phím rời (tiếng Việt Telex). Enter = bấm nút Gửi, Shift+Enter = xuống dòng. Chạm ra ngoài cửa sổ để gõ ở app khác.", 13f, mutedColor))
+        })
+    }
+
+    private fun hasBluetoothPermission(): Boolean =
+        Build.VERSION.SDK_INT < 31 ||
+            checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+
+    /** Thử nghiệm: máy tính bảng làm màn hình cảm ứng + bàn phím Bluetooth của điện thoại. */
+    @SuppressLint("MissingPermission")
+    private fun renderBluetoothCard() {
+        content.addView(card().apply {
+            addView(text("Điều khiển qua Bluetooth (thử nghiệm)", 16f, textColor, bold = true))
+            addView(text("Máy tính bảng đóng vai màn hình cảm ứng và bàn phím Bluetooth của điện thoại, nên điện thoại KHÔNG cần bật Trợ năng. Hình ảnh vẫn truyền qua Wi-Fi. Hai máy phải ở gần nhau.", 13f, mutedColor))
+            if (Build.VERSION.SDK_INT < 28) {
+                addView(text("Máy tính bảng này dùng Android quá cũ, không hỗ trợ.", 13f, warnColor))
+                return@apply
+            }
+            if (!prefs.btEnabled) {
+                addView(bigButton("Bật điều khiển qua Bluetooth") {
+                    if (!hasBluetoothPermission()) {
+                        requestPermissions(
+                            arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE),
+                            REQ_BLUETOOTH,
+                        )
+                    } else {
+                        prefs.btEnabled = true
+                        render()
+                    }
+                })
+                return@apply
+            }
+            if (!hasBluetoothPermission()) {
+                addView(smallButton("Cấp quyền Bluetooth") {
+                    requestPermissions(
+                        arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE),
+                        REQ_BLUETOOTH,
+                    )
+                })
+                return@apply
+            }
+            addView(text("Cách ghép lần đầu:\n1. Bấm Kết nối ở trên để mở cửa sổ điện thoại (bước này bật chế độ thiết bị nhập).\n2. Bấm nút bên dưới để điện thoại tìm thấy máy tính bảng.\n3. Trên ĐIỆN THOẠI: Cài đặt → Bluetooth → ghép đôi với máy tính bảng này. Nếu hai máy đã ghép đôi từ trước, hãy hủy ghép rồi ghép lại.\n4. Khi thấy báo \"đang điều khiển qua Bluetooth\" là được. Có thể tắt Trợ năng trên điện thoại để kiểm tra.", 13f, textColor))
+            addView(smallButton("Cho điện thoại tìm thấy máy tính bảng (5 phút)") {
+                try {
+                    startActivity(Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
+                        .putExtra(android.bluetooth.BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300))
+                } catch (e: Exception) {
+                    toast("Không mở được: ${e.message}")
+                }
+            })
+            val bonded = try {
+                getSystemService(android.bluetooth.BluetoothManager::class.java)?.adapter?.bondedDevices?.toList().orEmpty()
+            } catch (e: Exception) {
+                emptyList()
+            }
+            if (bonded.isNotEmpty()) {
+                addView(text("Điện thoại đã ghép đôi (chọn để máy tính bảng tự nối lại lần sau):", 13f, mutedColor))
+                for (d in bonded) {
+                    val selected = d.address == prefs.btAddress
+                    addView(smallButton((if (selected) "✅ " else "○ ") + (d.name ?: d.address)) {
+                        prefs.btAddress = if (selected) "" else d.address
+                        render()
+                    })
+                }
+            }
+            addView(text("Lưu ý: chỉ chạm 1 ngón (không thu phóng 2 ngón trong app của điện thoại). Gõ tiếng Việt do bàn phím của điện thoại xử lý: bật Telex cho bàn phím thật trong cài đặt bàn phím của điện thoại. Thay đổi ở đây có hiệu lực từ lần Kết nối sau.", 12f, mutedColor))
+            addView(smallButton("Tắt điều khiển qua Bluetooth") {
+                prefs.btEnabled = false
+                render()
+            })
         })
     }
 
@@ -455,6 +526,9 @@ class MainActivity : Activity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQ_BLUETOOTH && grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) prefs.btEnabled = true
         render()
     }
 

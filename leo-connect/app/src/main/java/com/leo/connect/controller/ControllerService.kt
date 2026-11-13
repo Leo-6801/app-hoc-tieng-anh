@@ -54,6 +54,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     private var channel: Channel? = null
     private var netThread: Thread? = null
 
+    // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
+    private var bt: BluetoothHid? = null
+    private val viaBt get() = bt?.connected == true
+
     // Trạng thái video (truy cập trong khóa decoderLock)
     private val decoderLock = Any()
     private var videoWidth = 0
@@ -99,6 +103,15 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         running = true
         active = true
         window = PhoneWindow(this, this).also { it.show() }
+        val prefs = com.leo.connect.Prefs(this)
+        if (prefs.btEnabled && Build.VERSION.SDK_INT >= 28) {
+            bt = BluetoothHid(this, prefs.btAddress) { status ->
+                main.post {
+                    window?.showMessage(status)
+                    window?.setRawKeys(viaBt)
+                }
+            }.also { it.start() }
+        }
         val key = Proto.keyFromPin(pin)
         netThread = thread(name = "leo-net") { netLoop(host, key) }
     }
@@ -249,20 +262,54 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
         }
     }
 
+    /**
+     * Màn hình cảm ứng Bluetooth luôn tính theo chiều dọc tự nhiên của điện thoại. Khi điện thoại xoay
+     * ngang, đổi tọa độ về chiều dọc (giả định xoay sang trái, kiểu phổ biến nhất).
+     */
+    private fun btPoint(x: Float, y: Float): FloatArray =
+        if (videoWidth > videoHeight) floatArrayOf(1f - y, x) else floatArrayOf(x, y)
+
     override fun onGesture(durationMs: Int, points: List<FloatArray>) {
-        send(Proto.GESTURE, Proto.encodeGesture(durationMs, points))
+        val b = bt
+        if (b != null && b.connected) {
+            b.gesture(durationMs, points.map { btPoint(it[0], it[1]) })
+        } else {
+            send(Proto.GESTURE, Proto.encodeGesture(durationMs, points))
+        }
     }
 
     override fun onTouch(action: Int, x: Float, y: Float) {
-        send(Proto.TOUCH, Proto.encodeTouch(action, x, y))
+        val b = bt
+        if (b != null && b.connected) {
+            val p = btPoint(x, y)
+            b.touch(action != Proto.TOUCH_UP, p[0], p[1])
+        } else {
+            send(Proto.TOUCH, Proto.encodeTouch(action, x, y))
+        }
     }
 
     override fun onKey(key: Int) {
-        send(Proto.KEY, byteArrayOf(key.toByte()))
+        val b = bt
+        if (b != null && b.connected) {
+            when (key) {
+                Proto.KEY_BACK -> b.consumer(BluetoothHid.CONSUMER_BACK)
+                Proto.KEY_HOME -> b.consumer(BluetoothHid.CONSUMER_HOME)
+                Proto.KEY_RECENTS -> b.consumer(BluetoothHid.CONSUMER_RECENTS)
+                Proto.KEY_ENTER -> b.key(BluetoothHid.KEY_ENTER)
+                Proto.KEY_NEWLINE -> b.key(BluetoothHid.KEY_ENTER, BluetoothHid.MOD_SHIFT)
+                Proto.KEY_BACKSPACE -> b.key(BluetoothHid.KEY_BACKSPACE)
+            }
+        } else {
+            send(Proto.KEY, byteArrayOf(key.toByte()))
+        }
     }
 
     override fun onReplace(deleteCount: Int, text: String) {
         send(Proto.REPLACE, Proto.encodeReplace(deleteCount, text))
+    }
+
+    override fun onRawKey(usage: Int, modifiers: Int) {
+        bt?.key(usage, modifiers)
     }
 
     override fun onClose() {
@@ -279,6 +326,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             releaseDecoderLocked()
             surface = null
         }
+        bt?.stop()
+        bt = null
         window?.dismiss()
         window = null
         sender.shutdownNow()

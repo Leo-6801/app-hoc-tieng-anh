@@ -24,7 +24,16 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
         fun onReplace(deleteCount: Int, text: String)
         fun onEnter()
         fun onNewline()
+
+        /** Phím thô (mã HID + phím bổ trợ) khi đang điều khiển qua Bluetooth. */
+        fun onRawKey(usage: Int, modifiers: Int)
     }
+
+    /**
+     * Chế độ phím thô: chuyển nguyên phím sang điện thoại qua Bluetooth, không gõ Telex ở máy tính bảng
+     * (bộ gõ của điện thoại tự xử lý tiếng Việt như với bàn phím thật).
+     */
+    var rawMode = false
 
     // Từ đang gõ theo đường phím thẳng: đúng như đang hiện trên điện thoại
     private var word = ""
@@ -76,7 +85,11 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
         if (newline) listener.onNewline() else listener.onEnter()
     }
 
-    override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection {
+    override fun onCreateInputConnection(outAttrs: EditorInfo): InputConnection? {
+        if (rawMode) {
+            outAttrs.inputType = InputType.TYPE_NULL
+            return null
+        }
         // Tắt gợi ý/tự sửa để bộ gõ chuyển phím thẳng, không tự gom và sửa chữ
         outAttrs.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or
             InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
@@ -137,6 +150,12 @@ class KeyInputView(context: Context, private val listener: Listener) : View(cont
 
     /** Phím vật lý không qua bộ gõ. */
     private fun handleKey(event: KeyEvent): Boolean {
+        if (rawMode) {
+            val usage = BluetoothHid.usageOf(event.keyCode)
+            if (usage == 0) return false
+            listener.onRawKey(usage, BluetoothHid.modifiersOf(event))
+            return true
+        }
         when (event.keyCode) {
             KeyEvent.KEYCODE_DEL -> {
                 backspace()

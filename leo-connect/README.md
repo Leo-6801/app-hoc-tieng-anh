@@ -13,6 +13,7 @@
 - Điều hướng như máy thật: **vuốt từ mép trái/phải vào** = Quay lại, **vuốt từ đáy lên** = Màn hình chính, **vuốt lên rồi giữ** = Đa nhiệm
 - **Gõ bằng bàn phím rời**: chạm vào cửa sổ rồi gõ, luôn là tiếng Việt kiểu **Telex**. **Enter** = bấm nút Gửi của app, **Shift+Enter** = xuống dòng. Chạm ra ngoài cửa sổ để gõ ở app khác
 - App bị văng thì lần mở sau **hiện thông tin lỗi** trên màn hình chính
+- **Điều khiển qua Bluetooth (thử nghiệm):** máy tính bảng đóng vai màn hình cảm ứng + bàn phím Bluetooth (HID) của điện thoại, nên điện thoại không cần bật Trợ năng. Bật trong màn hình chính của máy tính bảng. Chỉ chạm 1 ngón; gõ tiếng Việt do bàn phím của điện thoại xử lý
 
 ## Cài đặt
 1. Cho hai máy bắt **cùng một mạng Wi-Fi** (hoặc máy này bắt điểm phát sóng của máy kia).

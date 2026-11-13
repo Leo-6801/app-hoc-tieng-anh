@@ -41,6 +41,7 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
         fun onTouch(action: Int, x: Float, y: Float)
         fun onKey(key: Int)
         fun onReplace(deleteCount: Int, text: String)
+        fun onRawKey(usage: Int, modifiers: Int)
         fun onClose()
     }
 
@@ -78,6 +79,7 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
         override fun onReplace(deleteCount: Int, text: String) = callbacks.onReplace(deleteCount, text)
         override fun onEnter() = callbacks.onKey(Proto.KEY_ENTER)
         override fun onNewline() = callbacks.onKey(Proto.KEY_NEWLINE)
+        override fun onRawKey(usage: Int, modifiers: Int) = callbacks.onRawKey(usage, modifiers)
     })
 
     init {
@@ -526,6 +528,18 @@ class PhoneWindow(private val context: Context, private val callbacks: Callbacks
                 }
             }
         }
+    }
+
+    /** Bật khi điều khiển qua Bluetooth: bàn phím rời gửi phím thô sang điện thoại. */
+    fun setRawKeys(on: Boolean) {
+        if (keyInput.rawMode == on) return
+        keyInput.rawMode = on
+        keyInput.reset()
+        context.getSystemService(InputMethodManager::class.java).restartInput(keyInput)
+    }
+
+    fun showMessage(text: String) {
+        android.widget.Toast.makeText(context, text, android.widget.Toast.LENGTH_LONG).show()
     }
 
     fun minimize() {

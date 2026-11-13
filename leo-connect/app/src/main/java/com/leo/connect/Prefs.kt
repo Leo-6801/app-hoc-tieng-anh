@@ -39,6 +39,16 @@ class Prefs(context: Context) {
         get() = p.getString("target_name", "") ?: ""
         set(value) = p.edit().putString("target_name", value).apply()
 
+    /** Thử nghiệm: điều khiển qua Bluetooth thay cho Trợ năng. */
+    var btEnabled: Boolean
+        get() = p.getBoolean("bt_enabled", false)
+        set(value) = p.edit().putBoolean("bt_enabled", value).apply()
+
+    /** Địa chỉ Bluetooth của điện thoại đã chọn (có thể trống). */
+    var btAddress: String
+        get() = p.getString("bt_address", "") ?: ""
+        set(value) = p.edit().putString("bt_address", value).apply()
+
     /** Bộ gõ Telex của app cho bàn phím rời (VI) hoặc gõ thường (EN). */
     var telex: Boolean
         get() = p.getBoolean("telex", true)
