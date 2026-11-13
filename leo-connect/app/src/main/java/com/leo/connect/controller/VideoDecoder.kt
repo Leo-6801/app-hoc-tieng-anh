@@ -62,7 +62,7 @@ class VideoDecoder(
             return
         }
         if (waitingForKeyFrame) return
-        if (queue.size >= 6) {
+        if (queue.size >= 4) {
             queue.removeIf { it.codecFlags == 0 }
             waitingForKeyFrame = true
             onNeedKeyFrame()

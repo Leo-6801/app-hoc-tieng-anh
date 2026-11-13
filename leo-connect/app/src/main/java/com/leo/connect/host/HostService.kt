@@ -211,7 +211,7 @@ class HostService : Service() {
         try {
             socket.tcpNoDelay = true
             // Bộ đệm gửi nhỏ: khung hình không nằm chờ lâu trong hệ thống, việc bỏ khung có tác dụng ngay
-            socket.sendBufferSize = 128 * 1024
+            socket.sendBufferSize = 32 * 1024
             socket.soTimeout = 15_000
             // Bắt tay: trao đổi khóa ECDH + chứng minh biết mã PIN (hai chiều)
             val nonce = ByteArray(16).also { SecureRandom().nextBytes(it) }
@@ -329,7 +329,7 @@ class HostService : Service() {
                 if (closed) return
                 val max = quality.bitrate
                 if (System.currentTimeMillis() - lastDropAt > 4_000 && bitrate < max) {
-                    bitrate = minOf(max, (bitrate * 1.2f).toInt())
+                    bitrate = minOf(max, (bitrate * 1.1f).toInt())
                     encoder?.setBitrate(bitrate)
                 }
                 video.postDelayed(this, 2_000)
@@ -373,7 +373,7 @@ class HostService : Service() {
                 outbox.removeIf { it.droppable }
                 waitingForKey = true
                 lastDropAt = System.currentTimeMillis()
-                bitrate = maxOf(600_000, (bitrate * 0.7f).toInt())
+                bitrate = maxOf(300_000, (bitrate * 0.7f).toInt())
                 encoder?.setBitrate(bitrate)
                 encoder?.requestKeyFrame()
                 return
@@ -474,6 +474,12 @@ class HostService : Service() {
                             bitrate = q.bitrate / 2
                             video.post { restartEncoder() }
                         }
+                    }
+                    // Máy tính bảng đo thấy hình đang trễ: hạ bitrate ngay, chưa tăng lại trong vài giây tới
+                    Proto.CONGESTION -> {
+                        lastDropAt = System.currentTimeMillis()
+                        bitrate = maxOf(300_000, (bitrate * 0.7f).toInt())
+                        encoder?.setBitrate(bitrate)
                     }
                     // Trả lời đo độ trễ: chen lên đầu hàng đợi
                     Proto.PING -> outbox.addFirst(Frame(Proto.PONG, m.data, droppable = false))

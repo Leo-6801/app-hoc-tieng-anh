@@ -59,6 +59,10 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
     private var channel: Channel? = null
     private var netThread: Thread? = null
 
+    // Đo độ trễ đường truyền hình 2 lần mỗi giây; trễ cao thì báo điện thoại hạ chất lượng
+    private var pinger: java.util.concurrent.ScheduledExecutorService? = null
+    private var lastCongestionAt = 0L
+
     // Thử nghiệm: điều khiển qua Bluetooth (máy tính bảng là màn hình cảm ứng + bàn phím của điện thoại)
     private var bt: BluetoothHid? = null
     private val viaBt get() = bt?.connected == true
@@ -119,6 +123,11 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                 }
             }.also { it.start() }
         }
+        pinger = Executors.newSingleThreadScheduledExecutor().also {
+            it.scheduleWithFixedDelay({
+                if (connected) send(Proto.PING, ByteBuffer.allocate(8).putLong(System.nanoTime()).array())
+            }, 1000, 500, java.util.concurrent.TimeUnit.MILLISECONDS)
+        }
         val key = Proto.keyFromPin(pin)
         netThread = thread(name = "leo-net") { netLoop(host, key) }
     }
@@ -134,6 +143,8 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             var socket: Socket? = null
             try {
                 socket = Socket()
+                // Bộ đệm nhận nhỏ: hình không nằm chờ trong hệ thống, độ trễ không cộng dồn
+                socket.receiveBufferSize = 64 * 1024
                 socket.connect(InetSocketAddress(host, Proto.PORT), 8_000)
                 socket.tcpNoDelay = true
                 socket.soTimeout = 15_000
@@ -176,6 +187,16 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
                     when (m.type) {
                         Proto.VIDEO_CONFIG -> onVideoConfig(m.data)
                         Proto.VIDEO_FRAME -> onVideoFrame(m.data)
+                        Proto.PONG -> if (m.data.size >= 8) {
+                            // Câu trả lời phải xếp hàng sau các khung hình đang gửi, nên thời gian đi-về
+                            // phản ánh đúng độ trễ của hình
+                            val rttMs = (System.nanoTime() - ByteBuffer.wrap(m.data).long) / 1_000_000
+                            val now = System.currentTimeMillis()
+                            if (rttMs > 150 && now - lastCongestionAt > 1_000) {
+                                lastCongestionAt = now
+                                send(Proto.CONGESTION)
+                            }
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -345,6 +366,7 @@ class ControllerService : Service(), PhoneWindow.Callbacks {
             releaseDecoderLocked()
             surface = null
         }
+        pinger?.shutdownNow()
         bt?.stop()
         bt = null
         btStatus = ""
