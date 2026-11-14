@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}In mã – {{ payment.order_code }}{% endblock %}
+{% block body %}
+<style>
+  @media print { .no-print { display:none } body { background:#fff; color:#000 } .card { border:0 } }
+</style>
+<div class="wrap center">
+  <div class="card">
+    <div class="muted">{{ settings.shop_name }}</div>
+    <h1>Đơn {{ payment.order_code }}</h1>
+    <div class="big">{{ payment.amount | money }}</div>
+    <img class="qr" src="/qr/{{ payment.token }}.svg" alt="Mã QR thanh toán">
+    <div><b>Quét bằng camera hoặc Zalo để thanh toán</b></div>
+    <div class="muted">(Không quét bằng app ngân hàng)</div>
+    {% if payment.expires_at %}
+      <div>Hết hạn lúc <b>{{ payment.expires_at | time }}</b></div>
+    {% endif %}
+    <div class="muted">Mã: {{ payment.ref_code }}</div>
+  </div>
+  <button class="no-print" onclick="window.print()">In</button>
+</div>
+{% endblock %}
